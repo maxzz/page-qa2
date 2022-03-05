@@ -17,6 +17,14 @@ function HeroImage() {
     );
 }
 
+function CurrentVersion() {
+    return (
+        <div className="">
+            Current Versions
+        </div>
+    );
+}
+
 function Summary() {
     return (
         <div className="">
@@ -54,6 +62,8 @@ function Frontpage() {
         <div>
             <Header />
             <HeroImage />
+            <CurrentVersion />
+            <CurrentVersion />
             <Summary />
             <PrevVersion />
             <Conclusion />
