@@ -1,12 +1,18 @@
 import React from 'react';
+import { IconHIDLogo } from './UI/UIIcons';
 
 const textShadow = { textShadow: '1px 1px 2px #ffffffa0' };
 function Header() {
-    return (
+    return (<>
         <div className="p-4 flex items-center justify-between bg-[#003f82] shadow-sm">
-            <div className="flex items-center">
-                <img src="./src/assets/traytools.png" alt="logo" />
-                <div className="text-2xl tracking-tighter font-light text-slate-100 uppercase scale-y-150" style={textShadow}>QA Extensions</div>
+            <div className="flex items-center space-x-2">
+                {/* <img src="./src/assets/traytools.png" alt="logo" /> */}
+                <div className="w-28 px-3 py-2 flex items-center justify-center bg-white rounded-md">
+                    <IconHIDLogo className="leading-6" fill="#002f87" />
+                </div>
+                <div className="pb-1 text-2xl tracking-tighter font-light text-slate-100 uppercase scale-y-150 whitespace-nowrap" style={textShadow}>
+                    QA Extensions
+                </div>
             </div>
             <div className="text-lg tracking-tighter font-light text-slate-100 uppercase scale-y-90 flex items-center" style={textShadow}>
                 <ul className="flex items-center space-x-2">
@@ -17,7 +23,8 @@ function Header() {
                 </ul>
             </div>
         </div>
-    );
+        <div className="h-2 bg-[#002f87]"></div>
+    </>);
 }
 
 function HeroImage() {
