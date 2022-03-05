@@ -3,16 +3,18 @@ import React from 'react';
 const textShadow = { textShadow: '1px 1px 2px #ffffffa0' };
 function Header() {
     return (
-        <div className="p-4 flex items-center justify-between bg-slate-300 shadow-sm">
-            <div className="text-2xl tracking-tighter font-light text-slate-500 uppercase scale-y-150" style={textShadow}>QA Extensions</div>
-            <div className="text-lg tracking-tighter font-light text-slate-500 uppercase scale-y-90 flex items-center" style={textShadow}>
+        <div className="p-4 flex items-center justify-between bg-[#003f82] shadow-sm">
+            <div className="flex items-center">
+                <img src="./src/assets/traytools.png" alt="logo" />
+                <div className="text-2xl tracking-tighter font-light text-slate-100 uppercase scale-y-150" style={textShadow}>QA Extensions</div>
+            </div>
+            <div className="text-lg tracking-tighter font-light text-slate-100 uppercase scale-y-90 flex items-center" style={textShadow}>
                 <ul className="flex items-center space-x-2">
                     <li>Current</li>
                     <li>Summary</li>
                     <li>History</li>
                     <li>Notes</li>
                 </ul>
-                <img src="./src/assets/traytools.png" alt="logo" />
             </div>
         </div>
     );
