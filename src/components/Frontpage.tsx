@@ -1,10 +1,19 @@
 import React from 'react';
 
+const textShadow = { textShadow: '1px 1px 2px #ffffffa0' };
 function Header() {
     return (
-        <div className="p-4 flex items-center justify-between bg-orange-300 shadow-sm">
-            <div className="text-2xl tracking-tighter font-light text-orange-500 uppercase scale-y-125" style={{ textShadow: '1px 1px 2px #ffffffa0' }}>QA Extensions</div>
-            <img src="./src/assets/traytools.png" alt="logo" />
+        <div className="p-4 flex items-center justify-between bg-slate-300 shadow-sm">
+            <div className="text-2xl tracking-tighter font-light text-slate-500 uppercase scale-y-150" style={textShadow}>QA Extensions</div>
+            <div className="text-lg tracking-tighter font-light text-slate-500 uppercase scale-y-90 flex items-center" style={textShadow}>
+                <ul className="flex items-center space-x-2">
+                    <li>Current</li>
+                    <li>Summary</li>
+                    <li>History</li>
+                    <li>Notes</li>
+                </ul>
+                <img src="./src/assets/traytools.png" alt="logo" />
+            </div>
         </div>
     );
 }
@@ -21,6 +30,15 @@ function CurrentVersion() {
     return (
         <div className="">
             Current Versions
+        </div>
+    );
+}
+
+function CurrentVersions() {
+    return (
+        <div className="">
+            <CurrentVersion />
+            <CurrentVersion />
         </div>
     );
 }
@@ -63,8 +81,7 @@ function Frontpage() {
             <Header />
             <div className="p-4">
                 <HeroImage />
-                <CurrentVersion />
-                <CurrentVersion />
+                <CurrentVersions />
                 <Summary />
                 <PrevVersion />
                 <Conclusion />
