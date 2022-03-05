@@ -31,8 +31,8 @@ function Header() {
 
 function HeroImage() {
     return (
-        <div className="">
-            <img className="w-full m-auto object-cover hue-rotate-30" src="./src/assets/frontpage/qa-header.png" alt="hero" />
+        <div className="w-1/2">
+            <img className="object-cover hue-rotate-30" src="./src/assets/frontpage/qa-header.png" alt="hero" />
         </div>
     );
 }
@@ -49,7 +49,7 @@ function CurrentVersion({extensionAtom}: {extensionAtom: PrimitiveAtom<LatestExt
 
 function CurrentVersions() {
     return (
-        <div className="">
+        <div className="w-1/2 h-full flex flex-col">
             <CurrentVersion extensionAtom={extensionChAtom}/>
             <CurrentVersion extensionAtom={extensionFfAtom}/>
         </div>
@@ -60,6 +60,14 @@ function Summary() {
     return (
         <div className="">
             Summary
+        </div>
+    );
+}
+
+function ReleaseHistory() {
+    return (
+        <div className="">
+            Release History
         </div>
     );
 }
@@ -93,8 +101,11 @@ function Frontpage() {
         <div>
             <Header />
             <div className="m-auto w-3/4">
-                <HeroImage />
-                <CurrentVersions />
+                <div className="flex items-center">
+                    <HeroImage />
+                    <CurrentVersions />
+                </div>
+                <ReleaseHistory />
                 <Summary />
                 <PrevVersion />
                 <Conclusion />
