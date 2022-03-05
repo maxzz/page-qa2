@@ -1,4 +1,6 @@
+import { PrimitiveAtom, useAtom } from 'jotai';
 import React from 'react';
+import { extensionChAtom, extensionFfAtom, LatestExtension } from '../store/store';
 import { IconHIDLogo } from './UI/UIIcons';
 
 const textShadow = { textShadow: '1px 1px 2px #ffffffa0' };
@@ -35,10 +37,12 @@ function HeroImage() {
     );
 }
 
-function CurrentVersion() {
+function CurrentVersion({extensionAtom}: {extensionAtom: PrimitiveAtom<LatestExtension>}) {
+    const [extension] = useAtom(extensionAtom);
     return (
         <div className="">
-            Current Versions
+            <div className="">Current Version {extension.name}</div>
+            <div className=""></div>
         </div>
     );
 }
@@ -46,8 +50,8 @@ function CurrentVersion() {
 function CurrentVersions() {
     return (
         <div className="">
-            <CurrentVersion />
-            <CurrentVersion />
+            <CurrentVersion extensionAtom={extensionChAtom}/>
+            <CurrentVersion extensionAtom={extensionFfAtom}/>
         </div>
     );
 }
@@ -88,7 +92,7 @@ function Frontpage() {
     return (
         <div>
             <Header />
-            <div className="p-4">
+            <div className="m-auto w-3/4">
                 <HeroImage />
                 <CurrentVersions />
                 <Summary />
