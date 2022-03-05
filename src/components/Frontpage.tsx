@@ -9,10 +9,19 @@ function Header() {
     );
 }
 
+function HeroImage() {
+    return (
+        <div className="">
+            <img className="w-auto max-h-24 m-auto object-cover" src="./src/assets/frontpage/qa-header.png" alt="hero" />
+        </div>
+    );
+}
+
 function Frontpage() {
     return (
         <div>
             <Header />
+            <HeroImage />
         </div>
     );
 }
