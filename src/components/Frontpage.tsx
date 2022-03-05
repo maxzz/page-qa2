@@ -61,12 +61,14 @@ function Frontpage() {
     return (
         <div>
             <Header />
-            <HeroImage />
-            <CurrentVersion />
-            <CurrentVersion />
-            <Summary />
-            <PrevVersion />
-            <Conclusion />
+            <div className="p-4">
+                <HeroImage />
+                <CurrentVersion />
+                <CurrentVersion />
+                <Summary />
+                <PrevVersion />
+                <Conclusion />
+            </div>
         </div>
     );
 }
