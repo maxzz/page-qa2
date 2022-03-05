@@ -1,7 +1,5 @@
-/* eslint-disable */
-/// <reference path="../../../../../tools/src/web-file-formats-g01.d.ts" />
-
-import * as CONST from '../utils/constants';
+/// <reference path="../external/web-file-formats-g01.d.ts" />
+import * as CONST from './constants';
 
 const enum TBrowser {
     unknown = 'u',
