@@ -32,7 +32,7 @@ function Header() {
 function HeroImage() {
     return (
         <div className="">
-            <img className="w-auto max-h-24 m-auto object-cover" src="./src/assets/frontpage/qa-header.png" alt="hero" />
+            <img className="w-full m-auto object-cover hue-rotate-30" src="./src/assets/frontpage/qa-header.png" alt="hero" />
         </div>
     );
 }
@@ -40,7 +40,7 @@ function HeroImage() {
 function CurrentVersion({extensionAtom}: {extensionAtom: PrimitiveAtom<LatestExtension>}) {
     const [extension] = useAtom(extensionAtom);
     return (
-        <div className="">
+        <div className="px-4 py-3 border">
             <div className="">Current Version {extension.name}</div>
             <div className=""></div>
         </div>
