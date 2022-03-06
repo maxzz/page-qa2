@@ -31,7 +31,7 @@ function Header() {
 
 function HeroImage() {
     return (
-        <div className="w-1/2">
+        <div className="flex items-center">
             <img className="object-cover hue-rotate-30" src="./src/assets/frontpage/qa-header.png" alt="hero" />
         </div>
     );
@@ -49,18 +49,16 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
 
 function CurrentVersions() {
     return (
-        <div className="w-1/2">
-            <div className="flex flex-col justify-evenly">
-                <CurrentVersion extensionAtom={extensionChAtom} />
-                <CurrentVersion extensionAtom={extensionFfAtom} />
-            </div>
+        <div className="flex flex-col justify-evenly">
+            <CurrentVersion extensionAtom={extensionChAtom} />
+            <CurrentVersion extensionAtom={extensionFfAtom} />
         </div>
     );
 }
 
 function HeroSection() {
     return (
-        <div className="flex items-center">
+        <div className="grid grid-cols-2">
             <HeroImage />
             <CurrentVersions />
         </div>
