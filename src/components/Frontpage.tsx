@@ -37,7 +37,7 @@ function HeroImage() {
     );
 }
 
-function CurrentVersion({extensionAtom}: {extensionAtom: PrimitiveAtom<LatestExtension>}) {
+function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<LatestExtension>; }) {
     const [extension] = useAtom(extensionAtom);
     return (
         <div className="px-4 py-3 border">
@@ -49,9 +49,20 @@ function CurrentVersion({extensionAtom}: {extensionAtom: PrimitiveAtom<LatestExt
 
 function CurrentVersions() {
     return (
-        <div className="w-1/2 h-full flex flex-col">
-            <CurrentVersion extensionAtom={extensionChAtom}/>
-            <CurrentVersion extensionAtom={extensionFfAtom}/>
+        <div className="w-1/2">
+            <div className="flex flex-col justify-evenly">
+                <CurrentVersion extensionAtom={extensionChAtom} />
+                <CurrentVersion extensionAtom={extensionFfAtom} />
+            </div>
+        </div>
+    );
+}
+
+function HeroSection() {
+    return (
+        <div className="flex items-center">
+            <HeroImage />
+            <CurrentVersions />
         </div>
     );
 }
@@ -101,10 +112,7 @@ function Frontpage() {
         <div>
             <Header />
             <div className="m-auto w-3/4">
-                <div className="flex items-center">
-                    <HeroImage />
-                    <CurrentVersions />
-                </div>
+                <HeroSection />
                 <ReleaseHistory />
                 <Summary />
                 <PrevVersion />
