@@ -1,7 +1,7 @@
 import { PrimitiveAtom, useAtom } from 'jotai';
 import React from 'react';
 import { extensionChAtom, extensionFfAtom, LatestExtension } from '../store/store';
-import { IconHIDLogo } from './UI/UIIcons';
+import { IconCrLogo, IconFfLogo, IconHIDLogo, IconMsLogo } from './UI/UIIcons';
 
 const textShadow = { textShadow: '1px 1px 2px #ffffffa0' };
 function Header() {
@@ -43,6 +43,9 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
         <div className="px-4 py-3 border rounded">
             <div className="font-bold scale-y-125 whitespace-nowrap">{extension.name} QA extension</div>
             <div className="">version</div>
+            <IconCrLogo className="w-12 h-12" />
+            <IconFfLogo className="w-12 h-12" />
+            <IconMsLogo className="w-12 h-12" />
             <div className="flex items-center justify-end space-x-2 text-sm">
                 <div className="px-2 py-0.5 underline">Copy URL</div>
                 <div className="px-2 py-0.5 underline">Install</div>
