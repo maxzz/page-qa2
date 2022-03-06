@@ -32,7 +32,7 @@ function Header() {
 function HeroImage() {
     return (
         <div className="flex items-center">
-            <img className="object-cover hue-rotate-30" src="./src/assets/frontpage/qa-header.png" alt="hero" />
+            <img className="object-cover grayscale" src="./src/assets/frontpage/qa-header.png" alt="hero" />
         </div>
     );
 }
@@ -43,9 +43,9 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
         <div className="px-4 py-3 border rounded">
             <div className="font-bold scale-y-125 whitespace-nowrap">{extension.name} QA extension</div>
             <div className="">version</div>
-            <div className="flex items-center justify-end space-x-2">
-                <div className="px-2 py-0.5 border rounded">Copy URL</div>
-                <div className="px-2 py-0.5 border rounded">Install</div>
+            <div className="flex items-center justify-end space-x-2 text-sm">
+                <div className="px-2 py-0.5 underline">Copy URL</div>
+                <div className="px-2 py-0.5 underline">Install</div>
             </div>
         </div>
     );
@@ -53,7 +53,7 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
 
 function CurrentVersions() {
     return (
-        <div className="max-w-lg flex flex-col justify-evenly">
+        <div className="flex flex-col justify-evenly">
             <CurrentVersion extensionAtom={extensionChAtom} />
             <CurrentVersion extensionAtom={extensionFfAtom} />
         </div>
@@ -62,7 +62,7 @@ function CurrentVersions() {
 
 function HeroSection() {
     return (
-        <div className="grid grid-cols-2 gap-4">
+        <div className="mt-4 grid grid-cols-[minmax(8rem,1fr),minmax(8rem,32rem)] gap-4">
             <HeroImage />
             <CurrentVersions />
         </div>
@@ -113,7 +113,7 @@ function Frontpage() {
     return (
         <div>
             <Header />
-            <div className="m-auto max-w-[80%]">
+            <div className="m-auto max-w-[80%] flex flex-col space-y-2">
                 <HeroSection />
                 <ReleaseHistory />
                 <Summary />
