@@ -41,11 +41,17 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
     const [extension] = useAtom(extensionAtom);
     return (
         <div className="px-4 py-3 border rounded">
-            <div className="font-bold scale-y-125 whitespace-nowrap">{extension.name} QA extension</div>
-            <div className="">version</div>
-            <IconCrLogo className="w-12 h-12" />
+            <div className="flex items-center space-x-3">
+                {extension.icon}
+                <div className="">
+                    <div className="font-bold scale-y-125 whitespace-nowrap">{extension.name} QA extension</div>
+                    <div className="text-sm">{extension.version}</div>
+                </div>
+            </div>
+            
+            {/* <IconCrLogo className="w-12 h-12" />
             <IconFfLogo className="w-12 h-12" />
-            <IconMsLogo className="w-12 h-12" />
+            <IconMsLogo className="w-12 h-12" /> */}
             <div className="flex items-center justify-end space-x-2 text-sm">
                 <div className="px-2 py-0.5 underline">Copy URL</div>
                 <div className="px-2 py-0.5 underline">Install</div>
@@ -72,11 +78,19 @@ function HeroSection() {
     );
 }
 
+function SectionHeader({children}: React.HTMLAttributes<HTMLElement>) {
+    return (
+        <section>
+            {children}
+        </section>
+    );
+}
+
 function Summary() {
     return (
-        <div className="">
-            Summary
-        </div>
+        <SectionHeader>
+            <div className="font-bold">Summary</div>
+        </SectionHeader>
     );
 }
 
