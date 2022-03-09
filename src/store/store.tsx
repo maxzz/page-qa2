@@ -1,6 +1,7 @@
 import { atom } from "jotai";
 import React from "react";
 import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
+import { fetchReleaseNotes } from "./utils/utils-release-notes";
 
 export type LatestExtension = {
     name: string;
@@ -35,3 +36,5 @@ const extensionAtoms = [
     extensionFfAtom,
     extensionMsAtom,
 ];
+
+export const releaseNotesAtom = atom('');
