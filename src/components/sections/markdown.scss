@@ -1,0 +1,38 @@
+$md-theme-default-primary: #448aff;
+
+.notes {
+    padding: 16px;
+    
+    font-size: .8em;
+    line-height: 22px;
+    color: #000000de;
+    background-color: #f5f5f5;
+
+    a {
+        background-color: red;
+    }
+
+
+
+    h4 {
+        color: $md-theme-default-primary;
+        border-bottom: 1px solid $md-theme-default-primary;
+        margin-bottom: 0;
+    }
+    li {
+        list-style-type: circle;
+    }
+
+    .date {
+        font-size: 0.7em;
+        font-weight: normal;
+        color: #777;
+        background-color: #f5f5f5;
+        border: 1px solid #d2d2d2;
+        display: inline-block;
+        border-radius: 5px;
+        padding: 0 4px;
+        margin-top: 1px;
+        margin-bottom: 3px;
+    }
+}

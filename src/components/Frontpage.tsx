@@ -1,7 +1,8 @@
 import { PrimitiveAtom, useAtom } from 'jotai';
 import React from 'react';
 import { extensionChAtom, extensionFfAtom, LatestExtension } from '../store/store';
-import { IconCrLogo, IconFfLogo, IconHIDLogo, IconMsLogo } from './UI/UIIcons';
+import { ReleaseNotes } from './sections/ReleaseNotes';
+import { IconHIDLogo } from './UI/UIIcons';
 
 const textShadow = { textShadow: '1px 1px 2px #ffffffa0' };
 function Header() {
@@ -48,7 +49,7 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
                     <div className="text-sm">{extension.version}</div>
                 </div>
             </div>
-            
+
             {/* <IconCrLogo className="w-12 h-12" />
             <IconFfLogo className="w-12 h-12" />
             <IconMsLogo className="w-12 h-12" /> */}
@@ -78,7 +79,7 @@ function HeroSection() {
     );
 }
 
-function SectionHeader({children}: React.HTMLAttributes<HTMLElement>) {
+function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
         <section>
             {children}
@@ -132,6 +133,7 @@ function Frontpage() {
             <Header />
             <div className="m-auto max-w-[80%] flex flex-col space-y-2">
                 <HeroSection />
+                <ReleaseNotes />
                 <ReleaseHistory />
                 <Summary />
                 <PrevVersion />
