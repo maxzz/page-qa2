@@ -4,7 +4,7 @@
 
 const ROOT_WEB_URL = 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/';
 const ROOT_TEST_URL = './test/';
-export const API_URL = process.env.NODE_ENV === 'development' ? ROOT_TEST_URL : ROOT_WEB_URL;
+export const API_URL = import.meta.env.PROD ? ROOT_WEB_URL : ROOT_TEST_URL;
 
 export const CONFLUENCE = 'https://crossmatch.atlassian.net/wiki/spaces/ALTUS/pages/103023073/Browser+extensions+installation';
 
