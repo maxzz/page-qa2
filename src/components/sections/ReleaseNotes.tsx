@@ -11,23 +11,23 @@ Some *emphasis* and <strong>strong</strong>!
 `;
 
 export function ReleaseNotes() {
-    const [releaseNotes] = useAtom(releaseNotesAtom);
+    const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
 
     React.useEffect(() => {
         async function get() {
             try {
-                await fetchReleaseNotes();
+                const notes = await fetchReleaseNotes();
+                setReleaseNotes(notes);
             } catch (error) {
-                console.log('error', releaseNotes);
+                console.log('error', error);
             }
         }
         get();
-        console.log(releaseNotes);
     }, []);
 
     return (
         <div className="notes">
-            <ReactMarkdown children={md} remarkPlugins={[remarkGfm]} />
+            <ReactMarkdown children={releaseNotes} remarkPlugins={[remarkGfm]} />
         </div>
     );
 }
