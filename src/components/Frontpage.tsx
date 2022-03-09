@@ -2,7 +2,9 @@ import { PrimitiveAtom, useAtom } from 'jotai';
 import React from 'react';
 import { extensionChAtom, extensionFfAtom, LatestExtension } from '../store/store';
 import { ReleaseNotes } from './sections/ReleaseNotes';
+import { ReleaseNotes as ReleaseNotes1 } from './sections/ReleaseNotes1';
 import { IconHIDLogo } from './UI/UIIcons';
+import HERO_IMAGE from '../assets/frontpage/qa-header.png';
 
 const textShadow = { textShadow: '1px 1px 2px #ffffffa0' };
 function Header() {
@@ -26,11 +28,10 @@ function Header() {
                 </ul>
             </div>
         </div>
-        <div className="h-2 bg-[#002f87]"></div>
+        <div className="h-1 bg-[#002f87]"></div>
     </>);
 }
 
-import HERO_IMAGE from '../assets/frontpage/qa-header.png';
 function HeroImage() {
     return (
         <div className="flex items-center">
@@ -135,6 +136,7 @@ function Frontpage() {
             <div className="m-auto max-w-[80%] flex flex-col space-y-2">
                 <HeroSection />
                 <ReleaseNotes />
+                <ReleaseNotes1 />
                 <ReleaseHistory />
                 <Summary />
                 <PrevVersion />

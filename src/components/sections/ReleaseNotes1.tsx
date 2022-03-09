@@ -1,6 +1,7 @@
 import { useAtom } from 'jotai';
 import React from 'react';
-import { parse } from "markdown-wasm/dist/markdown.es.js";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { releaseNotesAtom } from '../../store/store';
 import { fetchReleaseNotes } from '../../store/utils/utils-release-notes';
 import './markdown.scss';
@@ -17,11 +18,6 @@ export function ReleaseNotes() {
             try {
                 const notes = await fetchReleaseNotes();
                 setReleaseNotes(notes);
-
-
-                const n = parse(notes);
-                console.log('n', n);
-
             } catch (error) {
                 console.log('error', error);
             }
@@ -31,7 +27,7 @@ export function ReleaseNotes() {
 
     return (
         <div className="notes">
-            notes
+            <ReactMarkdown children={releaseNotes} remarkPlugins={[remarkGfm]} />
         </div>
     );
 }
