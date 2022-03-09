@@ -30,10 +30,11 @@ function Header() {
     </>);
 }
 
+import HERO_IMAGE from '../assets/frontpage/qa-header.png';
 function HeroImage() {
     return (
         <div className="flex items-center">
-            <img className="object-cover grayscale" src="./src/assets/frontpage/qa-header.png" alt="hero" />
+            <img className="object-cover grayscale" src={HERO_IMAGE} alt="hero" />
         </div>
     );
 }

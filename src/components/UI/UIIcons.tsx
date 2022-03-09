@@ -20,20 +20,24 @@ export function IconHIDLogo(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGS
 //     );
 // }
 
+import ICO_CH from '../../assets/icons/browsers/chrome.svg';
+import ICO_FF from '../../assets/icons/browsers/firefox.svg';
+import ICO_MS from '../../assets/icons/browsers/edge.svg';
+
 export function IconCrLogo(props: HTMLAttributes<HTMLImageElement>) {
     return (
-        <img src="./src/assets/icons/browsers/chrome.svg" alt="Chrome logo" {...props}/>
+        <img src={ICO_CH} alt="Chrome logo" {...props}/>
     );
 }
 
 export function IconFfLogo(props: HTMLAttributes<HTMLImageElement>) {
     return (
-        <img src="./src/assets/icons/browsers/firefox.svg" alt="Firefox logo" {...props}/>
+        <img src={ICO_FF} alt="Firefox logo" {...props}/>
     );
 }
 
 export function IconMsLogo(props: HTMLAttributes<HTMLImageElement>) {
     return (
-        <img src="./src/assets/icons/browsers/edge.svg" alt="Firefox logo" {...props}/>
+        <img src={ICO_MS} alt="Firefox logo" {...props}/>
     );
 }
