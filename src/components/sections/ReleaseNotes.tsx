@@ -1,9 +1,11 @@
 import { useAtom } from 'jotai';
 import React from 'react';
-import { parse } from "markdown-wasm/dist/markdown.es.js";
+//import * as markdown from "markdown-wasm";
 import { releaseNotesAtom } from '../../store/store';
 import { fetchReleaseNotes } from '../../store/utils/utils-release-notes';
 import './markdown.scss';
+
+//await markdown.init();
 
 const md = `### Release --------- Notes Just a link: https://reactjs.com
 Some *emphasis* and <strong>strong</strong>!
@@ -18,9 +20,9 @@ export function ReleaseNotes() {
                 const notes = await fetchReleaseNotes();
                 setReleaseNotes(notes);
 
-
-                const n = parse(notes);
-                console.log('n', n);
+                //debugger
+                // const n = await markdown.parse(notes);
+                // console.log('n', n);
 
             } catch (error) {
                 console.log('error', error);
