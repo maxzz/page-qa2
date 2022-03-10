@@ -21,6 +21,7 @@
         "react-hot-toast": "^2.2.0",
         "react-markdown": "^8.0.0",
         "react-use": "^17.3.2",
+        "rehype-raw": "^6.1.1",
         "remark-gfm": "^3.0.1"
     },
     "devDependencies": {

@@ -2,7 +2,8 @@
 //export const ROOT_WEB_URL = 'https://www.crossmatch.com/AltusAddons/g01/current/';
 //https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/config.json
 
-const ROOT_WEB_URL = 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/';
+//const ROOT_WEB_URL = 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/';
+const ROOT_WEB_URL = './';
 const ROOT_TEST_URL = './';
 export const API_URL = import.meta.env.PROD ? ROOT_WEB_URL : ROOT_TEST_URL;
 

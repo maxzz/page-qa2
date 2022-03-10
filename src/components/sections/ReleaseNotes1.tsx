@@ -2,6 +2,7 @@ import { useAtom } from 'jotai';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { releaseNotesAtom } from '../../store/store';
 import { fetchReleaseNotes } from '../../store/utils/utils-release-notes';
 import './markdown.scss';
@@ -27,7 +28,7 @@ export function ReleaseNotes() {
 
     return (
         <div className="notes">
-            <ReactMarkdown children={releaseNotes} remarkPlugins={[remarkGfm]} />
+            <ReactMarkdown children={releaseNotes} rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} />
         </div>
     );
 }
