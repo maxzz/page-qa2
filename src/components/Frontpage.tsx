@@ -83,7 +83,7 @@ function HeroSection() {
 
 function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
-        <section>
+        <section className="font-bold">
             {children}
         </section>
     );
@@ -92,41 +92,37 @@ function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
 function Summary() {
     return (
         <SectionHeader>
-            <div className="font-bold">Summary</div>
+            <div className="">Current verions summary table</div>
         </SectionHeader>
     );
 }
 
-function ReleaseHistory() {
+function PreviousVersions() {
     return (
-        <div className="">
-            Release History
-        </div>
-    );
-}
-
-function PrevVersion() {
-    return (
-        <div className="">
-            previous extension versions
-        </div>
+        <SectionHeader>
+            Previously released extensions
+        </SectionHeader>
     );
 }
 
 function Conclusion() {
-    return (
+    return (<>
+        <SectionHeader>
+            Conclusion
+        </SectionHeader>
+
         <div className="">
-            <p>Browser extensions installation instructions</p>
+            <p className="font-semibold">Browser extensions installation instructions</p>
             <p>The documents are on the Crossmatch Confluence web site.</p>
 
-            <div className="h2">Check for duplicates</div>
+            <div className="font-semibold">Check for duplicates</div>
             <p>
                 Only one the DigitalPersona extension can run at the same time in the same browser.
                 After finishing (or before starting) installation of the DigitalPersona extension,
                 make sure that any previous versions of extension are uninstalled.
             </p>
         </div>
-    );
+    </>);
 }
 
 function Frontpage() {
@@ -137,9 +133,8 @@ function Frontpage() {
                 <HeroSection />
                 <ReleaseNotes />
                 <ReleaseNotes1 />
-                <ReleaseHistory />
                 <Summary />
-                <PrevVersion />
+                <PreviousVersions />
                 <Conclusion />
             </div>
         </div>
