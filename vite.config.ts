@@ -15,7 +15,9 @@ export default (({ command }) => defineConfig({
             brotliSize: true,
         }),
     ],
-    alias: {
-        '@': path.resolve(__dirname, './src'),
-    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src'),
+        },
+    }
 }));
