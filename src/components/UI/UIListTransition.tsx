@@ -2,9 +2,9 @@ import React from "react";
 import { a, useTransition } from "@react-spring/web";
 
 export const animationScaleY = {
-    from: { opacity: 0, scaleY: 0, y: -1000, transformOrigin: 'center top', overflow: 'hidden' },
-    enter: { opacity: 1, scaleY: 1, y: 0, transformOrigin: 'center top', overflow: 'hidden' },
-    leave: { opacity: 0, scaleY: 0, y: -1000, transformOrigin: 'center top', overflow: 'hidden' },
+    from: { opacity: 0, scaleY: 0, overflow: 'hidden' },
+    enter: { opacity: 1, scaleY: 1, transformOrigin: 'center top', overflow: 'hidden' },
+    leave: { opacity: 0, scaleY: 0, overflow: 'hidden' },
 };
 
 export const animationConfig = {

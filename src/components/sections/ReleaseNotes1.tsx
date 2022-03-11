@@ -32,7 +32,7 @@ export function ReleaseNotes() {
         <>
             <button onClick={() => setOpen(!open)}>Open</button>
             <UIListTransition open={open}>
-                <div className="notes">
+                <div className="notes max-h-52">
                     <ReactMarkdown children={releaseNotes} rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} />
                 </div>
             </UIListTransition>
