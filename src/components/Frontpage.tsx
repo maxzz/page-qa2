@@ -5,6 +5,7 @@ import { ReleaseNotes } from './sections/ReleaseNotes';
 import { IconHIDLogo } from './UI/UIIcons';
 import { AppHeader } from './AppHeader';
 import { HeroSection } from './sections/HeroSection';
+import { ReleaseNotes2 } from './sections/ReleaseNotes2';
 
 
 function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
@@ -57,6 +58,7 @@ function Frontpage() {
             <AppHeader />
             <div className="m-auto max-w-[80%] flex flex-col space-y-2">
                 <HeroSection />
+                <ReleaseNotes2 />
                 <ReleaseNotes />
                 <Summary />
                 <PreviousVersions />
