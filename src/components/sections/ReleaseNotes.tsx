@@ -1,25 +1,27 @@
-import { useAtom } from 'jotai';
 import React from 'react';
+import { useAtom } from 'jotai';
 import { releaseNotesAtom, releaseNotesOpenAtom } from '../../store/store';
+import { marked } from 'marked';
 import { fetchReleaseNotes } from '../../store/utils/utils-release-notes';
-import './markdown.scss';
-import { UIListTransition } from '../UI/UIListTransition';
 import { UISectionPane } from '../UI/UISectionPane';
 import { UIAccordion } from '../UI/UIAccordion';
-import { marked } from 'marked';
+import './markdown.scss';
 
-const md = `### Release --------- Notes Just a link: https://reactjs.com
-Some *emphasis* and <strong>strong</strong>!
-`;
-
-// const getMarkdownText = (md: string) => {
-//     const rawMarkup = marked("This is _Markdown_.", { sanitize: true });
-//     return { __html: rawMarkup };
-// };
-
-const getMarkdownText = (md: string) => {
-    return marked(md);
+const renderer = {
+    heading(text: string, level: number) {
+        const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+        return `
+            <h${level}>
+                <a name="${escapedText}" class="anchor" href="#${escapedText}">
+                    <span class="header-link">#</span>
+                </a>
+                ${text}
+            </h${level}>
+        `;
+    }
 };
+
+marked.use({ renderer });
 
 export function ReleaseNotes() {
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
@@ -28,8 +30,7 @@ export function ReleaseNotes() {
     React.useEffect(() => {
         async function get() {
             try {
-                const notes = await fetchReleaseNotes();
-                setReleaseNotes(getMarkdownText(notes));
+                setReleaseNotes(marked(await fetchReleaseNotes()));
             } catch (error) {
                 console.log('error', error);
             }
@@ -37,16 +38,14 @@ export function ReleaseNotes() {
         get();
     }, []);
 
-    return (
-        <>
-            <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
-                Release Notes
-            </UISectionPane>
-            <UIAccordion toggle={open}>
-                <div className="notes max-h-96 overflow-y-auto">
-                    <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
-                </div>
-            </UIAccordion>
-        </>
-    );
+    return (<>
+        <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
+            Release Notes
+        </UISectionPane>
+        <UIAccordion toggle={open}>
+            <div className="notes max-h-96 overflow-y-auto">
+                <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
+            </div>
+        </UIAccordion>
+    </>);
 }
