@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite';
+import path from 'node:path';
 import react from '@vitejs/plugin-react';
 import visualizer from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
-export default (({command}) => defineConfig({
+export default (({ command }) => defineConfig({
     base: command === 'build' ? '/page-qa2/' : '',
     plugins: [
         react(),
@@ -13,5 +14,8 @@ export default (({command}) => defineConfig({
             gzipSize: true,
             brotliSize: true,
         }),
-    ]
+    ],
+    alias: {
+        '@': path.resolve(__dirname, './src'),
+    },
 }));

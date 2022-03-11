@@ -1,7 +1,7 @@
 import React from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { extensionChAtom, extensionFfAtom, LatestExtension } from '../../store/store';
-import HERO_IMAGE from '../../assets/frontpage/qa-header.png';
+import HERO_IMAGE from '@/assets/frontpage/qa-header.png';
 
 function HeroImage() {
     return (
