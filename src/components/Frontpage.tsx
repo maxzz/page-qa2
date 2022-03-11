@@ -1,7 +1,6 @@
 import React from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { extensionChAtom, extensionFfAtom, LatestExtension } from '../store/store';
-import { ReleaseNotes } from './sections/ReleaseNotes';
 import { IconHIDLogo } from './UI/UIIcons';
 import { AppHeader } from './AppHeader';
 import { HeroSection } from './sections/HeroSection';
@@ -59,7 +58,7 @@ function Frontpage() {
             <div className="m-auto max-w-[80%] flex flex-col space-y-2">
                 <HeroSection />
                 <ReleaseNotes2 />
-                <ReleaseNotes />
+                {/* <ReleaseNotes /> */}
                 <Summary />
                 <PreviousVersions />
                 <Conclusion />
