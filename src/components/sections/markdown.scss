@@ -1,26 +1,45 @@
 $md-theme-default-primary: #448aff;
 
 .notes {
-    padding: 16px;
-    
-    font-size: .8em;
+    padding: 1rem;
+
+    font-size: .8rem;
     line-height: 22px;
     color: #000000de;
     background-color: #f5f5f5;
 
-    a {
-        background-color: red;
-    }
-
-
-
     h4 {
+        font-size: 1rem;
+        font-weight: bold;
         color: $md-theme-default-primary;
         border-bottom: 1px solid $md-theme-default-primary;
+        margin-top: 1rem;
         margin-bottom: 0;
     }
+
+    a {
+        color: $md-theme-default-primary;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    ul {
+        display: block;
+        margin-block-start: .4em;
+        margin-block-end: .4em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 1rem;
+    }
+
     li {
         list-style-type: circle;
+        
+        &::marker  {
+            color:$md-theme-default-primary;
+        }
     }
 
     .date {
