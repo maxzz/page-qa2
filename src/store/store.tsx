@@ -37,3 +37,4 @@ const extensionAtoms = [
 ];
 
 export const releaseNotesAtom = atom('');
+export const releaseNotesOpenAtom = atom(false);
