@@ -1,8 +1,7 @@
-import { PrimitiveAtom, useAtom } from 'jotai';
 import React from 'react';
+import { PrimitiveAtom, useAtom } from 'jotai';
 import { extensionChAtom, extensionFfAtom, LatestExtension } from '../store/store';
 import { ReleaseNotes } from './sections/ReleaseNotes';
-import { ReleaseNotes as ReleaseNotes1 } from './sections/ReleaseNotes1';
 import { IconHIDLogo } from './UI/UIIcons';
 import HERO_IMAGE from '../assets/frontpage/qa-header.png';
 
@@ -132,7 +131,6 @@ function Frontpage() {
             <div className="m-auto max-w-[80%] flex flex-col space-y-2">
                 <HeroSection />
                 <ReleaseNotes />
-                <ReleaseNotes1 />
                 <Summary />
                 <PreviousVersions />
                 <Conclusion />

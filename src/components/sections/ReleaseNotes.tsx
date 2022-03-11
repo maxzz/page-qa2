@@ -1,11 +1,14 @@
 import { useAtom } from 'jotai';
 import React from 'react';
-//import * as markdown from "markdown-wasm";
-import { releaseNotesAtom } from '../../store/store';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import { releaseNotesAtom, releaseNotesOpenAtom } from '../../store/store';
 import { fetchReleaseNotes } from '../../store/utils/utils-release-notes';
 import './markdown.scss';
-
-//await markdown.init();
+import { UIListTransition } from '../UI/UIListTransition';
+import { UISectionPane } from '../UI/UISectionPane';
+import { UIAccordion } from '../UI/UIAccordion';
 
 const md = `### Release --------- Notes Just a link: https://reactjs.com
 Some *emphasis* and <strong>strong</strong>!
@@ -13,17 +16,13 @@ Some *emphasis* and <strong>strong</strong>!
 
 export function ReleaseNotes() {
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
+    const [open, setOpen] = useAtom(releaseNotesOpenAtom);
 
     React.useEffect(() => {
         async function get() {
             try {
                 const notes = await fetchReleaseNotes();
                 setReleaseNotes(notes);
-
-                //debugger
-                // const n = await markdown.parse(notes);
-                // console.log('n', n);
-
             } catch (error) {
                 console.log('error', error);
             }
@@ -32,8 +31,15 @@ export function ReleaseNotes() {
     }, []);
 
     return (
-        <div className="notes">
-            notes
-        </div>
+        <>
+            <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
+                Release Notes
+            </UISectionPane>
+            <UIAccordion toggle={open}>
+                <div className="notes max-h-96 overflow-y-auto">
+                    <ReactMarkdown children={releaseNotes} rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} />
+                </div>
+            </UIAccordion>
+        </>
     );
 }
