@@ -7,6 +7,8 @@ import { releaseNotesAtom, releaseNotesOpenAtom } from '../../store/store';
 import { fetchReleaseNotes } from '../../store/utils/utils-release-notes';
 import './markdown.scss';
 import { UIListTransition } from '../UI/UIListTransition';
+import { UISectionPane } from '../UI/UISectionPane';
+import { UIAccordion } from '../UI/UIAccordion';
 
 const md = `### Release --------- Notes Just a link: https://reactjs.com
 Some *emphasis* and <strong>strong</strong>!
@@ -31,11 +33,19 @@ export function ReleaseNotes() {
     return (
         <>
             <button onClick={() => setOpen(!open)}>Open</button>
-            <UIListTransition open={open}>
-                <div className="notes max-h-52">
+            <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
+                Release
+            </UISectionPane>
+            <UIAccordion toggle={open}>
+                <div className="notes max-h-96 overflow-y-auto">
                     <ReactMarkdown children={releaseNotes} rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} />
                 </div>
-            </UIListTransition>
+            </UIAccordion>
+            {/* <UIListTransition open={open}>
+                <div className="notes max-h-96 overflow-y-auto">
+                    <ReactMarkdown children={releaseNotes} rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} />
+                </div>
+            </UIListTransition> */}
         </>
     );
 }
