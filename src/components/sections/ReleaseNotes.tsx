@@ -21,7 +21,7 @@ const getMarkdownText = (md: string) => {
     return marked(md);
 };
 
-export function ReleaseNotes2() {
+export function ReleaseNotes() {
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
 

@@ -11,7 +11,7 @@ export function UISectionPane({ children, open = true, ...rest }: { open?: boole
             {/* Section name */}
             {children}
             {/* Open/Close icon */}
-            <svg className="w-6 h-6 p-1 stroke-current stroke-[.6rem] fill-none" viewBox="0 0 100 100">
+            <svg className="w-6 h-6 p-1 stroke-current stroke-[.6rem] fill-transparent" viewBox="0 0 100 100">
                 <a.path d={styles.open.to({ range: [0, .3, 1], output: ["M 50 13 L 80 43 L 50 72", "M 50 13 L 50 42 L 50 72", "M 80 35 L 50 65 L 20 35"] })} />
             </svg>
         </div>
