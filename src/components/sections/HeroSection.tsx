@@ -14,7 +14,9 @@ function HeroImage() {
 function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<LatestExtension>; }) {
     const [extension] = useAtom(extensionAtom);
     return (
-        <div className="px-4 py-3 border rounded">
+        <div className="px-4 py-3 border" style={{
+            boxShadow: '0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12)'
+        }}>
             <div className="flex items-center space-x-3">
                 {extension.icon}
                 <div className="">
@@ -23,9 +25,6 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
                 </div>
             </div>
 
-            {/* <IconCrLogo className="w-12 h-12" />
-            <IconFfLogo className="w-12 h-12" />
-            <IconMsLogo className="w-12 h-12" /> */}
             <div className="flex items-center justify-end space-x-2 text-sm">
                 <div className="px-2 py-0.5 underline">Copy URL</div>
                 <div className="px-2 py-0.5 underline">Install</div>
@@ -36,7 +35,7 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
 
 function CurrentVersions() {
     return (
-        <div className="flex flex-col justify-evenly">
+        <div className="flex flex-col justify-evenly space-y-2">
             <CurrentVersion extensionAtom={extensionChAtom} />
             <CurrentVersion extensionAtom={extensionFfAtom} />
         </div>
