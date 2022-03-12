@@ -25,8 +25,9 @@ import './markdown.scss';
 export function ReleaseNotes() {
     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
-    const [state, setState] = useAtom(releaseNotesStateAtom);
+    const state = useAtomValue(releaseNotesStateAtom);
     //useAtomValue(runFetchAtom);
+    const [runFetch, setRunFetch] = useAtom(runFetchAtom);
 
 
     // React.useEffect(() => {
@@ -46,7 +47,10 @@ export function ReleaseNotes() {
         </UISectionPane>
         <UIAccordion toggle={open}>
             <div className="notes max-h-96 overflow-y-auto">
+                <>
+                <div className="inline-block px-2 py-1 border-slate-600 border rounded" onClick={setRunFetch}>reload</div>
                 <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
+                </>                
             </div>
         </UIAccordion>
     </>);
