@@ -38,15 +38,13 @@ const extensionAtoms = [
     extensionMsAtom,
 ];
 
-// export const releaseNotesAtom = atom('');
+// export const releaseNotesAtom = atom(async () => {
+//     try {
+//         return marked(await fetchReleaseNotes());
+//     } catch (error) {
+//         console.log('error', error);
+//     }
+//     return '';
+// });
+export const releaseNotesAtom = atom('');
 export const releaseNotesOpenAtom = atom(false);
-
-
-export const releaseNotesAtom = atom(async () => {
-    try {
-        return marked(await fetchReleaseNotes());
-    } catch (error) {
-        console.log('error', error);
-    }
-    return '';
-});
