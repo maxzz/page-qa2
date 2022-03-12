@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
-import { useAtom } from 'jotai';
-import {useUpdateAtom} from 'jotai/utils'
-import { releaseNotesAtom, releaseNotesOpenAtom, runFetchAtom } from '../../store/store';
+import { useAtom, useAtomValue } from 'jotai';
+import { releaseNotesAtom, releaseNotesOpenAtom, releaseNotesStateAtom, runFetchAtom } from '../../store/store';
 import { marked } from 'marked';
 import { fetchReleaseNotes } from '../../store/utils/utils-release-notes';
 import { UISectionPane } from '../UI/UISectionPane';
@@ -24,9 +23,11 @@ import './markdown.scss';
 // marked.use({ renderer });
 
 export function ReleaseNotes() {
-    const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
-    const runFetch = useUpdateAtom(runFetchAtom);
+    const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
+    const [state, setState] = useAtom(releaseNotesStateAtom);
+    //useAtomValue(runFetchAtom);
+
 
     // React.useEffect(() => {
     //     async function get() {
@@ -44,7 +45,7 @@ export function ReleaseNotes() {
             Release Notes
         </UISectionPane>
         <UIAccordion toggle={open}>
-            <div className="notes max-h-96">
+            <div className="notes max-h-96 overflow-y-auto">
                 <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
             </div>
         </UIAccordion>
