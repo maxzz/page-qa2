@@ -38,13 +38,32 @@ const extensionAtoms = [
     extensionMsAtom,
 ];
 
-export const releaseNotesAtom = atom(async () => {
-    try {
-        return marked(await fetchReleaseNotes());
-    } catch (error) {
-        console.log('error', error);
+
+export type LoadingDataState = { loading: boolean, error: string|unknown|null, data: string|null };
+
+export const releaseNotesStateAtom = atom<LoadingDataState>({ loading: true, error: null, data: null });
+
+export const runFetchAtom = atom(
+    (get) => get(releaseNotesStateAtom),
+    (_get, set) => {
+        const fetchData = async () => {
+            set(releaseNotesStateAtom, (prev) => ({ ...prev, loading: true }));
+            try {
+                const data = marked(await fetchReleaseNotes());
+                set(releaseNotesStateAtom, { loading: false, error: null, data });
+            } catch (error) {
+                set(releaseNotesStateAtom, { loading: false, error, data: null });
+            }
+        };
+        fetchData();
     }
-    return '';
+);
+runFetchAtom.onMount = (runFetch) => {
+    runFetch();
+};
+
+export const releaseNotesAtom = atom((get) => {
+    const state = get(releaseNotesStateAtom);
+    return state.data || '';
 });
-//export const releaseNotesAtom = atom('');
 export const releaseNotesOpenAtom = atom(false);
