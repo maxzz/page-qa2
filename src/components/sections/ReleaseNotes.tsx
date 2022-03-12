@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useAtom } from 'jotai';
 import { releaseNotesAtom, releaseNotesOpenAtom } from '../../store/store';
 import { marked } from 'marked';
@@ -22,28 +22,52 @@ import './markdown.scss';
 // };
 // marked.use({ renderer });
 
-export function ReleaseNotes() {
+// export function ReleaseNotes() {
+//     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
+//     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
+
+//     // React.useEffect(() => {
+//     //     async function get() {
+//     //         try {
+//     //             setReleaseNotes(marked(await fetchReleaseNotes()));
+//     //         } catch (error) {
+//     //             console.log('error', error);
+//     //         }
+//     //     }
+//     //     get();
+//     // }, []);
+
+//     return (<>
+//         <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
+//             Release Notes
+//         </UISectionPane>
+//         <UIAccordion toggle={open}>
+//             <div className="notes max-h-96">
+//                 <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
+//             </div>
+//         </UIAccordion>
+//     </>);
+// }
+
+function Body() {
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
+    return (
+        <Suspense fallback={<>Loading...</>}>
+            <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
+        </Suspense>
+    )
+}
+
+export function ReleaseNotes() {
+    //const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
-
-    React.useEffect(() => {
-        async function get() {
-            try {
-                setReleaseNotes(marked(await fetchReleaseNotes()));
-            } catch (error) {
-                console.log('error', error);
-            }
-        }
-        get();
-    }, []);
-
     return (<>
         <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
             Release Notes
         </UISectionPane>
         <UIAccordion toggle={open}>
             <div className="notes max-h-96">
-                <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
+                <Body />
             </div>
         </UIAccordion>
     </>);
