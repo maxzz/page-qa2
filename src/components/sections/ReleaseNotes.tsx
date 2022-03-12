@@ -44,7 +44,7 @@ export function ReleaseNotes() {
             </div>
         </UISectionPane>
         <UIAccordion toggle={open}>
-            <div className="notes max-h-96 px-4">
+            <div className="notes max-h-96 px-4 overflow-y-auto text-slate-900 bg-slate-100">
                 <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
             </div>
         </UIAccordion>
