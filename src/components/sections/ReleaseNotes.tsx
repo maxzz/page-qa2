@@ -26,32 +26,27 @@ export function ReleaseNotes() {
     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
     const state = useAtomValue(releaseNotesStateAtom);
-    //useAtomValue(runFetchAtom);
-    const [runFetch, setRunFetch] = useAtom(runFetchAtom);
+    const [_runFetch, setRunFetch] = useAtom(runFetchAtom);
 
-
-    // React.useEffect(() => {
-    //     async function get() {
-    //         try {
-    //             setReleaseNotes(marked(await fetchReleaseNotes()));
-    //         } catch (error) {
-    //             console.log('error', error);
-    //         }
-    //     }
-    //     get();
-    // }, []);
-
-    return (<>
-        <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
-            Release Notes
+    return (<div>
+        <UISectionPane open={open} onClick={(event) => {
+            if (!(event.target as HTMLElement)?.classList.contains('reload-button')) {
+                setOpen(v => !v)
+            }
+        }}>
+            <div className="flex-1 flex items-center justify-between">
+                <div className="">
+                    Release Notes
+                </div>
+                <button className="reload-button inline-block mr-4 px-2 py-1 text-xs normal-case border-slate-600 border rounded active:scale-x-[.97]" onClick={setRunFetch}>
+                    Reload
+                </button>
+            </div>
         </UISectionPane>
         <UIAccordion toggle={open}>
-            <div className="notes max-h-96 overflow-y-auto">
-                <>
-                <div className="inline-block px-2 py-1 border-slate-600 border rounded" onClick={setRunFetch}>reload</div>
+            <div className="notes max-h-96 px-4">
                 <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
-                </>                
             </div>
         </UIAccordion>
-    </>);
+    </div>);
 }
