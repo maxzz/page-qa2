@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { useAtom } from 'jotai';
+import {useUpdateAtom} from 'jotai/utils'
 import { releaseNotesAtom, releaseNotesOpenAtom, runFetchAtom } from '../../store/store';
 import { marked } from 'marked';
 import { fetchReleaseNotes } from '../../store/utils/utils-release-notes';
@@ -25,7 +26,7 @@ import './markdown.scss';
 export function ReleaseNotes() {
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
-    const [runFetch] = useAtom(runFetchAtom);
+    const runFetch = useUpdateAtom(runFetchAtom);
 
     // React.useEffect(() => {
     //     async function get() {
