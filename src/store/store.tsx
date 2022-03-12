@@ -1,13 +1,15 @@
 import { atom } from "jotai";
+import { marked } from "marked";
 import React from "react";
 import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
+import { fetchReleaseNotes } from "./utils/utils-release-notes";
 
 export type LatestExtension = {
     name: string;
     icon: React.ReactNode;
     version: string;
     url: string;
-}
+};
 
 export const extensionChAtom = atom<LatestExtension>({
     name: 'Chrome',
@@ -36,5 +38,15 @@ const extensionAtoms = [
     extensionMsAtom,
 ];
 
-export const releaseNotesAtom = atom('');
+// export const releaseNotesAtom = atom('');
 export const releaseNotesOpenAtom = atom(false);
+
+
+export const releaseNotesAtom = atom(async () => {
+    try {
+        return marked(await fetchReleaseNotes());
+    } catch (error) {
+        console.log('error', error);
+    }
+    return '';
+});

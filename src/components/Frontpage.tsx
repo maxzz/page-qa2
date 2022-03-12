@@ -5,6 +5,33 @@ import { HeroSection } from './sections/HeroSection';
 import { ReleaseNotes } from './sections/ReleaseNotes';
 
 
+// export function ReleaseNotes() {
+//     const [open, setOpen] = React.useState(releaseNotesOpenAtom);
+
+//     React.useEffect(() => {
+//         async function get() {
+//             try {
+//                 setReleaseNotes(marked(await fetchReleaseNotes()));
+//             } catch (error) {
+//                 console.log('error', error);
+//             }
+//         }
+//         get();
+//     }, []);
+
+//     return (<>
+//         <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
+//             Release Notes
+//         </UISectionPane>
+//         <UIAccordion toggle={open}>
+//             <div className="notes max-h-96 overflow-y-auto">
+//                 <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
+//             </div>
+//         </UIAccordion>
+//     </>);
+// }
+
+
 function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
         <section className="font-bold">

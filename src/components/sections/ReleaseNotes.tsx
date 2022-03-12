@@ -26,23 +26,23 @@ export function ReleaseNotes() {
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
 
-    React.useEffect(() => {
-        async function get() {
-            try {
-                setReleaseNotes(marked(await fetchReleaseNotes()));
-            } catch (error) {
-                console.log('error', error);
-            }
-        }
-        get();
-    }, []);
+    // React.useEffect(() => {
+    //     async function get() {
+    //         try {
+    //             setReleaseNotes(marked(await fetchReleaseNotes()));
+    //         } catch (error) {
+    //             console.log('error', error);
+    //         }
+    //     }
+    //     get();
+    // }, []);
 
     return (<>
         <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
             Release Notes
         </UISectionPane>
         <UIAccordion toggle={open}>
-            <div className="notes max-h-96 overflow-y-auto">
+            <div className="notes max-h-96">
                 <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
             </div>
         </UIAccordion>
