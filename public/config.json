@@ -1,0 +1,82 @@
+{
+    "browsers": {
+        "chrome": {
+            "extensionUrl": {
+                "dp": {
+                    "url": "https://chrome.google.com/webstore/detail/digitalpersona-altus/piimgpjgnagkckjlhjcppbkbjjfjmnbh",
+                    "version": "3.4.385",
+                    "updated": "2021.11.01",
+                    "published": "2021.11.07"
+                },
+                "hp": {
+                    "url": "https://chrome.google.com/webstore/detail/hp-client-security-manage/pkdnjfgdoolnmiacpdamadcneoblphbj",
+                    "version": "3.0.904",
+                    "updated": "2020.09.08",
+                    "published": "2019.02.24"
+                },
+                "de": {
+                    "url": "https://chrome.google.com/webstore/detail/digitalpersona-altus/piimgpjgnagkckjlhjcppbkbjjfjmnbh",
+                    "version": "1.4.0.6562",
+                    "updated": "12.08.2016",
+                    "published": "12.08.2016"
+                }
+            },
+            "qaUrl": {
+                "dp": {
+                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
+                }
+            }
+        },
+        "edge": {
+            "extensionUrl": {
+                "dp": {
+                    "url": "https://chrome.google.com/webstore/detail/digitalpersona-altus/piimgpjgnagkckjlhjcppbkbjjfjmnbh",
+                    "version": "3.4.277",
+                    "updated": "2021.01.29",
+                    "published": "2020.09.10"
+                },
+                "hp": {
+                    "url": "https://chrome.google.com/webstore/detail/hp-client-security-manage/pkdnjfgdoolnmiacpdamadcneoblphbj",
+                    "version": "3.4.277",
+                    "updated": "2021.01.29",
+                    "published": "2019.02.24"
+                },
+                "de": {
+                    "url": "https://chrome.google.com/webstore/detail/digitalpersona-altus/piimgpjgnagkckjlhjcppbkbjjfjmnbh",
+                    "version": "1.4.0.6562",
+                    "updated": "12.08.2016",
+                    "published": "12.08.2016"
+                }
+            },
+            "qaUrl": {
+                "dp": {
+                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.220_on_2020.10.15-r-chrome.zip"
+                }
+            }
+        },
+        "firefox": {
+            "extensionUrl": {
+                "dp": {
+                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.350_on_2021.05.24-r-firefox.xpi"
+                }
+            },
+            "qaUrl": {
+                "dp": {
+                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.375_on_2021.08.31-r-firefox.xpi"
+                }
+            }
+        }
+    },
+    "brand": "dp",
+    "languages": {
+        "available": [
+            "en",
+            "de",
+            "es",
+            "fr",
+            "it",
+            "ja",
+            "pt-BR"
+        ]
+    }
+}

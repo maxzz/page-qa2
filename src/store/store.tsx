@@ -2,6 +2,7 @@ import { atom } from "jotai";
 import { marked } from "marked";
 import React from "react";
 import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
+import { getCurrentConfig, IBrExtnInfos } from "./utils/utils-current-config";
 import { fetchReleaseNotes } from "./utils/utils-release-notes";
 
 export type LatestExtension = {
@@ -40,18 +41,20 @@ const extensionAtoms = [
 
 // Data files
 
-export type LoadingDataState = { loading: boolean, error: string|unknown|null, data: string|null };
+export type LoadingDataState<T> = { loading: boolean, error: unknown|null, data: string|null };
 
 //#region Release Notes
 
-const loadingDataStateInit = (): LoadingDataState => ({ loading: true, error: null, data: null });
+//function loadingDataStateInit<T>(): LoadingDataState<T> {return { loading: true, error: null, data: null }};
+//const loadingDataStateInit = <T, >(): LoadingDataState<T> => ({ loading: true, error: null, data: null });
+const loadingDataStateInit = () => ({ loading: true, error: null, data: null });
 
-export const releaseNotesStateAtom = atom<LoadingDataState>(loadingDataStateInit());
+export const releaseNotesStateAtom = atom<LoadingDataState<string>>(loadingDataStateInit());
 
 export const runFetchAtom = atom(
     (get) => get(releaseNotesStateAtom),
     (_get, set) => {
-        const fetchData = async () => {
+        async function fetchData() {
             set(releaseNotesStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const data = marked(await fetchReleaseNotes());
@@ -67,10 +70,7 @@ runFetchAtom.onMount = (runFetch) => {
     runFetch();
 };
 
-export const releaseNotesAtom = atom((get) => {
-    const state = get(releaseNotesStateAtom);
-    return state.data || '';
-});
+export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data || '');
 export const releaseNotesOpenAtom = atom(false);
 
 //#endregion Release Notes
@@ -78,5 +78,26 @@ export const releaseNotesOpenAtom = atom(false);
 //#region Data loading
 
 export const configFile = atom<FormatCfg.IConfigFile | null>(null);
+
+export const configFileStateAtom = atom<LoadingDataState<IBrExtnInfos>>(loadingDataStateInit());
+
+export const runFetchConfigAtom = atom(
+    (get) => get(configFileStateAtom),
+    (_get, set) => {
+        async function fetchData() {
+            set(configFileStateAtom, (prev) => ({ ...prev, loading: true }));
+            try {
+                const data = marked(await fetchReleaseNotes());
+                set(configFileStateAtom, { loading: false, error: null, data });
+            } catch (error) {
+                set(configFileStateAtom, { loading: false, error, data: null });
+            }
+        };
+        fetchData();
+    }
+);
+runFetchConfigAtom.onMount = (runFetch) => {
+    runFetch();
+};
 
 //#endregion Data loading
