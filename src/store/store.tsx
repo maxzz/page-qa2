@@ -39,19 +39,33 @@ const extensionAtoms = [
     extensionMsAtom,
 ];
 
-// Data files
-
 export type LoadingDataState<T> = { loading: boolean, error: unknown|null, data: string|null };
-
-//#region Release Notes
-
 //function loadingDataStateInit<T>(): LoadingDataState<T> {return { loading: true, error: null, data: null }};
 //const loadingDataStateInit = <T, >(): LoadingDataState<T> => ({ loading: true, error: null, data: null });
 const loadingDataStateInit = () => ({ loading: true, error: null, data: null });
 
+// Data files
+
+//#region Release Notes
+
 export const releaseNotesStateAtom = atom<LoadingDataState<string>>(loadingDataStateInit());
 
-export const runFetchAtom = atom(
+// const renderer = {
+//     heading(text: string, level: number) {
+//         const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+//         return `
+//             <h${level}>
+//                 <a name="${escapedText}" class="anchor" href="#${escapedText}">
+//                     <span class="header-link">#</span>
+//                 </a>
+//                 ${text}
+//             </h${level}>
+//         `;
+//     }
+// };
+// marked.use({ renderer });
+
+export const runFetchReleaseNotesAtom = atom(
     (get) => get(releaseNotesStateAtom),
     (_get, set) => {
         async function fetchData() {
@@ -66,7 +80,7 @@ export const runFetchAtom = atom(
         fetchData();
     }
 );
-runFetchAtom.onMount = (runFetch) => {
+runFetchReleaseNotesAtom.onMount = (runFetch) => {
     runFetch();
 };
 
@@ -75,9 +89,9 @@ export const releaseNotesOpenAtom = atom(false);
 
 //#endregion Release Notes
 
-//#region Data loading
+//#region Config File
 
-export const configFile = atom<FormatCfg.IConfigFile | null>(null);
+//export const configFile = atom<FormatCfg.IConfigFile | null>(null);
 
 export const configFileStateAtom = atom<LoadingDataState<IBrExtnInfos>>(loadingDataStateInit());
 
@@ -100,4 +114,4 @@ runFetchConfigAtom.onMount = (runFetch) => {
     runFetch();
 };
 
-//#endregion Data loading
+//#endregion Config File

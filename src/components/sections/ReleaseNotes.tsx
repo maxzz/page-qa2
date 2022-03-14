@@ -1,32 +1,15 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { releaseNotesAtom, releaseNotesOpenAtom, releaseNotesStateAtom, runFetchAtom } from '../../store/store';
-import { marked } from 'marked';
-import { fetchReleaseNotes } from '../../store/utils/utils-release-notes';
+import { releaseNotesAtom, releaseNotesOpenAtom, releaseNotesStateAtom, runFetchReleaseNotesAtom } from '../../store/store';
 import { UISectionPane } from '../UI/UISectionPane';
 import { UIAccordion } from '../UI/UIAccordion';
 import './markdown.scss';
-
-// const renderer = {
-//     heading(text: string, level: number) {
-//         const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-//         return `
-//             <h${level}>
-//                 <a name="${escapedText}" class="anchor" href="#${escapedText}">
-//                     <span class="header-link">#</span>
-//                 </a>
-//                 ${text}
-//             </h${level}>
-//         `;
-//     }
-// };
-// marked.use({ renderer });
 
 export function ReleaseNotes() {
     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
     const state = useAtomValue(releaseNotesStateAtom);
-    const [_runFetch, setRunFetch] = useAtom(runFetchAtom);
+    const [_runFetch, setRunFetch] = useAtom(runFetchReleaseNotesAtom);
 
     return (<div>
         <UISectionPane open={open} onClick={(event) => {
