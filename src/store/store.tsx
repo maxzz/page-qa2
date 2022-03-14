@@ -38,10 +38,15 @@ const extensionAtoms = [
     extensionMsAtom,
 ];
 
+// Data files
 
 export type LoadingDataState = { loading: boolean, error: string|unknown|null, data: string|null };
 
-export const releaseNotesStateAtom = atom<LoadingDataState>({ loading: true, error: null, data: null });
+//#region Release Notes
+
+const loadingDataStateInit = (): LoadingDataState => ({ loading: true, error: null, data: null });
+
+export const releaseNotesStateAtom = atom<LoadingDataState>(loadingDataStateInit());
 
 export const runFetchAtom = atom(
     (get) => get(releaseNotesStateAtom),
@@ -67,3 +72,11 @@ export const releaseNotesAtom = atom((get) => {
     return state.data || '';
 });
 export const releaseNotesOpenAtom = atom(false);
+
+//#endregion Release Notes
+
+//#region Data loading
+
+export const configFile = atom<FormatCfg.IConfigFile | null>(null);
+
+//#endregion Data loading
