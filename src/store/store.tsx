@@ -1,10 +1,10 @@
-import { LoadingDataState, loadingDataStateInit } from "@/hooks/atomsX";
-import { atom } from "jotai";
-import { marked } from "marked";
 import React from "react";
-import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
+import { atom } from "jotai";
+import { LoadingDataState, loadingDataStateInit } from "@/hooks/atomsX";
+import { marked } from "marked";
 import { getCurrentConfig, IBrExtnInfos } from "./utils/utils-current-config";
 import { fetchReleaseNotes } from "./utils/utils-release-notes";
+import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
 
 export type LatestExtension = {
     name: string;
