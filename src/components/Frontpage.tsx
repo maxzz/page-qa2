@@ -76,7 +76,7 @@ function Conclusion() {
     </>);
 }
 
-function Frontpage() {
+export function Frontpage() {
     return (
         <div>
             <AppHeader />
@@ -90,5 +90,3 @@ function Frontpage() {
         </div>
     );
 }
-
-export default Frontpage;

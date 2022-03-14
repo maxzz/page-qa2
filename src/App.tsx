@@ -1,10 +1,11 @@
+import { useAtomValue } from 'jotai';
+import { runFetchConfigAtom, runFetchReleaseNotesAtom } from './store/store';
+import { Frontpage } from './components/Frontpage';
 import { UIToaster } from './components/UI/UiToaster';
 import './App.css';
-import Frontpage from './components/Frontpage';
-import { useAtomValue } from 'jotai';
-import { runFetchReleaseNotesAtom } from './store/store';
 
 function App() {
+    useAtomValue(runFetchConfigAtom);
     useAtomValue(runFetchReleaseNotesAtom);
     return (<>
         <UIToaster />
