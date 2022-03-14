@@ -3,48 +3,13 @@ import { PrimitiveAtom, useAtom } from 'jotai';
 import { AppHeader } from './AppHeader';
 import { HeroSection } from './sections/HeroSection';
 import { ReleaseNotes } from './sections/ReleaseNotes';
+import { VersionSummary } from './sections/VersionSummary';
 
-
-// export function ReleaseNotes() {
-//     const [open, setOpen] = React.useState(releaseNotesOpenAtom);
-
-//     React.useEffect(() => {
-//         async function get() {
-//             try {
-//                 setReleaseNotes(marked(await fetchReleaseNotes()));
-//             } catch (error) {
-//                 console.log('error', error);
-//             }
-//         }
-//         get();
-//     }, []);
-
-//     return (<>
-//         <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
-//             Release Notes
-//         </UISectionPane>
-//         <UIAccordion toggle={open}>
-//             <div className="notes max-h-96 overflow-y-auto">
-//                 <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
-//             </div>
-//         </UIAccordion>
-//     </>);
-// }
-
-
-function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
+export function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
         <section className="font-bold">
             {children}
         </section>
-    );
-}
-
-function Summary() {
-    return (
-        <SectionHeader>
-            <div className="">Current verions summary table</div>
-        </SectionHeader>
     );
 }
 
@@ -83,7 +48,7 @@ export function Frontpage() {
             <div className="m-auto max-w-[80%] flex flex-col space-y-2">
                 <HeroSection />
                 <ReleaseNotes />
-                <Summary />
+                <VersionSummary />
                 <PreviousVersions />
                 <Conclusion />
             </div>
