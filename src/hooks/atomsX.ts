@@ -16,3 +16,8 @@ export default function atomWithCallback<Value>(initialValue: Value, onValueChan
     );
     return derivedAtom;
 }
+
+export type LoadingDataState<T> = { loading: boolean, error: unknown | null, data: T | null; };
+//export function loadingDataStateInit<T>(): LoadingDataState<T> {return { loading: true, error: null, data: null }};
+//export const loadingDataStateInit = <T, >(): LoadingDataState<T> => ({ loading: true, error: null, data: null });
+export const loadingDataStateInit = () => ({ loading: true, error: null, data: null });

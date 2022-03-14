@@ -1,3 +1,4 @@
+import { LoadingDataState, loadingDataStateInit } from "@/hooks/atomsX";
 import { atom } from "jotai";
 import { marked } from "marked";
 import React from "react";
@@ -38,11 +39,6 @@ const extensionAtoms = [
     extensionFfAtom,
     extensionMsAtom,
 ];
-
-export type LoadingDataState<T> = { loading: boolean, error: unknown|null, data: string|null };
-//function loadingDataStateInit<T>(): LoadingDataState<T> {return { loading: true, error: null, data: null }};
-//const loadingDataStateInit = <T, >(): LoadingDataState<T> => ({ loading: true, error: null, data: null });
-const loadingDataStateInit = () => ({ loading: true, error: null, data: null });
 
 // Data files
 
@@ -101,7 +97,7 @@ export const runFetchConfigAtom = atom(
         async function fetchData() {
             set(configFileStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
-                const data = marked(await fetchReleaseNotes());
+                const data = await getCurrentConfig();
                 set(configFileStateAtom, { loading: false, error: null, data });
             } catch (error) {
                 set(configFileStateAtom, { loading: false, error, data: null });
