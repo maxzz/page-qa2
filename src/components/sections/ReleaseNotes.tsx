@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
+import { useUpdateAtom } from 'jotai/utils';
 import { releaseNotesAtom, releaseNotesOpenAtom, releaseNotesStateAtom, runFetchReleaseNotesAtom } from '../../store/store';
 import { UISectionPane } from '../UI/UISectionPane';
 import { UIAccordion } from '../UI/UIAccordion';
@@ -9,14 +10,16 @@ export function ReleaseNotes() {
     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
     const state = useAtomValue(releaseNotesStateAtom);
-    const [_runFetch, setRunFetch] = useAtom(runFetchReleaseNotesAtom);
+    const setRunFetch = useUpdateAtom(runFetchReleaseNotesAtom);
 
     return (<div>
-        <UISectionPane open={open} onClick={(event) => {
-            if (!(event.target as HTMLElement)?.classList.contains('reload-button')) {
-                setOpen(v => !v)
-            }
-        }}>
+        <UISectionPane open={open}
+            onClick={(event) => {
+                if (!(event.target as HTMLElement)?.classList.contains('reload-button')) {
+                    setOpen(v => !v);
+                }
+            }}
+        >
             <div className="flex-1 flex items-center justify-between">
                 <div className="">
                     Release Notes
