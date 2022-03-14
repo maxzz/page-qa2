@@ -136,17 +136,20 @@ function parseCurrentConfig(config: FormatCfg.IConfigFile): IBrExtnInfos {
     return state;
 } //parseCurrentConfig()
 
-export async function getCurrentConfig(): Promise<IBrExtnInfos> {
+export async function fetchCurrentConfig(): Promise<Response> {
     console.log('Fetching: current config');
 
     const response = await fetch(`${CONST.API_URL}config.json`, { cache: 'no-cache' });
     if (!response.ok) {
         throw new Error('No access to the HID server current configuration');
     }
+    return response;
+}
+
+export async function getCurrentConfig(): Promise<IBrExtnInfos> {
+    const response = await fetchCurrentConfig();
     const json = await response.json();
-    
-    let state = parseCurrentConfig(json);
-    return state;
+    return parseCurrentConfig(json);
 }
 
 export function extInfoNotAvailable(): IExtnInfo {
