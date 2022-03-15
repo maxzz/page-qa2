@@ -7,12 +7,14 @@ export enum TBrowser {
     firefox = 'f',
     edge = 'e'
 }
+export const TBrowserName = (v: TBrowser) => v === TBrowser.chrome ? 'Chrome' : v === TBrowser.firefox ? 'Firefox' : v === TBrowser.edge ? 'Microsoft Edge' : '?';
 
 export enum TBrand {
     dp = 'dp',
     hp = 'hp',
     de = 'de'
 }
+export const TBrandName = (v: TBrand) => v === TBrand.dp ? 'DP' : v === TBrand.hp ? 'HP' : v === TBrand.de ? 'Dell' : '?';
 
 export interface IExtnInfo { // Extension info
     url: string;                // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
