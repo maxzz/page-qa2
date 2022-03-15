@@ -1,30 +1,30 @@
 /// <reference path="../external/web-file-formats-g01.d.ts" />
 import * as CONST from './constants';
 
-const enum TBrowser {
+export enum TBrowser {
     unknown = 'u',
     chrome = 'c',
     firefox = 'f',
     edge = 'e'
 }
 
-const enum TBrand {
+export enum TBrand {
     dp = 'dp',
     hp = 'hp',
     de = 'de'
 }
 
 export interface IExtnInfo { // Extension info
-    url: string;
-    version: string;
-    updated: string;
-    brand?: TBrand;
-    browser?: TBrowser;
-    qa?: boolean;
+    url: string;                // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
+    version: string;            // "3.4.430"
+    updated: string;            // "2022.03.04"
+    brand?: TBrand;             // "dp"
+    browser?: TBrowser;         // "c"
+    qa?: boolean;               // true
 }
 
 function parseFnameVersionDate(fname: string): FormatCfg.IFilenameMeta | undefined {
-    // Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
+    // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
     const match = fname.match(CONST.Regex_FNAME_VerDate);
     if (match) {
         return {
@@ -35,7 +35,7 @@ function parseFnameVersionDate(fname: string): FormatCfg.IFilenameMeta | undefin
 }
 
 function fnameVersionDate(fname: string, meta: IExtnInfo): void {
-    // Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
+    // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
     const match = fname.match(CONST.Regex_FNAME_VerDate);
     meta.version = match ? match[1] : '';
     meta.updated = match ? match[2] : '';
