@@ -42,7 +42,7 @@ const extensionAtoms = [
 
 // Data files
 
-//#region Release Notes
+//#region Server Release Notes
 
 export const releaseNotesStateAtom = atom<LoadingDataState<string>>(loadingDataStateInit());
 
@@ -83,24 +83,24 @@ runFetchReleaseNotesAtom.onMount = (runFetch) => {
 export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data || '');
 export const releaseNotesOpenAtom = atom(false);
 
-//#endregion Release Notes
+//#endregion Server Release Notes
 
-//#region Config File
+//#region Server Config File
 
 //export const configFile = atom<FormatCfg.IConfigFile | null>(null);
 
-export const configFileStateAtom = atom<LoadingDataState<IBrExtnInfos>>(loadingDataStateInit());
+export const extInfosStateAtom = atom<LoadingDataState<IBrExtnInfos>>(loadingDataStateInit());
 
 export const runFetchConfigAtom = atom(
-    (get) => get(configFileStateAtom),
+    (get) => get(extInfosStateAtom),
     (_get, set) => {
         async function fetchData() {
-            set(configFileStateAtom, (prev) => ({ ...prev, loading: true }));
+            set(extInfosStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const data = await getCurrentConfig();
-                set(configFileStateAtom, { loading: false, error: null, data });
+                set(extInfosStateAtom, { loading: false, error: null, data });
             } catch (error) {
-                set(configFileStateAtom, { loading: false, error, data: null });
+                set(extInfosStateAtom, { loading: false, error, data: null });
             }
         };
         fetchData();
@@ -110,4 +110,5 @@ runFetchConfigAtom.onMount = (runFetch) => {
     runFetch();
 };
 
-//#endregion Config File
+//#endregion Server Config File
+
