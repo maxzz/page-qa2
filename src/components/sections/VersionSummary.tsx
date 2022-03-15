@@ -55,10 +55,10 @@ function reduceToFlat(table: Table): FlatTable {
     return res;
 }
 
-function TableToBrowser({ browser, table }: { browser: TBrowser; table: FlatTableItem[]; }) {
+function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: FlatTableItem[]; }) {
     return (
-        <div className="">
-            <div className="">{TBrowserName(browser)}</div>
+        <div className="mt-1">
+            <div className="text-sm font-bold">{TBrowserName(browser)}</div>
             <div className="grid grid-cols-3">
                 <div className="border-b text-xs">Brand</div>
                 <div className="border-b text-xs">QA</div>
@@ -79,20 +79,17 @@ function TableToBrowser({ browser, table }: { browser: TBrowser; table: FlatTabl
 export function VersionSummary() {
     const [extInfos] = useAtom(extInfosStateAtom);
     const summary = extInfos.data?.summary || [];
-    const chrome = summary.filter((ext) => ext.browser === TBrowser.chrome);
+    const res = reduceToFlat(reduceForTable(summary));
+    return (
+        <div>
+            <SectionHeader>
+                <div className="uppercase">Current verions summary table</div>
+            </SectionHeader>
 
-    const tbl = reduceForTable(summary);
-    console.log('table', tbl);
-
-    const res = reduceToFlat(tbl);
-    console.log('flat', res);
-
-    return (<>
-        <SectionHeader>
-            <div className="uppercase">Current verions summary table</div>
-        </SectionHeader>
-
-        <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
-        <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
-    </>);
+            <div className="max-w-2xl grid grid-cols-2 gap-x-2">
+                <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
+                <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
+            </div>
+        </div>
+    );
 }

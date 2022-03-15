@@ -7,7 +7,7 @@ import { VersionSummary } from './sections/VersionSummary';
 
 export function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
-        <section className="font-bold">
+        <section className="color-[#003f82] font-bold">
             {children}
         </section>
     );
@@ -45,7 +45,7 @@ export function Frontpage() {
     return (
         <div>
             <AppHeader />
-            <div className="m-auto max-w-[80%] flex flex-col space-y-2">
+            <div className="m-auto max-w-[80%] flex flex-col space-y-4">
                 <HeroSection />
                 <ReleaseNotes />
                 <VersionSummary />
