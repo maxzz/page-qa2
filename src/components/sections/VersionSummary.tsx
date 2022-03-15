@@ -76,6 +76,9 @@ function TableToBrowser({ browser, table }: { browser: TBrowser; table: FlatTabl
     );
 }
 
+// const s = (a: TBrowser, b: TBrowser) => a === TBrowser.chrome ? -1 : a === TBrowser.firefox ? -1 : -1;
+// Object.keys(res).sort<TBrowser[]>(s);
+
 export function VersionSummary() {
     const [extInfos] = useAtom(extInfosStateAtom);
     const summary = extInfos.data?.summary || [];
@@ -92,9 +95,9 @@ export function VersionSummary() {
             <div className="uppercase">Current verions summary table</div>
         </SectionHeader>
 
-        {Object.keys(res).map((key) => <TableToBrowser browser={key as TBrowser} table={res[TBrowser.chrome]} key={key} />)}
+        {/* {Object.keys(res).map((key) => <TableToBrowser browser={key as TBrowser} table={res[TBrowser.chrome]} key={key} />)} */}
 
-        {/* <TableToBrowser table={res[TBrowser.chrome]} />
-        <TableToBrowser table={res[TBrowser.firefox]} /> */}
+        <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
+        <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
     </>);
 }
