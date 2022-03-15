@@ -7,7 +7,7 @@ import { VersionSummary } from './sections/VersionSummary';
 
 export function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
-        <section className="color-[#003f82] font-bold">
+        <section className="text-[#003f82] text-xl font-semibold uppercase tracking-tighter">
             {children}
         </section>
     );

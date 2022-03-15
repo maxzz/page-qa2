@@ -57,7 +57,7 @@ function reduceToFlat(table: Table): FlatTable {
 
 function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: FlatTableItem[]; }) {
     return (
-        <div className="mt-1">
+        <div className="mt-1 cursor-default">
             <div className="text-sm font-bold">{TBrowserName(browser)}</div>
             <div className="grid grid-cols-3">
                 <div className="border-b text-xs">Brand</div>
@@ -67,8 +67,8 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: Fla
                 {table.map((item, idx) => (
                     <React.Fragment key={idx}>
                         <div className={`text-sm ${idx ? 'opacity-25' : ''}`}>{TBrandName(item.brand)}</div>
-                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`} title={`${item.qa?.updated ? `Updated on ${item.qa?.updated}`:''}`}>{item.qa?.version}</div>
-                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`} title={`${item.release?.updated ? `Updated on ${item.release?.updated}`:''}`}>{item.release?.version}</div>
+                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`} title={`${item.qa?.updated ? `Updated on ${item.qa?.updated}` : ''}`}>{item.qa?.version}</div>
+                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`} title={`${item.release?.updated ? `Updated on ${item.release?.updated}` : ''}`}>{item.release?.version}</div>
                     </React.Fragment>))
                 }
             </div>
@@ -83,7 +83,7 @@ export function VersionSummary() {
     return (
         <div>
             <SectionHeader>
-                <div className="uppercase">Current verions summary table</div>
+                Current verions summary table
             </SectionHeader>
 
             <div className="max-w-2xl grid grid-cols-2 gap-x-2">
