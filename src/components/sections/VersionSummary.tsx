@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { SectionHeader } from '../Frontpage';
 import { extInfosStateAtom } from '@/store/store';
-import { IExtnInfo, TBrand, TBrandName, TBrowser } from '@/store/utils/utils-current-config';
+import { IExtnInfo, TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/utils/utils-current-config';
 
 type Table = {
     [key in TBrowser]: {
@@ -32,7 +32,7 @@ type FlatTableItem = {
     brand: TBrand;
     qa?: IExtnInfo;
     release?: IExtnInfo;
-}
+};
 
 type FlatTable = {
     [key in TBrowser]: FlatTableItem[]
@@ -55,20 +55,23 @@ function reduceToFlat(table: Table): FlatTable {
     return res;
 }
 
-function TableToBrowser({table}: {table: FlatTableItem[]}) {
+function TableToBrowser({ browser, table }: { browser: TBrowser; table: FlatTableItem[]; }) {
     return (
-        <div className="grid grid-cols-3">
-            <div className="font-bold">Brand</div>
-            <div className="font-bold">QA</div>
-            <div className="font-bold">Public</div>
+        <div className="">
+            <div className="">{TBrowserName(browser)}</div>
+            <div className="grid grid-cols-3">
+                <div className="font-bold">Brand</div>
+                <div className="font-bold">QA</div>
+                <div className="font-bold">Public</div>
 
-            {table.map((item, idx) => (
-                <React.Fragment key={idx}>
-                    <div className="">{TBrandName(item.brand)}</div>
-                    <div className="">{item.qa?.version}</div>
-                    <div className="">{item.release?.version}</div>
-                </React.Fragment>))
-            }
+                {table.map((item, idx) => (
+                    <React.Fragment key={idx}>
+                        <div className="">{TBrandName(item.brand)}</div>
+                        <div className="">{item.qa?.version}</div>
+                        <div className="">{item.release?.version}</div>
+                    </React.Fragment>))
+                }
+            </div>
         </div>
     );
 }
@@ -89,20 +92,9 @@ export function VersionSummary() {
             <div className="uppercase">Current verions summary table</div>
         </SectionHeader>
 
-        <TableToBrowser table={res[TBrowser.chrome]} />
+        {Object.keys(res).map((key) => <TableToBrowser browser={key as TBrowser} table={res[TBrowser.chrome]} key={key} />)}
 
-        <div className="grid grid-cols-3">
-            <div className="font-bold">Brand</div>
-            <div className="font-bold">QA</div>
-            <div className="font-bold">Public</div>
-
-            {chrome.map((ext, idx) => (
-                <React.Fragment key={idx}>
-                    <div className="">{TBrandName(ext.brand)}</div>
-                    <div className="">{ext.version}</div>
-                    <div className="">{`${ext.qa}`}</div>
-                </React.Fragment>))
-            }
-        </div>
+        {/* <TableToBrowser table={res[TBrowser.chrome]} />
+        <TableToBrowser table={res[TBrowser.firefox]} /> */}
     </>);
 }
