@@ -67,11 +67,8 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: Fla
                 {table.map((item, idx) => (
                     <React.Fragment key={idx}>
                         <div className={`text-sm ${idx ? 'opacity-25' : ''}`}>{TBrandName(item.brand)}</div>
-                        <div className="flex items-baseline space-x-1">
-                            <div className={`text-sm ${idx ? 'opacity-25' : ''}`}>{item.qa?.version}</div>
-                            <div className={`text-[.55rem] ${idx ? 'opacity-25' : ''}`}>{item.qa?.updated}</div>
-                        </div>
-                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`}>{item.release?.version}</div>
+                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`} title={`${item.qa?.updated ? `Updated on ${item.qa?.updated}`:''}`}>{item.qa?.version}</div>
+                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`} title={`${item.release?.updated ? `Updated on ${item.release?.updated}`:''}`}>{item.release?.version}</div>
                     </React.Fragment>))
                 }
             </div>
