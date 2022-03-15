@@ -13,8 +13,8 @@ type Table = {
     };
 };
 
-function reduceForTable(infos: IExtnInfo[]) {
-    return infos.reduce<Table>((acc, cur) => {
+function reduceForTable(exts: IExtnInfo[]) {
+    return exts.reduce<Table>((acc, cur) => {
         if (cur.browser && cur.brand) {
             if (!acc[cur.browser]) {
                 acc[cur.browser] = {};
@@ -28,6 +28,31 @@ function reduceForTable(infos: IExtnInfo[]) {
     }, {} as Table);
 }
 
+type FlatTable = {
+    [key in TBrowser]: {
+        brand: string;
+        qa?: IExtnInfo;
+        release?: IExtnInfo;
+    }[]
+};
+
+function reduceToFlat(table: Table): FlatTable {
+    const res = {} as FlatTable;
+    for (const [brKey, brVal] of Object.entries(table) as [TBrowser, Table[TBrowser]][]) {
+        if (!res[brKey]) {
+            res[brKey] = [];
+        }
+        for (const [bdKey, bdVal] of Object.entries(brVal) as [TBrand, { qa?: IExtnInfo; release?: IExtnInfo; }][]) {
+            res[brKey].push({
+                brand: TBrandName(bdKey),
+                qa: bdVal.qa,
+                release: bdVal.release,
+            });
+        }
+    }
+    return res;
+}
+
 export function VersionSummary() {
     const [extInfos] = useAtom(extInfosStateAtom);
     const summary = extInfos.data?.summary || [];
@@ -36,24 +61,37 @@ export function VersionSummary() {
     const res = reduceForTable(summary);
     console.log('table', res);
 
-    return (
-        <>
-            <SectionHeader>
-                <div className="uppercase">Current verions summary table</div>
-            </SectionHeader>
-            <div className="grid grid-cols-3">
-                <div className="">Brand</div>
-                <div className="">QA</div>
-                <div className="">Public</div>
+    return (<>
+        <SectionHeader>
+            <div className="uppercase">Current verions summary table</div>
+        </SectionHeader>
 
-                {chrome.map((ext) => (
-                    <>
-                        <div className="">{TBrandName(ext.brand)}</div>
-                        <div className="">{ext.version}</div>
-                        <div className="">{`${ext.qa}`}</div>
-                    </>
-                ))}
-            </div>
-        </>
-    );
+        <div className="grid grid-cols-3">
+            <div className="font-bold">Brand</div>
+            <div className="font-bold">QA</div>
+            <div className="font-bold">Public</div>
+
+            {chrome.map((ext, idx) => (
+                <React.Fragment key={idx}>
+                    <div className="">{TBrandName(ext.brand)}</div>
+                    <div className="">{ext.version}</div>
+                    <div className="">{`${ext.qa}`}</div>
+                </React.Fragment>))
+            }
+        </div>
+
+        <div className="grid grid-cols-3">
+            <div className="font-bold">Brand</div>
+            <div className="font-bold">QA</div>
+            <div className="font-bold">Public</div>
+
+            {chrome.map((ext, idx) => (
+                <React.Fragment key={idx}>
+                    <div className="">{TBrandName(ext.brand)}</div>
+                    <div className="">{ext.version}</div>
+                    <div className="">{`${ext.qa}`}</div>
+                </React.Fragment>))
+            }
+        </div>
+    </>);
 }
