@@ -4,11 +4,16 @@ import { Frontpage } from './components/Frontpage';
 import { UIToaster } from './components/UI/UiToaster';
 import './App.css';
 
-function App() {
+function Loader() {
     useAtomValue(runFetchConfigAtom);
     useAtomValue(runFetchReleaseNotesAtom);
+    return null;
+}
+
+function App() {
     return (<>
         <UIToaster />
+        <Loader />
         <div className="h-screen bg-slate-50">
             <Frontpage />
         </div>
