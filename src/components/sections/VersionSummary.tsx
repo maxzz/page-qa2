@@ -60,24 +60,21 @@ function TableToBrowser({ browser, table }: { browser: TBrowser; table: FlatTabl
         <div className="">
             <div className="">{TBrowserName(browser)}</div>
             <div className="grid grid-cols-3">
-                <div className="font-bold">Brand</div>
-                <div className="font-bold">QA</div>
-                <div className="font-bold">Public</div>
+                <div className="border-b text-xs">Brand</div>
+                <div className="border-b text-xs">QA</div>
+                <div className="border-b text-xs">Public</div>
 
                 {table.map((item, idx) => (
                     <React.Fragment key={idx}>
-                        <div className="">{TBrandName(item.brand)}</div>
-                        <div className="">{item.qa?.version}</div>
-                        <div className="">{item.release?.version}</div>
+                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`}>{TBrandName(item.brand)}</div>
+                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`}>{item.qa?.version}</div>
+                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`}>{item.release?.version}</div>
                     </React.Fragment>))
                 }
             </div>
         </div>
     );
 }
-
-// const s = (a: TBrowser, b: TBrowser) => a === TBrowser.chrome ? -1 : a === TBrowser.firefox ? -1 : -1;
-// Object.keys(res).sort<TBrowser[]>(s);
 
 export function VersionSummary() {
     const [extInfos] = useAtom(extInfosStateAtom);
@@ -94,8 +91,6 @@ export function VersionSummary() {
         <SectionHeader>
             <div className="uppercase">Current verions summary table</div>
         </SectionHeader>
-
-        {/* {Object.keys(res).map((key) => <TableToBrowser browser={key as TBrowser} table={res[TBrowser.chrome]} key={key} />)} */}
 
         <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
         <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
