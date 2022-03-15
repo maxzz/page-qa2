@@ -28,12 +28,14 @@ function reduceForTable(exts: IExtnInfo[]) {
     }, {} as Table);
 }
 
+type FlatTableItem = {
+    brand: TBrand;
+    qa?: IExtnInfo;
+    release?: IExtnInfo;
+}
+
 type FlatTable = {
-    [key in TBrowser]: {
-        brand: string;
-        qa?: IExtnInfo;
-        release?: IExtnInfo;
-    }[]
+    [key in TBrowser]: FlatTableItem[]
 };
 
 function reduceToFlat(table: Table): FlatTable {
@@ -44,7 +46,7 @@ function reduceToFlat(table: Table): FlatTable {
         }
         for (const [bdKey, bdVal] of Object.entries(brVal) as [TBrand, { qa?: IExtnInfo; release?: IExtnInfo; }][]) {
             res[brKey].push({
-                brand: TBrandName(bdKey),
+                brand: bdKey,
                 qa: bdVal.qa,
                 release: bdVal.release,
             });
@@ -53,32 +55,41 @@ function reduceToFlat(table: Table): FlatTable {
     return res;
 }
 
+function TableToBrowser({table}: {table: FlatTableItem[]}) {
+    return (
+        <div className="grid grid-cols-3">
+            <div className="font-bold">Brand</div>
+            <div className="font-bold">QA</div>
+            <div className="font-bold">Public</div>
+
+            {table.map((item, idx) => (
+                <React.Fragment key={idx}>
+                    <div className="">{TBrandName(item.brand)}</div>
+                    <div className="">{item.qa?.version}</div>
+                    <div className="">{item.release?.version}</div>
+                </React.Fragment>))
+            }
+        </div>
+    );
+}
+
 export function VersionSummary() {
     const [extInfos] = useAtom(extInfosStateAtom);
     const summary = extInfos.data?.summary || [];
     const chrome = summary.filter((ext) => ext.browser === TBrowser.chrome);
 
-    const res = reduceForTable(summary);
-    console.log('table', res);
+    const tbl = reduceForTable(summary);
+    console.log('table', tbl);
+
+    const res = reduceToFlat(tbl);
+    console.log('flat', res);
 
     return (<>
         <SectionHeader>
             <div className="uppercase">Current verions summary table</div>
         </SectionHeader>
 
-        <div className="grid grid-cols-3">
-            <div className="font-bold">Brand</div>
-            <div className="font-bold">QA</div>
-            <div className="font-bold">Public</div>
-
-            {chrome.map((ext, idx) => (
-                <React.Fragment key={idx}>
-                    <div className="">{TBrandName(ext.brand)}</div>
-                    <div className="">{ext.version}</div>
-                    <div className="">{`${ext.qa}`}</div>
-                </React.Fragment>))
-            }
-        </div>
+        <TableToBrowser table={res[TBrowser.chrome]} />
 
         <div className="grid grid-cols-3">
             <div className="font-bold">Brand</div>
