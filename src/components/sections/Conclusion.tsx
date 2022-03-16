@@ -10,7 +10,11 @@ export function Conclusion() {
 
             <div className="">
                 <p className="font-semibold">Browser extensions installation instructions</p>
-                <p>The documents are on <a className="underline" href="https://crossmatch.atlassian.net/wiki/spaces/ALTUS/pages/103023073/Browser+extensions+installation">the Crossmatch Confluence web site.</a></p>
+                <p>The additional documents are on <a className="underline" 
+                    href="https://crossmatch.atlassian.net/wiki/spaces/ALTUS/pages/103023073/Browser+extensions+installation">
+                        the HID Confluence web site.
+                    </a>
+                </p>
 
                 <div className="mt-4 font-semibold">Check for duplicates</div>
                 <p>
