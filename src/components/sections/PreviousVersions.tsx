@@ -1,11 +1,40 @@
 import React from 'react';
+import { useAtom } from 'jotai';
+import { extArchiveStateAtom } from '@/store/store';
+import * as CONST from '@/store/utils/constants';
+import { IFnameMeta } from '@/store/utils/utils-existing-on-server';
 import { SectionHeader } from '../Frontpage';
 
-export function PreviousVersions() {
-    return (
-        <SectionHeader>
-            Previously released extensions
-        </SectionHeader>
-    );
+function getUrl(name: string) {
+    return `${CONST.API_URL}${name}`;
 }
 
+function getClass(mdfile: IFnameMeta) {
+    if (mdfile.browser === 'chrome') {
+        return 'br-chrome';
+    }
+    if (mdfile.browser === 'firefox') {
+        return 'br-firefox';
+    }
+    if (mdfile.browser === 'maxz') {
+        return 'br-maxz';
+    }
+    return 'br-edge';
+}
+
+export function PreviousVersions() {
+    const [extArchiveState] = useAtom(extArchiveStateAtom);
+    const archive = extArchiveState.data || [];
+    return (
+        <div className="">
+            <SectionHeader>
+                Previously released extensions
+            </SectionHeader>
+            <div className="text-xs columns-5">
+                {archive.map((item, idx) => (
+                    <div className="" key={idx}>{item.version}</div>
+                ))}
+            </div>
+        </div>
+    );
+}
