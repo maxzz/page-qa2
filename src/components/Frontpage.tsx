@@ -4,20 +4,13 @@ import { AppHeader } from './AppHeader';
 import { HeroSection } from './sections/HeroSection';
 import { ReleaseNotes } from './sections/ReleaseNotes';
 import { VersionSummary } from './sections/VersionSummary';
+import { PreviousVersions } from './sections/PreviousVersions';
 
 export function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
         <section className="text-[#003f82] text-xl font-semibold uppercase tracking-tighter">
             {children}
         </section>
-    );
-}
-
-function PreviousVersions() {
-    return (
-        <SectionHeader>
-            Previously released extensions
-        </SectionHeader>
     );
 }
 
