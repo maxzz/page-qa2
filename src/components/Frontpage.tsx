@@ -17,15 +17,17 @@ export function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
 
 export function Frontpage() {
     return (
-        <div>
+        <div className="h-screen flex flex-col">
             <AppHeader />
-            <div className="m-auto max-w-[80%] flex flex-col space-y-4">
-                <HeroSection />
-                <ReleaseNotes />
-                <VersionSummary />
-                <PreviousVersions />
-                <QATestApps />
-                <Conclusion />
+            <div className="flex-1 overflow-y-auto">
+                <div className="m-auto max-w-[80%] flex flex-col space-y-4">
+                    <HeroSection />
+                    <ReleaseNotes />
+                    <VersionSummary />
+                    <PreviousVersions />
+                    <QATestApps />
+                    <Conclusion />
+                </div>
             </div>
         </div>
     );

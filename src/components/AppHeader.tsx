@@ -20,6 +20,7 @@ export function AppHeader() {
                     <li>Current</li>
                     <li>Summary</li>
                     <li>Archive</li>
+                    <li>Tests</li>
                     <li>Notes</li>
                 </ul>
             </div>
