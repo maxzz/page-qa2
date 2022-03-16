@@ -23,16 +23,21 @@ function getClass(mdfile: IFnameMeta) {
 }
 
 type Meta = IFnameMeta & {
+    yearChanged: boolean;
     year: number;
     date: string;
 }
 
 function addDates(archive: IFnameMeta[]): Meta[] {
+    let prevYear = 0;
     return archive.map((item) => {
         const dt = new Date(item.updated);
         const year = dt.getFullYear();
+        let yearChanged = year !== prevYear;
+        prevYear = year;
         return {
             ...item,
+            yearChanged,
             year,
             date: dt.toDateString(),
         }
@@ -42,8 +47,6 @@ function addDates(archive: IFnameMeta[]): Meta[] {
 export function PreviousVersions() {
     const [extArchiveState] = useAtom(extArchiveStateAtom);
     const archive = addDates(extArchiveState.data || []);
-    console.log('cccc', archive);
-    
     return (
         <div className="">
             <SectionHeader>
@@ -52,9 +55,15 @@ export function PreviousVersions() {
             <div className="mt-1 text-sm">List of previously released extensions available on the HID server.</div>
             <div className="mt-1 text-xs columns-5">
                 {archive.map((item, idx) => (
-                    <div className="" key={idx}>{item.year} {item.version}</div>
+                    <React.Fragment key={idx}>
+                        {item.yearChanged && <div className="mt-2 text-right bg-slate-200 font-bold">{item.year}</div> }
+                        <div className="text-right">{item.version}</div>
+                    </React.Fragment>
+
                 ))}
             </div>
         </div>
     );
 }
+
+//TODO: icons
