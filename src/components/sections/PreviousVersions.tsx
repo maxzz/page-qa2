@@ -22,15 +22,20 @@ function getClass(mdfile: IFnameMeta) {
     return 'br-edge';
 }
 
+type Meta = IFnameMeta & {
+    date: string;
+}
+
 export function PreviousVersions() {
     const [extArchiveState] = useAtom(extArchiveStateAtom);
     const archive = extArchiveState.data || [];
     return (
         <div className="">
             <SectionHeader>
-                Previously released extensions
+                <div className="" title="Previously released extensions">Archive</div>
             </SectionHeader>
-            <div className="text-xs columns-5">
+            <div className="mt-1 text-sm">List of previously released extensions available on the HID server.</div>
+            <div className="mt-1 text-xs columns-5">
                 {archive.map((item, idx) => (
                     <div className="" key={idx}>{item.version}</div>
                 ))}
