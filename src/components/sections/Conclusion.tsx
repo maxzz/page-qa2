@@ -9,9 +9,9 @@ export function Conclusion() {
 
         <div className="">
             <p className="font-semibold">Browser extensions installation instructions</p>
-            <p>The documents are on the Crossmatch Confluence web site.</p>
+            <p>The documents are on <a className="underline" href="https://crossmatch.atlassian.net/wiki/spaces/ALTUS/pages/103023073/Browser+extensions+installation">the Crossmatch Confluence web site.</a></p>
 
-            <div className="font-semibold">Check for duplicates</div>
+            <div className="mt-4 font-semibold">Check for duplicates</div>
             <p>
                 Only one the DigitalPersona extension can run at the same time in the same browser.
                 After finishing (or before starting) installation of the DigitalPersona extension,

@@ -1,5 +1,4 @@
 import React from 'react';
-import { PrimitiveAtom, useAtom } from 'jotai';
 import { AppHeader } from './AppHeader';
 import { HeroSection } from './sections/HeroSection';
 import { ReleaseNotes } from './sections/ReleaseNotes';
