@@ -5,7 +5,7 @@ export function Conclusion() {
     return (
         <div>
             <SectionHeader>
-                Conclusion
+                Final notes
             </SectionHeader>
 
             <div className="mt-3">

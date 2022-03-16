@@ -19,7 +19,7 @@ export function AppHeader() {
                 <ul className="flex items-center space-x-2">
                     <li>Current</li>
                     <li>Summary</li>
-                    <li>History</li>
+                    <li>Archive</li>
                     <li>Notes</li>
                 </ul>
             </div>

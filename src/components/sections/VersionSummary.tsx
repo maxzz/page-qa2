@@ -83,9 +83,10 @@ export function VersionSummary() {
     return (
         <div>
             <SectionHeader>
-                Current verions summary table
+                Current verions
             </SectionHeader>
 
+            <div className="mt-2 text-sm">Summary table of current versions.</div>
             <div className="max-w-2xl grid grid-cols-2 gap-x-2">
                 <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
                 <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
