@@ -5,6 +5,7 @@ import { ReleaseNotes } from './sections/ReleaseNotes';
 import { VersionSummary } from './sections/VersionSummary';
 import { PreviousVersions } from './sections/PreviousVersions';
 import { Conclusion } from './sections/Conclusion';
+import { QATestApps } from './sections/QATestApps';
 
 export function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
@@ -23,6 +24,7 @@ export function Frontpage() {
                 <ReleaseNotes />
                 <VersionSummary />
                 <PreviousVersions />
+                <QATestApps />
                 <Conclusion />
             </div>
         </div>
