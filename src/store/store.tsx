@@ -5,6 +5,7 @@ import { marked } from "marked";
 import { getCurrentConfig, IBrExtnInfos } from "./utils/utils-current-config";
 import { fetchReleaseNotes } from "./utils/utils-release-notes";
 import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
+import { getExistingOnServer, IFnameMeta } from "./utils/utils-existing-on-server";
 
 export type LatestExtension = {
     name: string;
@@ -87,8 +88,6 @@ export const releaseNotesOpenAtom = atom(false);
 
 //#region Server Config File
 
-//export const configFile = atom<FormatCfg.IConfigFile | null>(null);
-
 export const extInfosStateAtom = atom<LoadingDataState<IBrExtnInfos>>(loadingDataStateInit());
 
 export const runFetchConfigAtom = atom(
@@ -112,3 +111,27 @@ runFetchConfigAtom.onMount = (runFetch) => {
 
 //#endregion Server Config File
 
+//#region Extensions Archive on server
+
+export const extArchiveStateAtom = atom<LoadingDataState<IFnameMeta[]>>(loadingDataStateInit());
+
+export const runFetchArchiveAtom = atom(
+    (get) => get(extArchiveStateAtom),
+    (_get, set) => {
+        async function fetchData() {
+            set(extArchiveStateAtom, (prev) => ({ ...prev, loading: true }));
+            try {
+                const data = await getExistingOnServer();
+                set(extArchiveStateAtom, { loading: false, error: null, data });
+            } catch (error) {
+                set(extArchiveStateAtom, { loading: false, error, data: null });
+            }
+        };
+        fetchData();
+    }
+);
+runFetchArchiveAtom.onMount = (runFetch) => {
+    runFetch();
+};
+
+//#endregion Extensions Archive on server
