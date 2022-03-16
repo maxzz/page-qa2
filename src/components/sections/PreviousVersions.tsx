@@ -23,12 +23,27 @@ function getClass(mdfile: IFnameMeta) {
 }
 
 type Meta = IFnameMeta & {
+    year: number;
     date: string;
+}
+
+function addDates(archive: IFnameMeta[]): Meta[] {
+    return archive.map((item) => {
+        const dt = new Date(item.updated);
+        const year = dt.getFullYear();
+        return {
+            ...item,
+            year,
+            date: dt.toDateString(),
+        }
+    })
 }
 
 export function PreviousVersions() {
     const [extArchiveState] = useAtom(extArchiveStateAtom);
-    const archive = extArchiveState.data || [];
+    const archive = addDates(extArchiveState.data || []);
+    console.log('cccc', archive);
+    
     return (
         <div className="">
             <SectionHeader>
@@ -37,7 +52,7 @@ export function PreviousVersions() {
             <div className="mt-1 text-sm">List of previously released extensions available on the HID server.</div>
             <div className="mt-1 text-xs columns-5">
                 {archive.map((item, idx) => (
-                    <div className="" key={idx}>{item.version}</div>
+                    <div className="" key={idx}>{item.year} {item.version}</div>
                 ))}
             </div>
         </div>
