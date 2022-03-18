@@ -26,10 +26,11 @@ type Meta = IFnameMeta & {
     yearChanged: boolean;
     year: number;
     date: string;
-}
+};
 
 function addDates(archive: IFnameMeta[]): Meta[] {
     let prevYear = 0;
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return archive.map((item) => {
         const dt = new Date(item.updated);
         const year = dt.getFullYear();
@@ -39,9 +40,9 @@ function addDates(archive: IFnameMeta[]): Meta[] {
             ...item,
             yearChanged,
             year,
-            date: dt.toDateString(),
-        }
-    })
+            date: dt.toLocaleDateString('en-US', options),
+        };
+    });
 }
 
 export function PreviousVersions() {
@@ -53,10 +54,10 @@ export function PreviousVersions() {
                 <div className="" title="Previously released extensions">Archive</div>
             </SectionHeader>
             <div className="mt-1 text-sm">List of previously released extensions available on the HID server.</div>
-            <div className="mt-1 text-xs columns-5 cursor-default">
+            <div className="mt-1 columns-7 gap-4 text-xs cursor-default">
                 {archive.map((item, idx) => (
                     <React.Fragment key={idx}>
-                        {item.yearChanged && <div className="mt-2 text-right bg-slate-200 font-bold">{item.year}</div> }
+                        {item.yearChanged && <div className={`${idx ? 'mt-3' : ''} bg-slate-200 font-bold`}>{item.year}</div>}
                         <div className="text-right" title={item.date}>{item.version}</div>
                     </React.Fragment>
 
