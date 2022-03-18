@@ -20,7 +20,9 @@ export function Frontpage() {
         <div className="h-screen flex flex-col">
             <AppHeader />
             <div className="flex-1 overflow-y-auto">
-                <div className="m-auto max-w-[80%] flex flex-col space-y-4">
+                {/* <div className="m-auto max-w-[80%] flex flex-col space-y-4"> */}
+                {/* <div className="ml-[calc(20vw/2)] mr-[calc(calc(20vw/2)-16px)] max-w-3xl flex flex-col space-y-4"> */}
+                <div className="ml-[calc(20vw/2)] mr-auto max-w-3xl flex flex-col space-y-4">
                     <HeroSection />
                     <ReleaseNotes />
                     <VersionSummary />

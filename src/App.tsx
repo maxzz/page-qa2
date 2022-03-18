@@ -15,7 +15,7 @@ function App() {
     return (<>
         <UIToaster />
         <Loader />
-        <div className="min-h-full bg-slate-50">
+        <div className="min-h-full overflow-hidden bg-slate-50">
             <Frontpage />
         </div>
     </>);
