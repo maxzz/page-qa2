@@ -2,7 +2,7 @@ import React from 'react';
 import { AppHeader } from './AppHeader';
 import { HeroSection } from './sections/HeroSection';
 import { ReleaseNotes } from './sections/ReleaseNotes';
-import { VersionSummary } from './sections/VersionSummary';
+import { CurrentVersions } from './sections/CurrentVersions';
 import { PreviousVersions } from './sections/PreviousVersions';
 import { Conclusion } from './sections/Conclusion';
 import { QATestApps } from './sections/QATestApps';
@@ -29,7 +29,7 @@ export function Frontpage() {
                 {/* <div className="ml-[calc(20vw/2)] mr-auto max-w-3xl flex flex-col space-y-4"> */}
                     <HeroSection />
                     <ReleaseNotes />
-                    <VersionSummary />
+                    <CurrentVersions />
                     <PreviousVersions />
                     <QATestApps />
                     <Conclusion />

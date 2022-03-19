@@ -66,9 +66,9 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: Fla
 
                 {table.map((item, idx) => (
                     <React.Fragment key={idx}>
-                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`}>{TBrandName(item.brand)}</div>
-                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`} title={`${item.qa?.updated ? `Updated on ${item.qa?.updated}` : ''}`}>{item.qa?.version}</div>
-                        <div className={`text-sm ${idx ? 'opacity-25' : ''}`} title={`${item.release?.updated ? `Updated on ${item.release?.updated}` : ''}`}>{item.release?.version}</div>
+                        <div className={`text-xs ${idx ? 'opacity-25' : ''}`}>{TBrandName(item.brand)}</div>
+                        <div className={`text-xs ${idx ? 'opacity-25' : ''}`} title={`${item.qa?.updated ? `Updated on ${item.qa?.updated}` : ''}`}>{item.qa?.version}</div>
+                        <div className={`text-xs ${idx ? 'opacity-25' : ''}`} title={`${item.release?.updated ? `Updated on ${item.release?.updated}` : ''}`}>{item.release?.version}</div>
                     </React.Fragment>))
                 }
             </div>
@@ -76,7 +76,7 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: Fla
     );
 }
 
-export function VersionSummary() {
+export function CurrentVersions() {
     const [extInfos] = useAtom(extInfosStateAtom);
     const summary = extInfos.data?.summary || [];
     const res = reduceToFlat(reduceForTable(summary));
