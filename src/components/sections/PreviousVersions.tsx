@@ -73,11 +73,17 @@ export function PreviousVersions() {
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
                             {items.map((item, idx) => (
+                                <a className="leading-5 flex items-center" href={getUrl(item.fname)} target="_blank" title={item.date} key={idx}>
+                                    <span className={`w-4 h-4 mr-1 ${getClass(item)} saturate-150`}></span>
+                                    <span>{item.version}</span>
+                                </a>
+                            ))}
+                            {/* {items.map((item, idx) => (
                                 <div className="leading-5 flex items-center" key={`${idxYear}${idx}`}>
-                                    <span className={`w-4 h-4 mr-1 ${getClass(item)}`}></span>
+                                    <span className={`w-4 h-4 mr-1 ${getClass(item)} saturate-150`}></span>
                                     <a href={getUrl(item.fname)} target="_blank" title={item.date}>{item.version}</a>
                                 </div>
-                            ))}
+                            ))} */}
                         </div>
                     </div>
                 )
