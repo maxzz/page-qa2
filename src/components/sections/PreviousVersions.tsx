@@ -89,11 +89,17 @@ export function PreviousVersions() {
             <div className="mt-1 text-sm">List of previously released extensions available on the HID server.</div>
 
             <div className="mt-1 text-xs cursor-default">
-                {Object.entries(byYears).map(([year, items], idxYear) => {
-                    return items.map((item, idx) => (
-                        <div className="text-right" title={item.date} key={`${idxYear}${idx}`}>{item.version}</div>
-                    ))
-                })}
+                {Object.entries(byYears).map(([year, items], idxYear) => (
+                    <div key={idxYear}>
+                        <div className="">{year}</div>
+                        <div className="columns-7">
+                            {items.map((item, idx) => (
+                                <div className="text-right" title={item.date} key={`${idxYear}${idx}`}>{item.version}</div>
+                            ))}
+                        </div>
+                    </div>
+                )
+                )}
 
             </div>
 
