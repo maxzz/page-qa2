@@ -4,6 +4,7 @@ import { extArchiveStateAtom } from '@/store/store';
 import * as CONST from '@/store/utils/constants';
 import { IFnameMeta } from '@/store/utils/utils-existing-on-server';
 import { SectionHeader } from '../Frontpage';
+import iconClasses from './browser-icons.module.scss';
 
 function getUrl(name: string) {
     return `${CONST.API_URL}${name}`;
@@ -11,15 +12,15 @@ function getUrl(name: string) {
 
 function getClass(mdfile: IFnameMeta) {
     if (mdfile.browser === 'chrome') {
-        return 'br-chrome';
+        return iconClasses.iconCh;
     }
     if (mdfile.browser === 'firefox') {
-        return 'br-firefox';
+        return iconClasses.iconFf;
     }
     if (mdfile.browser === 'maxz') {
-        return 'br-maxz';
+        return 'br-maxz'; //TODO:
     }
-    return 'br-edge';
+    return iconClasses.iconMs;
 }
 
 type Meta = IFnameMeta & {
@@ -72,7 +73,10 @@ export function PreviousVersions() {
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
                             {items.map((item, idx) => (
-                                <a className="block" href={getUrl(item.fname)} target="_blank" title={item.date} key={`${idxYear}${idx}`}>{item.version}</a>
+                                <div className="" key={`${idxYear}${idx}`}>
+                                    <span className={`inline-block w-4 h-4 ${getClass(item)}`}>1</span>
+                                    <a href={getUrl(item.fname)} target="_blank" title={item.date}>{item.version}</a>
+                                </div>
                             ))}
                         </div>
                     </div>
