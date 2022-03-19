@@ -9,7 +9,7 @@ import { QATestApps } from './sections/QATestApps';
 
 export function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
-        <section className="text-[#003f82] text-xl font-semibold uppercase tracking-tighter">
+        <section className="text-[#003f82] text-xl font-semibold uppercase tracking-tighter border-b border-[#003f82]">
             {children}
         </section>
     );
@@ -20,7 +20,6 @@ export function Frontpage() {
         <div className="h-screen flex flex-col">
             <AppHeader />
             <div className="flex-1 overflow-y-auto" style={{overflow: 'overlay'}}>
-            {/* <div className="flex-1 overflow-y-auto"> */}
                 <div className="m-auto max-w-sm sm:max-w-xl md:max-w-3xl lg:max-w-4xl flex flex-col space-y-4">
                 {/* <div className="m-auto w-4/5 flex flex-col space-y-4"> */}
                 {/* <div className="m-auto max-w-[80vw] flex flex-col space-y-4"> */}
