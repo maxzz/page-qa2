@@ -91,16 +91,15 @@ export function PreviousVersions() {
             <div className="mt-1 text-xs cursor-default">
                 {Object.entries(byYears).map(([year, items], idxYear) => (
                     <div key={idxYear}>
-                        <div className="">{year}</div>
+                        <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
                             {items.map((item, idx) => (
-                                <div className="text-right" title={item.date} key={`${idxYear}${idx}`}>{item.version}</div>
+                                <div className="" title={item.date} key={`${idxYear}${idx}`}>{item.version}</div>
                             ))}
                         </div>
                     </div>
                 )
                 )}
-
             </div>
 
 
