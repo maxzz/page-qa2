@@ -72,7 +72,7 @@ export function PreviousVersions() {
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
                             {items.map((item, idx) => (
-                                <div className="" title={item.date} key={`${idxYear}${idx}`}>{item.version}</div>
+                                <a className="block" href={getUrl(item.fname)} target="_blank" title={item.date} key={`${idxYear}${idx}`}>{item.version}</a>
                             ))}
                         </div>
                     </div>
@@ -85,5 +85,5 @@ export function PreviousVersions() {
 
 //TODO: accordion
 //TODO: icons
-//TODO: links
+//TODO: links - done
 //TODO: timeline
