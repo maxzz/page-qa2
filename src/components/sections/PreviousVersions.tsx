@@ -32,7 +32,7 @@ function addDates(archive: IFnameMeta[]): Meta[] {
     let prevYear = 0;
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return archive.map((item) => {
-        const dt = new Date(item.updated);
+        const dt = new Date(item.updated.replace(/\./g, '-')+'T00:00:00');
         const year = dt.getFullYear();
         let yearChanged = year !== prevYear;
         prevYear = year;
