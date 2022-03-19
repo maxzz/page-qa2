@@ -67,7 +67,7 @@ export function PreviousVersions() {
             <p className="mt-1 text-sm">List of previously released extensions that are still available on the HID server.</p>
 
             <div className="mt-1 text-xs cursor-default">
-                {Object.entries(byYears).map(([year, items], idxYear) => (
+                {Object.entries(byYears).reverse().map(([year, items], idxYear) => (
                     <div key={idxYear}>
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
