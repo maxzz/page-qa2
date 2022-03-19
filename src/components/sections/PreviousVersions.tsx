@@ -18,7 +18,7 @@ function getClass(mdfile: IFnameMeta) {
         return iconClasses.iconFf;
     }
     if (mdfile.browser === 'maxz') {
-        return 'br-maxz'; //TODO:
+        return iconClasses.iconTt;
     }
     return iconClasses.iconMs;
 }
@@ -73,8 +73,8 @@ export function PreviousVersions() {
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
                             {items.map((item, idx) => (
-                                <div className="" key={`${idxYear}${idx}`}>
-                                    <span className={`inline-block w-4 h-4 ${getClass(item)}`}>1</span>
+                                <div className="leading-5 flex items-center" key={`${idxYear}${idx}`}>
+                                    <span className={`w-4 h-4 mr-1 ${getClass(item)}`}></span>
                                     <a href={getUrl(item.fname)} target="_blank" title={item.date}>{item.version}</a>
                                 </div>
                             ))}
@@ -88,6 +88,6 @@ export function PreviousVersions() {
 }
 
 //TODO: accordion
-//TODO: icons
+//TODO: icons - done
 //TODO: links - done
 //TODO: timeline
