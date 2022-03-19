@@ -10,24 +10,41 @@ function getUrl(name: string) {
     return `${CONST.API_URL}${name}`;
 }
 
-function getClass(mdfile: IFnameMeta) {
-    if (mdfile.browser === 'chrome') {
+function getClass(item: IFnameMeta) {
+    if (item.browser === 'chrome') {
         return iconClasses.iconCh;
     }
-    if (mdfile.browser === 'firefox') {
+    if (item.browser === 'firefox') {
         return iconClasses.iconFf;
     }
-    if (mdfile.browser === 'maxz') {
+    if (item.browser === 'maxz') {
         return iconClasses.iconTt;
     }
     return iconClasses.iconMs;
+}
+
+function getBrowserName(item: Meta) {
+    if (item.browser === 'chrome') {
+        return 'Chrome';
+    }
+    if (item.browser === 'firefox') {
+        return 'Firefox';
+    }
+    if (item.browser === 'maxz') {
+        return 'DevTools';
+    }
+    return 'Microsoft Edge';
+}
+
+function getTooltip(item: Meta) {
+    return `${getBrowserName(item)} extension released on ${item.date}`;
 }
 
 type Meta = IFnameMeta & {
     yearChanged: boolean;
     year: number;
     cls: string;
-    tooltip: string;
+    date: string;
 };
 
 function addDates(archive: IFnameMeta[]): Meta[] {
@@ -43,7 +60,7 @@ function addDates(archive: IFnameMeta[]): Meta[] {
             yearChanged,
             year,
             cls: getClass(item),
-            tooltip: dt.toLocaleDateString('en-US', options),
+            date: dt.toLocaleDateString('en-US', options),
         } as Meta;
     });
 }
@@ -75,7 +92,7 @@ export function PreviousVersions() {
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
                             {items.map((item, idx) => (
-                                <a className="leading-5 flex items-center" href={getUrl(item.fname)} target="_blank" title={item.tooltip} key={idx}>
+                                <a className="leading-5 flex items-center" href={getUrl(item.fname)} target="_blank" title={getTooltip(item)} key={idx}>
                                     <span className={`w-4 h-4 mr-1 ${item.cls} saturate-150`}></span>
                                     <span>{item.version}</span>
                                 </a>
