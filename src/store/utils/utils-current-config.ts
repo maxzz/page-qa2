@@ -43,6 +43,11 @@ function fnameVersionDate(fname: string, meta: IExtnInfo): void {
     meta.updated = match ? match[2] : '';
 }
 
+export function parseDate(date: string): Date | string {
+    const dt = new Date(date.replace(/\./g, '-') + 'T00:00:00');
+    return dt.toString() !== 'Invalid Date' ? dt : date;
+}
+
 function findInfo(ei: IExtnInfo[], browser: TBrowser, brand: TBrand, qa: boolean): IExtnInfo | undefined {
     return ei.find((_: IExtnInfo) => {
         return _.browser === browser && _.brand === brand && _.qa === qa;
