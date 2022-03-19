@@ -45,27 +45,6 @@ function addDates(archive: IFnameMeta[]): Meta[] {
     });
 }
 
-// export function PreviousVersions() {
-//     const [extArchiveState] = useAtom(extArchiveStateAtom);
-//     const archive = addDates(extArchiveState.data || []);
-//     return (
-//         <div className="">
-//             <SectionHeader>
-//                 <div className="" title="Previously released extensions">Archive</div>
-//             </SectionHeader>
-//             <div className="mt-1 text-sm">List of previously released extensions available on the HID server.</div>
-//             <div className="mt-1 columns-7 gap-4 text-xs cursor-default">
-//                 {archive.map((item, idx) => (
-//                     <React.Fragment key={idx}>
-//                         {item.yearChanged && <div className={`${idx ? 'mt-3' : ''} bg-slate-200 font-bold`}>{item.year}</div>}
-//                         <div className="text-right" title={item.date}>{item.version}</div>
-//                     </React.Fragment>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// }
-
 function splitByYears(archive: Meta[]): Record<string, Meta[]> {
     const res: Record<string, Meta[]> = {};
     archive.forEach((item) => {
@@ -79,14 +58,13 @@ function splitByYears(archive: Meta[]): Record<string, Meta[]> {
 
 export function PreviousVersions() {
     const [extArchiveState] = useAtom(extArchiveStateAtom);
-    const archive = addDates(extArchiveState.data || []);
-    const byYears = splitByYears(archive);
+    const byYears = splitByYears(addDates(extArchiveState.data || []));
     return (
         <div className="">
             <SectionHeader>
                 <div className="" title="Previously released extensions">Archive</div>
             </SectionHeader>
-            <div className="mt-1 text-sm">List of previously released extensions available on the HID server.</div>
+            <p className="mt-1 text-sm">List of previously released extensions that are still available on the HID server.</p>
 
             <div className="mt-1 text-xs cursor-default">
                 {Object.entries(byYears).map(([year, items], idxYear) => (
@@ -101,16 +79,6 @@ export function PreviousVersions() {
                 )
                 )}
             </div>
-
-
-            {/* <div className="mt-1 columns-7 gap-4 text-xs cursor-default">
-                {archive.map((item, idx) => (
-                    <React.Fragment key={idx}>
-                        {item.yearChanged && <div className={`${idx ? 'mt-3' : ''} bg-slate-200 font-bold`}>{item.year}</div>}
-                        <div className="text-right" title={item.date}>{item.version}</div>
-                    </React.Fragment>
-                ))}
-            </div> */}
         </div>
     );
 }
