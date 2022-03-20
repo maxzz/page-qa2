@@ -105,9 +105,7 @@ export const runFetchConfigAtom = atom(
         fetchData();
     }
 );
-runFetchConfigAtom.onMount = (runFetch) => {
-    runFetch();
-};
+runFetchConfigAtom.onMount = (runFetch) => runFetch();
 
 //#endregion Server Config File
 
@@ -130,8 +128,7 @@ export const runFetchArchiveAtom = atom(
         fetchData();
     }
 );
-runFetchArchiveAtom.onMount = (runFetch) => {
-    runFetch();
-};
+runFetchArchiveAtom.onMount = (runFetch) => runFetch();
+export const sectionArchiveOpenAtom = atom(false);
 
 //#endregion Extensions Archive on server

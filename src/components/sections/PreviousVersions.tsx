@@ -1,10 +1,12 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { extArchiveStateAtom } from '@/store/store';
+import { extArchiveStateAtom, sectionArchiveOpenAtom } from '@/store/store';
 import * as CONST from '@/store/utils/constants';
 import { IFnameMeta } from '@/store/utils/utils-existing-on-server';
 import { SectionHeader } from '../Frontpage';
 import iconClasses from './browser-icons.module.scss';
+import { UISectionPane } from '../UI/UISectionPane';
+import { UIAccordion } from '../UI/UIAccordion';
 
 function getUrl(name: string) {
     return `${CONST.API_URL}${name}`;
@@ -76,7 +78,7 @@ function splitByYears(archive: Meta[]): Record<string, Meta[]> {
     return res;
 }
 
-export function PreviousVersions() {
+export function PreviousVersions2() {
     const [extArchiveState] = useAtom(extArchiveStateAtom);
     const byYears = splitByYears(addDates(extArchiveState.data || []));
     return (
@@ -106,7 +108,41 @@ export function PreviousVersions() {
     );
 }
 
-//TODO: accordion
+export function PreviousVersions() {
+    const [open, setOpen] = useAtom(sectionArchiveOpenAtom);
+    const [extArchiveState] = useAtom(extArchiveStateAtom);
+    const byYears = splitByYears(addDates(extArchiveState.data || []));
+
+    return (<div>
+        <UISectionPane open={open} onClick={(event) => setOpen(v => !v)}>
+            <div className="" title="Previously released extensions">
+                Archive
+            </div>
+        </UISectionPane>
+        <UIAccordion toggle={open}>
+            <p className="mt-1 text-sm">List of previously released extensions that are still available on the HID server.</p>
+
+            <div className="mt-1 text-xs cursor-default">
+                {Object.entries(byYears).reverse().map(([year, items], idxYear) => (
+                    <div key={idxYear}>
+                        <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
+                        <div className="columns-7">
+                            {items.map((item, idx) => (
+                                <a className="leading-5 flex items-center" href={getUrl(item.fname)} target="_blank" title={getTooltip(item)} key={idx}>
+                                    <span className={`w-4 h-4 mr-1 ${item.cls} saturate-150`}></span>
+                                    <span>{item.version}</span>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                )
+                )}
+            </div>
+        </UIAccordion>
+    </div>);
+}
+
+//TODO: accordion - done
 //TODO: icons - done
 //TODO: links - done
 //TODO: timeline - done
