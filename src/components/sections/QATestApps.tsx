@@ -17,10 +17,10 @@ export function QATestApps() {
                     <img className="m-auto bg-slate-300" src={mainImage} width="200px" alt="test applications preview" />
                 </div>
 
-                <ul>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
+                <ul className="ml-4 list-disc">
+                    <li><a className="underline" href="https://maxzz.github.io/test-pm-domain-logins/#" target="_blank">Test login and password change screens on the same domain</a></li>
+                    <li><a className="underline" href="https://maxzz.github.io/test-pm-second" target="_blank">Simple login screen to test login transactions</a></li>
+                    <li><a className="underline" href="https://maxzz.github.io/test-pm" target="_blank">Customizable login and password change screens</a></li>
                 </ul>
             </div>
         </div>
