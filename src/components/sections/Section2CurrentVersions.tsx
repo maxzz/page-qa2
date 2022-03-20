@@ -76,7 +76,7 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: Fla
     );
 }
 
-export function CurrentVersions() {
+export function Section2CurrentVersions() {
     const [extInfos] = useAtom(extInfosStateAtom);
     const summary = extInfos.data?.summary || [];
     const res = reduceToFlat(reduceForTable(summary));

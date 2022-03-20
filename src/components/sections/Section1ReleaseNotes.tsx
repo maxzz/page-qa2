@@ -6,7 +6,7 @@ import { UISectionPane } from '../UI/UISectionPane';
 import { UIAccordion } from '../UI/UIAccordion';
 import './markdown.scss';
 
-export function ReleaseNotes() {
+export function Section1ReleaseNotes() {
     const [open, setOpen] = useAtom(releaseNotesOpenAtom);
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
     const state = useAtomValue(releaseNotesStateAtom);

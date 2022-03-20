@@ -1,11 +1,11 @@
 import React from 'react';
 import { AppHeader } from './AppHeader';
-import { HeroSection } from './sections/HeroSection';
-import { ReleaseNotes } from './sections/ReleaseNotes';
-import { CurrentVersions } from './sections/CurrentVersions';
+import { Section0HeroSection } from './sections/Section0HeroSection';
+import { Section1ReleaseNotes } from './sections/Section1ReleaseNotes';
+import { Section2CurrentVersions } from './sections/Section2CurrentVersions';
 import { Section3Archive } from './sections/Section3Archive';
-import { Conclusion } from './sections/Conclusion';
-import { QATestApps } from './sections/QATestApps';
+import { Section5Conclusion } from './sections/Section5Conclusion';
+import { Section4TestApps } from './sections/Section4TestApps';
 
 export function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
@@ -27,12 +27,12 @@ export function Frontpage() {
                 {/* <div className="m-auto max-w-[80%] flex flex-col space-y-4" style={{ overflow: 'hidden', scrollbarGutter: 'stable' }}> */}
                 {/* <div className="ml-[calc(20vw/2)] mr-[calc(calc(20vw/2)-16px)] max-w-3xl flex flex-col space-y-4"> */}
                 {/* <div className="ml-[calc(20vw/2)] mr-auto max-w-3xl flex flex-col space-y-4"> */}
-                    <HeroSection />
-                    <ReleaseNotes />
-                    <CurrentVersions />
+                    <Section0HeroSection />
+                    <Section1ReleaseNotes />
+                    <Section2CurrentVersions />
                     <Section3Archive />
-                    <QATestApps />
-                    <Conclusion />
+                    <Section4TestApps />
+                    <Section5Conclusion />
                 </div>
             </div>
         </div>
