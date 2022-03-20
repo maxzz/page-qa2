@@ -70,7 +70,7 @@ function splitByYears(archive: Meta[]): Record<string, Meta[]> {
     return res;
 }
 
-// export function PreviousVersions2() {
+// export function Section3Archive2() {
 //     const [extArchiveState] = useAtom(extArchiveStateAtom);
 //     const byYears = splitByYears(addDates(extArchiveState.data || []));
 //     return (
@@ -99,7 +99,7 @@ function splitByYears(archive: Meta[]): Record<string, Meta[]> {
 //     );
 // }
 
-export function PreviousVersions() {
+export function Section3Archive() {
     const [open, setOpen] = useAtom(sectionArchiveOpenAtom);
     const [extArchiveState] = useAtom(extArchiveStateAtom);
     const byYears = splitByYears(addDates(extArchiveState.data || []));
@@ -115,7 +115,7 @@ export function PreviousVersions() {
                 List of previously released extensions that are still available on the HID server.
             </p>
 
-            <div className="mt-1 text-xs cursor-default">
+            <div className="mt-1 pb-2 text-xs cursor-default">
                 {Object.entries(byYears).reverse().map(([year, items], idxYear) => (
                     <div key={idxYear}>
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>

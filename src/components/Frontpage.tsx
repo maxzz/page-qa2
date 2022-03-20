@@ -3,7 +3,7 @@ import { AppHeader } from './AppHeader';
 import { HeroSection } from './sections/HeroSection';
 import { ReleaseNotes } from './sections/ReleaseNotes';
 import { CurrentVersions } from './sections/CurrentVersions';
-import { PreviousVersions } from './sections/PreviousVersions';
+import { Section3Archive } from './sections/Section3Archive';
 import { Conclusion } from './sections/Conclusion';
 import { QATestApps } from './sections/QATestApps';
 
@@ -30,7 +30,7 @@ export function Frontpage() {
                     <HeroSection />
                     <ReleaseNotes />
                     <CurrentVersions />
-                    <PreviousVersions />
+                    <Section3Archive />
                     <QATestApps />
                     <Conclusion />
                 </div>
