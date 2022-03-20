@@ -13,16 +13,23 @@ function getUrl(name: string) {
 }
 
 function getClass(item: IFnameMeta) {
-    if (item.browser === 'chrome') {
-        return iconClasses.iconCh;
+    const types = {
+        chrome: 'iconCh',
+        firefox: 'iconFf',
+        maxz: 'iconTt',
     }
-    if (item.browser === 'firefox') {
-        return iconClasses.iconFf;
-    }
-    if (item.browser === 'maxz') {
-        return iconClasses.iconTt;
-    }
-    return iconClasses.iconMs;
+    return iconClasses[types[item.browser as keyof typeof types] || 'iconMs'];
+
+    // if (item.browser === 'chrome') {
+    //     return iconClasses.iconCh;
+    // }
+    // if (item.browser === 'firefox') {
+    //     return iconClasses.iconFf;
+    // }
+    // if (item.browser === 'maxz') {
+    //     return iconClasses.iconTt;
+    // }
+    // return iconClasses.iconMs;
 }
 
 function getBrowserName(item: Meta) {
