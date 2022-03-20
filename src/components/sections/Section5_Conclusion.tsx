@@ -1,7 +1,7 @@
 import React from 'react';
 import { SectionHeader } from '../Frontpage';
 
-export function Section5Conclusion() {
+export function Section5_Conclusion() {
     return (
         <div>
             <SectionHeader>

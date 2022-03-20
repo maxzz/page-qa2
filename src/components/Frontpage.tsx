@@ -1,11 +1,11 @@
 import React from 'react';
 import { AppHeader } from './AppHeader';
-import { Section0HeroSection } from './sections/Section0HeroSection';
-import { Section1ReleaseNotes } from './sections/Section1ReleaseNotes';
-import { Section2CurrentVersions } from './sections/Section2CurrentVersions';
-import { Section3Archive } from './sections/Section3Archive';
-import { Section5Conclusion } from './sections/Section5Conclusion';
-import { Section4TestApps } from './sections/Section4TestApps';
+import { Section0_HeroSection } from './sections/Section0_HeroSection';
+import { Section1_ReleaseNotes } from './sections/Section1_ReleaseNotes';
+import { Section2_CurrentVersions } from './sections/Section2_CurrentVersions';
+import { Section3_Archive } from './sections/Section3_Archive';
+import { Section5_Conclusion } from './sections/Section5_Conclusion';
+import { Section4_TestApps } from './sections/Section4_TestApps';
 
 export function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
     return (
@@ -27,12 +27,12 @@ export function Frontpage() {
                 {/* <div className="m-auto max-w-[80%] flex flex-col space-y-4" style={{ overflow: 'hidden', scrollbarGutter: 'stable' }}> */}
                 {/* <div className="ml-[calc(20vw/2)] mr-[calc(calc(20vw/2)-16px)] max-w-3xl flex flex-col space-y-4"> */}
                 {/* <div className="ml-[calc(20vw/2)] mr-auto max-w-3xl flex flex-col space-y-4"> */}
-                    <Section0HeroSection />
-                    <Section1ReleaseNotes />
-                    <Section2CurrentVersions />
-                    <Section3Archive />
-                    <Section4TestApps />
-                    <Section5Conclusion />
+                    <Section0_HeroSection />
+                    <Section1_ReleaseNotes />
+                    <Section2_CurrentVersions />
+                    <Section3_Archive />
+                    <Section4_TestApps />
+                    <Section5_Conclusion />
                 </div>
             </div>
         </div>

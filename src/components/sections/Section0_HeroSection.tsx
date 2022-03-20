@@ -44,7 +44,7 @@ function CurrentVersions() {
     );
 }
 
-export function Section0HeroSection() {
+export function Section0_HeroSection() {
     return (
         <div className="mt-4 grid grid-cols-[minmax(8rem,1fr),minmax(8rem,32rem)] gap-4">
             <HeroImage />

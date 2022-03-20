@@ -99,7 +99,7 @@ function splitByYears(archive: Meta[]): Record<string, Meta[]> {
 //     );
 // }
 
-export function Section3Archive() {
+export function Section3_Archive() {
     const [open, setOpen] = useAtom(sectionArchiveOpenAtom);
     const [extArchiveState] = useAtom(extArchiveStateAtom);
     const byYears = splitByYears(addDates(extArchiveState.data || []));

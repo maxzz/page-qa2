@@ -31,7 +31,7 @@ export function QATestApps2() {
     );
 }
 
-export function Section4TestApps() {
+export function Section4_TestApps() {
     const [open, setOpen] = useAtom(sectionQATestOpenAtom);
 
     return (<div>
