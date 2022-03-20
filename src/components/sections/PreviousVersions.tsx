@@ -19,17 +19,6 @@ function getClass(item: IFnameMeta) {
         maxz: 'iconTt',
     }
     return iconClasses[types[item.browser as keyof typeof types] || 'iconMs'];
-
-    // if (item.browser === 'chrome') {
-    //     return iconClasses.iconCh;
-    // }
-    // if (item.browser === 'firefox') {
-    //     return iconClasses.iconFf;
-    // }
-    // if (item.browser === 'maxz') {
-    //     return iconClasses.iconTt;
-    // }
-    // return iconClasses.iconMs;
 }
 
 function getBrowserName(item: Meta) {
