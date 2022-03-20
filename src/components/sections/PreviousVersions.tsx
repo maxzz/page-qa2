@@ -26,16 +26,12 @@ function getClass(item: IFnameMeta) {
 }
 
 function getBrowserName(item: Meta) {
-    if (item.browser === 'chrome') {
-        return 'Chrome';
+    const types = {
+        chrome: 'Chrome',
+        firefox: 'Firefox',
+        maxz: 'DevTools'
     }
-    if (item.browser === 'firefox') {
-        return 'Firefox';
-    }
-    if (item.browser === 'maxz') {
-        return 'DevTools';
-    }
-    return 'Microsoft Edge';
+    return types[item.browser as keyof typeof types] || 'Microsoft Edge';
 }
 
 function getTooltip(item: Meta) {
@@ -119,7 +115,9 @@ export function PreviousVersions() {
             </div>
         </UISectionPane>
         <UIAccordion toggle={open}>
-            <p className="mt-1 text-sm">List of previously released extensions that are still available on the HID server.</p>
+            <p className="mt-1 text-sm">
+                List of previously released extensions that are still available on the HID server.
+            </p>
 
             <div className="mt-1 text-xs cursor-default">
                 {Object.entries(byYears).reverse().map(([year, items], idxYear) => (
@@ -134,8 +132,7 @@ export function PreviousVersions() {
                             ))}
                         </div>
                     </div>
-                )
-                )}
+                ))}
             </div>
         </UIAccordion>
     </div>);
