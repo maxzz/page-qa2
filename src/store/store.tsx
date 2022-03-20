@@ -132,3 +132,5 @@ runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 export const sectionArchiveOpenAtom = atom(false);
 
 //#endregion Extensions Archive on server
+
+export const sectionQATestOpenAtom = atom(false);

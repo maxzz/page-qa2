@@ -1,16 +1,20 @@
 import React from 'react';
 import { SectionHeader } from '../Frontpage';
 import mainImage from '../../assets/testapps/2022-03-01_19-09-50.png';
+import { useAtom } from 'jotai';
+import { sectionQATestOpenAtom } from '@/store/store';
+import { UISectionPane } from '../UI/UISectionPane';
+import { UIAccordion } from '../UI/UIAccordion';
 
-export function QATestApps() {
+export function QATestApps2() {
     return (
-        <div className="">
-            <SectionHeader>
+        <>
+            {/* <SectionHeader>
                 Test Applications for QA
-            </SectionHeader>
+            </SectionHeader> */}
 
 
-            <div className="mt-2 text-sm flex flex-col space-y-2">
+            <div className="py-2 text-sm flex flex-col space-y-2">
                 <p>Here are some test web apps that you can use to test the various features of Password Manager.</p>
 
                 <div>
@@ -23,6 +27,21 @@ export function QATestApps() {
                     <li><a className="underline" href="https://maxzz.github.io/test-pm" target="_blank">Customizable login and password change screens</a></li>
                 </ul>
             </div>
-        </div>
+        </>
     );
+}
+
+export function QATestApps() {
+    const [open, setOpen] = useAtom(sectionQATestOpenAtom);
+
+    return (<div>
+        <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
+            <div className="">
+                Test Applications for QA
+            </div>
+        </UISectionPane>
+        <UIAccordion toggle={open}>
+            <QATestApps2 />
+        </UIAccordion>
+    </div>);
 }
