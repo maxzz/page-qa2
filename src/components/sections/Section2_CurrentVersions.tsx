@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { SectionHeader } from '../Frontpage';
 import { extInfosStateAtom, section2_OpenCurrentVersionsAtom } from '@/store/store';
 import { IExtnInfo, TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/utils/utils-current-config';
 import { Section } from './Section';
@@ -92,7 +91,6 @@ export function Body() {
     );
 }
 
-
 export function Section2_CurrentVersions() {
     return (
         <Section openAtom={section2_OpenCurrentVersionsAtom} title={"Current verions"}>
@@ -100,23 +98,3 @@ export function Section2_CurrentVersions() {
         </Section>
     );
 }
-
-// export function Section2_CurrentVersions() {
-//     const [extInfos] = useAtom(extInfosStateAtom);
-//     const summary = extInfos.data?.summary || [];
-//     const res = reduceToFlat(reduceForTable(summary));
-//     return (
-//         <div>
-//             <SectionHeader>
-//                 Current verions
-//             </SectionHeader>
-//             <div className="">
-//                 <div className="mt-2 text-sm">Summary table of current versions.</div>
-//                 <div className="max-w-2xl grid grid-cols-2 gap-x-2">
-//                     <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
-//                     <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
