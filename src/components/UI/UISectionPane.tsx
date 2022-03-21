@@ -5,8 +5,7 @@ export function UISectionPane({ className, children, open = true, ...rest }: { o
     const styles = useSpring({ open: open ? 1 : 0, config: { mass: 0.2, tension: 492, clamp: true } });
     return (
         <div
-            // className={className || "px-2 py-1 bg-slate-500 text-stone-100 uppercase flex items-center justify-between select-none cursor-pointer font-ui"}
-            className={className}
+            className={className || "px-2 py-1 bg-slate-500 text-stone-100 uppercase flex items-center justify-between select-none cursor-pointer font-ui"}
             {...rest}
         >
             {/* Section name */}
