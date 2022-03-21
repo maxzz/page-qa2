@@ -1,8 +1,9 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { SectionHeader } from '../Frontpage';
-import { extInfosStateAtom } from '@/store/store';
+import { extInfosStateAtom, section2_OpenCurrentVersionsAtom } from '@/store/store';
 import { IExtnInfo, TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/utils/utils-current-config';
+import { Section } from './Section';
 
 type Table = {
     [key in TBrowser]: {
@@ -76,17 +77,13 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: Fla
     );
 }
 
-export function Section2_CurrentVersions() {
+export function Body() {
     const [extInfos] = useAtom(extInfosStateAtom);
     const summary = extInfos.data?.summary || [];
     const res = reduceToFlat(reduceForTable(summary));
     return (
-        <div>
-            <SectionHeader>
-                Current verions
-            </SectionHeader>
-
-            <div className="mt-2 text-sm">Summary table of current versions.</div>
+        <div className="py-2 text-sm">
+            <div>Summary table of current versions.</div>
             <div className="max-w-2xl grid grid-cols-2 gap-x-2">
                 <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
                 <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
@@ -94,3 +91,32 @@ export function Section2_CurrentVersions() {
         </div>
     );
 }
+
+
+export function Section2_CurrentVersions() {
+    return (
+        <Section openAtom={section2_OpenCurrentVersionsAtom} title={"Current verions"}>
+            <Body />
+        </Section>
+    );
+}
+
+// export function Section2_CurrentVersions() {
+//     const [extInfos] = useAtom(extInfosStateAtom);
+//     const summary = extInfos.data?.summary || [];
+//     const res = reduceToFlat(reduceForTable(summary));
+//     return (
+//         <div>
+//             <SectionHeader>
+//                 Current verions
+//             </SectionHeader>
+//             <div className="">
+//                 <div className="mt-2 text-sm">Summary table of current versions.</div>
+//                 <div className="max-w-2xl grid grid-cols-2 gap-x-2">
+//                     <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
+//                     <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
