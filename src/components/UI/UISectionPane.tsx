@@ -1,11 +1,12 @@
 import React, { HTMLAttributes } from 'react';
 import { a, useSpring } from '@react-spring/web';
 
-export function UISectionPane({ children, open = true, ...rest }: { open?: boolean; } & HTMLAttributes<HTMLDivElement>) {
+export function UISectionPane({ className, children, open = true, ...rest }: { open?: boolean; } & HTMLAttributes<HTMLDivElement>) {
     const styles = useSpring({ open: open ? 1 : 0, config: { mass: 0.2, tension: 492, clamp: true } });
     return (
         <div
-            className="px-2 py-1 bg-slate-500 text-stone-100 uppercase flex items-center justify-between select-none cursor-pointer font-ui"
+            // className={className || "px-2 py-1 bg-slate-500 text-stone-100 uppercase flex items-center justify-between select-none cursor-pointer font-ui"}
+            className={className}
             {...rest}
         >
             {/* Section name */}

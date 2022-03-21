@@ -5,6 +5,7 @@ import { useAtom } from 'jotai';
 import { sectionQATestOpenAtom } from '@/store/store';
 import { UISectionPane } from '../UI/UISectionPane';
 import { UIAccordion } from '../UI/UIAccordion';
+import { Section } from './Section';
 
 export function QATestApps2() {
     return (
@@ -31,17 +32,25 @@ export function QATestApps2() {
     );
 }
 
+// export function Section4_TestApps() {
+//     const [open, setOpen] = useAtom(sectionQATestOpenAtom);
+//     return (<div>
+//         <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
+//             <div className="">
+//                 Test Applications for QA
+//             </div>
+//         </UISectionPane>
+//         <UIAccordion toggle={open}>
+//             <QATestApps2 />
+//         </UIAccordion>
+//     </div>);
+// }
+
 export function Section4_TestApps() {
     const [open, setOpen] = useAtom(sectionQATestOpenAtom);
-
     return (<div>
-        <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
-            <div className="">
-                Test Applications for QA
-            </div>
-        </UISectionPane>
-        <UIAccordion toggle={open}>
+        <Section openAtom={sectionQATestOpenAtom} title="Test Applications for QA">
             <QATestApps2 />
-        </UIAccordion>
+        </Section>
     </div>);
 }
