@@ -3,7 +3,6 @@ import { useAtom } from 'jotai';
 import { extArchiveStateAtom, section3_OpenArchiveAtom } from '@/store/store';
 import * as CONST from '@/store/utils/constants';
 import { IFnameMeta } from '@/store/utils/utils-existing-on-server';
-import { Section } from './Section';
 import iconClasses from './browser-icons.module.scss';
 
 function getUrl(name: string) {
@@ -68,36 +67,7 @@ function splitByYears(archive: Meta[]): Record<string, Meta[]> {
     return res;
 }
 
-// export function Section3Archive2() {
-//     const [extArchiveState] = useAtom(extArchiveStateAtom);
-//     const byYears = splitByYears(addDates(extArchiveState.data || []));
-//     return (
-//         <div className="">
-//             <SectionHeader>
-//                 <div className="" title="Previously released extensions">Archive</div>
-//             </SectionHeader>
-//             <p className="mt-1 text-sm">List of previously released extensions that are still available on the HID server.</p>
-//             <div className="mt-1 text-xs cursor-default">
-//                 {Object.entries(byYears).reverse().map(([year, items], idxYear) => (
-//                     <div key={idxYear}>
-//                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
-//                         <div className="columns-7">
-//                             {items.map((item, idx) => (
-//                                 <a className="leading-5 flex items-center" href={getUrl(item.fname)} target="_blank" title={getTooltip(item)} key={idx}>
-//                                     <span className={`w-4 h-4 mr-1 ${item.cls} saturate-150`}></span>
-//                                     <span>{item.version}</span>
-//                                 </a>
-//                             ))}
-//                         </div>
-//                     </div>
-//                 )
-//                 )}
-//             </div>
-//         </div>
-//     );
-// }
-
-export function Body() {
+export function Section3_Archive() {
     const [extArchiveState] = useAtom(extArchiveStateAtom);
     const byYears = splitByYears(addDates(extArchiveState.data || []));
     return (
@@ -124,46 +94,3 @@ export function Body() {
         </div>
     );
 }
-
-export function Section3_Archive() {
-    return (
-        <Section openAtom={section3_OpenArchiveAtom} title={<div title="Previously released extensions">Archive</div>}>
-            <Body />
-        </Section>
-    );
-}
-
-// export function Section3_Archive() {
-//     const [open, setOpen] = useAtom(section3_OpenArchiveAtom);
-//     const [extArchiveState] = useAtom(extArchiveStateAtom);
-//     const byYears = splitByYears(addDates(extArchiveState.data || []));
-
-//     return (<div>
-//         <UISectionPane open={open} onClick={() => setOpen(v => !v)}>
-//             <div className="" title="Previously released extensions">
-//                 Archive
-//             </div>
-//         </UISectionPane>
-//         <UIAccordion toggle={open}>
-//             <p className="mt-1 text-sm">
-//                 List of previously released extensions that are still available on the HID server.
-//             </p>
-
-//             <div className="mt-1 pb-2 text-xs cursor-default">
-//                 {Object.entries(byYears).reverse().map(([year, items], idxYear) => (
-//                     <div key={idxYear}>
-//                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
-//                         <div className="columns-7">
-//                             {items.map((item, idx) => (
-//                                 <a className="leading-5 flex items-center" href={getUrl(item.fname)} target="_blank" title={getTooltip(item)} key={idx}>
-//                                     <span className={`w-4 h-4 mr-1 ${item.cls} saturate-150`}></span>
-//                                     <span>{item.version}</span>
-//                                 </a>
-//                             ))}
-//                         </div>
-//                     </div>
-//                 ))}
-//             </div>
-//         </UIAccordion>
-//     </div>);
-// }

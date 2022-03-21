@@ -1,8 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { extInfosStateAtom, section2_OpenCurrentVersionsAtom } from '@/store/store';
+import { extInfosStateAtom } from '@/store/store';
 import { IExtnInfo, TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/utils/utils-current-config';
-import { Section } from './Section';
 
 type Table = {
     [key in TBrowser]: {
@@ -76,7 +75,7 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: Fla
     );
 }
 
-export function Body() {
+export function Section2_CurrentVersions() {
     const [extInfos] = useAtom(extInfosStateAtom);
     const summary = extInfos.data?.summary || [];
     const res = reduceToFlat(reduceForTable(summary));
@@ -88,13 +87,5 @@ export function Body() {
                 <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
             </div>
         </div>
-    );
-}
-
-export function Section2_CurrentVersions() {
-    return (
-        <Section openAtom={section2_OpenCurrentVersionsAtom} title={"Current verions"}>
-            <Body />
-        </Section>
     );
 }
