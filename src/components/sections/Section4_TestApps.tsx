@@ -1,5 +1,5 @@
 import React from 'react';
-import { sectionQATestOpenAtom } from '@/store/store';
+import { section4_OpenTestAppsAtom } from '@/store/store';
 import { Section } from './Section';
 import mainImage from '../../assets/testapps/2022-03-01_19-09-50.png';
 
@@ -23,7 +23,7 @@ export function TestApps() {
 
 export function Section4_TestApps() {
     return (
-        <Section openAtom={sectionQATestOpenAtom} title={"Test Applications for QA"}>
+        <Section openAtom={section4_OpenTestAppsAtom} title={"Test Applications for QA"}>
             <TestApps />
         </Section>
     );

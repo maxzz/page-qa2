@@ -77,12 +77,9 @@ export const runFetchReleaseNotesAtom = atom(
         fetchData();
     }
 );
-runFetchReleaseNotesAtom.onMount = (runFetch) => {
-    runFetch();
-};
+runFetchReleaseNotesAtom.onMount = (runFetch) => runFetch();
 
 export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data || '');
-export const releaseNotesOpenAtom = atom(false);
 
 //#endregion Server Release Notes
 
@@ -129,8 +126,11 @@ export const runFetchArchiveAtom = atom(
     }
 );
 runFetchArchiveAtom.onMount = (runFetch) => runFetch();
-export const sectionArchiveOpenAtom = atom(false);
 
 //#endregion Extensions Archive on server
 
-export const sectionQATestOpenAtom = atom(false);
+export const section1_OpenReleaseNotesAtom = atom(false);
+export const section2_OpenCurrentVersionsAtom = atom(false);
+export const section3_OpenArchiveAtom = atom(false);
+export const section4_OpenTestAppsAtom = atom(false);
+export const section5_OpenConclusionAtom = atom(false);

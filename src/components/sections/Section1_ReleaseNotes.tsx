@@ -1,13 +1,13 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { releaseNotesAtom, releaseNotesOpenAtom, releaseNotesStateAtom, runFetchReleaseNotesAtom } from '../../store/store';
+import { releaseNotesAtom, section1_OpenReleaseNotesAtom, releaseNotesStateAtom, runFetchReleaseNotesAtom } from '../../store/store';
 import { UISectionPane } from '../UI/UISectionPane';
 import { UIAccordion } from '../UI/UIAccordion';
 import './markdown.scss';
 
 export function Section1_ReleaseNotes() {
-    const [open, setOpen] = useAtom(releaseNotesOpenAtom);
+    const [open, setOpen] = useAtom(section1_OpenReleaseNotesAtom);
     const [releaseNotes, setReleaseNotes] = useAtom(releaseNotesAtom);
     const state = useAtomValue(releaseNotesStateAtom);
     const setRunFetch = useUpdateAtom(runFetchReleaseNotesAtom);

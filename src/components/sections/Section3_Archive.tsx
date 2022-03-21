@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { extArchiveStateAtom, sectionArchiveOpenAtom } from '@/store/store';
+import { extArchiveStateAtom, section3_OpenArchiveAtom } from '@/store/store';
 import * as CONST from '@/store/utils/constants';
 import { IFnameMeta } from '@/store/utils/utils-existing-on-server';
 import { SectionHeader } from '../Frontpage';
@@ -100,7 +100,7 @@ function splitByYears(archive: Meta[]): Record<string, Meta[]> {
 // }
 
 export function Section3_Archive() {
-    const [open, setOpen] = useAtom(sectionArchiveOpenAtom);
+    const [open, setOpen] = useAtom(section3_OpenArchiveAtom);
     const [extArchiveState] = useAtom(extArchiveStateAtom);
     const byYears = splitByYears(addDates(extArchiveState.data || []));
 
