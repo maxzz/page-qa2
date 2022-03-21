@@ -4,7 +4,7 @@ import { Section0_HeroSection } from './sections/Section0_HeroSection';
 import { Section1_ReleaseNotes } from './sections/Section1_ReleaseNotes';
 import { Section2_CurrentVersions } from './sections/Section2_CurrentVersions';
 import { Section3_Archive } from './sections/Section3_Archive';
-import { Section5_Conclusion } from './sections/Section5_Conclusion';
+import { Section5_FinalNotes } from './sections/Section5_FinalNotes';
 import { Section4_TestApps } from './sections/Section4_TestApps';
 
 export function SectionHeader({ children }: React.HTMLAttributes<HTMLElement>) {
@@ -32,7 +32,7 @@ export function Frontpage() {
                     <Section2_CurrentVersions />
                     <Section3_Archive />
                     <Section4_TestApps />
-                    <Section5_Conclusion />
+                    <Section5_FinalNotes />
                 </div>
             </div>
         </div>

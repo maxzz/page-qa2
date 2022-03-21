@@ -133,4 +133,4 @@ export const section1_OpenReleaseNotesAtom = atom(false);
 export const section2_OpenCurrentVersionsAtom = atom(false);
 export const section3_OpenArchiveAtom = atom(false);
 export const section4_OpenTestAppsAtom = atom(false);
-export const section5_OpenConclusionAtom = atom(false);
+export const section5_OpenFinalNotestom = atom(false);
