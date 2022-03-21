@@ -56,8 +56,8 @@ function reduceToFlat(table: Table): FlatTable {
 
 function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: FlatTableItem[]; }) {
     return (
-        <div className="mt-1 cursor-default">
-            <div className="text-sm font-bold">{TBrowserName(browser)}</div>
+        <div className="cursor-default">
+            <div className="mb-1 text-sm font-bold">{`${TBrowserName(browser)} extensions`}</div>
             <div className="grid grid-cols-3">
                 <div className="border-b text-xs">Brand</div>
                 <div className="border-b text-xs">QA</div>
@@ -80,11 +80,23 @@ export function Section2_CurrentVersions() {
     const summary = extInfos.data?.summary || [];
     const res = reduceToFlat(reduceForTable(summary));
     return (
-        <div className="py-2 text-sm">
-            <div>Summary table of current versions.</div>
+        <div className="py-2 text-sm flex flex-col space-y-2">
+            <p>Summary table of current versions.</p>
             <div className="max-w-2xl grid grid-cols-2 gap-x-2">
                 <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
                 <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
+            </div>
+            <div className="">
+                <p className="mb-1">Legend:</p>
+                <ul className="ml-4 list-disc">
+                    <li>DP - extension for DigitalPersoane product</li>
+                    <li>HP - extension for HP client secury product</li>
+                    <li>DELL - extension for DELL privacy manager product</li>
+                </ul>
+            </div>
+            <div className="">
+                <p className="">* HP and Dell extensions are still available for historical reasons. You don't need to test them.</p>
+                <p className="">** The Firefox extension is not currently updated due to issues on Mozilla's side.</p>
             </div>
         </div>
     );
