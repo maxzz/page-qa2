@@ -8,7 +8,7 @@ export function Section({ title, children, openAtom }: { title: React.ReactNode;
     return (
         <div>
             <UISectionPane
-                className="px-2 py-1 bg-[#003f82] text-stone-100 uppercase flex items-center justify-between select-none cursor-pointer font-ui"
+                className="pl-4 px-2 py-2 bg-[#003f82] text-stone-100 uppercase rounded flex items-center justify-between select-none cursor-pointer font-ui"
                 open={open}
                 onClick={() => setOpen(v => !v)}
             >
