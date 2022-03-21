@@ -23,7 +23,7 @@ export function TestApps() {
 
 export function Section4_TestApps() {
     return (
-        <Section openAtom={sectionQATestOpenAtom} title="Test Applications for QA">
+        <Section openAtom={sectionQATestOpenAtom} title={<div>"Test Applications for QA"</div>}>
             <TestApps />
         </Section>
     );
