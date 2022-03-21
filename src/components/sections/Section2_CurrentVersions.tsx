@@ -81,13 +81,13 @@ export function Section2_CurrentVersions() {
     const res = reduceToFlat(reduceForTable(summary));
     return (
         <div className="py-2 text-sm flex flex-col space-y-2">
-            <p>Summary table of current versions.</p>
+            <p>Summary table of current extension versions.</p>
             <div className="max-w-2xl grid grid-cols-2 gap-x-2">
                 <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
                 <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
             </div>
             <div className="">
-                <p className="mb-1">Legend:</p>
+                <p className="mb-1">Brand legend:</p>
                 <ul className="ml-4 list-disc">
                     <li>DP - extension for DigitalPersoane product</li>
                     <li>HP - extension for HP client secury product</li>
