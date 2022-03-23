@@ -5,8 +5,8 @@ import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
 
 function HeroImage() {
     return (
-        <div className="flex items-center">
-            <img className="object-cover grayscale" src={HERO_IMAGE} alt="hero" />
+        <div className="">
+            <img className="h-full object-cover grayscale" src={HERO_IMAGE} alt="hero" />
         </div>
     );
 }
