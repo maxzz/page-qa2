@@ -86,7 +86,7 @@ export function Section2_CurrentVersions() {
                 <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
                 <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
             </div>
-            <div className="">
+            <div className="text-xs">
                 <p className="mb-1">Brand legend:</p>
                 <ul className="ml-4 list-disc">
                     <li>DP - extension for DigitalPersoane product</li>
@@ -94,9 +94,9 @@ export function Section2_CurrentVersions() {
                     <li>DELL - extension for DELL privacy manager product</li>
                 </ul>
             </div>
-            <div className="">
+            <div className="text-xs">
                 <p className="">* HP and Dell extensions are still available for historical reasons. You don't need to test them.</p>
-                <p className="">** The Firefox extension is not currently updated due to issues on Mozilla's side.</p>
+                <p className="">** The Mozilla Firefox extension is not currently updated due to issues on Moz://a's side.</p>
             </div>
         </div>
     );
