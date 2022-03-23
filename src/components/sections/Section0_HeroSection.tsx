@@ -28,18 +28,18 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
             </div>
 
             <div className="flex items-center justify-end space-x-2 text-sm">
-                <a className="px-2 py-0.5 underline"
+                <a className="px-2 py-0.5 uppercase underline"
                     href="https://github.com/maxzz"
                     target="_blank"
                 >
                     Install
                 </a>
-                <div className="px-2 py-0.5 underline cursor-pointer"
+                <div className="px-2 py-0.5 uppercase underline cursor-pointer"
                     onClick={() => {
                         navigator.clipboard.writeText('here');
                     }}
                 >
-                    Copy <span className="text-xs font-semibold">URL</span>
+                    Copy URL
                 </div>
             </div>
         </div>
