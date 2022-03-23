@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { extArchiveStateAtom, section3_OpenArchiveAtom } from '@/store/store';
+import { extArchiveStateAtom } from '@/store/store';
 import * as CONST from '@/store/utils/constants';
 import { IFnameMeta } from '@/store/utils/utils-existing-on-server';
 import iconClasses from './browser-icons.module.scss';

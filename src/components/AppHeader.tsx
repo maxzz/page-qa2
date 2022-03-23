@@ -16,7 +16,7 @@ export function AppHeader() {
                     QA Extensions
                 </div> */}
                 
-                <div className="w-20 px-3 py-2 flex items-center justify-center bg-white rounded-md">
+                <div className="w-[4.5rem] py-3 flex items-center justify-center bg-white rounded-md">
                     <IconHIDLogo fill="#002f87" />
                 </div>
                 <div className="pb-1 text-3xl tracking-tighter font-light text-slate-100 uppercase whitespace-nowrap" style={textShadow}>
