@@ -8,6 +8,7 @@ import { Section2_CurrentVersions } from './sections/Section2_CurrentVersions';
 import { Section3_Archive } from './sections/Section3_Archive';
 import { Section4_TestApps } from './sections/Section4_TestApps';
 import { Section5_FinalNotes } from './sections/Section5_FinalNotes';
+import { Section6_Footer } from './sections/Section6_Footer';
 
 export function Frontpage() {
     return (
@@ -43,6 +44,8 @@ export function Frontpage() {
                     <Section openAtom={section5_OpenFinalNotestom} title={"Final notes"}>
                         <Section5_FinalNotes />
                     </Section>
+
+                    <Section6_Footer />
                 </div>
             </div>
         </div>
