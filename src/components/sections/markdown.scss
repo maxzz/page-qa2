@@ -1,13 +1,14 @@
-$md-theme-default-primary: #448aff;
+$md-theme-default-primary: #2275ff;
 
 .notes {
     font-size: .8rem;
     line-height: 22px;
+    color: #001845;
     
     h4 {
         font-size: 1rem;
         font-weight: bold;
-        color: $md-theme-default-primary;
+        color: #2963c3;
         border-bottom: 1px solid $md-theme-default-primary;
         margin-top: 1rem;
         margin-bottom: 0;
@@ -34,7 +35,7 @@ $md-theme-default-primary: #448aff;
         list-style-type: circle;
         
         &::marker  {
-            color:$md-theme-default-primary;
+            color: #001845;
         }
     }
 
