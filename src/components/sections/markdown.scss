@@ -14,6 +14,10 @@ $md-theme-default-primary: #2275ff;
         margin-bottom: 0;
     }
 
+    h4:first-child {
+        margin-top: 0;
+    }
+
     a {
         color: $md-theme-default-primary;
 
