@@ -7,9 +7,7 @@ export function Section1_ReleaseNotes() {
     const releaseNotes = useAtomValue(releaseNotesAtom);
     return (
         <div className="py-2">
-            <div className="notes max-h-96 px-4 overflow-y-auto text-slate-900 bg-slate-100">
-                <div dangerouslySetInnerHTML={{ __html: releaseNotes }} />
-            </div>
+            <div className="notes max-h-96 px-4 overflow-y-auto bg-slate-100" dangerouslySetInnerHTML={{ __html: releaseNotes }} />
         </div>
     );
 }
