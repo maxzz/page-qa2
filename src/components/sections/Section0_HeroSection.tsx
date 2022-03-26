@@ -7,15 +7,16 @@ import { confetti } from 'dom-confetti';
 
 const confettiConfig = {
     angle: 90,
-    spread: 360,
-    startVelocity: 40,
-    elementCount: 70,
-    dragFriction: 0.12,
-    duration: 3000,
-    stagger: 3,
-    width: "10px",
-    height: "10px",
-    perspective: "500px",
+    spread: 147,
+    startVelocity: 60,
+    elementCount: 130,
+    dragFriction: 0.21,
+    duration: 2000,
+    stagger: 0,
+    width: "8px",
+    height: "4px",
+    perspective: "1000px",
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
 };
 
 function HeroImage() {
