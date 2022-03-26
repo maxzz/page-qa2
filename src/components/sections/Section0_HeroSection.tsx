@@ -32,6 +32,7 @@ const boxShadow = {
 
 function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<LatestExtension>; }) {
     const [extension] = useAtom(extensionAtom);
+    const confettiRef = React.useRef<HTMLDivElement>(null);
     return (
         <div className="px-4 py-3 border" style={boxShadow}>
             <div className="flex items-center space-x-3">
@@ -49,11 +50,11 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
                 >
                     Download
                 </a>
-                <div className="px-2 py-0.5 uppercase underline cursor-pointer"
+                <div ref={confettiRef} className="px-2 py-0.5 uppercase underline cursor-pointer confe"
                     onClick={async () => {
                         await navigator.clipboard.writeText('here');
                         toast('copied to clipboard');
-                        confetti(document.querySelector('.toaser')!, confettiConfig);
+                        confetti(confettiRef.current!, confettiConfig);
                     }}
                 >
                     Copy URL
