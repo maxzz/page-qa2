@@ -30,10 +30,10 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
 
             <div className="flex items-center justify-end space-x-2 text-sm">
                 <a className="px-2 py-0.5 uppercase underline"
-                    href="https://github.com/maxzz"
-                    target="_blank"
+                    href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.432_on_2022.03.16-r-chrome.zip"
+                    //target="_blank"
                 >
-                    Install
+                    Download
                 </a>
                 <div className="px-2 py-0.5 uppercase underline cursor-pointer"
                     onClick={async () => {
