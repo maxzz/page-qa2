@@ -4,8 +4,9 @@ import { extensionChAtom, extensionFfAtom, LatestExtension } from '@/store/store
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
 import { toast } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
+import { IconClipboard, IconDownload } from '../UI/UIIcons';
 
-const confettiConfig = {
+const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
     angle: 90,
     spread: 147,
     startVelocity: 60,
@@ -45,12 +46,14 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
             </div>
 
             <div className="flex items-center justify-end space-x-2 text-sm">
+                <IconDownload className="w-6 h-6" strokeWidth={1} />
                 <a
                     className="px-2 py-0.5 uppercase underline"
                     href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.432_on_2022.03.16-r-chrome.zip"
                 >
                     Download
                 </a>
+                <IconClipboard className="w-6 h-6" strokeWidth={1} />
                 <div ref={confettiRef} className="px-2 py-0.5 uppercase underline cursor-pointer confe"
                     onClick={async () => {
                         await navigator.clipboard.writeText('here');
