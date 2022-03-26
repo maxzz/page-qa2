@@ -2,6 +2,7 @@ import React from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { extensionChAtom, extensionFfAtom, LatestExtension } from '@/store/store';
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
+import { toast } from '../UI/UiToaster';
 
 function HeroImage() {
     return (
@@ -35,8 +36,9 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
                     Install
                 </a>
                 <div className="px-2 py-0.5 uppercase underline cursor-pointer"
-                    onClick={() => {
-                        navigator.clipboard.writeText('here');
+                    onClick={async () => {
+                        await navigator.clipboard.writeText('here');
+                        toast('copied to clipboard');
                     }}
                 >
                     Copy URL
