@@ -3,6 +3,20 @@ import { PrimitiveAtom, useAtom } from 'jotai';
 import { extensionChAtom, extensionFfAtom, LatestExtension } from '@/store/store';
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
 import { toast } from '../UI/UiToaster';
+import { confetti } from 'dom-confetti';
+
+const confettiConfig = {
+    angle: 90,
+    spread: 360,
+    startVelocity: 40,
+    elementCount: 70,
+    dragFriction: 0.12,
+    duration: 3000,
+    stagger: 3,
+    width: "10px",
+    height: "10px",
+    perspective: "500px",
+};
 
 function HeroImage() {
     return (
@@ -29,9 +43,9 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
             </div>
 
             <div className="flex items-center justify-end space-x-2 text-sm">
-                <a className="px-2 py-0.5 uppercase underline"
+                <a
+                    className="px-2 py-0.5 uppercase underline"
                     href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.432_on_2022.03.16-r-chrome.zip"
-                    //target="_blank"
                 >
                     Download
                 </a>
@@ -39,6 +53,7 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<Latest
                     onClick={async () => {
                         await navigator.clipboard.writeText('here');
                         toast('copied to clipboard');
+                        confetti(document.querySelector('.toaser')!, confettiConfig);
                     }}
                 >
                     Copy URL
