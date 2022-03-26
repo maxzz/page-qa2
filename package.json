@@ -15,7 +15,6 @@
         "@popperjs/core": "^2.11.2",
         "@react-spring/web": "9.4.4",
         "@use-gesture/react": "10.2.9",
-        "canvas-confetti": "^1.5.1",
         "jotai": "1.6.1",
         "marked": "^4.0.12",
         "react": "^17.0.2",
