@@ -8,12 +8,12 @@ $md-theme-default-primary: #2275ff;
     h4 {
         margin-top: 1rem;
         margin-bottom: 0;
-        font-size: .9rem;
+        font-size: .85rem;
         font-weight: bold;
         border-bottom: 1px solid $md-theme-default-primary;
         color: #2963c3;
         text-transform: uppercase;
-        //letter-spacing: -0.02em;
+        letter-spacing: -0.02em;
     }
 
     h4:first-child {
@@ -49,14 +49,15 @@ $md-theme-default-primary: #2275ff;
         display: inline-block;
         margin-bottom: 2px;
         padding: 1px 3px;
-        line-height: .8rem;
+        font-size: .65rem;
+        line-height: .65rem;
 
         border-radius: 3px;
-        font-size: .65rem;
+        
         font-weight: normal;
 
         color: #000340;
-        background-color: #7772;
-        border: 1px solid #7774;
+        background-color: #7771;
+        border: 1px solid #7772;
     }
 }
