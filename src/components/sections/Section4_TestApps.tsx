@@ -3,18 +3,20 @@ import mainImage from '../../assets/testapps/2022-03-01_19-09-50.png';
 
 export function Section4_TestApps() {
     return (
-        <div className="py-2 text-sm flex flex-col space-y-2">
-            <p>Here are some test web apps that you can use to test the various features of Password Manager.</p>
+        <div className="py-2 text-sm flex flex-col space-y-1">
 
-            <div>
+            <p>Here are some links to test web applications that you can use to test various features of the Password Manager:</p>
+
+            <ul className="ml-8 list-disc">
+                <li><a className="underline" href="https://maxzz.github.io/test-pm-domain-logins/#" target="_blank">Two test logins and corresponding password change screens in the same domain</a></li>
+                <li><a className="underline" href="https://maxzz.github.io/test-pm-second" target="_blank">Simple test login screen to verify login transactions</a></li>
+                <li><a className="underline" href="https://maxzz.github.io/test-pm" target="_blank">Five customizable logins and password change screens</a></li>
+            </ul>
+
+            <div className="pt-3">
                 <img className="m-auto bg-slate-300" src={mainImage} width="200px" alt="test applications preview" />
             </div>
 
-            <ul className="ml-4 list-disc">
-                <li><a className="underline" href="https://maxzz.github.io/test-pm-domain-logins/#" target="_blank">Test login and password change screens on the same domain</a></li>
-                <li><a className="underline" href="https://maxzz.github.io/test-pm-second" target="_blank">Simple login screen to test login transactions</a></li>
-                <li><a className="underline" href="https://maxzz.github.io/test-pm" target="_blank">Customizable login and password change screens</a></li>
-            </ul>
         </div>
     );
 }
