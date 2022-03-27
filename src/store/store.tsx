@@ -2,7 +2,7 @@ import React from "react";
 import { atom, Getter } from "jotai";
 import atomWithCallback, { LoadingDataState, loadingDataStateInit } from "@/hooks/atomsX";
 import { marked } from "marked";
-import { getCurrentConfig, IBrExtnInfos } from "./utils/utils-current-config";
+import { getCurrentConfig, ExtensionsOnFtp } from "./utils/utils-current-config";
 import { fetchReleaseNotes } from "./utils/utils-release-notes";
 import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
 import { getExistingOnServer, IFnameMeta } from "./utils/utils-existing-on-server";
@@ -133,7 +133,7 @@ export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data ||
 
 //#region Server Config File
 
-export const extInfosStateAtom = atom<LoadingDataState<IBrExtnInfos>>(loadingDataStateInit());
+export const extInfosStateAtom = atom<LoadingDataState<ExtensionsOnFtp>>(loadingDataStateInit());
 
 export const runFetchConfigAtom = atom(
     (get) => get(extInfosStateAtom),
@@ -142,6 +142,8 @@ export const runFetchConfigAtom = atom(
             set(extInfosStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const data = await getCurrentConfig();
+                console.log({data});
+                
                 set(extInfosStateAtom, { loading: false, error: null, data });
             } catch (error) {
                 set(extInfosStateAtom, { loading: false, error, data: null });

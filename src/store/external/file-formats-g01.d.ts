@@ -1,41 +1,41 @@
-//#region File Definitions
+//#region Config File
 
-declare namespace FormatCfg {
-    export interface IFilenameMeta {
-        version: string; //"1.4.0.6562"
-        updated: string; //"12.08.2016"
+declare namespace FormatCurrentCfg {
+    export interface MetaFromFilename {
+        version: string;    //"1.4.0.6562"
+        updated: string;    //"12.08.2016"
     }
 
-    export interface IVersionMeta {
+    export interface SingleExtensionInfo {
         url: string;
-        version?: string; //"1.4.0.6562"
-        updated?: string; //"12.08.2016" This is when extension QA build was created. This is updated automatically.
+        version?: string;   //"1.4.0.6562"
+        updated?: string;   //"12.08.2016" This is when extension QA build was created. This is updated automatically.
         published?: string; //"12.08.2016" This is when QA extension was published to the Google store. This is updated manually.
     }
 
-    export type IExtensionUrl = {
+    export type BrandExtensionVersions = {
         // At least one 'dp' should be defined, missing one will be defaulted to 'dp'.
         // Firefox extension has a single shared update.jsom file, so it cannot be realy branded now.
-        [brand: string] : IVersionMeta; // key: 'dp' | 'hp' | 'de' --> metadata
+        [brand: string] : SingleExtensionInfo; // key: 'dp' | 'hp' | 'de' --> metadata
     };
 
-    export interface IConfigBrowser {
-        extensionUrl: IExtensionUrl;
-        qaUrl: IExtensionUrl;
+    export interface QaReleaseForBrowser {
+        extensionUrl: BrandExtensionVersions;
+        qaUrl: BrandExtensionVersions;
     }
 
-    export interface IConfigBrowsers {
-        [key: string]: IConfigBrowser; // 'chrome' | 'firefox' | 'me' | 'ie' -> IConfigBrowser
+    export interface ExtensionsPerBrowser {
+        [key: string]: QaReleaseForBrowser; // 'chrome' | 'firefox' | 'me' | 'ie' -> IConfigBrowser
     }
 
-    export interface IConfigLanguages {
-        available: string[];
+    export interface Languages {
+        available: string[]; // [ "en", "de", "es", "fr", "it", "ja", "pt-BR" ]
     }
 
-    export interface IConfigFile {
-        browsers: IConfigBrowsers;
+    export interface CurrentConfigFile {
+        browsers: ExtensionsPerBrowser;
         brand: 'dp' | 'hp' | 'de';
-        languages: IConfigLanguages;
+        languages: Languages;
     }
     /*
     original:
@@ -137,8 +137,10 @@ declare namespace FormatCfg {
         }
     }
     */
-} //namespace FormatCfg
+} //namespace FormatCurrentCfg
+//#endregion Config File
 
+//#region Update File
 declare namespace FormatUpd {
     export interface IUpdateItem {
         version: string;
@@ -167,6 +169,9 @@ declare namespace FormatUpd {
     }
     */
 } //namespace FormatUpd
+//#endregion Update File
+
+//#region FtpVersions File
 
 declare namespace FormatFtp {
     export interface IFtpFile {
@@ -208,5 +213,4 @@ declare namespace FormatFtp {
     // let listAccess: FormatFtp.IFilesAccess = list.reduce((acc: FormatFtp.IFilesAccess, _: FormatFtp.IFtpFile) => (acc[_.name] = _, acc), {});
 
 } //namespace FormatFtp
-
-//#endregion File Definitions
+//#endregion FtpVersions File

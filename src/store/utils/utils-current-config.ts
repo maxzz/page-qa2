@@ -1,4 +1,4 @@
-/// <reference path="../external/web-file-formats-g01.d.ts" />
+/// <reference path="../external/file-formats-g01.d.ts" />
 import * as CONST from './constants';
 
 export enum TBrowser {
@@ -25,7 +25,7 @@ export interface IExtnInfo { // Extension info
     qa?: boolean;               // true
 }
 
-function parseFnameVersionDate(fname: string): FormatCfg.IFilenameMeta | undefined {
+function parseFnameVersionDate(fname: string): FormatCurrentCfg.MetaFromFilename | undefined {
     // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
     const match = fname.match(CONST.Regex_FNAME_VerDate);
     if (match) {
@@ -54,14 +54,15 @@ function findInfo(ei: IExtnInfo[], browser: TBrowser, brand: TBrand, qa: boolean
     } );
 }
 
-function extensionUrl(eurl: FormatCfg.IExtensionUrl, browser: TBrowser, qa: boolean, rv: IExtnInfo[]): void {
+function extensionUrl(eurl: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowser, qa: boolean): IExtnInfo[] {
+    const rv: IExtnInfo[] = [];
 
     [TBrand.dp, TBrand.hp, TBrand.de].forEach((key: TBrand) => {
         if (!eurl[key]) {
             return;
         }
 
-        let meta: FormatCfg.IVersionMeta = eurl[key];
+        let meta: FormatCurrentCfg.SingleExtensionInfo = eurl[key];
 
         let newInfo: IExtnInfo = {
             url: meta.url,
@@ -111,33 +112,28 @@ function extensionUrl(eurl: FormatCfg.IExtensionUrl, browser: TBrowser, qa: bool
         });
     }
 
+    return rv;
 } //extensionUrl()
 
-export interface IBrExtnInfos { // Browser extensions info
+export interface ExtensionsOnFtp { // Extensions on Ftp server
     firefox: IExtnInfo;
     chrome: IExtnInfo;
     summary: IExtnInfo[];
 }
 
-function parseCurrentConfig(config: FormatCfg.IConfigFile): IBrExtnInfos {
-    const extInfoFfQA: IExtnInfo[] = [];
-    extensionUrl(config.browsers['firefox'].qaUrl, TBrowser.firefox, true, extInfoFfQA);
-    
-    const extInfoFf: IExtnInfo[] = [];
-    extensionUrl(config.browsers['firefox'].extensionUrl, TBrowser.firefox, false, extInfoFf);
-
-    const extInfoChQA: IExtnInfo[] = [];
-    extensionUrl(config.browsers['chrome'].qaUrl, TBrowser.chrome, true, extInfoChQA);
-
-    const extInfoCh: IExtnInfo[] = [];
-    extensionUrl(config.browsers['chrome'].extensionUrl, TBrowser.chrome, false, extInfoCh);
-
+function parseCurrentConfig(config: FormatCurrentCfg.CurrentConfigFile): ExtensionsOnFtp {
+    const extInfoFfQa: IExtnInfo[] = extensionUrl(config.browsers['firefox'].qaUrl, TBrowser.firefox, true);
+    const extInfoFfPu: IExtnInfo[] = extensionUrl(config.browsers['firefox'].extensionUrl, TBrowser.firefox, false); // public
+    const extInfoChQa: IExtnInfo[] = extensionUrl(config.browsers['chrome'].qaUrl, TBrowser.chrome, true);
+    const extInfoChPu: IExtnInfo[] = extensionUrl(config.browsers['chrome'].extensionUrl, TBrowser.chrome, false);
     return {
-        firefox: extInfoFfQA[0],
-        chrome: extInfoChQA[0],
-        summary: [...extInfoFfQA, ...extInfoFf, ...extInfoChQA, ...extInfoCh]
+        firefox: extInfoFfQa[0],
+        chrome: extInfoChQa[0],
+        summary: [...extInfoFfQa, ...extInfoFfPu, ...extInfoChQa, ...extInfoChPu]
     };
 }
+
+//#region Data Fetch
 
 export async function fetchCurrentConfig(): Promise<Response> {
     console.log('Fetching: current config');
@@ -149,7 +145,7 @@ export async function fetchCurrentConfig(): Promise<Response> {
     return response;
 }
 
-export async function getCurrentConfig(): Promise<IBrExtnInfos> {
+export async function getCurrentConfig(): Promise<ExtensionsOnFtp> {
     const response = await fetchCurrentConfig();
     const json = await response.json();
     return parseCurrentConfig(json);
@@ -162,3 +158,5 @@ export function extInfoNotAvailable(): IExtnInfo {
         updated: ''
     };
 }
+
+//#endregion Data Fetch
