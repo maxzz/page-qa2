@@ -2,6 +2,7 @@ import React from 'react';
 import { IconHIDLogo } from './UI/UIIcons';
 
 export const textShadow = { textShadow: '1px 1px 2px #000' };
+export const elevation4Shadow = { boxShadow: '0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%)' };
 
 export function AppHeader() {
     return (<>
@@ -15,7 +16,7 @@ export function AppHeader() {
                 <div className="pb-1 text-2xl tracking-tighter font-light text-slate-100 uppercase scale-y-150 whitespace-nowrap" style={textShadow}>
                     QA Extensions
                 </div> */}
-                
+
                 <div className="w-20 py-2 flex items-center justify-center bg-white rounded-md">
                     <IconHIDLogo className="px-2" fill="#002f87" />
                 </div>
@@ -33,6 +34,6 @@ export function AppHeader() {
                 </ul>
             </div> */}
         </div>
-        <div className="h-1 bg-[#002f87]"></div>
+        <div className="h-1 bg-[#002f87]" style={elevation4Shadow}></div>
     </>);
 }
