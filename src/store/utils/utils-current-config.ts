@@ -61,10 +61,10 @@ function extensionUrl(eurl: FormatCfg.IExtensionUrl, browser: TBrowser, qa: bool
             return;
         }
 
-        let vm: FormatCfg.IVersionMeta = eurl[key];
+        let meta: FormatCfg.IVersionMeta = eurl[key];
 
-        let ei: IExtnInfo = {
-            url: vm.url,
+        let newInfo: IExtnInfo = {
+            url: meta.url,
             version: '',
             updated: '',
             brand: key,
@@ -72,14 +72,14 @@ function extensionUrl(eurl: FormatCfg.IExtensionUrl, browser: TBrowser, qa: bool
             qa: qa
         } as any;
 
-        if (vm.version && vm.updated) {
-            ei.version = vm.version || '';
-            ei.updated = vm.updated || '';
+        if (meta.version && meta.updated) {
+            newInfo.version = meta.version || '';
+            newInfo.updated = meta.updated || '';
         } else {
-            fnameVersionDate(ei.url, ei);
+            fnameVersionDate(newInfo.url, newInfo);
         }
 
-        rv.push(ei);
+        rv.push(newInfo);
     });
 
     // Fill out missing
@@ -120,28 +120,24 @@ export interface IBrExtnInfos { // Browser extensions info
 }
 
 function parseCurrentConfig(config: FormatCfg.IConfigFile): IBrExtnInfos {
-    //console.log('Got current config', config);
+    const extInfoFfQA: IExtnInfo[] = [];
+    extensionUrl(config.browsers['firefox'].qaUrl, TBrowser.firefox, true, extInfoFfQA);
+    
+    const extInfoFf: IExtnInfo[] = [];
+    extensionUrl(config.browsers['firefox'].extensionUrl, TBrowser.firefox, false, extInfoFf);
 
-    let extInfoFirefoxQA: IExtnInfo[] = [];
-    let extInfoFirefox: IExtnInfo[] = [];
-    let extInfoChromeQA: IExtnInfo[] = [];
-    let extInfoChrome: IExtnInfo[] = [];
+    const extInfoChQA: IExtnInfo[] = [];
+    extensionUrl(config.browsers['chrome'].qaUrl, TBrowser.chrome, true, extInfoChQA);
 
-    extensionUrl(config.browsers['firefox'].qaUrl, TBrowser.firefox, true, extInfoFirefoxQA);
-    extensionUrl(config.browsers['firefox'].extensionUrl, TBrowser.firefox, false, extInfoFirefox);
+    const extInfoCh: IExtnInfo[] = [];
+    extensionUrl(config.browsers['chrome'].extensionUrl, TBrowser.chrome, false, extInfoCh);
 
-    extensionUrl(config.browsers['chrome'].qaUrl, TBrowser.chrome, true, extInfoChromeQA);
-    extensionUrl(config.browsers['chrome'].extensionUrl, TBrowser.chrome, false, extInfoChrome);
-
-    let state: IBrExtnInfos = {
-        firefox: extInfoFirefoxQA[0],
-        chrome: extInfoChromeQA[0],
-        summary: [...extInfoFirefoxQA, ...extInfoFirefox, ...extInfoChromeQA, ...extInfoChrome]
+    return {
+        firefox: extInfoFfQA[0],
+        chrome: extInfoChQA[0],
+        summary: [...extInfoFfQA, ...extInfoFf, ...extInfoChQA, ...extInfoCh]
     };
-
-    //console.log(JSON.stringify(state.summary, null, 4));
-    return state;
-} //parseCurrentConfig()
+}
 
 export async function fetchCurrentConfig(): Promise<Response> {
     console.log('Fetching: current config');
