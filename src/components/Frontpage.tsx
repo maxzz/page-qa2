@@ -29,7 +29,7 @@ export function Frontpage() {
                         <Section1_ReleaseNotes />
                     </Section>
 
-                    <Section openAtom={section2_OpenCurrentVersionsAtom} title={"Current verions"}>
+                    <Section openAtom={section2_OpenCurrentVersionsAtom} title={"Current versions"}>
                         <Section2_CurrentVersions />
                     </Section>
 
