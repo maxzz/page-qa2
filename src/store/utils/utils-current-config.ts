@@ -44,10 +44,8 @@ function fnameVersionDate(fname: string) {
     return meta;
 }
 
-function findInfo(ei: InAppExtnInfo[], browser: TBrowser, brand: TBrand, qa: boolean): InAppExtnInfo | undefined {
-    return ei.find((_: InAppExtnInfo) => {
-        return _.browser === browser && _.brand === brand && _.qa === qa;
-    });
+function findInfo(extensions: InAppExtnInfo[], brand: TBrand, browser: TBrowser, qa: boolean): InAppExtnInfo | undefined {
+    return extensions.find((item: InAppExtnInfo) => item.brand === brand && item.browser === browser && item.qa === qa);
 }
 
 function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowser, qa: boolean): InAppExtnInfo[] {
@@ -70,32 +68,32 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
 
     // Fill out missing
 
-    let dp: InAppExtnInfo | undefined = findInfo(rv, browser, TBrand.dp, qa);
+    let dp: InAppExtnInfo | undefined = findInfo(rv, TBrand.dp, browser, qa);
     if (!dp) {
         throw new Error('DP info is missing. At least DP info should exist.');
     }
 
-    let hp: InAppExtnInfo | undefined = findInfo(rv, browser, TBrand.hp, qa);
+    let hp: InAppExtnInfo | undefined = findInfo(rv, TBrand.hp, browser, qa);
     if (!hp) {
         rv.push({
             url: dp.url,
-            version: dp.version,
-            updated: dp.updated,
             brand: TBrand.hp,
             browser: dp.browser,
-            qa: dp.qa
+            qa: dp.qa,
+            version: dp.version,
+            updated: dp.updated,
         });
     }
 
-    let de: InAppExtnInfo | undefined = findInfo(rv, browser, TBrand.de, qa);
+    let de: InAppExtnInfo | undefined = findInfo(rv, TBrand.de, browser, qa);
     if (!de) {
         rv.push({
             url: dp.url,
-            version: dp.version,
-            updated: dp.updated,
             brand: TBrand.de,
             browser: dp.browser,
-            qa: dp.qa
+            qa: dp.qa,
+            version: dp.version,
+            updated: dp.updated,
         });
     }
 
