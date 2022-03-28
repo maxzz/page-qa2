@@ -1,6 +1,25 @@
+//#region Common
+
+export enum TBrowser {
+    unknown = 'u',
+    chrome = 'c',
+    firefox = 'f',
+    edge = 'e'
+}
+export const TBrowserName = (v?: TBrowser) => v === TBrowser.chrome ? 'Chrome' : v === TBrowser.firefox ? 'Firefox' : v === TBrowser.edge ? 'Microsoft Edge' : '?';
+
+export enum TBrand {
+    dp = 'dp',
+    hp = 'hp',
+    de = 'de'
+}
+export const TBrandName = (v?: TBrand) => v === TBrand.dp ? 'DP' : v === TBrand.hp ? 'HP' : v === TBrand.de ? 'Dell' : '?';
+
+//#endregion Common
+
 //#region Config File
 
-declare namespace FormatCurrentCfg {
+export namespace FormatCurrentCfg {
     export interface MetaFromFilename {
         version: string;    //"1.4.0.6562"
         updated: string;    //"12.08.2016"
@@ -141,7 +160,7 @@ declare namespace FormatCurrentCfg {
 //#endregion Config File
 
 //#region Update File
-declare namespace FormatUpd {
+export namespace FormatUpd {
     export interface IUpdateItem {
         version: string;
         update_link: string;
@@ -173,7 +192,7 @@ declare namespace FormatUpd {
 
 //#region FtpVersions File
 
-declare namespace FormatFtp {
+export namespace FormatFtp {
     export interface IFtpFile {
         type: '-' | 'd' | 'l',    // file type: 'd'- directory; '-' - file; (or 'l' for symlink on **\*NIX only**)
         name: string,             // file name

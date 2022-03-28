@@ -1,30 +1,15 @@
-/// <reference path="../external/file-formats-g01.d.ts" />
+import { FormatCurrentCfg, TBrand, TBrowser } from '../external/file-formats-g01';
 import * as CONST from './constants';
 
 //#region Definitions
 
-export enum TBrowser {
-    unknown = 'u',
-    chrome = 'c',
-    firefox = 'f',
-    edge = 'e'
-}
-export const TBrowserName = (v?: TBrowser) => v === TBrowser.chrome ? 'Chrome' : v === TBrowser.firefox ? 'Firefox' : v === TBrowser.edge ? 'Microsoft Edge' : '?';
-
-export enum TBrand {
-    dp = 'dp',
-    hp = 'hp',
-    de = 'de'
-}
-export const TBrandName = (v?: TBrand) => v === TBrand.dp ? 'DP' : v === TBrand.hp ? 'HP' : v === TBrand.de ? 'Dell' : '?';
-
 export interface InAppExtnInfo { // Extension info
     url: string;                // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
-    version: string;            // "3.4.430"
-    updated: string;            // "2022.03.04"
     brand?: TBrand;             // "dp"
     browser?: TBrowser;         // "c"
     qa?: boolean;               // true
+    version: string;            // "3.4.430"
+    updated: string;            // "2022.03.04"
 }
 
 //#endregion Definitions
