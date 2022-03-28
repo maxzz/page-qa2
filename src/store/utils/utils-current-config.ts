@@ -74,28 +74,10 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
     }
 
     let hp: InAppExtnInfo | undefined = findInfo(rv, TBrand.hp, browser, qa);
-    if (!hp) {
-        rv.push({
-            url: dp.url,
-            brand: TBrand.hp,
-            browser: dp.browser,
-            qa: dp.qa,
-            version: dp.version,
-            updated: dp.updated,
-        });
-    }
+    !hp && rv.push({ ...dp, brand: TBrand.hp, });
 
     let de: InAppExtnInfo | undefined = findInfo(rv, TBrand.de, browser, qa);
-    if (!de) {
-        rv.push({
-            url: dp.url,
-            brand: TBrand.de,
-            browser: dp.browser,
-            qa: dp.qa,
-            version: dp.version,
-            updated: dp.updated,
-        });
-    }
+    !de && rv.push({ ...dp, brand: TBrand.de, });
 
     return rv;
 } //extensionUrl()
