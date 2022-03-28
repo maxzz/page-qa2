@@ -72,15 +72,11 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
     if (!dp) {
         throw new Error('DP info is missing. At least DP info should exist.');
     }
-
-    let hp: InAppExtnInfo | undefined = findInfo(rv, TBrand.hp, browser, qa);
-    !hp && rv.push({ ...dp, brand: TBrand.hp, });
-
-    let de: InAppExtnInfo | undefined = findInfo(rv, TBrand.de, browser, qa);
-    !de && rv.push({ ...dp, brand: TBrand.de, });
+    !findInfo(rv, TBrand.hp, browser, qa) && rv.push({ ...dp, brand: TBrand.hp, });
+    !findInfo(rv, TBrand.de, browser, qa) && rv.push({ ...dp, brand: TBrand.de, });
 
     return rv;
-} //extensionUrl()
+}
 
 export interface ExtensionsOnFtp { // Extensions on Ftp server
     firefox: InAppExtnInfo;
