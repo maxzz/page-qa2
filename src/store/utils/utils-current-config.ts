@@ -29,27 +29,19 @@ export interface InAppExtnInfo { // Extension info
 
 //#endregion Definitions
 
-function parseFnameVersionDate(fname: string): FormatCurrentCfg.MetaFromFilename | undefined {
-    // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
-    const match = fname.match(CONST.Regex_FNAME_VerDate);
-    if (match) {
-        return {
-            version: match[1],
-            updated: match[2]
-        };
-    }
-}
-
-function fnameVersionDate(fname: string, meta: InAppExtnInfo): void {
-    // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
-    const match = fname.match(CONST.Regex_FNAME_VerDate);
-    meta.version = match ? match[1] : '';
-    meta.updated = match ? match[2] : '';
-}
-
 export function parseDate(date: string): Date | string {
     const dt = new Date(date.replace(/\./g, '-') + 'T00:00:00');
     return dt.toString() !== 'Invalid Date' ? dt : date;
+}
+
+function fnameVersionDate(fname: string) {
+    // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
+    const match = fname.match(CONST.Regex_FNAME_VerDate);
+    const meta = {
+        version: match ? match[1] : '',
+        updated: match ? match[2] : '',
+    };
+    return meta;
 }
 
 function findInfo(ei: InAppExtnInfo[], browser: TBrowser, brand: TBrand, qa: boolean): InAppExtnInfo | undefined {
@@ -58,40 +50,29 @@ function findInfo(ei: InAppExtnInfo[], browser: TBrowser, brand: TBrand, qa: boo
     });
 }
 
-function extensionUrl(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowser, qa: boolean): InAppExtnInfo[] {
+function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowser, qa: boolean): InAppExtnInfo[] {
     const rv: InAppExtnInfo[] = [];
 
     [TBrand.dp, TBrand.hp, TBrand.de].forEach((brand: TBrand) => {
-        if (!brands[brand]) {
-            return;
+        const meta: FormatCurrentCfg.SingleExtensionInfo = brands[brand];
+        if (meta) {
+            const fromName = fnameVersionDate(meta.url);
+            rv.push({
+                url: meta.url,
+                brand,
+                browser,
+                qa,
+                version: meta.version || fromName.version,
+                updated: meta.updated || fromName.updated,
+            });
         }
-
-        let meta: FormatCurrentCfg.SingleExtensionInfo = brands[brand];
-
-        let newInfo: InAppExtnInfo = {
-            url: meta.url,
-            version: '',
-            updated: '',
-            brand,
-            browser,
-            qa,
-        };
-
-        if (meta.version && meta.updated) {
-            newInfo.version = meta.version || '';
-            newInfo.updated = meta.updated || '';
-        } else {
-            fnameVersionDate(newInfo.url, newInfo);
-        }
-
-        rv.push(newInfo);
     });
 
     // Fill out missing
 
     let dp: InAppExtnInfo | undefined = findInfo(rv, browser, TBrand.dp, qa);
     if (!dp) {
-        throw new Error('Cannot get dp info');
+        throw new Error('DP info is missing. At least DP info should exist.');
     }
 
     let hp: InAppExtnInfo | undefined = findInfo(rv, browser, TBrand.hp, qa);
@@ -128,10 +109,10 @@ export interface ExtensionsOnFtp { // Extensions on Ftp server
 }
 
 function parseCurrentConfig(config: FormatCurrentCfg.CurrentConfigFile): ExtensionsOnFtp {
-    const extInfoFfQa: InAppExtnInfo[] = extensionUrl(config.browsers['firefox'].qaUrl, TBrowser.firefox, true);
-    const extInfoFfPu: InAppExtnInfo[] = extensionUrl(config.browsers['firefox'].extensionUrl, TBrowser.firefox, false); // public
-    const extInfoChQa: InAppExtnInfo[] = extensionUrl(config.browsers['chrome'].qaUrl, TBrowser.chrome, true);
-    const extInfoChPu: InAppExtnInfo[] = extensionUrl(config.browsers['chrome'].extensionUrl, TBrowser.chrome, false);
+    const extInfoFfQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowser.firefox, true);
+    const extInfoFfPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowser.firefox, false); // public
+    const extInfoChQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowser.chrome, true);
+    const extInfoChPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowser.chrome, false);
     return {
         firefox: extInfoFfQa[0],
         chrome: extInfoChQa[0],
