@@ -1,18 +1,18 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { extInfosStateAtom } from '@/store/store';
-import { IExtnInfo, TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/utils/utils-current-config';
+import { InAppExtnInfo, TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/utils/utils-current-config';
 
 type Table = {
     [key in TBrowser]: {
         [key in TBrand]?: {
-            qa?: IExtnInfo;
-            release?: IExtnInfo;
+            qa?: InAppExtnInfo;
+            release?: InAppExtnInfo;
         }
     };
 };
 
-function reduceForTable(exts: IExtnInfo[]) {
+function reduceForTable(exts: InAppExtnInfo[]) {
     return exts.reduce<Table>((acc, cur) => {
         if (cur.browser && cur.brand) {
             if (!acc[cur.browser]) {
@@ -29,8 +29,8 @@ function reduceForTable(exts: IExtnInfo[]) {
 
 type FlatTableItem = {
     brand: TBrand;
-    qa?: IExtnInfo;
-    release?: IExtnInfo;
+    qa?: InAppExtnInfo;
+    release?: InAppExtnInfo;
 };
 
 type FlatTable = {
@@ -43,7 +43,7 @@ function reduceToFlat(table: Table): FlatTable {
         if (!res[brKey]) {
             res[brKey] = [];
         }
-        for (const [bdKey, bdVal] of Object.entries(brVal) as [TBrand, { qa?: IExtnInfo; release?: IExtnInfo; }][]) {
+        for (const [bdKey, bdVal] of Object.entries(brVal) as [TBrand, { qa?: InAppExtnInfo; release?: InAppExtnInfo; }][]) {
             res[brKey].push({
                 brand: bdKey,
                 qa: bdVal.qa,

@@ -1,6 +1,8 @@
 /// <reference path="../external/file-formats-g01.d.ts" />
 import * as CONST from './constants';
 
+//#region Definitions
+
 export enum TBrowser {
     unknown = 'u',
     chrome = 'c',
@@ -16,7 +18,7 @@ export enum TBrand {
 }
 export const TBrandName = (v?: TBrand) => v === TBrand.dp ? 'DP' : v === TBrand.hp ? 'HP' : v === TBrand.de ? 'Dell' : '?';
 
-export interface IExtnInfo { // Extension info
+export interface InAppExtnInfo { // Extension info
     url: string;                // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
     version: string;            // "3.4.430"
     updated: string;            // "2022.03.04"
@@ -24,6 +26,8 @@ export interface IExtnInfo { // Extension info
     browser?: TBrowser;         // "c"
     qa?: boolean;               // true
 }
+
+//#endregion Definitions
 
 function parseFnameVersionDate(fname: string): FormatCurrentCfg.MetaFromFilename | undefined {
     // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
@@ -36,7 +40,7 @@ function parseFnameVersionDate(fname: string): FormatCurrentCfg.MetaFromFilename
     }
 }
 
-function fnameVersionDate(fname: string, meta: IExtnInfo): void {
+function fnameVersionDate(fname: string, meta: InAppExtnInfo): void {
     // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
     const match = fname.match(CONST.Regex_FNAME_VerDate);
     meta.version = match ? match[1] : '';
@@ -48,30 +52,30 @@ export function parseDate(date: string): Date | string {
     return dt.toString() !== 'Invalid Date' ? dt : date;
 }
 
-function findInfo(ei: IExtnInfo[], browser: TBrowser, brand: TBrand, qa: boolean): IExtnInfo | undefined {
-    return ei.find((_: IExtnInfo) => {
+function findInfo(ei: InAppExtnInfo[], browser: TBrowser, brand: TBrand, qa: boolean): InAppExtnInfo | undefined {
+    return ei.find((_: InAppExtnInfo) => {
         return _.browser === browser && _.brand === brand && _.qa === qa;
-    } );
+    });
 }
 
-function extensionUrl(eurl: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowser, qa: boolean): IExtnInfo[] {
-    const rv: IExtnInfo[] = [];
+function extensionUrl(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowser, qa: boolean): InAppExtnInfo[] {
+    const rv: InAppExtnInfo[] = [];
 
-    [TBrand.dp, TBrand.hp, TBrand.de].forEach((key: TBrand) => {
-        if (!eurl[key]) {
+    [TBrand.dp, TBrand.hp, TBrand.de].forEach((brand: TBrand) => {
+        if (!brands[brand]) {
             return;
         }
 
-        let meta: FormatCurrentCfg.SingleExtensionInfo = eurl[key];
+        let meta: FormatCurrentCfg.SingleExtensionInfo = brands[brand];
 
-        let newInfo: IExtnInfo = {
+        let newInfo: InAppExtnInfo = {
             url: meta.url,
             version: '',
             updated: '',
-            brand: key,
-            browser: browser,
-            qa: qa
-        } as any;
+            brand,
+            browser,
+            qa,
+        };
 
         if (meta.version && meta.updated) {
             newInfo.version = meta.version || '';
@@ -85,11 +89,12 @@ function extensionUrl(eurl: FormatCurrentCfg.BrandExtensionVersions, browser: TB
 
     // Fill out missing
 
-    let dp: IExtnInfo | undefined = findInfo(rv, browser, TBrand.dp, qa);
+    let dp: InAppExtnInfo | undefined = findInfo(rv, browser, TBrand.dp, qa);
     if (!dp) {
         throw new Error('Cannot get dp info');
     }
-    let hp: IExtnInfo | undefined = findInfo(rv, browser, TBrand.hp, qa);
+
+    let hp: InAppExtnInfo | undefined = findInfo(rv, browser, TBrand.hp, qa);
     if (!hp) {
         rv.push({
             url: dp.url,
@@ -100,7 +105,8 @@ function extensionUrl(eurl: FormatCurrentCfg.BrandExtensionVersions, browser: TB
             qa: dp.qa
         });
     }
-    let de: IExtnInfo | undefined = findInfo(rv, browser, TBrand.de, qa);
+
+    let de: InAppExtnInfo | undefined = findInfo(rv, browser, TBrand.de, qa);
     if (!de) {
         rv.push({
             url: dp.url,
@@ -116,16 +122,16 @@ function extensionUrl(eurl: FormatCurrentCfg.BrandExtensionVersions, browser: TB
 } //extensionUrl()
 
 export interface ExtensionsOnFtp { // Extensions on Ftp server
-    firefox: IExtnInfo;
-    chrome: IExtnInfo;
-    summary: IExtnInfo[];
+    firefox: InAppExtnInfo;
+    chrome: InAppExtnInfo;
+    summary: InAppExtnInfo[];
 }
 
 function parseCurrentConfig(config: FormatCurrentCfg.CurrentConfigFile): ExtensionsOnFtp {
-    const extInfoFfQa: IExtnInfo[] = extensionUrl(config.browsers['firefox'].qaUrl, TBrowser.firefox, true);
-    const extInfoFfPu: IExtnInfo[] = extensionUrl(config.browsers['firefox'].extensionUrl, TBrowser.firefox, false); // public
-    const extInfoChQa: IExtnInfo[] = extensionUrl(config.browsers['chrome'].qaUrl, TBrowser.chrome, true);
-    const extInfoChPu: IExtnInfo[] = extensionUrl(config.browsers['chrome'].extensionUrl, TBrowser.chrome, false);
+    const extInfoFfQa: InAppExtnInfo[] = extensionUrl(config.browsers['firefox'].qaUrl, TBrowser.firefox, true);
+    const extInfoFfPu: InAppExtnInfo[] = extensionUrl(config.browsers['firefox'].extensionUrl, TBrowser.firefox, false); // public
+    const extInfoChQa: InAppExtnInfo[] = extensionUrl(config.browsers['chrome'].qaUrl, TBrowser.chrome, true);
+    const extInfoChPu: InAppExtnInfo[] = extensionUrl(config.browsers['chrome'].extensionUrl, TBrowser.chrome, false);
     return {
         firefox: extInfoFfQa[0],
         chrome: extInfoChQa[0],
@@ -151,7 +157,7 @@ export async function getCurrentConfig(): Promise<ExtensionsOnFtp> {
     return parseCurrentConfig(json);
 }
 
-export function extInfoNotAvailable(): IExtnInfo {
+export function extInfoNotAvailable(): InAppExtnInfo {
     return {
         url: 'Not avialable',
         version: '',
