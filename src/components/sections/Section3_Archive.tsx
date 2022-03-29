@@ -1,13 +1,9 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { extArchiveStateAtom } from '@/store/store';
-import * as CONST from '@/store/utils/constants';
 import { IFnameMeta } from '@/store/utils/utils-existing-on-server';
+import { getArchiveExtensionUrl } from '@/store/utils/constants';
 import iconClasses from './browser-icons.module.scss';
-
-function getUrl(name: string) {
-    return `${CONST.API_URL}${name}`;
-}
 
 function getClass(item: IFnameMeta) {
     const types = {
@@ -82,7 +78,7 @@ export function Section3_Archive() {
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
                             {items.map((item, idx) => (
-                                <a className="leading-5 flex items-center" href={getUrl(item.fname)} target="_blank" title={getTooltip(item)} key={idx}>
+                                <a className="leading-5 flex items-center" href={getArchiveExtensionUrl(item.fname)} target="_blank" title={getTooltip(item)} key={idx}>
                                     <span className={`w-4 h-4 mr-1 ${item.cls} saturate-150`}></span>
                                     <span>{item.version}</span>
                                 </a>

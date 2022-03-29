@@ -1,16 +1,15 @@
 import React from 'react';
+import { CONFLUENCE_URL } from '@/store/utils/constants';
 
 export function Section5_FinalNotes() {
     return (
-        <div className="py-2">
-            <p className="font-semibold">Browser extensions installation instructions</p>
-            <p>Additional documents are available on the <a className="underline"
-                href="https://crossmatch.atlassian.net/wiki/spaces/ALTUS/pages/103023073/Browser+extensions+installation">
-                HID Confluence website.
-            </a>
+        <div className="py-1">
+            <h2 className="mt-1 font-semibold">Browser extensions installation instructions</h2>
+            <p>
+                Additional documents are available on the <a className="underline" href={CONFLUENCE_URL}> HID Confluence website.</a>
             </p>
 
-            <div className="mt-4 font-semibold">Check for duplicate extensions</div>
+            <h2 className="mt-3 font-semibold">Check for duplicate extensions</h2>
             <p>
                 Only one DigitalPersona extension can run at the same time in the same browser.
                 After completing (or before starting) the installation of the DigitalPersona extension,
