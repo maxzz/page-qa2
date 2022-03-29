@@ -1,7 +1,5 @@
 import { FormatCurrentCfg, TBrand, TBrowser } from '../external/file-formats-g01';
-import * as CONST from './constants';
-
-//#region Definitions
+import { getCurrentConfigUrl, Regex_FNAME_VerDate } from './constants';
 
 export interface InAppExtnInfo { // Extension info
     url: string;                // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
@@ -12,16 +10,9 @@ export interface InAppExtnInfo { // Extension info
     updated: string;            // "2022.03.04"
 }
 
-//#endregion Definitions
-
-export function parseDate(date: string): Date | string {
-    const dt = new Date(date.replace(/\./g, '-') + 'T00:00:00');
-    return dt.toString() !== 'Invalid Date' ? dt : date;
-}
-
 function fnameVersionDate(fname: string) {
     // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
-    const match = fname.match(CONST.Regex_FNAME_VerDate);
+    const match = fname.match(Regex_FNAME_VerDate);
     const meta = {
         version: match ? match[1] : '',
         updated: match ? match[2] : '',
@@ -84,9 +75,9 @@ function parseCurrentConfig(config: FormatCurrentCfg.CurrentConfigFile): Extensi
 //#region Data Fetch
 
 export async function fetchCurrentConfig(): Promise<Response> {
-    console.log('Fetching: current config');
+    //console.log('Fetching: current config', getCurrentConfigUrl());
 
-    const response = await fetch(`${CONST.API_URL}config.json`, { cache: 'no-cache' });
+    const response = await fetch(getCurrentConfigUrl(), { cache: 'no-cache' });
     if (!response.ok) {
         throw new Error('No access to the HID server current configuration');
     }

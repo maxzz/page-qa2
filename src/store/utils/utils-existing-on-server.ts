@@ -1,4 +1,4 @@
-import * as CONST from './constants';
+import { getFtpExtensionsUrl, Regex_FNAME_VerDateRelBrouser } from "./constants";
 
 namespace ExistingExtensions {
 
@@ -31,7 +31,7 @@ export interface IFnameMeta { // Extension info from filename
 
 function getFnameMeta(fname: string): IFnameMeta {
     // Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
-    const match = fname.match(CONST.Regex_FNAME_VerDateRelBrouser);
+    const match = fname.match(Regex_FNAME_VerDateRelBrouser);
     let meta: IFnameMeta = {} as any;
     meta.fname = fname;
     meta.version = match ? match[1] : '';
@@ -42,9 +42,9 @@ function getFnameMeta(fname: string): IFnameMeta {
 }
 
 export async function getExistingOnServer(): Promise<IFnameMeta[]> {
-    console.log('Fetching: extensions on server');
+    //console.log('Fetching: extensions on server', getFtpExtensionsUrl());
 
-    const response = await fetch(`${CONST.API_URL}existing.json`, { cache: 'no-cache' });
+    const response = await fetch(getFtpExtensionsUrl(), { cache: 'no-cache' });
     if (!response.ok) {
         throw new Error('No access to the HID server');
     }
