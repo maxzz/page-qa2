@@ -1,3 +1,5 @@
+// Legacy
+
 //export const ROOT_FTP_URL = '/AltusAddons/g01/current';
 //export const ROOT_WEB_URL = 'https://www.crossmatch.com/AltusAddons/g01/current/';
 //https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/config.json
@@ -6,7 +8,8 @@ const ROOT_HID_CURRENT_URL = 'https://www.hidglobal.com/sites/default/files/cros
 //const ROOT_WEB_URL = 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/';
 const ROOT_WEB_URL = './';
 const ROOT_TEST_URL = './';
-export const API_URL = import.meta.env.PROD ? ROOT_WEB_URL : ROOT_TEST_URL;
+
+const API_URL = import.meta.env.PROD ? ROOT_WEB_URL : ROOT_TEST_URL;
 
 export const CONFLUENCE_URL = 'https://crossmatch.atlassian.net/wiki/spaces/ALTUS/pages/103023073/Browser+extensions+installation';
 
@@ -26,5 +29,5 @@ export function getFtpExtensionsUrl() {
 }
 
 export function getArchiveExtensionUrl(name: string) {
-    return `${API_URL}${name}`;
+    return `${ROOT_HID_CURRENT_URL}${name}`;
 }
