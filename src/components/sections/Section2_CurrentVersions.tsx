@@ -96,8 +96,11 @@ export function Section2_CurrentVersions() {
                 </ul>
             </div>
             <div className="text-xs">
-                <p className="">* HP and Dell extensions are still available for historical reasons. You don't need to test them.</p>
-                <p className="">** The Mozilla Firefox extension is not currently updated due to issues on Moz://a's side.</p>
+                <p className="mb-1">Notes:</p>
+                <ul className="ml-4 list-disc">
+                    <li className="">HP and Dell extensions are still available for historical reasons. You don't need to test them.</li>
+                    <li className="">The Firefox extension is not currently updated due to issues from Moz://a, but still works.</li>
+                </ul>
             </div>
         </div>
     );
