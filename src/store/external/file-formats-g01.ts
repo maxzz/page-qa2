@@ -1,22 +1,3 @@
-//#region Common
-
-export enum TBrowser {
-    unknown = 'u',
-    chrome = 'c',
-    firefox = 'f',
-    edge = 'e'
-}
-export const TBrowserName = (v?: TBrowser) => v === TBrowser.chrome ? 'Chrome' : v === TBrowser.firefox ? 'Firefox' : v === TBrowser.edge ? 'Microsoft Edge' : '?';
-
-export enum TBrand {
-    dp = 'dp',
-    hp = 'hp',
-    de = 'de'
-}
-export const TBrandName = (v?: TBrand) => v === TBrand.dp ? 'DP' : v === TBrand.hp ? 'HP' : v === TBrand.de ? 'Dell' : '?';
-
-//#endregion Common
-
 //#region Config File
 
 export namespace FormatCurrentCfg {
@@ -233,3 +214,27 @@ export namespace FormatFtp {
 
 } //namespace FormatFtp
 //#endregion FtpVersions File
+
+//#region Common
+
+export enum TBrowser {
+    unknown = 'u',
+    chrome = 'c',
+    firefox = 'f',
+    edge = 'e'
+}
+export const TBrowserName = (v?: TBrowser) => v === TBrowser.chrome ? 'Chrome' : v === TBrowser.firefox ? 'Firefox' : v === TBrowser.edge ? 'Microsoft Edge' : '?';
+
+export enum TBrand {
+    dp = 'dp',
+    hp = 'hp',
+    de = 'de'
+}
+export const TBrandName = (v?: TBrand) => v === TBrand.dp ? 'DP' : v === TBrand.hp ? 'HP' : v === TBrand.de ? 'Dell' : '?';
+
+export function parseDate(date: string): Date | string {
+    const dt = new Date(date.replace(/\./g, '-') + 'T00:00:00');
+    return dt.toString() !== 'Invalid Date' ? dt : date;
+}
+
+//#endregion Common
