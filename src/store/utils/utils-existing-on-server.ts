@@ -9,14 +9,15 @@ export interface ArchiveExtensionMeta { // Extension info from filename
 }
 
 function getFnameMeta(fname: string): ArchiveExtensionMeta {
-    // Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
+    // 0. Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
     const match = fname.match(Regex_FNAME_VerDateRelBrouser);
-    let meta: ArchiveExtensionMeta = {} as any;
-    meta.fname = fname;
-    meta.version = match ? match[1] : '';
-    meta.updated = match ? match[2] : '';
-    meta.release = match ? match[3] === 'r' : false;
-    meta.browser = match ? match[4] : '';
+    let meta: ArchiveExtensionMeta = {
+        fname,
+        version: match ? match[1] : '',
+        updated: match ? match[2] : '',
+        release: match ? match[3] === 'r' : false,
+        browser: match ? match[4] : '',
+    };
     return meta;
 }
 
@@ -57,7 +58,7 @@ export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
     existing.push({
         fname: '../../maxz/traytools.zip.txt',
         version: '2.0.7234',
-        updated: '2019.10.20',
+        updated: '2017.10.20', // It was 2019.10.20 but moved in time to have it as a separate group.
         release: false,
         browser: 'maxz',
 

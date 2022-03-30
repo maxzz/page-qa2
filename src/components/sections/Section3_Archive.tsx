@@ -1,11 +1,18 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { extArchiveStateAtom } from '@/store/store';
-import { IFnameMeta } from '@/store/utils/utils-existing-on-server';
+import { ArchiveExtensionMeta } from '@/store/utils/utils-existing-on-server';
 import { getArchiveExtensionUrl } from '@/store/utils/constants';
 import iconClasses from './browser-icons.module.scss';
 
-function getClass(item: IFnameMeta) {
+type Meta = {
+    yearChanged: boolean;
+    year: number;
+    cls: string;
+    date: string;
+} & ArchiveExtensionMeta;
+
+function getClass(item: ArchiveExtensionMeta) {
     const types = {
         chrome: 'iconCh',
         firefox: 'iconFf',
@@ -27,14 +34,7 @@ function getTooltip(item: Meta) {
     return `${getBrowserName(item)} extension released on ${item.date}`;
 }
 
-type Meta = IFnameMeta & {
-    yearChanged: boolean;
-    year: number;
-    cls: string;
-    date: string;
-};
-
-function addDates(archive: IFnameMeta[]): Meta[] {
+function addDates(archive: ArchiveExtensionMeta[]): Meta[] {
     let prevYear = 0;
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return archive.map((item) => {
