@@ -54,13 +54,13 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
     return rv;
 }
 
-export interface ExtensionsOnFtp { // Extensions on Ftp server
+export interface CurrentExtensions { // Extensions on Ftp server
     firefox: InAppExtnInfo;
     chrome: InAppExtnInfo;
     summary: InAppExtnInfo[];
 }
 
-function parseCurrentConfig(config: FormatCurrentCfg.CurrentConfigFile): ExtensionsOnFtp {
+function parseCurrentConfig(config: FormatCurrentCfg.CurrentConfigFile): CurrentExtensions {
     const extInfoFfQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowser.firefox, true);
     const extInfoFfPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowser.firefox, false); // public
     const extInfoChQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowser.chrome, true);
@@ -84,7 +84,7 @@ export async function fetchCurrentConfig(): Promise<Response> {
     return response;
 }
 
-export async function getCurrentConfig(): Promise<ExtensionsOnFtp> {
+export async function getCurrentConfig(): Promise<CurrentExtensions> {
     const response = await fetchCurrentConfig();
     const json = await response.json();
     return parseCurrentConfig(json);

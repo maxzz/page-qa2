@@ -2,10 +2,10 @@ import React from "react";
 import { atom, Getter } from "jotai";
 import atomWithCallback, { LoadingDataState, loadingDataStateInit } from "@/hooks/atomsX";
 import { marked } from "marked";
-import { getCurrentConfig, ExtensionsOnFtp } from "./utils/utils-current-config";
+import { getCurrentConfig, CurrentExtensions } from "./utils/utils-current-config";
 import { fetchReleaseNotes } from "./utils/utils-release-notes";
 import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
-import { getExistingOnServer, IFnameMeta } from "./utils/utils-existing-on-server";
+import { getExistingOnServer, ArchiveExtensionMeta } from "./utils/utils-existing-on-server";
 import debounce from "@/utils/debounce";
 
 //#region LocalStorage
@@ -133,7 +133,7 @@ export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data ||
 
 //#region Server Config File
 
-export const extInfosStateAtom = atom<LoadingDataState<ExtensionsOnFtp>>(loadingDataStateInit());
+export const extInfosStateAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
 
 export const runFetchConfigAtom = atom(
     (get) => get(extInfosStateAtom),
@@ -158,7 +158,7 @@ runFetchConfigAtom.onMount = (runFetch) => runFetch();
 
 //#region Extensions Archive on server
 
-export const extArchiveStateAtom = atom<LoadingDataState<IFnameMeta[]>>(loadingDataStateInit());
+export const extArchiveStateAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
 
 export const runFetchArchiveAtom = atom(
     (get) => get(extArchiveStateAtom),

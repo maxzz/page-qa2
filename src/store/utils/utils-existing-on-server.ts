@@ -1,7 +1,26 @@
 import { getFtpExtensionsUrl, Regex_FNAME_VerDateRelBrouser } from "./constants";
 
-namespace ExistingExtensions {
+export interface ArchiveExtensionMeta { // Extension info from filename
+    fname: string;
+    version: string;
+    updated: string;
+    release: boolean;
+    browser: string;
+}
 
+function getFnameMeta(fname: string): ArchiveExtensionMeta {
+    // Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
+    const match = fname.match(Regex_FNAME_VerDateRelBrouser);
+    let meta: ArchiveExtensionMeta = {} as any;
+    meta.fname = fname;
+    meta.version = match ? match[1] : '';
+    meta.updated = match ? match[2] : '';
+    meta.release = match ? match[3] === 'r' : false;
+    meta.browser = match ? match[4] : '';
+    return meta;
+}
+
+namespace FtpFiles {
     export interface FileRights {
         user: string;
         group: string;
@@ -18,41 +37,21 @@ namespace ExistingExtensions {
         owner: number;
         group: number;
     }
-
-} //namespace ExistingExtensions
-
-export interface IFnameMeta { // Extension info from filename
-    fname: string;
-    version: string;
-    updated: string;
-    release: boolean;
-    browser: string;
 }
 
-function getFnameMeta(fname: string): IFnameMeta {
-    // Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
-    const match = fname.match(Regex_FNAME_VerDateRelBrouser);
-    let meta: IFnameMeta = {} as any;
-    meta.fname = fname;
-    meta.version = match ? match[1] : '';
-    meta.updated = match ? match[2] : '';
-    meta.release = match ? match[3] === 'r' : false;
-    meta.browser = match ? match[4] : '';
-    return meta;
-}
-
-export async function getExistingOnServer(): Promise<IFnameMeta[]> {
+export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
     //console.log('Fetching: extensions on server', getFtpExtensionsUrl());
 
     const response = await fetch(getFtpExtensionsUrl(), { cache: 'no-cache' });
     if (!response.ok) {
         throw new Error('No access to the HID server');
     }
-    let existingRaw: ExistingExtensions.FileRecord[] = await response.json();
+    let existingRaw: FtpFiles.FileRecord[] = await response.json();
 
-    let existing: IFnameMeta[] = existingRaw
-        .map((_: ExistingExtensions.FileRecord) => getFnameMeta(_.name))
-        .filter((_) => _.version); // skip empty non extension names wo/ version.
+    let existing: ArchiveExtensionMeta[] =
+        existingRaw
+            .map((file: FtpFiles.FileRecord) => getFnameMeta(file.name))
+            .filter((meta) => meta.version); // skip empty non extension names wo/ version.
 
     // added one more path to traytools.zip
     existing.push({
@@ -63,14 +62,8 @@ export async function getExistingOnServer(): Promise<IFnameMeta[]> {
         browser: 'maxz',
 
     });
-    existing.sort((a, b) => {
-        if (a.version < b.version) {
-            return -1;
-        } else if (a.version > b.version) {
-            return 1;
-        } else {
-            return 0;
-        }
-    });
+
+    existing.sort((a, b) => a.version < b.version ? -1 : a.version > b.version ? 1 : 0);
+
     return existing;
 }
