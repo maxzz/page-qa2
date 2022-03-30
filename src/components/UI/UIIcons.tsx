@@ -46,18 +46,18 @@ import ICO_MS from '../../assets/icons/browsers/edge.svg';
 
 export function IconCrLogo(props: HTMLAttributes<HTMLImageElement>) {
     return (
-        <img src={ICO_CH} alt="Chrome logo" {...props}/>
+        <img src={ICO_CH} style={{filter: 'drop-shadow(1px 1px 1px #0002)'}} alt="Chrome logo" {...props}/>
     );
 }
 
 export function IconFfLogo(props: HTMLAttributes<HTMLImageElement>) {
     return (
-        <img src={ICO_FF} alt="Firefox logo" {...props}/>
+        <img src={ICO_FF} style={{filter: 'drop-shadow(1px 1px 1px #0002)'}} alt="Firefox logo" {...props}/>
     );
 }
 
 export function IconMsLogo(props: HTMLAttributes<HTMLImageElement>) {
     return (
-        <img src={ICO_MS} alt="Firefox logo" {...props}/>
+        <img src={ICO_MS} style={{filter: 'drop-shadow(1px 1px 1px #0002)'}} alt="Firefox logo" {...props}/>
     );
 }
