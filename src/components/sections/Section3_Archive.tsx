@@ -69,7 +69,7 @@ export function Section3_Archive() {
     return (
         <div className="py-2">
             <p className="text-sm">
-                List of previously released extensions that are still available on the HID server. You can download any version for testing.
+                List of previously released extensions that are still available on the HID server. You can download any version for testing purposes or for any other reason.
             </p>
 
             <div className="mt-1 text-xs cursor-default">
