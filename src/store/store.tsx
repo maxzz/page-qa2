@@ -66,8 +66,6 @@ export const runFetchConfigAtom = atom(
             set(extInfosStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const data = await getCurrentConfig();
-                console.log({ data });
-
                 set(extInfosStateAtom, { loading: false, error: null, data });
             } catch (error) {
                 set(extInfosStateAtom, { loading: false, error, data: null });

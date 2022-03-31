@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { extInfosStateAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
-import { TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/apis/file-formats-g01';
+import { TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/apis/api-formats-g01';
 
 type Table = {
     [key in TBrowser]: {

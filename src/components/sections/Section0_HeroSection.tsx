@@ -1,7 +1,8 @@
 import React from 'react';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { extInfosStateAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
+import { beautifyDate } from '@/store/apis/api-formats-g01';
 import { toast } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
 import { IconClipboard, IconCrLogo, IconDownload, IconFfLogo, IconMsLogo } from '../UI/UIIcons';
@@ -62,7 +63,8 @@ function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtensi
                 {extension.icon}
                 <div>
                     <div className="font-bold scale-y-125 whitespace-nowrap">{extension.name} QA extension</div>
-                    <div className="text-sm">{inAppExtnInfo.version}</div>
+                    <div className="text-xs">Updated on {beautifyDate(inAppExtnInfo.updated)}</div>
+                    <div className="text-xs">{inAppExtnInfo.version}</div>
                 </div>
             </div>
 
@@ -81,11 +83,11 @@ function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtensi
                 {/* Copy link */}
                 <button ref={confettiRef} className="p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
                     onClick={async () => {
-                        await navigator.clipboard.writeText('here');
+                        await navigator.clipboard.writeText(inAppExtnInfo.url);
                         toast('copied to clipboard');
                         confetti(confettiRef.current!, confettiConfig);
                     }}
-                    title="Copy URL to clipboard"
+                    title="Copy extension URL to clipboard"
                 >
                     <IconClipboard className="w-6 h-6" strokeWidth={1} />
                     <div>Copy link</div>

@@ -1,4 +1,4 @@
-import { FormatCurrentCfg, TBrand, TBrowser } from './file-formats-g01';
+import { FormatCurrentCfg, TBrand, TBrowser } from './api-formats-g01';
 import { getCurrentConfigUrl, Regex_FNAME_VerDate } from './constants';
 
 export interface InAppExtnInfo { // Extension info

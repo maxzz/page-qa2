@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 function getDpBrandFromLocation() {
     const brand = window.location.href.match(/page(dp|hp|de|qa)/i);
     return !!brand ? brand[1] : '';
