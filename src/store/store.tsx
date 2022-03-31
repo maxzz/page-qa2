@@ -1,8 +1,8 @@
 import React from "react";
 import { atom, Getter } from "jotai";
-import atomWithCallback, { LoadingDataState, loadingDataStateInit } from "@/hooks/atomsX";
+import { atomWithCallback, LoadingDataState, loadingDataStateInit } from "@/hooks/atomsX";
 import { marked } from "marked";
-import { getCurrentConfig, CurrentExtensions } from "./utils/utils-current-config";
+import { getCurrentConfig, CurrentExtensions, InAppExtnInfo } from "./utils/utils-current-config";
 import { fetchReleaseNotes } from "./utils/utils-release-notes";
 import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
 import { getExistingOnServer, ArchiveExtensionMeta } from "./utils/utils-existing-on-server";
@@ -55,41 +55,55 @@ namespace Storage {
 
 //#endregion LocalStorage
 
-export type LatestExtension = {
-    name: string;
-    icon: React.ReactNode;
-    version: string;
-    url: string;
-};
-
-export const extensionChAtom = atom<LatestExtension>({
-    name: 'Chrome',
-    icon: <IconCrLogo className="w-8 h-8" />,
-    version: '3.4.430',
-    url: 'chrome',
-});
-
-export const extensionFfAtom = atom<LatestExtension>({
-    name: 'Firefox',
-    icon: <IconFfLogo className="w-8 h-8" />,
-    version: '3.4.430',
-    url: 'chrome',
-});
-
-export const extensionMsAtom = atom<LatestExtension>({
-    name: 'Edge',
-    icon: <IconMsLogo className="w-8 h-8" />,
-    version: '3.4.430',
-    url: 'chrome',
-});
-
-const extensionAtoms = [
-    extensionChAtom,
-    extensionFfAtom,
-    extensionMsAtom,
-];
-
 // Data files
+
+//#region Server Config File
+
+export const extInfosStateAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
+
+export const runFetchConfigAtom = atom(
+    (get) => get(extInfosStateAtom),
+    (_get, set) => {
+        async function fetchData() {
+            set(extInfosStateAtom, (prev) => ({ ...prev, loading: true }));
+            try {
+                const data = await getCurrentConfig();
+                console.log({ data });
+
+                set(extInfosStateAtom, { loading: false, error: null, data });
+            } catch (error) {
+                set(extInfosStateAtom, { loading: false, error, data: null });
+            }
+        };
+        fetchData();
+    }
+);
+runFetchConfigAtom.onMount = (runFetch) => runFetch();
+
+//#endregion Server Config File
+
+//#region Extensions Archive on server
+
+export const extArchiveStateAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
+
+export const runFetchArchiveAtom = atom(
+    (get) => get(extArchiveStateAtom),
+    (_get, set) => {
+        async function fetchData() {
+            set(extArchiveStateAtom, (prev) => ({ ...prev, loading: true }));
+            try {
+                const data = await getExistingOnServer();
+                set(extArchiveStateAtom, { loading: false, error: null, data });
+            } catch (error) {
+                set(extArchiveStateAtom, { loading: false, error, data: null });
+            }
+        };
+        fetchData();
+    }
+);
+runFetchArchiveAtom.onMount = (runFetch) => runFetch();
+
+//#endregion Extensions Archive on server
 
 //#region Server Release Notes
 
@@ -131,56 +145,61 @@ export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data ||
 
 //#endregion Server Release Notes
 
-//#region Server Config File
+export type LatestExtension = {
+    name: string;
+    icon: React.ReactNode;
+    version: string;
+    url: string;
+    info: InAppExtnInfo | null;
+};
 
-export const extInfosStateAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
-
-export const runFetchConfigAtom = atom(
-    (get) => get(extInfosStateAtom),
-    (_get, set) => {
-        async function fetchData() {
-            set(extInfosStateAtom, (prev) => ({ ...prev, loading: true }));
-            try {
-                const data = await getCurrentConfig();
-                console.log({data});
-                
-                set(extInfosStateAtom, { loading: false, error: null, data });
-            } catch (error) {
-                set(extInfosStateAtom, { loading: false, error, data: null });
-            }
+export const extensionChAtom = atom<LatestExtension>(
+    (get) => {
+        const currentConfig = get(extInfosStateAtom);
+        return {
+            name: 'Chrome',
+            icon: <IconCrLogo className="w-8 h-8" />,
+            version: '3.4.430',
+            url: 'chrome',
+            info: currentConfig.data ? currentConfig.data.chrome : null,
         };
-        fetchData();
     }
 );
-runFetchConfigAtom.onMount = (runFetch) => runFetch();
 
-//#endregion Server Config File
-
-//#region Extensions Archive on server
-
-export const extArchiveStateAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
-
-export const runFetchArchiveAtom = atom(
-    (get) => get(extArchiveStateAtom),
-    (_get, set) => {
-        async function fetchData() {
-            set(extArchiveStateAtom, (prev) => ({ ...prev, loading: true }));
-            try {
-                const data = await getExistingOnServer();
-                set(extArchiveStateAtom, { loading: false, error: null, data });
-            } catch (error) {
-                set(extArchiveStateAtom, { loading: false, error, data: null });
-            }
+export const extensionFfAtom = atom<LatestExtension>(
+    (get) => {
+        const currentConfig = get(extInfosStateAtom);
+        return {
+            name: 'Firefox',
+            icon: <IconFfLogo className="w-8 h-8" />,
+            version: '3.4.430',
+            url: 'chrome',
+            info: currentConfig.data ? currentConfig.data.firefox : null,
         };
-        fetchData();
     }
 );
-runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 
-//#endregion Extensions Archive on server
+export const extensionMsAtom = atom<LatestExtension>(
+    (get) => {
+        const currentConfig = get(extInfosStateAtom);
+        return {
+            name: 'Edge',
+            icon: <IconMsLogo className="w-8 h-8" />,
+            version: '3.4.430',
+            url: 'chrome',
+            info: currentConfig.data ? currentConfig.data.chrome : null,
+        };
+    }
+);
 
-export const section1_OpenReleaseNotesAtom = atomWithCallback<boolean>(Storage.initialData.open1, ({get}) => Storage.save(get));
-export const section2_OpenCurrentVersionsAtom = atomWithCallback<boolean>(Storage.initialData.open2, ({get}) => Storage.save(get));
-export const section3_OpenArchiveAtom = atomWithCallback<boolean>(Storage.initialData.open3, ({get}) => Storage.save(get));
-export const section4_OpenTestAppsAtom = atomWithCallback<boolean>(Storage.initialData.open4, ({get}) => Storage.save(get));
-export const section5_OpenFinalNotestom = atomWithCallback<boolean>(Storage.initialData.open5, ({get}) => Storage.save(get));
+// const extensionAtoms = [
+//     extensionChAtom,
+//     extensionFfAtom,
+//     extensionMsAtom,
+// ];
+
+export const section1_OpenReleaseNotesAtom = atomWithCallback<boolean>(Storage.initialData.open1, ({ get }) => Storage.save(get));
+export const section2_OpenCurrentVersionsAtom = atomWithCallback<boolean>(Storage.initialData.open2, ({ get }) => Storage.save(get));
+export const section3_OpenArchiveAtom = atomWithCallback<boolean>(Storage.initialData.open3, ({ get }) => Storage.save(get));
+export const section4_OpenTestAppsAtom = atomWithCallback<boolean>(Storage.initialData.open4, ({ get }) => Storage.save(get));
+export const section5_OpenFinalNotestom = atomWithCallback<boolean>(Storage.initialData.open5, ({ get }) => Storage.save(get));
