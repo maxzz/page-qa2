@@ -1,10 +1,11 @@
 import React from 'react';
-import { Atom, useAtom } from 'jotai';
-import { extensionChAtom, extensionFfAtom, LatestExtension } from '@/store/store';
-import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
+import { useAtom, useAtomValue } from 'jotai';
+import { extInfosStateAtom } from '@/store/store';
+import { InAppExtnInfo } from '@/store/utils/utils-current-config';
 import { toast } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
-import { IconClipboard, IconDownload } from '../UI/UIIcons';
+import { IconClipboard, IconCrLogo, IconDownload, IconFfLogo, IconMsLogo } from '../UI/UIIcons';
+import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
 
 const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
     angle: 90,
@@ -20,6 +21,26 @@ const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
     colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
 };
 
+export type LatestExtension = {
+    name: string;
+    icon: React.ReactNode;
+};
+
+const extensionChAtom: LatestExtension = {
+    name: 'Chrome',
+    icon: <IconCrLogo className="w-8 h-8" />,
+};
+
+const extensionFfAtom: LatestExtension = {
+    name: 'Firefox',
+    icon: <IconFfLogo className="w-8 h-8" />,
+};
+
+const extensionMsAtom: LatestExtension = {
+    name: 'Edge',
+    icon: <IconMsLogo className="w-8 h-8" />,
+};
+
 function HeroImage() {
     return (
         <div className="">
@@ -32,8 +53,7 @@ const boxShadow = {
     boxShadow: '0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12)'
 };
 
-function CurrentVersion({ extensionAtom }: { extensionAtom: Atom<LatestExtension>; }) {
-    const [extension] = useAtom(extensionAtom);
+function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtension, inAppExtnInfo: InAppExtnInfo; }) {
     const confettiRef = React.useRef<HTMLDivElement>(null);
     return (
         <div className="px-4 py-3 border" style={boxShadow}>
@@ -41,7 +61,7 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: Atom<LatestExtension
                 {extension.icon}
                 <div className="">
                     <div className="font-bold scale-y-125 whitespace-nowrap">{extension.name} QA extension</div>
-                    <div className="text-sm">{extension.version}</div>
+                    <div className="text-sm">{inAppExtnInfo.version}</div>
                 </div>
             </div>
 
@@ -71,10 +91,11 @@ function CurrentVersion({ extensionAtom }: { extensionAtom: Atom<LatestExtension
 }
 
 function CurrentVersions() {
+    const inAppExtnInfos = useAtomValue(extInfosStateAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
-            <CurrentVersion extensionAtom={extensionChAtom} />
-            <CurrentVersion extensionAtom={extensionFfAtom} />
+            {inAppExtnInfos.data?.chrome && <CurrentVersion extension={extensionChAtom} inAppExtnInfo={inAppExtnInfos.data.chrome}/>}
+            {inAppExtnInfos.data?.firefox && <CurrentVersion extension={extensionFfAtom} inAppExtnInfo={inAppExtnInfos.data.firefox}/>}
         </div>
     );
 }

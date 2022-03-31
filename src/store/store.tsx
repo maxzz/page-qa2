@@ -4,7 +4,7 @@ import { atomWithCallback, LoadingDataState, loadingDataStateInit } from "@/hook
 import { marked } from "marked";
 import { getCurrentConfig, CurrentExtensions, InAppExtnInfo } from "./utils/utils-current-config";
 import { fetchReleaseNotes } from "./utils/utils-release-notes";
-import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
+//import { IconCrLogo, IconFfLogo, IconMsLogo } from "../components/UI/UIIcons";
 import { getExistingOnServer, ArchiveExtensionMeta } from "./utils/utils-existing-on-server";
 import debounce from "@/utils/debounce";
 
@@ -145,52 +145,25 @@ export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data ||
 
 //#endregion Server Release Notes
 
-export type LatestExtension = {
-    name: string;
-    icon: React.ReactNode;
-    version: string;
-    url: string;
-    info: InAppExtnInfo | null;
-};
+// export type LatestExtension = {
+//     name: string;
+//     icon: React.ReactNode;
+// };
 
-export const extensionChAtom = atom<LatestExtension>(
-    (get) => {
-        const currentConfig = get(extInfosStateAtom);
-        return {
-            name: 'Chrome',
-            icon: <IconCrLogo className="w-8 h-8" />,
-            version: '3.4.430',
-            url: 'chrome',
-            info: currentConfig.data ? currentConfig.data.chrome : null,
-        };
-    }
-);
+// export const extensionChAtom = atom<LatestExtension>({
+//     name: 'Chrome',
+//     icon: <IconCrLogo className="w-8 h-8" />,
+// });
 
-export const extensionFfAtom = atom<LatestExtension>(
-    (get) => {
-        const currentConfig = get(extInfosStateAtom);
-        return {
-            name: 'Firefox',
-            icon: <IconFfLogo className="w-8 h-8" />,
-            version: '3.4.430',
-            url: 'chrome',
-            info: currentConfig.data ? currentConfig.data.firefox : null,
-        };
-    }
-);
+// export const extensionFfAtom = atom<LatestExtension>({
+//     name: 'Firefox',
+//     icon: <IconFfLogo className="w-8 h-8" />,
+// });
 
-export const extensionMsAtom = atom<LatestExtension>(
-    (get) => {
-        const currentConfig = get(extInfosStateAtom);
-        return {
-            name: 'Edge',
-            icon: <IconMsLogo className="w-8 h-8" />,
-            version: '3.4.430',
-            url: 'chrome',
-            info: currentConfig.data ? currentConfig.data.chrome : null,
-        };
-    }
-);
+// export const extensionMsAtom = atom<LatestExtension>({
+//     name: 'Edge',
+//     icon: <IconMsLogo className="w-8 h-8" />,
+// });
 
 // const extensionAtoms = [
 //     extensionChAtom,
