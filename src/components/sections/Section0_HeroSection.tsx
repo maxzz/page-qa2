@@ -1,5 +1,5 @@
 import React from 'react';
-import { PrimitiveAtom, useAtom } from 'jotai';
+import { Atom, useAtom } from 'jotai';
 import { extensionChAtom, extensionFfAtom, LatestExtension } from '@/store/store';
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
 import { toast } from '../UI/UiToaster';
@@ -32,7 +32,7 @@ const boxShadow = {
     boxShadow: '0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12)'
 };
 
-function CurrentVersion({ extensionAtom }: { extensionAtom: PrimitiveAtom<LatestExtension>; }) {
+function CurrentVersion({ extensionAtom }: { extensionAtom: Atom<LatestExtension>; }) {
     const [extension] = useAtom(extensionAtom);
     const confettiRef = React.useRef<HTMLDivElement>(null);
     return (
