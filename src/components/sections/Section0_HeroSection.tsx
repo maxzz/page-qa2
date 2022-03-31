@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { extInfosStateAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
-import { beautifyDate } from '@/store/apis/api-formats-g01';
+import { beautifyDate } from '@/utils/helpers';
 import { toast } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
 import { IconClipboard, IconCrLogo, IconDownload, IconFfLogo, IconMsLogo } from '../UI/UIIcons';
@@ -69,7 +69,7 @@ function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtensi
             </div>
 
             {/* Action buttons */}
-            <div className="flex items-center justify-end space-x-2 text-sm">
+            <div className="flex items-center lg:justify-end space-x-2 text-sm">
                 {/* Download button */}
                 <a
                     className="p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
