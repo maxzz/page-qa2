@@ -43,7 +43,7 @@ const extensionMsAtom: LatestExtension = {
 
 function HeroImage() {
     return (
-        <div className="">
+        <div>
             <img className="h-full object-cover grayscale" src={HERO_IMAGE} alt="hero" />
         </div>
     );
@@ -54,27 +54,32 @@ const boxShadow = {
 };
 
 function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtension, inAppExtnInfo: InAppExtnInfo; }) {
-    const confettiRef = React.useRef<HTMLDivElement>(null);
+    const confettiRef = React.useRef<HTMLButtonElement>(null);
     return (
         <div className="px-4 py-3 border" style={boxShadow}>
+            {/* Icon, name, version */}
             <div className="flex items-center space-x-3">
                 {extension.icon}
-                <div className="">
+                <div>
                     <div className="font-bold scale-y-125 whitespace-nowrap">{extension.name} QA extension</div>
                     <div className="text-sm">{inAppExtnInfo.version}</div>
                 </div>
             </div>
 
+            {/* Action buttons */}
             <div className="flex items-center justify-end space-x-2 text-sm">
+                {/* Download button */}
                 <a
-                    className="p-2 cursor-pointer flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
+                    className="p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
                     href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.432_on_2022.03.16-r-chrome.zip"
                     title="Download extension"
                 >
                     <IconDownload className="w-6 h-6" strokeWidth={1} />
                     <div className="">Download</div>
                 </a>
-                <div ref={confettiRef} className="p-2 cursor-pointer flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
+
+                {/* Copy link */}
+                <button ref={confettiRef} className="p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
                     onClick={async () => {
                         await navigator.clipboard.writeText('here');
                         toast('copied to clipboard');
@@ -83,8 +88,8 @@ function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtensi
                     title="Copy URL to clipboard"
                 >
                     <IconClipboard className="w-6 h-6" strokeWidth={1} />
-                    <div className="">Copy link</div>
-                </div>
+                    <div>Copy link</div>
+                </button>
             </div>
         </div>
     );
@@ -94,8 +99,8 @@ function CurrentVersions() {
     const inAppExtnInfos = useAtomValue(extInfosStateAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
-            {inAppExtnInfos.data?.chrome && <CurrentVersion extension={extensionChAtom} inAppExtnInfo={inAppExtnInfos.data.chrome}/>}
-            {inAppExtnInfos.data?.firefox && <CurrentVersion extension={extensionFfAtom} inAppExtnInfo={inAppExtnInfos.data.firefox}/>}
+            {inAppExtnInfos.data?.chrome && <CurrentVersion extension={extensionChAtom} inAppExtnInfo={inAppExtnInfos.data.chrome} />}
+            {inAppExtnInfos.data?.firefox && <CurrentVersion extension={extensionFfAtom} inAppExtnInfo={inAppExtnInfos.data.firefox} />}
         </div>
     );
 }
