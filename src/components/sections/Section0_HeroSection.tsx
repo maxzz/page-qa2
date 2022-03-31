@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { extInfosStateAtom } from '@/store/store';
-import { InAppExtnInfo } from '@/store/utils/utils-current-config';
+import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { toast } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
 import { IconClipboard, IconCrLogo, IconDownload, IconFfLogo, IconMsLogo } from '../UI/UIIcons';

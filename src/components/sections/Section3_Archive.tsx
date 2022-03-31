@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { extArchiveStateAtom } from '@/store/store';
-import { ArchiveExtensionMeta } from '@/store/utils/utils-existing-on-server';
-import { getArchiveExtensionUrl } from '@/store/utils/constants';
+import { ArchiveExtensionMeta } from '@/store/apis/file-existing-on-server';
+import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import iconClasses from './browser-icons.module.scss';
 
 type Meta = {

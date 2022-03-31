@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { extInfosStateAtom } from '@/store/store';
-import { InAppExtnInfo } from '@/store/utils/utils-current-config';
-import { TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/external/file-formats-g01';
+import { InAppExtnInfo } from '@/store/apis/file-current-config';
+import { TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/apis/file-formats-g01';
 
 type Table = {
     [key in TBrowser]: {

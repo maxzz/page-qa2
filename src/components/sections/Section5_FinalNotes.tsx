@@ -1,5 +1,5 @@
 import React from 'react';
-import { CONFLUENCE_URL } from '@/store/utils/constants';
+import { CONFLUENCE_URL } from '@/store/apis/constants';
 
 export function Section5_FinalNotes() {
     return (

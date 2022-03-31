@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-function getBrandFromLocation() {
+function getDpBrandFromLocation() {
     const brand = window.location.href.match(/page(dp|hp|de|qa)/i);
     return !!brand ? brand[1] : '';
 }
@@ -15,20 +15,23 @@ export function getBrowserType(): IBrowserName {
     const isEdge = ua.indexOf('edge/') !== -1 && !isChrome;
 
     return isChrome ? 'chrome' : isFirefox ? 'firefox' : isIE ? 'ie' : isEdge ? 'me' : 'unknown';
-} //getBrowserType()
+}
 
 export function copyToClipboard(el: any): boolean | undefined {
     // 0. el - HTMLElement
     const range: Range = document.createRange();
-    range && range.selectNode(el);
-    let selA = window.getSelection(); selA && selA.addRange(range);
-    // Now that we've selected the anchor text, execute the copy command
+    range?.selectNode(el);
+    window.getSelection()?.addRange(range);
+
+    // 1. Now that we've selected the anchor text, execute the copy command
     let done;
     try {
         done = document.execCommand('copy');
     } catch (err) {
     }
-    // Remove the selections - NOTE: Should use removeRange(range) when it is supported
-    let selB = window.getSelection(); selB && selB.removeAllRanges();
+
+    // 2. Remove the selections - NOTE: Should use removeRange(range) when it is supported
+    window.getSelection()?.removeAllRanges();
+
     return done;
-} //copyToClipboard()
+}
