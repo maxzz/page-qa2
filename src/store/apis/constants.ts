@@ -1,6 +1,6 @@
 // Locations
 
-const IS_HID = /hidglobal/.test(window?.location.host || '');
+export const IS_HID = /hidglobal/.test(window?.location.host || '');
 
 export const URL_CONFLUENCE = 'https://crossmatch.atlassian.net/wiki/spaces/ALTUS/pages/103023073/Browser+extensions+installation';
 export const URL_OLD_QA_WEBSITE = 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pageqa1/index.html';

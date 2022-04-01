@@ -1,5 +1,5 @@
 import React from 'react';
-import { URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from '@/store/apis/constants';
+import { IS_HID, URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from '@/store/apis/constants';
 
 export function Section5_FinalNotes() {
     return (
@@ -23,6 +23,9 @@ export function Section5_FinalNotes() {
             <p>
                 This __BUILD_VER__ version of the QA website is built on __BUILD_DATE__<span>.</span>
             </p>
+            {!IS_HID && <p>
+                The source code for this website on <a className="underline hover:text-url" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here.</a>
+            </p>}
         </div>
     );
 }
