@@ -5,7 +5,7 @@ import visualizer from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default (({ command }) => defineConfig({
-    base: command === 'build' ? '/page-qa2/' : '',
+    base: command === 'build' ? '' : '',
     plugins: [
         react(),
         visualizer({
