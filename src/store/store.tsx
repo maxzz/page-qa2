@@ -41,11 +41,11 @@ namespace Storage {
 
     export const save = debounce(function _save(get: Getter) {
         let newStore: Store = {
-            open1: get(section1_OpenReleaseNotesAtom),
-            open2: get(section2_OpenCurrentVersionsAtom),
-            open3: get(section3_OpenArchiveAtom),
-            open4: get(section4_OpenTestAppsAtom),
-            open5: get(section5_OpenFinalNotestom),
+            open1: get(section1_OpenAtom),
+            open2: get(section2_OpenAtom),
+            open3: get(section3_OpenAtom),
+            open4: get(section4_OpenAtom),
+            open5: get(section5_OpenAtom),
         };
         localStorage.setItem(KEY, JSON.stringify(newStore));
     }, 1000);
@@ -141,8 +141,8 @@ export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data ||
 
 //#endregion Server Release Notes
 
-export const section1_OpenReleaseNotesAtom = atomWithCallback<boolean>(Storage.initialData.open1, ({ get }) => Storage.save(get));
-export const section2_OpenCurrentVersionsAtom = atomWithCallback<boolean>(Storage.initialData.open2, ({ get }) => Storage.save(get));
-export const section3_OpenArchiveAtom = atomWithCallback<boolean>(Storage.initialData.open3, ({ get }) => Storage.save(get));
-export const section4_OpenTestAppsAtom = atomWithCallback<boolean>(Storage.initialData.open4, ({ get }) => Storage.save(get));
-export const section5_OpenFinalNotestom = atomWithCallback<boolean>(Storage.initialData.open5, ({ get }) => Storage.save(get));
+export const section1_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open1, ({ get }) => Storage.save(get));
+export const section2_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open2, ({ get }) => Storage.save(get));
+export const section3_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open3, ({ get }) => Storage.save(get));
+export const section4_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open4, ({ get }) => Storage.save(get));
+export const section5_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open5, ({ get }) => Storage.save(get));
