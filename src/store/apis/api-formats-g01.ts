@@ -232,16 +232,4 @@ export enum TBrand {
 }
 export const TBrandName = (v?: TBrand) => v === TBrand.dp ? 'DP' : v === TBrand.hp ? 'HP' : v === TBrand.de ? 'Dell' : '?';
 
-export function parseDate(date: string): Date | undefined {
-    // 0. Parse '2022.03.04' format to Date | string.
-    const dt = new Date(date.replace(/\./g, '-') + 'T00:00:00');
-    return dt.toString() !== 'Invalid Date' ? dt : undefined;
-}
-
-export function beautifyDate(dateStr: string) {
-    // 0. Parse '2022.03.04' format to string.
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return parseDate(dateStr)?.toLocaleDateString('en-US', options) || dateStr;
-}
-
 //#endregion Common
