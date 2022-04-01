@@ -1,8 +1,4 @@
-// Legacy
-
-//export const ROOT_FTP_URL = '/AltusAddons/g01/current';
-//export const ROOT_WEB_URL = 'https://www.crossmatch.com/AltusAddons/g01/current/';
-//https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/config.json
+// Locations
 
 const IS_HID = /hidglobal/.test(window?.location.host || '');
 
@@ -18,11 +14,6 @@ const ROOT_WEB_URL = IS_HID ? ROOT_HID_URL : ROOT_GITHUB_URL;
 const ROOT_TEST_URL = './';
 
 const API_URL = import.meta.env.PROD ? ROOT_WEB_URL : ROOT_TEST_URL;
-
-console.log('host', window.location.host);
-console.log('root', API_URL);
-console.log('loc3 hidglobal', /hidglobal/.test(window?.location.host || ''));
-console.log('loc4 localhost', /localhost/.test(window?.location.host || ''));
 
 export const Regex_FNAME_VerDate           = /dppm-(\d{1,3}\.\d{1,4}\.\d{1,5})_on_(\d\d\d\d\.\d\d\.\d\d)/i; // version and date
 export const Regex_FNAME_VerDateRelBrouser = /dppm-(\d{1,3}\.\d{1,4}\.\d{1,5})_on_(\d\d\d\d\.\d\d\.\d\d)-(r)-(chrome|firefox|edge)/i; // version and date release browser
