@@ -57,19 +57,19 @@ const boxShadow = {
 function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtension, inAppExtnInfo: InAppExtnInfo; }) {
     const confettiRef = React.useRef<HTMLButtonElement>(null);
     return (
-        <div className="px-4 py-3 border" style={boxShadow}>
+        <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{...boxShadow, transition: "all .2s"}}>
             {/* Icon, name, version */}
-            <div className="flex items-center space-x-3">
-                {extension.icon}
-                <div>
-                    <div className="font-bold scale-y-125 whitespace-nowrap">{extension.name} QA extension</div>
-                    <div className="text-xs">Updated on {beautifyDate(inAppExtnInfo.updated)}</div>
-                    <div className="text-xs">{inAppExtnInfo.version}</div>
-                </div>
+
+            <div className="content-center place-self-center">{extension.icon}</div>
+            <div className="ml-3">
+                <div className="font-bold scale-y-125 whitespace-nowrap">{extension.name} QA extension</div>
+                <div className="text-xs">Updated on {beautifyDate(inAppExtnInfo.updated)}</div>
+                <div className="text-xs">{inAppExtnInfo.version}</div>
             </div>
 
+
             {/* Action buttons */}
-            <div className="flex items-center lg:justify-end space-x-2 text-sm">
+            <div className="col-start-2 mt-2 sm:mt-0 flex items-center lg:justify-end space-x-2 text-sm">
                 {/* Download button */}
                 <a
                     className="p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
