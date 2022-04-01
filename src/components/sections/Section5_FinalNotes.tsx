@@ -17,15 +17,17 @@ export function Section5_FinalNotes() {
             </p>
 
             <h2 className="mt-2 text-base font-semibold">QA website history</h2>
-            <p>
-                The previous QA website is still <a className="underline hover:text-url" href={URL_OLD_QA_WEBSITE} target="_blank"> available here.</a>
-            </p>
-            <p>
-                This __BUILD_VER__ version of the QA website is built on __BUILD_DATE__<span>.</span>
-            </p>
-            {!IS_HID && <p>
-                The source code for this website on <a className="underline hover:text-url" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here.</a>
-            </p>}
+            <ul className="ml-4 list-disc">
+                <li>
+                    The previous QA website is still <a className="underline hover:text-url" href={URL_OLD_QA_WEBSITE} target="_blank"> available here.</a>
+                </li>
+                {!IS_HID && <li>
+                    The source code for this website on <a className="underline hover:text-url" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here.</a>
+                </li>}
+                <li>
+                    This __BUILD_VER__ version of the QA website is built on __BUILD_DATE__<span>.</span>
+                </li>
+            </ul>
         </div>
     );
 }
