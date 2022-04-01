@@ -20,6 +20,7 @@ export function Section5_FinalNotes() {
             <p className="text-sm">
                 The previous QA website is still <a className="underline hover:text-url" href={URL_OLD_QA_WEBSITE} target="_blank"> available here.</a>
             </p>
+            <p className="text-sm">This __BUILD_VER__ version of the QA website is built on __BUILD_DATE__<span>.</span></p>
         </div>
     );
 }
