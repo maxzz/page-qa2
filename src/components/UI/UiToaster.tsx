@@ -13,7 +13,7 @@ export function UIToaster() {
                 toastOptions={{
                     // Define default options
                     className: '',
-                    duration: 5000,
+                    duration: 25000,
                     style: {
                         background: '#363636',
                         color: '#fff',
@@ -33,24 +33,34 @@ export function UIToaster() {
 }
 
 export const toastWarning: typeof callToast.custom = (message, options) => {
-    console.log('options', options);
-    
     return callToast(message, {
-        style: { 
-            backgroundColor: 'tomato' ,
+        style: {
+            backgroundColor: 'tomato',
         },
         icon: '👏',
     });
 };
 
-// export function toast(message: string) {
-//     console.log(`%c${message}`, 'color: orange');
-//     toastWarning(message);
-// }
-
 export function toast(message: string) {
-    console.log(`%c${message}`, 'color: orange');
+    //console.log(`%c${message}`, 'color: orange');
     toastWarning(message);
+}
+
+export function toastSucceeded(message: string) {
+    callToast(message, {
+        style: {
+            backgroundColor: 'tomato',
+        },
+        icon: '👏',
+    });
+}
+
+export function toastError(message: string) {
+    callToast.custom(
+        <div className="px-3 py-2 max-w-[500px] text-red-50 bg-red-600 border-red-700 border-2 rounded shadow-lg shadow-red-900/40">
+            {message}
+        </div>
+    );
 }
 
 //TODO: set atom to add message to the list of errors popup
