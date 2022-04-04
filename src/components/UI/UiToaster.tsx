@@ -31,7 +31,7 @@ export function UIToaster() {
         </div>
     );
 }
-
+/*
 export const toastWarning: typeof callToast.custom = (message, options) => {
     return callToast(message, {
         style: {
@@ -45,7 +45,7 @@ export function toast(message: string) {
     //console.log(`%c${message}`, 'color: orange');
     toastWarning(message);
 }
-
+*/
 export function toastSucceeded(message: string) {
     callToast(message, {
         style: {

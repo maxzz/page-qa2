@@ -3,7 +3,7 @@ import { useAtomValue } from 'jotai';
 import { extInfosStateAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { beautifyDate } from '@/utils/helpers';
-import { toast } from '../UI/UiToaster';
+import { toastSucceeded } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
 import { IconClipboard, IconCrLogo, IconDownload, IconFfLogo, IconMsLogo } from '../UI/UIIcons';
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
@@ -84,7 +84,7 @@ function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtensi
                 <button ref={confettiRef} className="p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
                     onClick={async () => {
                         await navigator.clipboard.writeText(inAppExtnInfo.url);
-                        toast('copied to clipboard');
+                        toastSucceeded('Link copied to clipboard');
                         confetti(confettiRef.current!, confettiConfig);
                     }}
                     title="Copy extension URL to clipboard"
