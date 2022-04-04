@@ -4,7 +4,16 @@ module.exports = {
         extend: {
             colors: {
                 url: '#0047cc',
-            }
+            },
+            keyframes: {
+                slidein: {
+                    '0%': { ransform: 'translateY(-100%)',},
+                    '100%': { transform: 'translateY(0)', }                    
+                }
+            },
+            animation: {
+                slidein: 'slidein 5s',
+            },
         },
     },
     plugins: [
