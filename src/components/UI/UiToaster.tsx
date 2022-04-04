@@ -58,9 +58,9 @@ export function toastSucceeded(message: string) {
 export function toastError(message: string) {
     callToast.custom((t) =>
         <div className="max-w-[540px] text-red-50 bg-red-600 border-red-700 border-2 rounded shadow-lg shadow-red-900/40">
-            <div className="flex items-center justify-between space-x-2">
-                <div className="px-3 py-2">{message}</div>
-                <div className="w-8 h-8 flex items-center justify-center hover:bg-red-400 active:scale-[.97] cursor-pointer"
+            <div className="px-3 flex items-center justify-between">
+                <div className="py-2">{message}</div>
+                <div className="w-12 h-12 flex items-center justify-center hover:bg-red-400 active:scale-[.97] cursor-pointer"
                     onClick={() => callToast.dismiss(t.id)}
                 >❌</div>
             </div>
