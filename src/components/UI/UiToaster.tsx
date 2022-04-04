@@ -13,7 +13,7 @@ export function UIToaster() {
                 toastOptions={{
                     // Define default options
                     className: '',
-                    duration: 45000,
+                    duration: 5000,
                     style: {
                         background: '#363636',
                         color: '#fff',
@@ -58,22 +58,15 @@ export function toastSucceeded(message: string) {
 export function toastError(message: string) {
     callToast.custom((t) =>
         <div className="max-w-[540px] text-red-50 bg-red-600 border-red-700 border-2 rounded shadow-lg shadow-red-900/40">
-            <div className="px-3 flex items-center justify-between">
-                <div className="py-2">{message}</div>
-                <div className="w-12 h-12 flex items-center justify-center hover:bg-red-400 active:scale-[.97] cursor-pointer"
-                    onClick={() => callToast.dismiss(t.id)}
+            <div className="px-3 py-1 flex items-center justify-between">
+                <div className="">{message}</div>
+                <div className="ml-4 w-12 h-12 flex items-center justify-center hover:bg-red-400 active:scale-[.97] cursor-pointer select-none"
+                    onClick={() => callToast.remove(t.id)}
                 >❌</div>
             </div>
         </div>
     );
 }
 
-// export function toastError(message: string) {
-//     callToast.custom(
-//         <div className="px-3 py-2 max-w-[500px] text-red-50 bg-red-600 border-red-700 border-2 rounded shadow-lg shadow-red-900/40">
-//             {message}
-//         </div>
-//     );
-// }
-
 //TODO: set atom to add message to the list of errors popup
+//❌✖️
