@@ -6,7 +6,7 @@ export async function fetchReleaseNotes(): Promise<string> {
     const response = await fetch(getMarkdownUrl(), { cache: 'no-cache' });
     let text = await response.text();
     if (!text) { // this check will not work because the index.html is returned if file not found. Later.
-        throw new Error('The result should not be empty');
+        throw new Error(`No access to the HID server. Failed to get "${getMarkdownUrl()}"`);
     }
     return text;
 }

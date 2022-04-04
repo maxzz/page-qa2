@@ -45,7 +45,7 @@ export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
 
     const response = await fetch(getFtpExtensionsUrl(), { cache: 'no-cache' });
     if (!response.ok) {
-        throw new Error('No access to the HID server');
+        throw new Error(`No access to the HID server. Failed to get "${getFtpExtensionsUrl()}"`);
     }
     let existingRaw: FtpFiles.FileRecord[] = await response.json();
 

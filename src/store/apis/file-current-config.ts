@@ -79,7 +79,7 @@ export async function fetchCurrentConfig(): Promise<Response> {
 
     const response = await fetch(getCurrentConfigUrl(), { cache: 'no-cache' });
     if (!response.ok) {
-        throw new Error('No access to the HID server current configuration');
+        throw new Error(`No access to the HID server. Failed to get "${getCurrentConfigUrl()}"`);
     }
     return response;
 }

@@ -5,6 +5,7 @@ import { marked } from "marked";
 import { CurrentExtensions, getCurrentConfig } from "./apis/file-current-config";
 import { fetchReleaseNotes } from "./apis/file-release-notes";
 import { ArchiveExtensionMeta, getExistingOnServer } from "./apis/file-existing-on-server";
+import { toast } from "@/components/UI/UiToaster";
 
 //#region LocalStorage
 
@@ -69,6 +70,7 @@ export const runFetchConfigAtom = atom(
                 set(extInfosStateAtom, { loading: false, error: null, data });
             } catch (error) {
                 set(extInfosStateAtom, { loading: false, error, data: null });
+                toast((error as Error).message);
             }
         };
         fetchData();
@@ -92,6 +94,7 @@ export const runFetchArchiveAtom = atom(
                 set(extArchiveStateAtom, { loading: false, error: null, data });
             } catch (error) {
                 set(extArchiveStateAtom, { loading: false, error, data: null });
+                toast((error as Error).message);
             }
         };
         fetchData();
@@ -130,6 +133,7 @@ export const runFetchReleaseNotesAtom = atom(
                 set(releaseNotesStateAtom, { loading: false, error: null, data });
             } catch (error) {
                 set(releaseNotesStateAtom, { loading: false, error, data: null });
+                toast((error as Error).message);
             }
         };
         fetchData();
