@@ -1,18 +1,19 @@
+import { TBrowserShort } from "@/store/apis/api-formats-g01";
+
 function getDpBrandFromLocation() {
     const brand = window.location.href.match(/page(dp|hp|de|qa)/i);
     return !!brand ? brand[1] : '';
 }
 
-type IBrowserAgentName = 'chrome' | 'firefox' | 'ie' | 'me' | '?';
-
-function getBrowserType(): IBrowserAgentName {
+function getBrowserType(): TBrowserShort | undefined {
     const ua = navigator.userAgent.toLowerCase();
+    
     const isIE = ua.indexOf('msie ') !== -1 || ua.indexOf('trident/') > -1;
     const isChrome = ua.indexOf('chrome') !== -1 && typeof (<any>window).chrome !== 'undefined' && typeof (window as any).chrome.runtime !== 'undefined';
     const isFirefox = ua.indexOf('firefox') !== -1;
     const isEdge = ua.indexOf('edge/') !== -1 && !isChrome;
 
-    return isChrome ? 'chrome' : isFirefox ? 'firefox' : isIE ? 'ie' : isEdge ? 'me' : '?';
+    return isChrome ? TBrowserShort.chrome : isFirefox ? TBrowserShort.firefox : isIE ? TBrowserShort.ie : isEdge ? TBrowserShort.edge : undefined;
 }
 
 export function copyToClipboard(el: any): boolean | undefined {

@@ -227,8 +227,9 @@ export enum TBrowserShort {
     firefox = 'f',
     edge = 'e',
     dev = 'd',
+    ie = 'i',
 }
-export const TBrowserName = (v?: TBrowserShort) => v === TBrowserShort.chrome ? 'Chrome' : v === TBrowserShort.firefox ? 'Firefox' : v === TBrowserShort.edge ? 'Microsoft Edge' : v === TBrowserShort.dev ? 'DevTools' : '?';
+export const TBrowserName = (v?: TBrowserShort) => v === TBrowserShort.chrome ? 'Chrome' : v === TBrowserShort.firefox ? 'Firefox' : v === TBrowserShort.edge ? 'Microsoft Edge' : v === TBrowserShort.dev ? 'DevTools': v === TBrowserShort.ie ? 'IE' : '?';
 
 export enum TBrand {
     dp = 'dp',
