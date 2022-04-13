@@ -25,7 +25,7 @@ export namespace FormatCurrentCfg {
         qaUrl: BrandExtensionVersions;
     };
 
-    type TBrowserFname = 'chrome' | 'firefox' | 'me' | 'ie'; // Browser name as defined into config file.
+    export type TBrowserFname = 'chrome' | 'firefox' | 'me' | 'ie'; // Browser name as defined into config file.
 
     export type ExtensionsPerBrowser = {
         [key in TBrowserFname]: QaReleaseForBrowser; // key: 'chrome' | 'firefox' | 'me' | 'ie' -> value: IConfigBrowser
@@ -221,6 +221,13 @@ export namespace FormatFtp {
 
 //#region Common
 
+export enum TBrand {
+    dp = 'dp',
+    hp = 'hp',
+    de = 'de'
+}
+export const TBrandName = (v?: TBrand) => v === TBrand.dp ? 'DP' : v === TBrand.hp ? 'HP' : v === TBrand.de ? 'Dell' : '?';
+
 export enum TBrowserShort {
     unknown = 'u',
     chrome = 'c',
@@ -229,13 +236,8 @@ export enum TBrowserShort {
     dev = 'd',
     ie = 'i',
 }
-export const TBrowserName = (v?: TBrowserShort) => v === TBrowserShort.chrome ? 'Chrome' : v === TBrowserShort.firefox ? 'Firefox' : v === TBrowserShort.edge ? 'Microsoft Edge' : v === TBrowserShort.dev ? 'DevTools': v === TBrowserShort.ie ? 'IE' : '?';
 
-export enum TBrand {
-    dp = 'dp',
-    hp = 'hp',
-    de = 'de'
-}
-export const TBrandName = (v?: TBrand) => v === TBrand.dp ? 'DP' : v === TBrand.hp ? 'HP' : v === TBrand.de ? 'Dell' : '?';
+export const TBrowserName = (v?: TBrowserShort) => v === TBrowserShort.chrome ? 'Chrome' : v === TBrowserShort.firefox ? 'Firefox' : v === TBrowserShort.edge ? 'Microsoft Edge' : v === TBrowserShort.dev ? 'DevTools': v === TBrowserShort.ie ? 'IE' : '?';
+export const TBrowserShortFromFname = (v: FormatCurrentCfg.TBrowserFname) => v === 'chrome' ? TBrowserShort.chrome : v === 'firefox' ? TBrowserShort.firefox : v === 'me' ? TBrowserShort.edge : v === 'ie' ? TBrowserShort.ie : undefined;
 
 //#endregion Common

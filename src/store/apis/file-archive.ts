@@ -1,4 +1,4 @@
-import { TBrowserShort } from "./api-formats-g01";
+import { FormatCurrentCfg, TBrowserShort, TBrowserShortFromFname } from "./api-formats-g01";
 import { getFtpExtensionsUrl, regexFnameVerDateRelBrouser } from "./constants";
 
 export interface ArchiveExtensionMeta { // Extension info from filename
@@ -6,7 +6,7 @@ export interface ArchiveExtensionMeta { // Extension info from filename
     version: string;
     updated: string;
     release: boolean;
-    browser: string;
+    browser: TBrowserShort | undefined;
 }
 
 function metaFromFilename(fname: string): ArchiveExtensionMeta {
@@ -17,7 +17,7 @@ function metaFromFilename(fname: string): ArchiveExtensionMeta {
         version: match ? match[1] : '',
         updated: match ? match[2] : '',
         release: match ? match[3] === 'r' : false,
-        browser: match ? match[4] : '',
+        browser: match ? TBrowserShortFromFname(match[4] as FormatCurrentCfg.TBrowserFname) : undefined,
     };
     return meta;
 }
@@ -61,7 +61,7 @@ export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
         version: '2.0.7234',
         updated: '2017.10.20', // It was 2019.10.20 but moved in time to have it as a separate group.
         release: false,
-        browser: 'maxz',
+        browser: TBrowserShort.dev,
     });
 
     existing.sort((a, b) => a.version < b.version ? -1 : a.version > b.version ? 1 : 0);

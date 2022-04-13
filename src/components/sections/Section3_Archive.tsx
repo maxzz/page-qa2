@@ -4,27 +4,19 @@ import { byYearsAtom } from '@/store/store';
 import { Meta } from '@/store/apis/file-archive-parse';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import iconClasses from './browser-icons.module.scss';
+import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
 
 function getClass(item: Meta) {
     const types = {
-        chrome: 'iconCh',
-        firefox: 'iconFf',
-        maxz: 'iconTt',
+        [TBrowserShort.chrome]: 'iconCh',
+        [TBrowserShort.firefox]: 'iconFf',
+        [TBrowserShort.dev]: 'iconTt',
     };
     return iconClasses[types[item.browser as keyof typeof types] || 'iconMs'];
 }
 
-function getBrowserName(item: Meta) {
-    const types = {
-        chrome: 'Chrome',
-        firefox: 'Firefox',
-        maxz: 'DevTools'
-    };
-    return types[item.browser as keyof typeof types] || 'Microsoft Edge';
-}
-
 function getTooltip(item: Meta) {
-    return `${getBrowserName(item)} extension released on ${item.date}`;
+    return `${TBrowserName(item.browser)} extension released on ${item.date}`;
 }
 
 export function Section3_Archive() {
