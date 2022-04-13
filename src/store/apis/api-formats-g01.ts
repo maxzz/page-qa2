@@ -1,42 +1,42 @@
 //#region Config File
 
 export namespace FormatCurrentCfg {
-    export interface MetaFromFilename {
+    export type MetaFromFilename = {
         version: string;    //"1.4.0.6562"
         updated: string;    //"12.08.2016"
-    }
+    };
 
-    export interface SingleExtensionInfo {
+    export type SingleExtensionInfo = {
         url: string;
         version?: string;   //"1.4.0.6562"
         updated?: string;   //"12.08.2016" This is when extension QA build was created. This is updated automatically.
         published?: string; //"12.08.2016" This is when QA extension was published to the Google store. This is updated manually.
-    }
+    };
 
     export type BrandExtensionVersions = {
         // At least one 'dp' should be defined, missing one will be defaulted to 'dp'.
         // Firefox extension has a single shared update.jsom file, so it cannot be realy branded now.
-        [brand: string] : SingleExtensionInfo; // key: 'dp' | 'hp' | 'de' --> metadata
+        [brand: string]: SingleExtensionInfo; // key: 'dp' | 'hp' | 'de' --> metadata
     };
 
-    export interface QaReleaseForBrowser {
+    export type QaReleaseForBrowser = {
         extensionUrl: BrandExtensionVersions;
         qaUrl: BrandExtensionVersions;
-    }
+    };
 
-    export interface ExtensionsPerBrowser {
+    export type ExtensionsPerBrowser = {
         [key: string]: QaReleaseForBrowser; // 'chrome' | 'firefox' | 'me' | 'ie' -> IConfigBrowser
-    }
+    };
 
-    export interface Languages {
+    export type Languages = {
         available: string[]; // [ "en", "de", "es", "fr", "it", "ja", "pt-BR" ]
-    }
+    };
 
-    export interface CurrentConfigFile {
+    export type CurrentConfigFile = {
         browsers: ExtensionsPerBrowser;
         brand: 'dp' | 'hp' | 'de';
         languages: Languages;
-    }
+    };
     /*
     original:
     {
@@ -142,18 +142,18 @@ export namespace FormatCurrentCfg {
 
 //#region Update File
 export namespace FormatUpd {
-    export interface IUpdateItem {
+    export type IUpdateItem = {
         version: string;
         update_link: string;
-    }
+    };
 
-    export interface IUpdateFile {
+    export type IUpdateFile = {
         addons: {
             "pasman@crossmatch.com": {
                 updates: IUpdateItem[];
-            }
-        }
-    }
+            };
+        };
+    };
     /*
     {
         "addons": {
@@ -174,7 +174,7 @@ export namespace FormatUpd {
 //#region FtpVersions File
 
 export namespace FormatFtp {
-    export interface IFtpFile {
+    export type IFtpFile = {
         type: '-' | 'd' | 'l',    // file type: 'd'- directory; '-' - file; (or 'l' for symlink on **\*NIX only**)
         name: string,             // file name
         size: number,             // file size
@@ -183,10 +183,10 @@ export namespace FormatFtp {
         rights: {
             user: string,         // "rwx"
             group: string,        // "rwx"
-            other: string         // "rwx"
+            other: string;         // "rwx"
         },
         owner: number,            // user ID
-        group: number             // group ID
+        group: number;             // group ID
         /*
         {
             "type": "-",
@@ -203,13 +203,13 @@ export namespace FormatFtp {
             "group": 48
         },
         */
-    } //interface IFtpFile
+    }; //type IFtpFil= e
 
     export type IFtpList = IFtpFile[];
 
-    export interface IFilesAccess {
+    export type IFilesAccess = {
         [name: string]: IFtpFile;
-    }
+    };
     // let listAccess: FormatFtp.IFilesAccess = list.reduce((acc: FormatFtp.IFilesAccess, _: FormatFtp.IFtpFile) => (acc[_.name] = _, acc), {});
 
 } //namespace FormatFtp
@@ -217,13 +217,14 @@ export namespace FormatFtp {
 
 //#region Common
 
-export enum TBrowser {
+export enum TBrowserShort {
     unknown = 'u',
     chrome = 'c',
     firefox = 'f',
-    edge = 'e'
+    edge = 'e',
+    dev = 'd',
 }
-export const TBrowserName = (v?: TBrowser) => v === TBrowser.chrome ? 'Chrome' : v === TBrowser.firefox ? 'Firefox' : v === TBrowser.edge ? 'Microsoft Edge' : '?';
+export const TBrowserName = (v?: TBrowserShort) => v === TBrowserShort.chrome ? 'Chrome' : v === TBrowserShort.firefox ? 'Firefox' : v === TBrowserShort.edge ? 'Microsoft Edge' : v === TBrowserShort.dev ? 'DevTools' : '?';
 
 export enum TBrand {
     dp = 'dp',

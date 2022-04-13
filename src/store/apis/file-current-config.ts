@@ -1,10 +1,10 @@
-import { FormatCurrentCfg, TBrand, TBrowser } from './api-formats-g01';
+import { FormatCurrentCfg, TBrand, TBrowserShort } from './api-formats-g01';
 import { getCurrentConfigUrl, regexFnameVerDate } from './constants';
 
 export interface InAppExtnInfo { // Extension info
     url: string;                // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
     brand?: TBrand;             // "dp"
-    browser?: TBrowser;         // "c"
+    browser?: TBrowserShort;         // "c"
     qa?: boolean;               // true
     version: string;            // "3.4.430"
     updated: string;            // "2022.03.04"
@@ -20,11 +20,11 @@ function fnameVersionDate(fname: string) {
     return meta;
 }
 
-function findInfo(extensions: InAppExtnInfo[], brand: TBrand, browser: TBrowser, qa: boolean): InAppExtnInfo | undefined {
+function findInfo(extensions: InAppExtnInfo[], brand: TBrand, browser: TBrowserShort, qa: boolean): InAppExtnInfo | undefined {
     return extensions.find((item: InAppExtnInfo) => item.brand === brand && item.browser === browser && item.qa === qa);
 }
 
-function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowser, qa: boolean): InAppExtnInfo[] {
+function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowserShort, qa: boolean): InAppExtnInfo[] {
     const rv: InAppExtnInfo[] = [];
 
     [TBrand.dp, TBrand.hp, TBrand.de].forEach((brand: TBrand) => {
@@ -61,10 +61,10 @@ export interface CurrentExtensions { // Extensions on Ftp server
 }
 
 function parseCurrentConfig(config: FormatCurrentCfg.CurrentConfigFile): CurrentExtensions {
-    const extInfoFfQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowser.firefox, true);
-    const extInfoFfPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowser.firefox, false); // public
-    const extInfoChQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowser.chrome, true);
-    const extInfoChPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowser.chrome, false);
+    const extInfoFfQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowserShort.firefox, true);
+    const extInfoFfPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowserShort.firefox, false); // public
+    const extInfoChQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowserShort.chrome, true);
+    const extInfoChPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowserShort.chrome, false);
     return {
         firefox: extInfoFfQa[0],
         chrome: extInfoChQa[0],

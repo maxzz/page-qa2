@@ -2,10 +2,10 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { extInfosStateAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
-import { TBrand, TBrandName, TBrowser, TBrowserName } from '@/store/apis/api-formats-g01';
+import { TBrand, TBrandName, TBrowserShort, TBrowserName } from '@/store/apis/api-formats-g01';
 
 type Table = {
-    [key in TBrowser]: {
+    [key in TBrowserShort]: {
         [key in TBrand]?: {
             qa?: InAppExtnInfo;
             release?: InAppExtnInfo;
@@ -35,12 +35,12 @@ type FlatTableItem = {
 };
 
 type FlatTable = {
-    [key in TBrowser]: FlatTableItem[]
+    [key in TBrowserShort]: FlatTableItem[]
 };
 
 function reduceToFlat(table: Table): FlatTable {
     const res = {} as FlatTable;
-    for (const [brKey, brVal] of Object.entries(table) as [TBrowser, Table[TBrowser]][]) {
+    for (const [brKey, brVal] of Object.entries(table) as [TBrowserShort, Table[TBrowserShort]][]) {
         if (!res[brKey]) {
             res[brKey] = [];
         }
@@ -55,7 +55,7 @@ function reduceToFlat(table: Table): FlatTable {
     return res;
 }
 
-function TableToBrowser({ browser, table = [] }: { browser: TBrowser; table: FlatTableItem[]; }) {
+function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort; table: FlatTableItem[]; }) {
     return (
         <div className="cursor-default">
             <div className="mb-1 text-sm font-bold">{`${TBrowserName(browser)} extensions`}</div>
@@ -84,8 +84,8 @@ export function Section2_CurrentVersions() {
         <div className="py-2 text-sm flex flex-col space-y-2">
             <p>Summary table of currently published extensions.</p>
             <div className="max-w-2xl grid grid-cols-2 gap-x-2">
-                <TableToBrowser browser={TBrowser.firefox} table={res[TBrowser.firefox]} />
-                <TableToBrowser browser={TBrowser.chrome} table={res[TBrowser.chrome]} />
+                <TableToBrowser browser={TBrowserShort.firefox} table={res[TBrowserShort.firefox]} />
+                <TableToBrowser browser={TBrowserShort.chrome} table={res[TBrowserShort.chrome]} />
             </div>
             <div className="text-xs">
                 <p className="mb-1">Brand legend:</p>

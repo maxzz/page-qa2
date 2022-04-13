@@ -1,3 +1,4 @@
+import { TBrowserShort } from "./api-formats-g01";
 import { getFtpExtensionsUrl, regexFnameVerDateRelBrouser } from "./constants";
 
 export interface ArchiveExtensionMeta { // Extension info from filename
@@ -64,6 +65,10 @@ export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
     });
 
     existing.sort((a, b) => a.version < b.version ? -1 : a.version > b.version ? 1 : 0);
+    console.log('existing', existing);
+
+    const latestCh = existing.find((item) => item.browser === TBrowserShort.chrome);
+    console.log('latestCh', latestCh);
 
     return existing;
 }

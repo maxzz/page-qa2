@@ -6,8 +6,6 @@ export type Meta = {
     date: string;
 } & ArchiveExtensionMeta;
 
-
-
 export function addDates(archive: ArchiveExtensionMeta[] | null): Meta[] {
     let prevYear = 0;
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
