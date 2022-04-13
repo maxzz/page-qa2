@@ -83,7 +83,7 @@ runFetchConfigAtom.onMount = (runFetch) => runFetch();
 
 //#region Extensions Archive on server
 
-export const extArchiveStateAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
+const extArchiveStateAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
 
 export const runFetchArchiveAtom = atom(
     (get) => get(extArchiveStateAtom),
@@ -107,7 +107,7 @@ export const byYearsAtom = atom(
     (get) => {
         const extArchiveState = get(extArchiveStateAtom);
         
-        const byYears = archiveByYears(extArchiveState.data);
+        const byYears = archiveByYears(extArchiveState.data).reverse();
         console.log(byYears);
         
         return byYears;

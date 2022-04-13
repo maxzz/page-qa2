@@ -28,7 +28,7 @@ function getTooltip(item: Meta) {
 }
 
 export function Section3_Archive() {
-    const byYears = [...useAtomValue(byYearsAtom)].reverse();
+    const byYears = useAtomValue(byYearsAtom);
     return (
         <div className="py-2">
             <p className="text-sm">
@@ -36,8 +36,8 @@ export function Section3_Archive() {
             </p>
 
             <div className="mt-1 text-xs cursor-default">
-                {byYears.map(({year, items}, idxYear) => (
-                    <div key={idxYear}>
+                {byYears.map(({year, items}) => (
+                    <div key={year}>
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
                             {items.map((item, idx) => (
