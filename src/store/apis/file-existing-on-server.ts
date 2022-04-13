@@ -61,7 +61,6 @@ export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
         updated: '2017.10.20', // It was 2019.10.20 but moved in time to have it as a separate group.
         release: false,
         browser: 'maxz',
-
     });
 
     existing.sort((a, b) => a.version < b.version ? -1 : a.version > b.version ? 1 : 0);

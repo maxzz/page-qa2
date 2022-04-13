@@ -66,6 +66,10 @@ function splitByYears(archive: Meta[]): Record<string, Meta[]> {
 export function Section3_Archive() {
     const [extArchiveState] = useAtom(extArchiveStateAtom);
     const byYears = splitByYears(addDates(extArchiveState.data || []));
+
+    const lastYear = Object.keys(byYears).at(-1);
+    const lastExt = lastYear && byYears[lastYear]?.at(-1);
+    console.log('server', lastYear, lastExt);
     return (
         <div className="py-2">
             <p className="text-sm">
