@@ -108,7 +108,8 @@ export const byYearsAtom = atom(
         const extArchiveState = get(extArchiveStateAtom);
         
         const byYears = archiveByYears(extArchiveState.data).reverse();
-        console.log(byYears);
+        
+        //console.log(byYears);
         
         return byYears;
     }

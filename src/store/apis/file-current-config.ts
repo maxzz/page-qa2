@@ -1,5 +1,5 @@
 import { FormatCurrentCfg, TBrand, TBrowser } from './api-formats-g01';
-import { getCurrentConfigUrl, Regex_FNAME_VerDate } from './constants';
+import { getCurrentConfigUrl, regexFnameVerDate } from './constants';
 
 export interface InAppExtnInfo { // Extension info
     url: string;                // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
@@ -12,7 +12,7 @@ export interface InAppExtnInfo { // Extension info
 
 function fnameVersionDate(fname: string) {
     // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
-    const match = fname.match(Regex_FNAME_VerDate);
+    const match = fname.match(regexFnameVerDate);
     const meta = {
         version: match ? match[1] : '',
         updated: match ? match[2] : '',

@@ -1,4 +1,4 @@
-import { getFtpExtensionsUrl, Regex_FNAME_VerDateRelBrouser } from "./constants";
+import { getFtpExtensionsUrl, regexFnameVerDateRelBrouser } from "./constants";
 
 export interface ArchiveExtensionMeta { // Extension info from filename
     fname: string;
@@ -8,10 +8,10 @@ export interface ArchiveExtensionMeta { // Extension info from filename
     browser: string;
 }
 
-function getFnameMeta(fname: string): ArchiveExtensionMeta {
+function metaFromFilename(fname: string): ArchiveExtensionMeta {
     // 0. Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
-    const match = fname.match(Regex_FNAME_VerDateRelBrouser);
-    let meta: ArchiveExtensionMeta = {
+    const match = fname.match(regexFnameVerDateRelBrouser);
+    const meta: ArchiveExtensionMeta = {
         fname,
         version: match ? match[1] : '',
         updated: match ? match[2] : '',
@@ -22,12 +22,6 @@ function getFnameMeta(fname: string): ArchiveExtensionMeta {
 }
 
 namespace FtpFiles {
-    export interface FileRights {
-        user: string;
-        group: string;
-        other: string;
-    }
-
     export interface FileRecord {
         type: string;
         name: string;
@@ -37,6 +31,12 @@ namespace FtpFiles {
         rights: FileRights;
         owner: number;
         group: number;
+    }
+
+    export interface FileRights {
+        user: string;
+        group: string;
+        other: string;
     }
 }
 
@@ -51,8 +51,8 @@ export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
 
     let existing: ArchiveExtensionMeta[] =
         existingRaw
-            .map((file: FtpFiles.FileRecord) => getFnameMeta(file.name))
-            .filter((meta) => meta.version); // skip empty non extension names wo/ version.
+            .map((file: FtpFiles.FileRecord) => metaFromFilename(file.name))
+            .filter((meta: ArchiveExtensionMeta) => meta.version); // skip empty non extension names not matched by regex pattern.
 
     // added one more path to traytools.zip
     existing.push({
