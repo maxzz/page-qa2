@@ -107,7 +107,7 @@ export const byYearsAtom = atom(
     (get) => {
         const extArchiveState = get(extArchiveStateAtom);
         
-        const byYears = splitByYears(extArchiveState);
+        const byYears = splitByYears(extArchiveState.data);
         console.log(byYears);
         
         return byYears;
