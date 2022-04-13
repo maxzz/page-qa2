@@ -3,6 +3,16 @@ import { useAtom, useAtomValue } from 'jotai';
 import { byYearsAtom, extArchiveStateAtom } from '@/store/store';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import { Meta, splitByYears } from '@/store/apis/file-archive-parse';
+import iconClasses from './browser-icons.module.scss';
+
+function getClass(item: Meta) {
+    const types = {
+        chrome: 'iconCh',
+        firefox: 'iconFf',
+        maxz: 'iconTt',
+    };
+    return iconClasses[types[item.browser as keyof typeof types] || 'iconMs'];
+}
 
 function getBrowserName(item: Meta) {
     const types = {
@@ -34,7 +44,7 @@ export function Section3_Archive() {
                         <div className="columns-7">
                             {items.map((item, idx) => (
                                 <a className="leading-5 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)} key={idx}>
-                                    <span className={`w-4 h-4 mr-1 ${item.cls} saturate-150`}></span>
+                                    <span className={`w-4 h-4 mr-1 ${getClass(item)} saturate-150`}></span>
                                     <span>{item.version}</span>
                                 </a>
                             ))}
