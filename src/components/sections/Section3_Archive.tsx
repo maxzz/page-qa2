@@ -1,25 +1,8 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { extArchiveStateAtom } from '@/store/store';
-import { ArchiveExtensionMeta } from '@/store/apis/file-archive';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
-import iconClasses from './browser-icons.module.scss';
-
-type Meta = {
-    yearChanged: boolean;
-    year: number;
-    cls: string;
-    date: string;
-} & ArchiveExtensionMeta;
-
-function getClass(item: ArchiveExtensionMeta) {
-    const types = {
-        chrome: 'iconCh',
-        firefox: 'iconFf',
-        maxz: 'iconTt',
-    };
-    return iconClasses[types[item.browser as keyof typeof types] || 'iconMs'];
-}
+import { Meta, splitByYears } from '@/store/apis/file-archive-parse';
 
 function getBrowserName(item: Meta) {
     const types = {
@@ -34,42 +17,9 @@ function getTooltip(item: Meta) {
     return `${getBrowserName(item)} extension released on ${item.date}`;
 }
 
-function addDates(archive: ArchiveExtensionMeta[]): Meta[] {
-    let prevYear = 0;
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return archive.map((item) => {
-        const dt = new Date(item.updated.replace(/\./g, '-') + 'T00:00:00');
-        const year = dt.getFullYear();
-        let yearChanged = year !== prevYear;
-        prevYear = year;
-        return {
-            ...item,
-            yearChanged,
-            year,
-            cls: getClass(item),
-            date: dt.toLocaleDateString('en-US', options),
-        } as Meta;
-    });
-}
-
-function splitByYears(archive: Meta[]): Record<string, Meta[]> {
-    const res: Record<string, Meta[]> = {};
-    archive.forEach((item) => {
-        if (!res[item.year]) {
-            res[item.year] = [];
-        }
-        res[item.year].push(item);
-    });
-    return res;
-}
-
 export function Section3_Archive() {
     const [extArchiveState] = useAtom(extArchiveStateAtom);
-    const byYears = splitByYears(addDates(extArchiveState.data || []));
-
-    const lastYear = Object.keys(byYears).at(-1);
-    const lastExt = lastYear && byYears[lastYear]?.at(-1);
-    console.log('server', lastYear, lastExt);
+    const byYears = splitByYears(extArchiveState);
     return (
         <div className="py-2">
             <p className="text-sm">
