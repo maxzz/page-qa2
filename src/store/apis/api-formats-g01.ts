@@ -1,6 +1,7 @@
 //#region Config File
 
 export namespace FormatCurrentCfg {
+
     export type MetaFromFilename = {
         version: string;    //"1.4.0.6562"
         updated: string;    //"12.08.2016"
@@ -16,7 +17,7 @@ export namespace FormatCurrentCfg {
     export type BrandExtensionVersions = {
         // At least one 'dp' should be defined, missing one will be defaulted to 'dp'.
         // Firefox extension has a single shared update.jsom file, so it cannot be realy branded now.
-        [brand: string]: SingleExtensionInfo; // key: 'dp' | 'hp' | 'de' --> metadata
+        [brand in TBrand]: SingleExtensionInfo; // key: 'dp' | 'hp' | 'de' --> value: metadata
     };
 
     export type QaReleaseForBrowser = {
@@ -24,8 +25,10 @@ export namespace FormatCurrentCfg {
         qaUrl: BrandExtensionVersions;
     };
 
+    type TBrowserFname = 'chrome' | 'firefox' | 'me' | 'ie'; // Browser name as defined into config file.
+
     export type ExtensionsPerBrowser = {
-        [key: string]: QaReleaseForBrowser; // 'chrome' | 'firefox' | 'me' | 'ie' -> IConfigBrowser
+        [key in TBrowserFname]: QaReleaseForBrowser; // key: 'chrome' | 'firefox' | 'me' | 'ie' -> value: IConfigBrowser
     };
 
     export type Languages = {
@@ -34,9 +37,10 @@ export namespace FormatCurrentCfg {
 
     export type CurrentConfigFile = {
         browsers: ExtensionsPerBrowser;
-        brand: 'dp' | 'hp' | 'de';
+        brand: TBrand; // 'dp' | 'hp' | 'de'
         languages: Languages;
     };
+
     /*
     original:
     {
@@ -138,10 +142,13 @@ export namespace FormatCurrentCfg {
     }
     */
 } //namespace FormatCurrentCfg
+
 //#endregion Config File
 
 //#region Update File
+
 export namespace FormatUpd {
+
     export type IUpdateItem = {
         version: string;
         update_link: string;
@@ -154,6 +161,7 @@ export namespace FormatUpd {
             };
         };
     };
+
     /*
     {
         "addons": {
@@ -169,11 +177,13 @@ export namespace FormatUpd {
     }
     */
 } //namespace FormatUpd
+
 //#endregion Update File
 
 //#region FtpVersions File
 
 export namespace FormatFtp {
+
     export type IFtpFile = {
         type: '-' | 'd' | 'l',    // file type: 'd'- directory; '-' - file; (or 'l' for symlink on **\*NIX only**)
         name: string,             // file name
@@ -183,36 +193,30 @@ export namespace FormatFtp {
         rights: {
             user: string,         // "rwx"
             group: string,        // "rwx"
-            other: string;         // "rwx"
+            other: string;        // "rwx"
         },
         owner: number,            // user ID
-        group: number;             // group ID
-        /*
-        {
-            "type": "-",
-            "name": "dppm-2.0.7235_on_2018.03.12-r-firefox.xpi",
-            "size": 185816,
-            "modifyTime": 1520851475000,
-            "accessTime": 1520851557000,
-            "rights": {
-                "user": "rw",
-                "group": "r",
-                "other": "r"
-            },
-            "owner": 1005,
-            "group": 48
-        },
-        */
-    }; //type IFtpFil= e
-
-    export type IFtpList = IFtpFile[];
-
-    export type IFilesAccess = {
-        [name: string]: IFtpFile;
+        group: number;            // group ID
     };
-    // let listAccess: FormatFtp.IFilesAccess = list.reduce((acc: FormatFtp.IFilesAccess, _: FormatFtp.IFtpFile) => (acc[_.name] = _, acc), {});
 
+    /*
+    {
+        "type": "-",
+        "name": "dppm-2.0.7235_on_2018.03.12-r-firefox.xpi",
+        "size": 185816,
+        "modifyTime": 1520851475000,
+        "accessTime": 1520851557000,
+        "rights": {
+            "user": "rw",
+            "group": "r",
+            "other": "r"
+        },
+        "owner": 1005,
+        "group": 48
+    },
+    */
 } //namespace FormatFtp
+
 //#endregion FtpVersions File
 
 //#region Common

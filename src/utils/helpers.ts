@@ -3,16 +3,16 @@ function getDpBrandFromLocation() {
     return !!brand ? brand[1] : '';
 }
 
-type IBrowserName = 'chrome' | 'firefox' | 'ie' | 'me' | 'unknown';
+type IBrowserAgentName = 'chrome' | 'firefox' | 'ie' | 'me' | '?';
 
-export function getBrowserType(): IBrowserName {
+function getBrowserType(): IBrowserAgentName {
     const ua = navigator.userAgent.toLowerCase();
     const isIE = ua.indexOf('msie ') !== -1 || ua.indexOf('trident/') > -1;
     const isChrome = ua.indexOf('chrome') !== -1 && typeof (<any>window).chrome !== 'undefined' && typeof (window as any).chrome.runtime !== 'undefined';
     const isFirefox = ua.indexOf('firefox') !== -1;
     const isEdge = ua.indexOf('edge/') !== -1 && !isChrome;
 
-    return isChrome ? 'chrome' : isFirefox ? 'firefox' : isIE ? 'ie' : isEdge ? 'me' : 'unknown';
+    return isChrome ? 'chrome' : isFirefox ? 'firefox' : isIE ? 'ie' : isEdge ? 'me' : '?';
 }
 
 export function copyToClipboard(el: any): boolean | undefined {
