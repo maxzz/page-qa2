@@ -1,22 +1,11 @@
 import { LoadingDataState } from "@/hooks/atomsX";
 import { ArchiveExtensionMeta } from "./file-archive";
-import iconClasses from './browser-icons.module.scss';
 
 export type Meta = {
     yearChanged: boolean;
     year: number;
-    cls: string;
     date: string;
 } & ArchiveExtensionMeta;
-
-function getClass(item: ArchiveExtensionMeta) {
-    const types = {
-        chrome: 'iconCh',
-        firefox: 'iconFf',
-        maxz: 'iconTt',
-    };
-    return iconClasses[types[item.browser as keyof typeof types] || 'iconMs'];
-}
 
 export function addDates(archive: ArchiveExtensionMeta[]): Meta[] {
     let prevYear = 0;
@@ -30,7 +19,6 @@ export function addDates(archive: ArchiveExtensionMeta[]): Meta[] {
             ...item,
             yearChanged,
             year,
-            cls: getClass(item),
             date: dt.toLocaleDateString('en-US', options),
         } as Meta;
     });
