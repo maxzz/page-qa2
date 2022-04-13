@@ -6,7 +6,7 @@ import { CurrentExtensions, getCurrentConfig } from './apis/file-current-config'
 import { fetchReleaseNotes } from './apis/file-release-notes';
 import { ArchiveExtensionMeta, getExistingOnServer } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
-import { addDates, splitByYears } from './apis/file-archive-parse';
+import { addDates, archiveByYears } from './apis/file-archive-parse';
 
 //#region LocalStorage
 
@@ -107,7 +107,7 @@ export const byYearsAtom = atom(
     (get) => {
         const extArchiveState = get(extArchiveStateAtom);
         
-        const byYears = splitByYears(extArchiveState.data);
+        const byYears = archiveByYears(extArchiveState.data);
         console.log(byYears);
         
         return byYears;

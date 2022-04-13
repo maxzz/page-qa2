@@ -6,6 +6,8 @@ export type Meta = {
     date: string;
 } & ArchiveExtensionMeta;
 
+
+
 export function addDates(archive: ArchiveExtensionMeta[] | null): Meta[] {
     let prevYear = 0;
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -23,7 +25,7 @@ export function addDates(archive: ArchiveExtensionMeta[] | null): Meta[] {
     });
 }
 
-function _splitByYears(archive: Meta[]): Record<string, Meta[]> {
+function splitByYears(archive: Meta[]): Record<string, Meta[]> {
     const res: Record<string, Meta[]> = {};
     archive.forEach((item) => {
         if (!res[item.year]) {
@@ -34,9 +36,14 @@ function _splitByYears(archive: Meta[]): Record<string, Meta[]> {
     return res;
 }
 
-export function splitByYears(extArchiveState: ArchiveExtensionMeta[] | null) {
-    const byYears = _splitByYears(addDates(extArchiveState));
-    return byYears;
+export type OneYearExts = {
+    year: string;
+    items: Meta[];
+};
+
+export function archiveByYears(extArchiveState: ArchiveExtensionMeta[] | null): OneYearExts[] {
+    const byYears = splitByYears(addDates(extArchiveState));
+    return Object.entries(byYears).map(([year, items]) => ({year, items})); // can now sort if needed
 }
 
 // const lastYear = Object.keys(byYears).at(-1);
