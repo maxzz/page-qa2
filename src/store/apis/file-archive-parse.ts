@@ -18,7 +18,7 @@ function getClass(item: ArchiveExtensionMeta) {
     return iconClasses[types[item.browser as keyof typeof types] || 'iconMs'];
 }
 
-function addDates(archive: ArchiveExtensionMeta[]): Meta[] {
+export function addDates(archive: ArchiveExtensionMeta[]): Meta[] {
     let prevYear = 0;
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return archive.map((item) => {

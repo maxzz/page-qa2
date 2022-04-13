@@ -6,6 +6,7 @@ import { CurrentExtensions, getCurrentConfig } from './apis/file-current-config'
 import { fetchReleaseNotes } from './apis/file-release-notes';
 import { ArchiveExtensionMeta, getExistingOnServer } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
+import { addDates, splitByYears } from './apis/file-archive-parse';
 
 //#region LocalStorage
 
@@ -101,6 +102,17 @@ export const runFetchArchiveAtom = atom(
     }
 );
 runFetchArchiveAtom.onMount = (runFetch) => runFetch();
+
+export const byYearsAtom = atom(
+    (get) => {
+        const extArchiveState = get(extArchiveStateAtom);
+        
+        const byYears = splitByYears(extArchiveState);
+        console.log(byYears);
+        
+        return byYears;
+    }
+);
 
 //#endregion Extensions Archive on server
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAtom } from 'jotai';
-import { extArchiveStateAtom } from '@/store/store';
+import { useAtom, useAtomValue } from 'jotai';
+import { byYearsAtom, extArchiveStateAtom } from '@/store/store';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import { Meta, splitByYears } from '@/store/apis/file-archive-parse';
 
@@ -18,8 +18,9 @@ function getTooltip(item: Meta) {
 }
 
 export function Section3_Archive() {
-    const [extArchiveState] = useAtom(extArchiveStateAtom);
-    const byYears = splitByYears(extArchiveState);
+    // const [extArchiveState] = useAtom(extArchiveStateAtom);
+    // const byYears = splitByYears(extArchiveState);
+    const byYears = useAtomValue(byYearsAtom);
     return (
         <div className="py-2">
             <p className="text-sm">
