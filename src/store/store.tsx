@@ -92,7 +92,7 @@ export const runFetchArchiveAtom = atom(
             set(extArchiveStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const data = await getExistingOnServer();
-                set(extArchiveStateAtom, { loading: false, error: null, data });
+                set(extArchiveStateAtom, { loading: false, error: null, data: data.existing });
             } catch (error) {
                 set(extArchiveStateAtom, { loading: false, error, data: null });
                 toastError((error as Error).message);
@@ -166,6 +166,7 @@ export const section5_OpenAtom = atomWithCallback<boolean>(Storage.initialData.o
 
 export const dataLoadAtom = atom(
     (get) => {
+        // Load files in that order to correlate data between them
         get(runFetchReleaseNotesAtom);
         get(runFetchArchiveAtom);
         get(runFetchConfigAtom);

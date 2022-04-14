@@ -43,7 +43,3 @@ export function archiveByYears(extArchiveState: ArchiveExtensionMeta[] | null): 
     const byYears = splitByYears(addDates(extArchiveState));
     return Object.entries(byYears).map(([year, items]) => ({year, items})); // can now sort if needed
 }
-
-// const lastYear = Object.keys(byYears).at(-1);
-// const lastExt = lastYear && byYears[lastYear]?.at(-1);
-// console.log('server', lastYear, lastExt);

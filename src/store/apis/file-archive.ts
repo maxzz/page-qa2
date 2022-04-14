@@ -1,13 +1,13 @@
 import { FormatCurrentCfg, TBrowserShort, TBrowserShortFromFname } from "./api-formats-g01";
 import { getFtpExtensionsUrl, regexFnameVerDateRelBrouser } from "./constants";
 
-export interface ArchiveExtensionMeta { // Extension info from filename
+export type ArchiveExtensionMeta = { // Extension info from filename
     fname: string;
     version: string;
     updated: string;
     release: boolean;
     browser: TBrowserShort | undefined;
-}
+};
 
 function metaFromFilename(fname: string): ArchiveExtensionMeta {
     // 0. Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
@@ -23,7 +23,7 @@ function metaFromFilename(fname: string): ArchiveExtensionMeta {
 }
 
 namespace FtpFiles {
-    export interface FileRecord {
+    export type FileRecord = {
         type: string;
         name: string;
         size: number;
@@ -32,16 +32,22 @@ namespace FtpFiles {
         rights: FileRights;
         owner: number;
         group: number;
-    }
+    };
 
-    export interface FileRights {
+    export type FileRights = {
         user: string;
         group: string;
         other: string;
-    }
+    };
 }
 
-export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
+type ExistingOnServer = {
+    existing: ArchiveExtensionMeta[];
+    latestCh: ArchiveExtensionMeta | undefined;
+    latestFf: ArchiveExtensionMeta | undefined;
+};
+
+export async function getExistingOnServer(): Promise<ExistingOnServer> {
     //console.log('Fetching: extensions on server', getFtpExtensionsUrl());
 
     const response = await fetch(getFtpExtensionsUrl(), { cache: 'no-cache' });
@@ -64,11 +70,13 @@ export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
         browser: TBrowserShort.dev,
     });
 
-    existing.sort((a, b) => a.version < b.version ? -1 : a.version > b.version ? 1 : 0);
-    console.log('existing', existing);
+    const reverse = [...existing].reverse();
+    const latestCh = reverse.find((item) => item.browser === TBrowserShort.chrome);
+    const latestFf = reverse.find((item) => item.browser === TBrowserShort.firefox);
 
-    const latestCh = existing.find((item) => item.browser === TBrowserShort.chrome);
-    console.log('latestCh', latestCh);
-
-    return existing;
+    return {
+        existing,
+        latestCh,
+        latestFf,
+    };
 }
