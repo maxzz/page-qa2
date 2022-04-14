@@ -74,6 +74,7 @@ const runFetchConfigAtom = atom(
                 set(extInfosStateAtom, { loading: false, error, data: null });
                 toastError((error as Error).message);
             }
+            set(correlateAtom);
         };
         fetchData();
     }
@@ -98,8 +99,11 @@ const runFetchArchiveAtom = atom(
                 set(latestFf, data.latestFf);
             } catch (error) {
                 set(extArchiveStateAtom, { loading: false, error, data: null });
+                set(latestCh, undefined);
+                set(latestFf, undefined);
                 toastError((error as Error).message);
             }
+            set(correlateAtom);
         };
         fetchData();
     }
@@ -154,6 +158,7 @@ const runFetchReleaseNotesAtom = atom(
                 set(publishedAtom, undefined);
                 toastError((error as Error).message);
             }
+            set(correlateAtom);
         };
         fetchData();
     }
@@ -164,16 +169,36 @@ export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data ||
 
 //#endregion ServerReleaseNotes
 
-export const publishedAtom = atom<string[] | undefined>(undefined);
+export const publishedAtom = atom<string[] | undefined>(undefined); // ['3.4.419', '3.0.386', '3.0.378']
 
 export const latestCh = atom<ArchiveExtensionMeta | undefined>(undefined);
 export const latestFf = atom<ArchiveExtensionMeta | undefined>(undefined);
 
 export const dataLoadAtom = atom(
-    (get) => { // Load files in that order to correlate data between them
+    (get) => {
         get(runFetchReleaseNotesAtom);
         get(runFetchArchiveAtom);
         get(runFetchConfigAtom);
+    }
+);
+
+const correlateAtom = atom(
+    null,
+    (get, set) => {
+        const notes = get(releaseNotesStateAtom);
+        if (notes.loading || notes.error) {
+            return;
+        }
+        const archive = get(extArchiveStateAtom);
+        if (archive.loading || archive.error) {
+            return;
+        }
+        const config = get(extInfosStateAtom);
+        if (config.loading || config.error) {
+            return;
+        }
+
+        console.log('ready to rock');
     }
 );
 
