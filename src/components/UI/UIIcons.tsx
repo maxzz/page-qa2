@@ -52,7 +52,7 @@ export function IconCrLogo(props: HTMLAttributes<HTMLImageElement>) {
 
 export function IconFfLogo(props: HTMLAttributes<HTMLImageElement>) {
     return (
-        <img src={ICO_FF} style={{filter: 'drop-shadow(1px 1px 1px #0002)'}} alt="Firefox logo" {...props}/>
+        <img src={ICO_FF} style={{filter: 'drop-shadow(1px 1px 1px #0002) hue-rotate(270deg)'}} alt="Firefox logo" {...props}/>
     );
 }
 
