@@ -60,18 +60,18 @@ namespace Storage {
 
 //#region ServerCurrentConfig
 
-export const extInfosStateAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
+export const configStateAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
 
 const runFetchConfigAtom = atom(
-    (get) => get(extInfosStateAtom),
+    (get) => get(configStateAtom),
     (_get, set) => {
         async function fetchData() {
-            set(extInfosStateAtom, (prev) => ({ ...prev, loading: true }));
+            set(configStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const data = await getCurrentConfig();
-                set(extInfosStateAtom, { loading: false, error: null, data });
+                set(configStateAtom, { loading: false, error: null, data });
             } catch (error) {
-                set(extInfosStateAtom, { loading: false, error, data: null });
+                set(configStateAtom, { loading: false, error, data: null });
                 toastError((error as Error).message);
             }
             set(correlateAtom);
@@ -85,20 +85,20 @@ runFetchConfigAtom.onMount = (runFetch) => runFetch();
 
 //#region ServerArchive
 
-const extArchiveStateAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
+const archiveStateAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
 
 const runFetchArchiveAtom = atom(
-    (get) => get(extArchiveStateAtom),
+    (get) => get(archiveStateAtom),
     (_get, set) => {
         async function fetchData() {
-            set(extArchiveStateAtom, (prev) => ({ ...prev, loading: true }));
+            set(archiveStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const data: ExistingOnServer = await getExistingOnServer();
-                set(extArchiveStateAtom, { loading: false, error: null, data: data.existing });
+                set(archiveStateAtom, { loading: false, error: null, data: data.existing });
                 set(latestChAtom, data.latestCh);
                 set(latestFfAtom, data.latestFf);
             } catch (error) {
-                set(extArchiveStateAtom, { loading: false, error, data: null });
+                set(archiveStateAtom, { loading: false, error, data: null });
                 set(latestChAtom, undefined);
                 set(latestFfAtom, undefined);
                 toastError((error as Error).message);
@@ -112,7 +112,7 @@ runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 
 export const byYearsAtom = atom(
     (get) => {
-        const extArchiveState = get(extArchiveStateAtom);
+        const extArchiveState = get(archiveStateAtom);
         const byYears = archiveByYears(extArchiveState.data).reverse();
         return byYears;
     }
@@ -148,10 +148,10 @@ const runFetchReleaseNotesAtom = atom(
                 const data = await fetchReleaseNotes();
                 const markdown = marked(data);
                 set(releaseNotesStateAtom, { loading: false, error: null, data: markdown });
-                set(publishedAtom, [...data.matchAll(regexMarkdownPublicVersions)].map((match) => match[1]));
+                set(publicVersionsAtom, [...data.matchAll(regexMarkdownPublicVersions)].map((match) => match[1]));
             } catch (error) {
                 set(releaseNotesStateAtom, { loading: false, error, data: null });
-                set(publishedAtom, undefined);
+                set(publicVersionsAtom, undefined);
                 toastError((error as Error).message);
             }
             set(correlateAtom);
@@ -165,7 +165,7 @@ export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data ||
 
 //#endregion ServerReleaseNotes
 
-export const publishedAtom = atom<string[] | undefined>(undefined); // ['3.4.419', '3.0.386', '3.0.378']
+export const publicVersionsAtom = atom<string[] | undefined>(undefined); // ['3.4.419', '3.0.386', '3.0.378']
 
 export const latestChAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
 export const latestFfAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
@@ -185,21 +185,20 @@ const correlateAtom = atom(
         if (notes.loading || notes.error) {
             return;
         }
-        const archive = get(extArchiveStateAtom);
+        const archive = get(archiveStateAtom);
         if (archive.loading || archive.error) {
             return;
         }
-        const config = get(extInfosStateAtom);
+        const config = get(configStateAtom);
         if (config.loading || config.error) {
             return;
         }
 
-        const published = get(publishedAtom);
-        if (published && archive.data) {
-            //console.log('archive', archive.data);
+        const publicVersions = get(publicVersionsAtom);
+        if (publicVersions && archive.data) {
+            const archiveMap = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
 
-            const obj = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
-            console.log('published', obj);
+            console.log('published', archiveMap);
         }
 
         const latestCh = get(latestChAtom);

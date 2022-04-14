@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
-import { extInfosStateAtom } from '@/store/store';
+import { configStateAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { beautifyDate } from '@/utils/helpers';
 import { toastSucceeded } from '../UI/UiToaster';
@@ -98,7 +98,7 @@ function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtensi
 }
 
 function CurrentVersions() {
-    const inAppExtnInfos = useAtomValue(extInfosStateAtom);
+    const inAppExtnInfos = useAtomValue(configStateAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
             {inAppExtnInfos.data?.chrome && <CurrentVersion extension={extensionChAtom} inAppExtnInfo={inAppExtnInfos.data.chrome} />}
