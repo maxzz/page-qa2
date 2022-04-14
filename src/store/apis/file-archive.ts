@@ -41,7 +41,7 @@ namespace FtpFiles {
     };
 }
 
-type ExistingOnServer = {
+export type ExistingOnServer = {
     existing: ArchiveExtensionMeta[];
     latestCh: ArchiveExtensionMeta | undefined;
     latestFf: ArchiveExtensionMeta | undefined;

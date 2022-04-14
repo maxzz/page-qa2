@@ -4,9 +4,9 @@ import { debounce } from '@/utils/debounce';
 import { marked } from 'marked';
 import { CurrentExtensions, getCurrentConfig } from './apis/file-current-config';
 import { fetchReleaseNotes } from './apis/file-release-notes';
-import { ArchiveExtensionMeta, getExistingOnServer } from './apis/file-archive';
+import { ArchiveExtensionMeta, ExistingOnServer, getExistingOnServer } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
-import { addDates, archiveByYears } from './apis/file-archive-parse';
+import { archiveByYears } from './apis/file-archive-parse';
 
 //#region LocalStorage
 
@@ -57,7 +57,7 @@ namespace Storage {
 
 // Data files
 
-//#region Server Config File
+//#region ServerCurrentConfig
 
 export const extInfosStateAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
 
@@ -79,9 +79,9 @@ export const runFetchConfigAtom = atom(
 );
 runFetchConfigAtom.onMount = (runFetch) => runFetch();
 
-//#endregion Server Config File
+//#endregion ServerCurrentConfig
 
-//#region Extensions Archive on server
+//#region ServerArchive
 
 const extArchiveStateAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
 
@@ -91,7 +91,7 @@ export const runFetchArchiveAtom = atom(
         async function fetchData() {
             set(extArchiveStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
-                const data = await getExistingOnServer();
+                const data: ExistingOnServer = await getExistingOnServer();
                 set(extArchiveStateAtom, { loading: false, error: null, data: data.existing });
             } catch (error) {
                 set(extArchiveStateAtom, { loading: false, error, data: null });
@@ -115,9 +115,9 @@ export const byYearsAtom = atom(
     }
 );
 
-//#endregion Extensions Archive on server
+//#endregion ServerArchive
 
-//#region Server Release Notes
+//#region ServerReleaseNotes
 
 export const releaseNotesStateAtom = atom<LoadingDataState<string>>(loadingDataStateInit());
 
@@ -156,19 +156,20 @@ runFetchReleaseNotesAtom.onMount = (runFetch) => runFetch();
 
 export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data || '');
 
-//#endregion Server Release Notes
+//#endregion ServerReleaseNotes
+
+export const dataLoadAtom = atom(
+    (get) => { // Load files in that order to correlate data between them
+        get(runFetchReleaseNotesAtom);
+        get(runFetchArchiveAtom);
+        get(runFetchConfigAtom);
+    }
+);
+
+// UI state
 
 export const section1_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open1, ({ get }) => Storage.save(get));
 export const section2_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open2, ({ get }) => Storage.save(get));
 export const section3_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open3, ({ get }) => Storage.save(get));
 export const section4_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open4, ({ get }) => Storage.save(get));
 export const section5_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open5, ({ get }) => Storage.save(get));
-
-export const dataLoadAtom = atom(
-    (get) => {
-        // Load files in that order to correlate data between them
-        get(runFetchReleaseNotesAtom);
-        get(runFetchArchiveAtom);
-        get(runFetchConfigAtom);
-    }
-);
