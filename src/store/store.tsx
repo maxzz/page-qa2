@@ -106,11 +106,11 @@ runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 export const byYearsAtom = atom(
     (get) => {
         const extArchiveState = get(extArchiveStateAtom);
-        
+
         const byYears = archiveByYears(extArchiveState.data).reverse();
-        
+
         //console.log(byYears);
-        
+
         return byYears;
     }
 );
@@ -163,3 +163,11 @@ export const section2_OpenAtom = atomWithCallback<boolean>(Storage.initialData.o
 export const section3_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open3, ({ get }) => Storage.save(get));
 export const section4_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open4, ({ get }) => Storage.save(get));
 export const section5_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open5, ({ get }) => Storage.save(get));
+
+export const dataLoadAtom = atom(
+    (get) => {
+        get(runFetchReleaseNotesAtom);
+        get(runFetchArchiveAtom);
+        get(runFetchConfigAtom);
+    }
+);

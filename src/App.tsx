@@ -1,13 +1,11 @@
 import { useAtomValue } from 'jotai';
-import { runFetchArchiveAtom, runFetchConfigAtom, runFetchReleaseNotesAtom } from './store/store';
+import { dataLoadAtom } from './store/store';
 import { Frontpage } from './components/Frontpage';
 import { UIToaster } from './components/UI/UiToaster';
 import './App.css';
 
 function Loader() {
-    useAtomValue(runFetchConfigAtom);
-    useAtomValue(runFetchArchiveAtom);
-    useAtomValue(runFetchReleaseNotesAtom);
+    useAtomValue(dataLoadAtom);
     return null;
 }
 
