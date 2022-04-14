@@ -4,10 +4,11 @@ import { debounce } from '@/utils/debounce';
 import { marked } from 'marked';
 import { CurrentExtensions, getCurrentConfig } from './apis/file-current-config';
 import { fetchReleaseNotes } from './apis/file-release-notes';
-import { ArchiveExtensionMeta, ExistingOnServer, getExistingOnServer } from './apis/file-archive';
+import { ArchiveExtensionMeta, getExistingOnServer } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
 import { archiveByYears } from './apis/file-archive-parse';
 import { regexMarkdownPublicVersions } from './apis/constants';
+import { TBrowserShort } from './apis/api-formats-g01';
 
 //#region LocalStorage
 
@@ -93,14 +94,10 @@ const runFetchArchiveAtom = atom(
         async function fetchData() {
             set(archiveStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
-                const data: ExistingOnServer = await getExistingOnServer();
-                set(archiveStateAtom, { loading: false, error: null, data: data.existing });
-                set(latestChAtom, data.latestCh);
-                set(latestFfAtom, data.latestFf);
+                const existing: ArchiveExtensionMeta[] = await getExistingOnServer();
+                set(archiveStateAtom, { loading: false, error: null, data: existing });
             } catch (error) {
                 set(archiveStateAtom, { loading: false, error, data: null });
-                set(latestChAtom, undefined);
-                set(latestFfAtom, undefined);
                 toastError((error as Error).message);
             }
             set(correlateAtom);
@@ -114,8 +111,6 @@ export const byYearsAtom = atom(
     (get) => {
         const extArchiveState = get(archiveStateAtom);
         const byYears = archiveByYears(extArchiveState.data);
-        console.log('years', byYears);
-
         return byYears;
     }
 );
@@ -209,6 +204,16 @@ const correlateAtom = atom(
 
             console.log('published', archiveMap);
         }
+
+        if (archive.data) {
+            const reverse = [...archive.data].reverse();
+            const latestCh = reverse.find((item) => item.browser === TBrowserShort.chrome);
+            const latestFf = reverse.find((item) => item.browser === TBrowserShort.firefox);
+
+            set(latestChAtom, latestCh);
+            set(latestFfAtom, latestFf);
+        }
+
 
         const latestCh = get(latestChAtom);
         if (latestCh) {

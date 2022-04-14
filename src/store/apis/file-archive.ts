@@ -46,13 +46,7 @@ namespace FtpFiles {
     };
 }
 
-export type ExistingOnServer = {
-    existing: ArchiveExtensionMeta[];
-    latestCh: ArchiveExtensionMeta | undefined;
-    latestFf: ArchiveExtensionMeta | undefined;
-};
-
-export async function getExistingOnServer(): Promise<ExistingOnServer> {
+export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
     //console.log('Fetching: extensions on server', getFtpExtensionsUrl());
 
     const response = await fetch(getFtpExtensionsUrl(), { cache: 'no-cache' });
@@ -75,13 +69,5 @@ export async function getExistingOnServer(): Promise<ExistingOnServer> {
         browser: TBrowserShort.dev,
     });
 
-    const reverse = [...existing].reverse();
-    const latestCh = reverse.find((item) => item.browser === TBrowserShort.chrome);
-    const latestFf = reverse.find((item) => item.browser === TBrowserShort.firefox);
-
-    return {
-        existing,
-        latestCh,
-        latestFf,
-    };
+    return existing;
 }
