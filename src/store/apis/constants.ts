@@ -17,9 +17,9 @@ const API_URL = import.meta.env.PROD ? ROOT_WEB_URL : ROOT_TEST_URL;
 
 export const regexMarkdownPublicVersions = /#### version ([.\d]+) <span class="date">[.\d]+<\/span>.?public/gi; // to build ['3.4.419', '3.0.386', '3.0.378']
 export const regexFnameVerDate           = /dppm-(\d{1,3}\.\d{1,4}\.\d{1,5})_on_(\d\d\d\d\.\d\d\.\d\d)/i; // version and date
-export const regexFnameVerDateRelBrouser = /dppm-(\d{1,3}\.\d{1,4}\.\d{1,5})_on_(\d\d\d\d\.\d\d\.\d\d)-(r)-(chrome|firefox|edge)/i; // version and date release browser
+export const regexFnameVerDateRelBrouser = /dppm-(\d{1,3}\.\d{1,4}\.\d{1,5})_on_(\d\d\d\d\.\d\d\.\d\d)-(r|m)-(chrome|firefox|edge)/i; // version and date release browser
 
-
+// API generated locations
 
 export function getCurrentConfigUrl() {
     return `${API_URL}config.json`;

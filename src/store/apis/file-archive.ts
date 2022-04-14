@@ -1,11 +1,16 @@
 import { FormatCurrentCfg, TBrowserShort, TBrowserShortFromFname } from "./api-formats-g01";
 import { getFtpExtensionsUrl, regexFnameVerDateRelBrouser } from "./constants";
 
+export enum ReleaseType {
+    release = 'r',  // pucked version ready for release
+    debug = 'm',    // unpucked password protected version not for release
+}
+
 export type ArchiveExtensionMeta = { // Extension info from filename
     fname: string;
     version: string;
     updated: string;
-    release: boolean;
+    release: ReleaseType;
     browser: TBrowserShort | undefined;
 };
 
@@ -16,7 +21,7 @@ function metaFromFilename(fname: string): ArchiveExtensionMeta {
         fname,
         version: match ? match[1] : '',
         updated: match ? match[2] : '',
-        release: match ? match[3] === 'r' : false,
+        release: match ? match[3] === 'r' ? ReleaseType.release : ReleaseType.debug : ReleaseType.debug,
         browser: match ? TBrowserShortFromFname(match[4] as FormatCurrentCfg.TBrowserFname) : undefined,
     };
     return meta;
@@ -66,7 +71,7 @@ export async function getExistingOnServer(): Promise<ExistingOnServer> {
         fname: '../../maxz/traytools.zip.txt',
         version: '2.0.7234',
         updated: '2017.10.20', // It was 2019.10.20 but moved in time to have it as a separate group.
-        release: false,
+        release: ReleaseType.debug,
         browser: TBrowserShort.dev,
     });
 
