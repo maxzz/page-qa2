@@ -93,6 +93,8 @@ const runFetchArchiveAtom = atom(
             try {
                 const data: ExistingOnServer = await getExistingOnServer();
                 set(extArchiveStateAtom, { loading: false, error: null, data: data.existing });
+                set(latestCh, data.latestCh);
+                set(latestFf, data.latestFf);
             } catch (error) {
                 set(extArchiveStateAtom, { loading: false, error, data: null });
                 toastError((error as Error).message);
@@ -157,6 +159,9 @@ runFetchReleaseNotesAtom.onMount = (runFetch) => runFetch();
 export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data || '');
 
 //#endregion ServerReleaseNotes
+
+export const latestCh = atom<ArchiveExtensionMeta | undefined>(undefined);
+export const latestFf = atom<ArchiveExtensionMeta | undefined>(undefined);
 
 export const dataLoadAtom = atom(
     (get) => { // Load files in that order to correlate data between them
