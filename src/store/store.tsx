@@ -113,11 +113,7 @@ runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 export const byYearsAtom = atom(
     (get) => {
         const extArchiveState = get(extArchiveStateAtom);
-
         const byYears = archiveByYears(extArchiveState.data).reverse();
-
-        //console.log(byYears);
-
         return byYears;
     }
 );
@@ -199,8 +195,11 @@ const correlateAtom = atom(
         }
 
         const published = get(publishedAtom);
-        if (published) {
-            console.log('published', published);
+        if (published && archive.data) {
+            //console.log('archive', archive.data);
+
+            const obj = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
+            console.log('published', obj);
         }
 
         const latestCh = get(latestChAtom);
@@ -212,7 +211,7 @@ const correlateAtom = atom(
         if (latestFf) {
             console.log('latestFf', latestFf);
         }
-        
+
         console.log('ready to rock');
     }
 );

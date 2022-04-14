@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
 import { byYearsAtom } from '@/store/store';
-import { Meta } from '@/store/apis/file-archive-parse';
+import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
+import { Meta, OneYearExts } from '@/store/apis/file-archive-parse';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import iconClasses from './browser-icons.module.scss';
-import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
 
 function getClass(item: Meta) {
     const types = {
@@ -20,7 +20,7 @@ function getTooltip(item: Meta) {
 }
 
 export function Section3_Archive() {
-    const byYears = useAtomValue(byYearsAtom);
+    const byYears: OneYearExts[] = useAtomValue(byYearsAtom);
     return (
         <div className="py-2">
             <p className="text-sm">
