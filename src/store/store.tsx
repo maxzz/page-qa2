@@ -95,12 +95,12 @@ const runFetchArchiveAtom = atom(
             try {
                 const data: ExistingOnServer = await getExistingOnServer();
                 set(extArchiveStateAtom, { loading: false, error: null, data: data.existing });
-                set(latestCh, data.latestCh);
-                set(latestFf, data.latestFf);
+                set(latestChAtom, data.latestCh);
+                set(latestFfAtom, data.latestFf);
             } catch (error) {
                 set(extArchiveStateAtom, { loading: false, error, data: null });
-                set(latestCh, undefined);
-                set(latestFf, undefined);
+                set(latestChAtom, undefined);
+                set(latestFfAtom, undefined);
                 toastError((error as Error).message);
             }
             set(correlateAtom);
@@ -171,8 +171,8 @@ export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data ||
 
 export const publishedAtom = atom<string[] | undefined>(undefined); // ['3.4.419', '3.0.386', '3.0.378']
 
-export const latestCh = atom<ArchiveExtensionMeta | undefined>(undefined);
-export const latestFf = atom<ArchiveExtensionMeta | undefined>(undefined);
+export const latestChAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
+export const latestFfAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
 
 export const dataLoadAtom = atom(
     (get) => {
@@ -198,6 +198,21 @@ const correlateAtom = atom(
             return;
         }
 
+        const published = get(publishedAtom);
+        if (published) {
+            console.log('published', published);
+        }
+
+        const latestCh = get(latestChAtom);
+        if (latestCh) {
+            console.log('latestCh', latestCh);
+        }
+
+        const latestFf = get(latestFfAtom);
+        if (latestFf) {
+            console.log('latestFf', latestFf);
+        }
+        
         console.log('ready to rock');
     }
 );
