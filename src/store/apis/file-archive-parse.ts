@@ -1,26 +1,28 @@
 import { ArchiveExtensionMeta } from "./file-archive";
 
 export type Meta = {
-    yearChanged: boolean;
-    year: number;
     date: string;
+    year: number;
+    yearChanged: boolean;
 } & ArchiveExtensionMeta;
 
 export function addDates(archive: ArchiveExtensionMeta[] | null): Meta[] {
-    let prevYear = 0;
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return (archive || []).map((item) => {
+    let prevYear = 0;
+    
+    function transformItem(item: ArchiveExtensionMeta) {
         const dt = new Date(item.updated.replace(/\./g, '-') + 'T00:00:00');
         const year = dt.getFullYear();
-        let yearChanged = year !== prevYear;
         prevYear = year;
         return {
             ...item,
-            yearChanged,
-            year,
             date: dt.toLocaleDateString('en-US', options),
+            year,
+            yearChanged: year !== prevYear,
         } as Meta;
-    });
+    }
+
+    return (archive || []).map(transformItem);
 }
 
 function splitByYears(archive: Meta[]): Record<string, Meta[]> {
@@ -39,7 +41,7 @@ export type OneYearExts = {
     items: Meta[];
 };
 
-export function archiveByYears(extArchiveState: ArchiveExtensionMeta[] | null): OneYearExts[] {
-    const byYears = splitByYears(addDates(extArchiveState));
+export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null): OneYearExts[] {
+    const byYears = splitByYears(addDates(archiveExtensions));
     return Object.entries(byYears).map(([year, items]) => ({year, items})); // can now sort if needed
 }

@@ -196,7 +196,14 @@ const correlateAtom = atom(
 
         const publicVersions = get(publicVersionsAtom);
         if (publicVersions && archive.data) {
-            const archiveMap = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
+            //const archiveMap = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
+            const archiveMap = archive.data.reduce<Record<string, ArchiveExtensionMeta[]>>((acc, curr) => {
+                if (!acc[curr.version]) {
+                    acc[curr.version] = [];
+                }
+                acc[curr.version].push(curr);
+                return acc;
+            }, {});
 
             console.log('published', archiveMap);
         }
