@@ -144,8 +144,14 @@ const runFetchReleaseNotesAtom = atom(
         async function fetchData() {
             set(releaseNotesStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
-                const data = marked(await fetchReleaseNotes());
-                set(releaseNotesStateAtom, { loading: false, error: null, data });
+                const data = await fetchReleaseNotes();
+                
+                //const published = data.match(/#### version ([.\d]+) <span class="date">[.\d]+<\/span>.?public/gi);
+                const published = [...data.matchAll(/#### version ([.\d]+) <span class="date">[.\d]+<\/span>.?public/gi)];
+                console.log(published);
+
+                const markdown = marked(data);
+                set(releaseNotesStateAtom, { loading: false, error: null, data: markdown });
             } catch (error) {
                 set(releaseNotesStateAtom, { loading: false, error, data: null });
                 toastError((error as Error).message);
