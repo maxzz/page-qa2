@@ -113,7 +113,9 @@ runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 export const byYearsAtom = atom(
     (get) => {
         const extArchiveState = get(archiveStateAtom);
-        const byYears = archiveByYears(extArchiveState.data).reverse();
+        const byYears = archiveByYears(extArchiveState.data);
+        console.log('years', byYears);
+
         return byYears;
     }
 );

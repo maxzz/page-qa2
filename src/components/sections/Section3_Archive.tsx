@@ -20,7 +20,8 @@ function getTooltip(item: Meta) {
 }
 
 export function Section3_Archive() {
-    const byYears: OneYearExts[] = useAtomValue(byYearsAtom);
+    const byYears: OneYearExts[] = [...useAtomValue(byYearsAtom)].reverse();
+    //console.log('Section3_Archive', byYears); // TODO: check re-renders number
     return (
         <div className="py-2">
             <p className="text-sm">
