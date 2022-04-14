@@ -7,6 +7,7 @@ import { fetchReleaseNotes } from './apis/file-release-notes';
 import { ArchiveExtensionMeta, ExistingOnServer, getExistingOnServer } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
 import { archiveByYears } from './apis/file-archive-parse';
+import { regexMarkdownPublicVersions } from './apis/constants';
 
 //#region LocalStorage
 
@@ -145,15 +146,12 @@ const runFetchReleaseNotesAtom = atom(
             set(releaseNotesStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const data = await fetchReleaseNotes();
-                
-                //const published = data.match(/#### version ([.\d]+) <span class="date">[.\d]+<\/span>.?public/gi);
-                const published = [...data.matchAll(/#### version ([.\d]+) <span class="date">[.\d]+<\/span>.?public/gi)];
-                console.log(published);
-
                 const markdown = marked(data);
                 set(releaseNotesStateAtom, { loading: false, error: null, data: markdown });
+                set(publishedAtom, [...data.matchAll(regexMarkdownPublicVersions)].map((match) => match[1]));
             } catch (error) {
                 set(releaseNotesStateAtom, { loading: false, error, data: null });
+                set(publishedAtom, undefined);
                 toastError((error as Error).message);
             }
         };
@@ -165,6 +163,8 @@ runFetchReleaseNotesAtom.onMount = (runFetch) => runFetch();
 export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data || '');
 
 //#endregion ServerReleaseNotes
+
+export const publishedAtom = atom<string[] | undefined>(undefined);
 
 export const latestCh = atom<ArchiveExtensionMeta | undefined>(undefined);
 export const latestFf = atom<ArchiveExtensionMeta | undefined>(undefined);
