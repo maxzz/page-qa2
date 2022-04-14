@@ -61,7 +61,7 @@ namespace Storage {
 
 export const extInfosStateAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
 
-export const runFetchConfigAtom = atom(
+const runFetchConfigAtom = atom(
     (get) => get(extInfosStateAtom),
     (_get, set) => {
         async function fetchData() {
@@ -85,7 +85,7 @@ runFetchConfigAtom.onMount = (runFetch) => runFetch();
 
 const extArchiveStateAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
 
-export const runFetchArchiveAtom = atom(
+const runFetchArchiveAtom = atom(
     (get) => get(extArchiveStateAtom),
     (_get, set) => {
         async function fetchData() {
@@ -136,7 +136,7 @@ export const releaseNotesStateAtom = atom<LoadingDataState<string>>(loadingDataS
 // };
 // marked.use({ renderer });
 
-export const runFetchReleaseNotesAtom = atom(
+const runFetchReleaseNotesAtom = atom(
     (get) => get(releaseNotesStateAtom),
     (_get, set) => {
         async function fetchData() {
