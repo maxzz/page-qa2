@@ -35,7 +35,7 @@ export namespace FormatCurrentCfg {
         available: string[]; // [ "en", "de", "es", "fr", "it", "ja", "pt-BR" ]
     };
 
-    export type CurrentConfigFile = {
+    export type FromFile = {
         browsers: ExtensionsPerBrowser;
         brand: TBrand; // 'dp' | 'hp' | 'de'
         languages: Languages;

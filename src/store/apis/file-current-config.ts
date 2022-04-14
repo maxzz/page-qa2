@@ -4,7 +4,7 @@ import { getCurrentConfigUrl, regexFnameVerDate } from './constants';
 export interface InAppExtnInfo { // Extension info
     url: string;                // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
     brand?: TBrand;             // "dp"
-    browser?: TBrowserShort;         // "c"
+    browser?: TBrowserShort;    // "c"
     qa?: boolean;               // true
     version: string;            // "3.4.430"
     updated: string;            // "2022.03.04"
@@ -60,7 +60,7 @@ export interface CurrentExtensions { // Extensions on Ftp server
     summary: InAppExtnInfo[];
 }
 
-function parseCurrentConfig(config: FormatCurrentCfg.CurrentConfigFile): CurrentExtensions {
+function parseCurrentConfig(config: FormatCurrentCfg.FromFile): CurrentExtensions {
     const extInfoFfQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowserShort.firefox, true);
     const extInfoFfPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowserShort.firefox, false); // public
     const extInfoChQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowserShort.chrome, true);
