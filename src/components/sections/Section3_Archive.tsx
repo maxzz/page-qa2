@@ -5,6 +5,7 @@ import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
 import { Meta, OneYearExts } from '@/store/apis/file-archive-parse';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import iconClasses from './browser-icons.module.scss';
+import { ReleaseType } from '@/store/apis/file-archive';
 
 function getClass(item: Meta) {
     const types = {
@@ -20,19 +21,22 @@ function getTooltip(item: Meta) {
 }
 
 function VersionGroup({ group }: { group: Meta[]; }) {
-    console.log('group', group);
-
     const item = group[0];
     if (!item) {
         return null;
     }
-    const icons = group.map((item) => (getClass(item)));
+    const iconClasses = group.map((item) => ({ cls: getClass(item), release: item.release === ReleaseType.release }));
     return (
         <div className="">
-            <a className="leading-5 flex items-center justify-between" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
-                {/* <span className={`w-4 h-4 mr-1 ${getClass(item)} saturate-150`}></span> */}
-                <div className="flex">
-                    {icons.map((icon, idx) => <span className={`w-4 h-4 mr-1 ${icon} saturate-150`} key={idx}></span>)}
+            <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
+                <div className="w-11 flex">
+                    {iconClasses.map(({cls, release}, idx) =>
+                        <div
+                            className={`w-4 h-4 -mr-2 ${cls} ${release ? 'saturate-150' : 'saturate-0'}`}
+                            style={{ zIndex: `${4 - idx}` }}
+                            key={idx}
+                        />
+                    )}
                 </div>
                 <span className="hover:bg-slate-400/40">{item.version}</span>
             </a>
