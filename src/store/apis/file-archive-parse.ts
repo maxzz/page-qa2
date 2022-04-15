@@ -32,7 +32,7 @@ type YearExtsMap = Record<string, Meta[]>;
 
 export type OneYearExts = {
     year: string;
-    items: Meta[];
+    items: YearExtsMap;
 };
 
 function splitToVersionsMap(yearItems: Meta[]): YearExtsMap {
@@ -50,9 +50,6 @@ export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null)
     const withMeta: Meta[] = (archiveExtensions || []).map(transformToMeta);
     const byYearsMap = splitToByYearsMap(withMeta);
     const byYearsArr = Object.entries(byYearsMap).map(([year, items]) => ({ year, items })); // can now sort if needed
-
-    const grouped = byYearsArr.map(({ year, items }) => ({ year, items: splitToVersionsMap(items) }));
-    console.log('grouped', grouped);
-
-    return byYearsArr;
+    const grouped = byYearsArr.map<OneYearExts>(({ year, items }) => ({ year, items: splitToVersionsMap(items) }));
+    return grouped;
 }

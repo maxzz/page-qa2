@@ -19,6 +19,21 @@ function getTooltip(item: Meta) {
     return `${TBrowserName(item.browser)} extension released on ${item.date}`;
 }
 
+function VersionGroup({group}: {group: Meta[]}) {
+    const item = group[0];
+    if (!item) {
+        return null;
+    }
+    return (
+        <div className="">
+            <a className="leading-5 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
+                <span className={`w-4 h-4 mr-1 ${getClass(item)} saturate-150`}></span>
+                <span className="hover:bg-red-500">{item.version}</span>
+            </a>
+        </div>
+    );
+}
+
 export function Section3_Archive() {
     const byYears: OneYearExts[] = [...useAtomValue(byYearsAtom)].reverse();
     return (
@@ -28,15 +43,12 @@ export function Section3_Archive() {
             </p>
 
             <div className="mt-1 text-xs cursor-default">
-                {byYears.map(({year, items}) => (
+                {byYears.map(({ year, items }) => (
                     <div key={year}>
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
-                            {items.map((item, idx) => (
-                                <a className="leading-5 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)} key={idx}>
-                                    <span className={`w-4 h-4 mr-1 ${getClass(item)} saturate-150`}></span>
-                                    <span>{item.version}</span>
-                                </a>
+                            {Object.entries(items).map(([version, items], idx) => (
+                                <VersionGroup group={items} key={`${version || idx}`} />
                             ))}
                         </div>
                     </div>
