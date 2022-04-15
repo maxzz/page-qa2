@@ -19,16 +19,22 @@ function getTooltip(item: Meta) {
     return `${TBrowserName(item.browser)} extension released on ${item.date}`;
 }
 
-function VersionGroup({group}: {group: Meta[]}) {
+function VersionGroup({ group }: { group: Meta[]; }) {
+    console.log('group', group);
+
     const item = group[0];
     if (!item) {
         return null;
     }
+    const icons = group.map((item) => (getClass(item)));
     return (
         <div className="">
-            <a className="leading-5 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
-                <span className={`w-4 h-4 mr-1 ${getClass(item)} saturate-150`}></span>
-                <span className="hover:bg-red-500">{item.version}</span>
+            <a className="leading-5 flex items-center justify-between" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
+                {/* <span className={`w-4 h-4 mr-1 ${getClass(item)} saturate-150`}></span> */}
+                <div className="flex">
+                    {icons.map((icon, idx) => <span className={`w-4 h-4 mr-1 ${icon} saturate-150`} key={idx}></span>)}
+                </div>
+                <span className="hover:bg-slate-400/40">{item.version}</span>
             </a>
         </div>
     );
