@@ -28,14 +28,31 @@ function splitToByYearsMap(archive: Meta[]): Record<string, Meta[]> {
     return res;
 }
 
+type YearExtsMap = Record<string, Meta[]>;
+
 export type OneYearExts = {
     year: string;
     items: Meta[];
 };
 
+function splitToVersionsMap(yearItems: Meta[]): YearExtsMap {
+    const rv: YearExtsMap = {};
+    yearItems.forEach((item) => {
+        if (!rv[item.version]) {
+            rv[item.version] = [];
+        }
+        rv[item.version].push(item);
+    });
+    return rv;
+}
+
 export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null): OneYearExts[] {
     const withMeta: Meta[] = (archiveExtensions || []).map(transformToMeta);
     const byYearsMap = splitToByYearsMap(withMeta);
-    const byYearsArr = Object.entries(byYearsMap).map(([year, items]) => ({year, items})); // can now sort if needed
+    const byYearsArr = Object.entries(byYearsMap).map(([year, items]) => ({ year, items })); // can now sort if needed
+
+    const grouped = byYearsArr.map(({ year, items }) => ({ year, items: splitToVersionsMap(items) }));
+    console.log('grouped', grouped);
+
     return byYearsArr;
 }
