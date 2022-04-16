@@ -28,9 +28,12 @@ function getItemIdx(item: Meta) {
     return types[item.browser as keyof typeof types] || 5;
 }
 
+function sortGroup(group: Meta[]): Meta[] {
+    return group.sort((a, b) => getItemIdx(a) - getItemIdx(b));
+}
+
 function GroupIcons({ group }: { group: Meta[]; }) {
-    const iconClasses = [...group]
-        .sort((a, b) => getItemIdx(a) - getItemIdx(b))
+    const iconClasses = sortGroup([...group])
         .map((item) => {
             const release = item.release === ReleaseType.release;
             const devtools = item.browser === TBrowserShort.dev;
