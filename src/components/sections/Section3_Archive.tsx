@@ -77,14 +77,17 @@ function VersionItems({ items }: { items: Meta[]; }) {
     }, {} as OrderedGroup);
 
     return (
-        <UITooltip trigger={
-            <div>
-                <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
-                    <GroupIcons orderedGroup={orderedGroup} />
-                    <span className="hover:bg-slate-400/40">{item.version}</span>
-                </a>
-            </div>
-        }>
+        <UITooltip
+            trigger={
+                <div>
+                    <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
+                        <GroupIcons orderedGroup={orderedGroup} />
+                        <span className="hover:bg-slate-400/40">{item.version}</span>
+                    </a>
+                </div>
+            }
+            arrow={true}
+        >
             tooltip
         </UITooltip>
     );
