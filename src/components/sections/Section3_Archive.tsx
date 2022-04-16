@@ -7,6 +7,7 @@ import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import iconClasses from './browser-icons.module.scss';
 import { ReleaseType } from '@/store/apis/file-archive';
 import { classNames } from '@/utils/classnames';
+import { UITooltip } from '../UI/UITooltip';
 
 function getClass(item?: Meta) {
     const types = {
@@ -76,12 +77,16 @@ function VersionItems({ items }: { items: Meta[]; }) {
     }, {} as OrderedGroup);
 
     return (
-        <div className="">
-            <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
-                <GroupIcons orderedGroup={orderedGroup} />
-                <span className="hover:bg-slate-400/40">{item.version}</span>
-            </a>
-        </div>
+        <UITooltip trigger={
+            <div>
+                <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
+                    <GroupIcons orderedGroup={orderedGroup} />
+                    <span className="hover:bg-slate-400/40">{item.version}</span>
+                </a>
+            </div>
+        }>
+            tooltip
+        </UITooltip>
     );
 }
 
