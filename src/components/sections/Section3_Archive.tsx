@@ -6,14 +6,15 @@ import { Meta, OneYearExts } from '@/store/apis/file-archive-parse';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import iconClasses from './browser-icons.module.scss';
 import { ReleaseType } from '@/store/apis/file-archive';
+import { classNames } from '@/utils/classnames';
 
-function getClass(item: Meta) {
+function getClass(item?: Meta) {
     const types = {
         [TBrowserShort.chrome]: 'iconCh',
         [TBrowserShort.firefox]: 'iconFf',
         [TBrowserShort.dev]: 'iconTt',
     };
-    return iconClasses[types[item.browser as keyof typeof types] || 'iconMs'];
+    return iconClasses[types[item?.browser as keyof typeof types || TBrowserShort.dev] || 'iconMs'];
 }
 
 function getTooltip(item: Meta) {
@@ -32,17 +33,17 @@ function sortGroup(group: Meta[]): Meta[] {
     return group.sort((a, b) => getItemIdx(a) - getItemIdx(b));
 }
 
-type GroupItem = {
-    main?: Meta;
-    debug?: Meta;
-};
-
-type OrderedGroup = {
-    [key in TBrowserShort]?: GroupItem;
-};
-
 function GroupIcons({ group }: { group: Meta[]; }) {
     const orderedGroup = sortGroup([...group]);
+
+    type GroupItem = {
+        main?: Meta;
+        debug?: Meta;
+    };
+
+    type OrderedGroup = {
+        [key in TBrowserShort]?: GroupItem;
+    };
 
     const grItems = orderedGroup.reduce((acc, curr) => {
         const item = acc[curr.browser] || (acc[curr.browser] = {});
@@ -67,13 +68,16 @@ function GroupIcons({ group }: { group: Meta[]; }) {
             };
         });
     return (
-        <div className="w-11 flex">
+        <div className="w-10 flex">
             {Object.entries(grItems).map(([browser, groupItem], idx) =>
                 <Fragment key={idx}>
                     {(groupItem.main || groupItem.debug) &&
                         <div
-                            className={`w-4 h-4 rounded-full ${getClass(groupItem.main! || groupItem.debug)}`}
-                            style={{ zIndex: `${4 - idx}`, }}
+                            className={classNames(
+                                `w-4 h-4 rounded-full`,
+                                getClass(groupItem.main || groupItem.debug),
+                                groupItem.main && groupItem.debug ? 'outline outline-2 outline-offset-1 outline-green-500/30' : '',
+                            )}
                             key={idx}
                         />
                     }
