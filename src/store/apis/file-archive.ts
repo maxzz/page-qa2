@@ -11,18 +11,19 @@ export type ArchiveExtensionMeta = { // Extension info from filename
     version: string;
     updated: string;
     release: ReleaseType;
-    browser: TBrowserShort | undefined;
+    browser: TBrowserShort;
 };
 
 function metaFromFilename(fname: string): ArchiveExtensionMeta {
     // 0. Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
     const match = fname.match(regexFnameVerDateRelBrouser);
+    const browser = match ? TBrowserShortFromFname(match[4] as FormatCurrentCfg.TBrowserFname) : undefined;
     const meta: ArchiveExtensionMeta = {
         fname,
         version: match ? match[1] : '',
         updated: match ? match[2] : '',
         release: match ? match[3] === 'r' ? ReleaseType.release : ReleaseType.debug : ReleaseType.debug,
-        browser: match ? TBrowserShortFromFname(match[4] as FormatCurrentCfg.TBrowserFname) : undefined,
+        browser: browser || TBrowserShort.chrome,
     };
     return meta;
 }

@@ -32,8 +32,26 @@ function sortGroup(group: Meta[]): Meta[] {
     return group.sort((a, b) => getItemIdx(a) - getItemIdx(b));
 }
 
+type GroupItem = {
+    main?: Meta;
+    debug?: Meta;
+};
+
+type OrderedGroup = {
+    [key in TBrowserShort]?: GroupItem;
+};
+
 function GroupIcons({ group }: { group: Meta[]; }) {
-    const iconClasses = sortGroup([...group])
+    const orderedGroup = sortGroup([...group]);
+
+    const grItems = orderedGroup.reduce((acc, curr) => {
+        const item = acc[curr.browser] || (acc[curr.browser] = {});
+        item[curr.release === ReleaseType.release ? 'main' : 'debug'] = curr;
+        return acc;
+    }, {} as OrderedGroup);
+    console.log('grItems', grItems);
+
+    const iconClasses = orderedGroup
         .map((item) => {
             const release = item.release === ReleaseType.release;
             const devtools = item.browser === TBrowserShort.dev;
