@@ -33,34 +33,26 @@ function sortGroup(group: Meta[]): Meta[] {
     return group.sort((a, b) => getItemIdx(a) - getItemIdx(b));
 }
 
-function GroupIcons({ group }: { group: Meta[]; }) {
-    const orderedGroup = sortGroup([...group]);
+type GroupItem = {
+    main?: Meta;
+    debug?: Meta;
+};
 
-    type GroupItem = {
-        main?: Meta;
-        debug?: Meta;
-    };
+type OrderedGroup = {
+    [key in TBrowserShort]?: GroupItem;
+};
 
-    type OrderedGroup = {
-        [key in TBrowserShort]?: GroupItem;
-    };
-
-    const grItems = orderedGroup.reduce((acc, curr) => {
-        const item = acc[curr.browser] || (acc[curr.browser] = {});
-        item[curr.release === ReleaseType.release ? 'main' : 'debug'] = curr;
-        return acc;
-    }, {} as OrderedGroup);
-
+function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
     return (
         <div className="w-10 flex">
-            {Object.entries(grItems).map(([browser, groupItem], idx) =>
+            {Object.entries(orderedGroup).map(([browser, groupItem], idx) =>
                 <Fragment key={idx}>
                     {(groupItem.main || groupItem.debug) &&
                         <div
                             className={classNames(
-                                `w-4 h-4 mr-px rounded-full`,
+                                `w-4 h-4 m-px rounded-full`,
                                 getClass(groupItem.main || groupItem.debug),
-                                groupItem.main && groupItem.debug ? 'outline outline-2 outline-offset-1 outline-green-500/30' : '',
+                                groupItem.main && groupItem.debug ? 'outline outline-2 outline-offset outline-green-500/30' : '',
                             )}
                             key={idx}
                         />
@@ -76,10 +68,17 @@ function VersionItems({ items }: { items: Meta[]; }) {
     if (!item) {
         return null;
     }
+
+    const orderedGroup = sortGroup([...items]).reduce((acc, curr) => {
+        const item = acc[curr.browser] || (acc[curr.browser] = {});
+        item[curr.release === ReleaseType.release ? 'main' : 'debug'] = curr;
+        return acc;
+    }, {} as OrderedGroup);
+
     return (
         <div className="">
             <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
-                <GroupIcons group={items} />
+                <GroupIcons orderedGroup={orderedGroup} />
                 <span className="hover:bg-slate-400/40">{item.version}</span>
             </a>
         </div>
@@ -94,7 +93,7 @@ export function Section3_Archive() {
                 List of previously released extensions that are still available on the HID server. You can download any version for testing purposes or for any other reason.
             </p>
 
-            <div className="mt-1 text-xs cursor-default">
+            <div className="mt-1 px-0.5 text-xs cursor-default">
                 {byYears.map(({ year, items }) => (
                     <div key={year}>
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
