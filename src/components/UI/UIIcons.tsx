@@ -59,6 +59,6 @@ export function IconFfLogo(props: HTMLAttributes<HTMLImageElement>) {
 
 export function IconMsLogo(props: HTMLAttributes<HTMLImageElement>) {
     return (
-        <img src={ICO_MS} style={{filter: 'drop-shadow(1px 1px 1px #0002)'}} alt="Firefox logo" {...props}/>
+        <img src={ICO_MS} style={{filter: 'drop-shadow(1px 1px 1px #0002)'}} alt="Microsoft Edge logo" {...props}/>
     );
 }
