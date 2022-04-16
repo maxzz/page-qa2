@@ -6,7 +6,6 @@ import { Meta, OneYearExts } from '@/store/apis/file-archive-parse';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import iconClasses from './browser-icons.module.scss';
 import { ReleaseType } from '@/store/apis/file-archive';
-import { release } from 'os';
 
 function getClass(item: Meta) {
     const types = {
@@ -29,12 +28,7 @@ function getItemIdx(item: Meta) {
     return types[item.browser as keyof typeof types] || 5;
 }
 
-function VersionGroup({ group }: { group: Meta[]; }) {
-    const item = group[0];
-    if (!item) {
-        return null;
-    }
-
+function GroupIcons({ group }: { group: Meta[]; }) {
     const iconClasses = [...group]
         .sort((a, b) => getItemIdx(a) - getItemIdx(b))
         .map((item) => {
@@ -47,25 +41,34 @@ function VersionGroup({ group }: { group: Meta[]; }) {
                 styles: {
                     // filter: `saturate(${release ? firefox ? '0.7' : '1.5' : devtools ? '1.5' : '0'})${hue}`,
                     filter: `saturate(${release ? '1.5' : devtools ? '1.5' : '0'})${hue}`,
-                    ...(release && !devtools && {borderWidth: '2px', borderColor: '#7777' })
+                    ...(release && !devtools && { borderWidth: '2px', borderColor: '#7777' })
                 },
             };
         });
+    return (
+        <div className="w-11 flex">
+            {iconClasses.map(({ cls, styles }, idx) =>
+                <div
+                    // className={`w-4 h-4 -mr-2 ${cls} ${release ? 'saturate-150' : 'saturate-0'}`}
+                    // className={`w-4 h-4 border-b-2 border-red-500 ${cls}`}
+                    className={`w-4 h-4 rounded-full ${cls}`}
+                    style={{ zIndex: `${4 - idx}`, ...styles }}
+                    key={idx}
+                />
+            )}
+        </div>
+    );
+}
 
+function VersionGroup({ group }: { group: Meta[]; }) {
+    const item = group[0];
+    if (!item) {
+        return null;
+    }
     return (
         <div className="">
             <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
-                <div className="w-11 flex">
-                    {iconClasses.map(({ cls, styles }, idx) =>
-                        <div
-                            // className={`w-4 h-4 -mr-2 ${cls} ${release ? 'saturate-150' : 'saturate-0'}`}
-                            // className={`w-4 h-4 border-b-2 border-red-500 ${cls}`}
-                            className={`w-4 h-4 rounded-full ${cls}`}
-                            style={{ zIndex: `${4 - idx}`, ...styles }}
-                            key={idx}
-                        />
-                    )}
-                </div>
+                <GroupIcons group={group} />
                 <span className="hover:bg-slate-400/40">{item.version}</span>
             </a>
         </div>
