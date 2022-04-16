@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useAtomValue } from 'jotai';
 import { byYearsAtom } from '@/store/store';
 import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
@@ -49,7 +49,7 @@ function GroupIcons({ group }: { group: Meta[]; }) {
         item[curr.release === ReleaseType.release ? 'main' : 'debug'] = curr;
         return acc;
     }, {} as OrderedGroup);
-    console.log('grItems', grItems);
+    //console.log('grItems', grItems);
 
     const iconClasses = orderedGroup
         .map((item) => {
@@ -68,7 +68,18 @@ function GroupIcons({ group }: { group: Meta[]; }) {
         });
     return (
         <div className="w-11 flex">
-            {iconClasses.map(({ cls, styles }, idx) =>
+            {Object.entries(grItems).map(([browser, groupItem], idx) =>
+                <Fragment key={idx}>
+                    {(groupItem.main || groupItem.debug) &&
+                        <div
+                            className={`w-4 h-4 rounded-full ${getClass(groupItem.main! || groupItem.debug)}`}
+                            style={{ zIndex: `${4 - idx}`, }}
+                            key={idx}
+                        />
+                    }
+                </Fragment>
+            )}
+            {/* {iconClasses.map(({ cls, styles }, idx) =>
                 <div
                     // className={`w-4 h-4 -mr-2 ${cls} ${release ? 'saturate-150' : 'saturate-0'}`}
                     // className={`w-4 h-4 border-b-2 border-red-500 ${cls}`}
@@ -76,7 +87,7 @@ function GroupIcons({ group }: { group: Meta[]; }) {
                     style={{ zIndex: `${4 - idx}`, ...styles }}
                     key={idx}
                 />
-            )}
+            )} */}
         </div>
     );
 }
