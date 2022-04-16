@@ -6,6 +6,7 @@ import { Meta, OneYearExts } from '@/store/apis/file-archive-parse';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import iconClasses from './browser-icons.module.scss';
 import { ReleaseType } from '@/store/apis/file-archive';
+import { release } from 'os';
 
 function getClass(item: Meta) {
     const types = {
@@ -20,20 +21,47 @@ function getTooltip(item: Meta) {
     return `${TBrowserName(item.browser)} extension released on ${item.date}`;
 }
 
+function getItemIdx(item: Meta) {
+    const types = {
+        [TBrowserShort.chrome]: item.release === ReleaseType.release ? 1 : 3,
+        [TBrowserShort.firefox]: item.release === ReleaseType.release ? 2 : 4,
+    };
+    return types[item.browser as keyof typeof types] || 5;
+}
+
 function VersionGroup({ group }: { group: Meta[]; }) {
     const item = group[0];
     if (!item) {
         return null;
     }
-    const iconClasses = group.map((item) => ({ cls: getClass(item), release: item.release === ReleaseType.release }));
+
+    const iconClasses = [...group]
+        .sort((a, b) => getItemIdx(a) - getItemIdx(b))
+        .map((item) => {
+            const release = item.release === ReleaseType.release;
+            const devtools = item.browser === TBrowserShort.dev;
+            const firefox = item.browser === TBrowserShort.firefox;
+            const hue = '';//firefox ? ' hue-rotate(270deg)' : '';
+            return {
+                cls: getClass(item),
+                styles: {
+                    // filter: `saturate(${release ? firefox ? '0.7' : '1.5' : devtools ? '1.5' : '0'})${hue}`,
+                    filter: `saturate(${release ? '1.5' : devtools ? '1.5' : '0'})${hue}`,
+                    ...(!release && {borderBottomWidth: '2px', borderColor: 'rgb(239 68 68 / 1)' })
+                },
+            };
+        });
+
     return (
         <div className="">
             <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
                 <div className="w-11 flex">
-                    {iconClasses.map(({cls, release}, idx) =>
+                    {iconClasses.map(({ cls, styles }, idx) =>
                         <div
-                            className={`w-4 h-4 -mr-2 ${cls} ${release ? 'saturate-150' : 'saturate-0'}`}
-                            style={{ zIndex: `${4 - idx}` }}
+                            // className={`w-4 h-4 -mr-2 ${cls} ${release ? 'saturate-150' : 'saturate-0'}`}
+                            // className={`w-4 h-4 border-b-2 border-red-500 ${cls}`}
+                            className={`w-4 h-4 ${cls}`}
+                            style={{ zIndex: `${4 - idx}`, ...styles }}
                             key={idx}
                         />
                     )}
