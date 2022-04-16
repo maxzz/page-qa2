@@ -50,23 +50,7 @@ function GroupIcons({ group }: { group: Meta[]; }) {
         item[curr.release === ReleaseType.release ? 'main' : 'debug'] = curr;
         return acc;
     }, {} as OrderedGroup);
-    //console.log('grItems', grItems);
 
-    const iconClasses = orderedGroup
-        .map((item) => {
-            const release = item.release === ReleaseType.release;
-            const devtools = item.browser === TBrowserShort.dev;
-            const firefox = item.browser === TBrowserShort.firefox;
-            const hue = '';//firefox ? ' hue-rotate(270deg)' : '';
-            return {
-                cls: getClass(item),
-                styles: {
-                    // filter: `saturate(${release ? firefox ? '0.7' : '1.5' : devtools ? '1.5' : '0'})${hue}`,
-                    filter: `saturate(${release ? '1.5' : devtools ? '1.5' : '0'})${hue}`,
-                    ...(release && !devtools && { borderWidth: '2px', borderColor: '#7777' })
-                },
-            };
-        });
     return (
         <div className="w-10 flex">
             {Object.entries(grItems).map(([browser, groupItem], idx) =>
@@ -74,7 +58,7 @@ function GroupIcons({ group }: { group: Meta[]; }) {
                     {(groupItem.main || groupItem.debug) &&
                         <div
                             className={classNames(
-                                `w-4 h-4 rounded-full`,
+                                `w-4 h-4 mr-px rounded-full`,
                                 getClass(groupItem.main || groupItem.debug),
                                 groupItem.main && groupItem.debug ? 'outline outline-2 outline-offset-1 outline-green-500/30' : '',
                             )}
@@ -83,28 +67,19 @@ function GroupIcons({ group }: { group: Meta[]; }) {
                     }
                 </Fragment>
             )}
-            {/* {iconClasses.map(({ cls, styles }, idx) =>
-                <div
-                    // className={`w-4 h-4 -mr-2 ${cls} ${release ? 'saturate-150' : 'saturate-0'}`}
-                    // className={`w-4 h-4 border-b-2 border-red-500 ${cls}`}
-                    className={`w-4 h-4 rounded-full ${cls}`}
-                    style={{ zIndex: `${4 - idx}`, ...styles }}
-                    key={idx}
-                />
-            )} */}
         </div>
     );
 }
 
-function VersionGroup({ group }: { group: Meta[]; }) {
-    const item = group[0];
+function VersionItems({ items }: { items: Meta[]; }) {
+    const item = items[0];
     if (!item) {
         return null;
     }
     return (
         <div className="">
             <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
-                <GroupIcons group={group} />
+                <GroupIcons group={items} />
                 <span className="hover:bg-slate-400/40">{item.version}</span>
             </a>
         </div>
@@ -125,7 +100,7 @@ export function Section3_Archive() {
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
                             {Object.entries(items).map(([version, items], idx) => (
-                                <VersionGroup group={items} key={`${version || idx}`} />
+                                <VersionItems items={items} key={`${version || idx}`} />
                             ))}
                         </div>
                     </div>
@@ -135,4 +110,4 @@ export function Section3_Archive() {
     );
 }
 
-//TODO: group versions by browser and add drop-down menu
+//TODO: group versions by browser (done) and add drop-down menu
