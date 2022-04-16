@@ -47,7 +47,7 @@ function VersionGroup({ group }: { group: Meta[]; }) {
                 styles: {
                     // filter: `saturate(${release ? firefox ? '0.7' : '1.5' : devtools ? '1.5' : '0'})${hue}`,
                     filter: `saturate(${release ? '1.5' : devtools ? '1.5' : '0'})${hue}`,
-                    ...(!release && {borderBottomWidth: '2px', borderColor: 'rgb(239 68 68 / 1)' })
+                    ...(release && !devtools && {borderWidth: '2px', borderColor: '#7777' })
                 },
             };
         });
@@ -60,7 +60,7 @@ function VersionGroup({ group }: { group: Meta[]; }) {
                         <div
                             // className={`w-4 h-4 -mr-2 ${cls} ${release ? 'saturate-150' : 'saturate-0'}`}
                             // className={`w-4 h-4 border-b-2 border-red-500 ${cls}`}
-                            className={`w-4 h-4 ${cls}`}
+                            className={`w-4 h-4 rounded-full ${cls}`}
                             style={{ zIndex: `${4 - idx}`, ...styles }}
                             key={idx}
                         />
