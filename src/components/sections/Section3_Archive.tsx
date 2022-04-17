@@ -89,6 +89,7 @@ function VersionItems({ items }: { items: Meta[]; }) {
             runInPortal={true}
             arrow={true}
             popperConfig={{ delayShow: 500 }}
+            containerClassNames={'p-0 text-xs'}
         >
             tooltip
         </UITooltip>
