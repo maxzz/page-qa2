@@ -9,10 +9,14 @@ function DataLoader() {
     return null;
 }
 
+function PopperRoot() {
+    return <div className="z-50" id="portal"></div>;
+}
+
 function App() {
     return (<>
         <UIToaster />
-        <div className="z-50" id="portal"></div>
+        <PopperRoot />
         <DataLoader />
         <div className="min-h-full overflow-hidden bg-slate-50">
             <Frontpage />
