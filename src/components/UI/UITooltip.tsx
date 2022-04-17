@@ -5,28 +5,23 @@ import 'react-popper-tooltip/dist/styles.css';
 
 type UITooltipOptions = {
     arrow?: boolean;
-    portal?: boolean;
-    popperOptions?: Config;
+    runInPortal?: boolean;
+    popperConfig?: Config;
 };
 
-type UITooltipProps = {
+type UITooltipProps = UITooltipOptions & {
     trigger: React.ReactNode;
     children?: React.ReactNode;
-} & UITooltipOptions;
+};
 
-export function UITooltip({ trigger, children, arrow = false, portal = true, popperOptions }: UITooltipProps) {
+export function UITooltip({ trigger, children, arrow = false, runInPortal = true, popperConfig }: UITooltipProps) {
     const {
         getArrowProps,
         getTooltipProps,
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip(
-        //{ defaultVisible: true }
-        {
-            ...popperOptions,
-        }
-    );
+    } = usePopperTooltip({ ...popperConfig, }); //{ defaultVisible: true }
     const poperBody = visible && (
         <div
             ref={setTooltipRef}
@@ -36,7 +31,9 @@ export function UITooltip({ trigger, children, arrow = false, portal = true, pop
             {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
         </div>
     );
-    const popper = visible && (portal ? ReactDOM.createPortal((<>{poperBody}</>), document.getElementById('portal')!) : <>{poperBody}</>);
+    const popper = visible && (
+        runInPortal ? ReactDOM.createPortal((poperBody), document.getElementById('portal')!) : { poperBody }
+    );
     return (
         <>
             <div ref={setTriggerRef}> {trigger} </div>
@@ -48,6 +45,6 @@ export function UITooltip({ trigger, children, arrow = false, portal = true, pop
 export function uitooltipSmall(): UITooltipOptions {
     return {
         arrow: true,
-        popperOptions: { delayShow: 750, placement: 'auto' }
+        popperConfig: { delayShow: 750, placement: 'auto' }
     };
 }

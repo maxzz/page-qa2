@@ -12,6 +12,7 @@ function Loader() {
 function App() {
     return (<>
         <UIToaster />
+        <div className="z-50" id="portal"></div>
         <Loader />
         <div className="min-h-full overflow-hidden bg-slate-50">
             <Frontpage />
