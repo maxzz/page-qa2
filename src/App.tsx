@@ -10,7 +10,11 @@ function DataLoader() {
 }
 
 function PopperRoot() {
-    return <div className="z-50" id="portal"></div>;
+    return (
+        <div className="absolute z-50">
+            <div id="portal"></div>
+        </div>
+    );
 }
 
 function App() {

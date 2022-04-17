@@ -1,3 +1,4 @@
+import { classNames } from '@/utils/classnames';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Config, usePopperTooltip } from 'react-popper-tooltip';
@@ -25,7 +26,7 @@ export function UITooltip({ trigger, children, arrow = false, runInPortal = true
     const poperBody = visible && (
         <div
             ref={setTooltipRef}
-            {...getTooltipProps({ className: 'tooltip-container' })} // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
+            {...getTooltipProps({ className: classNames('tooltip-container p-0 text-xs') })} // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
         >
             {children}
             {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}

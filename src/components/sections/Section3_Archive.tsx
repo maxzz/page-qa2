@@ -7,7 +7,7 @@ import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import iconClasses from './browser-icons.module.scss';
 import { ReleaseType } from '@/store/apis/file-archive';
 import { classNames } from '@/utils/classnames';
-import { UITooltip, uitooltipSmall } from '../UI/UITooltip';
+import { UITooltip } from '../UI/UITooltip';
 
 function getClass(item?: Meta) {
     const types = {
@@ -87,7 +87,8 @@ function VersionItems({ items }: { items: Meta[]; }) {
                 </div>
             }
             runInPortal={true}
-            {...uitooltipSmall()}
+            arrow={true}
+            popperConfig={{ delayShow: 500 }}
         >
             tooltip
         </UITooltip>
