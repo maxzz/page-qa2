@@ -202,7 +202,7 @@ const correlateAtom = atom(
                 return acc;
             }, {});
 
-            console.log('published', archiveMap);
+            // console.log('published', archiveMap);
         }
 
         if (archive.data) {
@@ -215,17 +215,17 @@ const correlateAtom = atom(
         }
 
 
-        const latestCh = get(latestChAtom);
-        if (latestCh) {
-            console.log('latestCh', latestCh);
-        }
+        // const latestCh = get(latestChAtom);
+        // if (latestCh) {
+        //     console.log('latestCh', latestCh);
+        // }
 
-        const latestFf = get(latestFfAtom);
-        if (latestFf) {
-            console.log('latestFf', latestFf);
-        }
+        // const latestFf = get(latestFfAtom);
+        // if (latestFf) {
+        //     console.log('latestFf', latestFf);
+        // }
 
-        console.log('ready to rock');
+        // console.log('ready to rock');
     }
 );
 
