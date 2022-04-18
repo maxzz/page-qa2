@@ -126,6 +126,8 @@ function VersionItems({ items }: { items: Meta[]; }) {
     );
 }
 
+const legendBrowsers = [TBrowserShort.chrome, TBrowserShort.chrome, TBrowserShort.firefox, TBrowserShort.firefox, TBrowserShort.dev];
+
 export function Section3_Archive() {
     const byYears: OneYearExts[] = [...useAtomValue(byYearsAtom)].reverse();
     return (
@@ -152,20 +154,21 @@ export function Section3_Archive() {
                 ))}
             </div>
 
-            <p className="mt-2 text-xs sm:text-sm">
+            <div className="mt-2 text-xs sm:text-sm">
                 <div className="mb-0 sm:mb-1">Legend:</div>
-                <div className="flex items-center space-x-2">
-                    <div
-                        className={classNames(
-                            `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
-                            getClass(TBrowserShort.chrome),
-                            'extension-small-icon-outline',
-                        )}
-                    >
+                {legendBrowsers.map((br, idx) => (
+                    <div className="ml-1 flex items-center space-x-2" key={idx}>
+                        <div
+                            className={classNames(
+                                `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
+                                getClass(br),
+                                (idx === 1 || idx === 3) ? 'extension-small-icon-outline' : '',
+                            )}
+                        />
+                        <div className="">{`${TBrowserName(br)} extension${(idx === 1 || idx === 3) ? ' with debug' : ''}`}</div>
                     </div>
-                    <div className="">{TBrowserName(TBrowserShort.chrome)}</div>
-                </div>
-            </p>
+                ))}
+            </div>
         </div>
     );
 }
