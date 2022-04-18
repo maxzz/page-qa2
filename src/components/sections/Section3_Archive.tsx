@@ -9,13 +9,13 @@ import { UITooltip } from '../UI/UITooltip';
 import { classNames } from '@/utils/classnames';
 import iconClasses from './browser-icons.module.scss';
 
-function getClass(item?: Meta) {
+function getClass(browser?: TBrowserShort | undefined) {
     const types = {
         [TBrowserShort.chrome]: 'iconCh',
         [TBrowserShort.firefox]: 'iconFf',
         [TBrowserShort.dev]: 'iconTt',
     };
-    return iconClasses[types[item?.browser as keyof typeof types || TBrowserShort.dev] || 'iconMs'];
+    return iconClasses[types[browser as keyof typeof types || TBrowserShort.dev] || 'iconMs'];
 }
 
 function getTooltip(item: Meta) {
@@ -52,7 +52,7 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
                         <div
                             className={classNames(
                                 `w-2 h-2 sm:w-4 sm:h-4 m-px rounded-full`,
-                                getClass(groupItem.main || groupItem.debug),
+                                getClass(groupItem.main?.browser || groupItem.debug?.browser),
                                 groupItem.main && groupItem.debug && 'extension-small-icon-outline',
                             )}
                             key={idx}
@@ -70,7 +70,7 @@ function VersionItem({ meta }: { meta?: Meta; }) {
     }
     return (
         <a className="h-5 flex items-center space-x-1" href={getArchiveExtensionUrl(meta.fname)}>
-            <div className={classNames(`w-4 h-4 m-px rounded-full`, getClass(meta),)} />
+            <div className={classNames(`w-4 h-4 m-px rounded-full`, getClass(meta?.browser),)} />
             <div className="text-xs text-url hover:underline cursor-pointer">
                 {`${TBrowserName(meta.browser)} version ${meta.version}${meta.release === ReleaseType.debug ? ' debug' : ''}`}
             </div>
@@ -127,7 +127,7 @@ export function Section3_Archive() {
     return (
         <div className="py-2 text-sm">
             <p className="">
-                List of previously released extensions that are still available on the HID server. 
+                List of previously released extensions that are still available on the HID server.
                 You can download any version for testing purposes or for any other reason.
                 Click an item to download a specific version. Debug versions are protected.
                 Contact Max Zakharzhevskiy at HID global for a password.
@@ -146,8 +146,8 @@ export function Section3_Archive() {
                 ))}
             </div>
 
-            <div className="mt-2 ">Legend:</div>
-            <p className="mt-2">
+            <div className="mt-2">Legend:</div>
+            <p className="">
             </p>
         </div>
     );

@@ -8,6 +8,6 @@
     }
 
     .extension-small-icon-outline {
-        @apply outline outline-2 outline-offset-1 outline-green-500/50 sm:outline-green-500/30;
+        @apply outline outline-1 sm:outline-2 outline-offset-1 outline-green-500 sm:outline-green-500/30;
     }
 }
