@@ -152,8 +152,19 @@ export function Section3_Archive() {
                 ))}
             </div>
 
-            <div className="mt-2">Legend:</div>
-            <p className="">
+            <p className="mt-2 text-xs sm:text-sm">
+                <div className="mb-0 sm:mb-1">Legend:</div>
+                <div className="flex items-center space-x-2">
+                    <div
+                        className={classNames(
+                            `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
+                            getClass(TBrowserShort.chrome),
+                            'extension-small-icon-outline',
+                        )}
+                    >
+                    </div>
+                    <div className="">{TBrowserName(TBrowserShort.chrome)}</div>
+                </div>
             </p>
         </div>
     );
