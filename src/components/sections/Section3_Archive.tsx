@@ -64,14 +64,19 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
     );
 }
 
-function VersionItem({ meta }: { meta: Meta; }) {
+function VersionItem({ meta }: { meta?: Meta; }) {
+    if (!meta) {
+        return null;
+    }
     return (
         <div className="flex items-center space-x-1">
             <div className={classNames(`w-4 h-4 m-px rounded-full`, getClass(meta),)} />
-            <div className="hover:bg-slate-400/40">{TBrowserName(meta.browser)} version {meta.version}</div>
+            <div className="hover:bg-slate-400/40">{`${TBrowserName(meta.browser)} version ${meta.version}${meta.release === ReleaseType.debug?' debug':''}`}</div>
         </div>
     );
 }
+
+// TODO: Click item to download a specific version. Debug versions are protected. contact maxz to get access.
 
 function VersionItems({ items }: { items: Meta[]; }) {
     const item = items[0];
@@ -100,23 +105,20 @@ function VersionItems({ items }: { items: Meta[]; }) {
             popperConfig={{ interactive: true, trigger: 'click', }}
         >
             <div className="min-w-[20rem] text-sm cursor-default">
-                <div className="">Released versions on {item.date}</div>
+                <div className="">Versions released on {item.date}</div>
 
                 {Object.entries(orderedGroup).map(([key, item], idx) => (
                     <Fragment key={idx}>
-                        {item.main && <VersionItem meta={item.main} />}
-
-                        {item.main && <div className="hover:bg-slate-400/40">{item.main.version}</div>}
-                        {item.debug && <div className="hover:bg-slate-400/40">{item.debug.version}</div>}
+                        <VersionItem meta={item.main} />
+                        <VersionItem meta={item.debug} />
                     </Fragment>
                 ))}
-                {getTooltip(item)}
+                {/* {getTooltip(item)}
 
                 <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)}>
                     <GroupIcons orderedGroup={orderedGroup} />
                     <span className="hover:bg-slate-400/40">{item.version}</span>
-                </a>
-
+                </a> */}
             </div>
         </UITooltip>
     );
