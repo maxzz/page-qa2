@@ -90,7 +90,7 @@ function VersionItems({ items }: { items: Meta[]; }) {
             arrow={true}
             popperConfig={{ delayShow: 500 }}
             classNamesContainer={`p-0 bg-red-400`}
-            classNamesArrow={`border border-red-900`}
+            classNamesArrow={`border border-blue-900`}
         >
             <div className="min-w-fit text-xs">
                 {getTooltip(item)}
