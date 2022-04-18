@@ -32,7 +32,7 @@ export function UITooltip({ trigger, children, arrow = false, runInPortal = true
             {...getTooltipProps({ className: classNames('tooltip-container', classNamesContainer) })} // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
         >
             {children}
-            {arrow && <div {...getArrowProps({ className: classNames('tooltip-arrow', classNamesArrow) })} />}
+            {arrow && <div {...getArrowProps({ className: classNames('tooltip-arrow', classNamesArrow), style: { '--tooltipBorder': 'green', '--tooltipBackground': 'red' } as React.CSSProperties} )} />}
         </div>
     );
 
