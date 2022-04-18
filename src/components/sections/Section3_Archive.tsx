@@ -89,8 +89,8 @@ function VersionItems({ items }: { items: Meta[]; }) {
             runInPortal={true}
             arrow={true}
             popperConfig={{ delayShow: 500 }}
-            classNamesContainer={`p-0 bg-red-400 border border-blue-900`}
-            classNamesArrow={`bg-red-400 border border-blue-900`}
+            classNamesContainer={`p-0 bg-[#555] border border-[red]`}
+            arrowStyle={{ '--tooltipBorder': 'red', '--tooltipBackground': '#555' } as React.CSSProperties}
         >
             <div className="min-w-fit text-xs">
                 {getTooltip(item)}
