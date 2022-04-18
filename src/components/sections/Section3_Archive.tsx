@@ -64,6 +64,15 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
     );
 }
 
+function VersionItem({ meta }: { meta: Meta; }) {
+    return (
+        <div className="flex items-center space-x-1">
+            <div className={classNames(`w-4 h-4 m-px rounded-full`, getClass(meta),)} />
+            <div className="hover:bg-slate-400/40">{TBrowserName(meta.browser)} version {meta.version}</div>
+        </div>
+    );
+}
+
 function VersionItems({ items }: { items: Meta[]; }) {
     const item = items[0];
     if (!item) {
@@ -90,7 +99,17 @@ function VersionItems({ items }: { items: Meta[]; }) {
             arrow={true}
             popperConfig={{ interactive: true, trigger: 'click', }}
         >
-            <div className="min-w-[20rem] text-sm">
+            <div className="min-w-[20rem] text-sm cursor-default">
+                <div className="">Released versions on {item.date}</div>
+
+                {Object.entries(orderedGroup).map(([key, item], idx) => (
+                    <Fragment key={idx}>
+                        {item.main && <VersionItem meta={item.main} />}
+
+                        {item.main && <div className="hover:bg-slate-400/40">{item.main.version}</div>}
+                        {item.debug && <div className="hover:bg-slate-400/40">{item.debug.version}</div>}
+                    </Fragment>
+                ))}
                 {getTooltip(item)}
 
                 <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)}>
