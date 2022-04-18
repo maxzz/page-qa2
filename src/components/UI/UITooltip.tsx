@@ -12,12 +12,12 @@ type UITooltipOptions = {
     classNamesArrow?: string;
 };
 
-type UITooltipProps = React.HTMLAttributes<HTMLDivElement> & UITooltipOptions & {
+type UITooltipProps = UITooltipOptions & {
     trigger: React.ReactNode;
     children?: React.ReactNode;
 };
 
-export function UITooltip({ trigger, children, arrow = false, runInPortal = true, popperConfig, classNamesContainer, classNamesArrow, style }: UITooltipProps) {
+export function UITooltip({ trigger, children, arrow = false, runInPortal = true, popperConfig, classNamesContainer, classNamesArrow }: UITooltipProps) {
     const {
         getArrowProps,
         getTooltipProps,
@@ -30,7 +30,6 @@ export function UITooltip({ trigger, children, arrow = false, runInPortal = true
         <div
             ref={setTooltipRef}
             {...getTooltipProps({ className: classNames('tooltip-container', classNamesContainer) })} // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
-            style={style}
         >
             {children}
             {arrow && <div {...getArrowProps({ className: classNames('tooltip-arrow', classNamesArrow) })} />}
