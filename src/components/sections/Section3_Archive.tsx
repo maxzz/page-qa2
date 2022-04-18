@@ -69,12 +69,12 @@ function VersionItem({ meta }: { meta?: Meta; }) {
         return null;
     }
     return (
-        <div className="flex items-center space-x-1">
+        <a className="flex items-center space-x-1" href={getArchiveExtensionUrl(meta.fname)}>
             <div className={classNames(`w-4 h-4 m-px rounded-full`, getClass(meta),)} />
-            <div className="hover:bg-slate-400/40 underline">
+            <div className="text-xs leading-5 text-url hover:underline cursor-pointer">
                 {`${TBrowserName(meta.browser)} version ${meta.version}${meta.release === ReleaseType.debug ? ' debug' : ''}`}
             </div>
-        </div>
+        </a>
     );
 }
 
@@ -96,9 +96,9 @@ function VersionItems({ items }: { items: Meta[]; }) {
         <UITooltip
             trigger={
                 <div>
-                    <div className="leading-6 flex items-center cursor-pointer" title={getTooltip(item)}>
+                    <div className="leading-6 flex items-center select-none cursor-pointer" title={getTooltip(item)}>
                         <GroupIcons orderedGroup={orderedGroup} />
-                        <span className="hover:bg-slate-400/40">{item.version}</span>
+                        <span>{item.version}</span>
                     </div>
                 </div>
             }
@@ -106,7 +106,7 @@ function VersionItems({ items }: { items: Meta[]; }) {
             arrow={true}
             popperConfig={{ interactive: true, trigger: 'click', }}
         >
-            <div className="min-w-[20rem] text-sm cursor-default">
+            <div className="min-w-[18rem] text-sm cursor-default">
                 <div className="pl-1 pb-1 font-bold border-b border-slate-400">
                     Versions released on {item.date}
                 </div>
@@ -132,7 +132,7 @@ export function Section3_Archive() {
                 List of previously released extensions that are still available on the HID server. You can download any version for testing purposes or for any other reason.
             </p>
 
-            <div className="mt-1 px-0.5 text-xs cursor-default">
+            <div className="mt-1 px-0.5 text-xs select-none cursor-default">
                 {byYears.map(({ year, items }) => (
                     <div key={year}>
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
