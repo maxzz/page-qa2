@@ -13,16 +13,16 @@ export function Section5_FinalNotes() {
 
             <h2 className="mt-2 text-base font-semibold">Browser extensions installation instructions</h2>
             <p>
-                Additional documents are available on the <a className="underline hover:text-url" href={URL_CONFLUENCE} target="_blank"> HID Confluence website.</a>
+                Additional documents are available on the <a className="border-b hover:border-b-2 border-url hover:text-url" href={URL_CONFLUENCE} target="_blank"> HID Confluence website.</a>
             </p>
 
             <h2 className="mt-2 text-base font-semibold">QA website history</h2>
             <ul className="ml-4 list-disc">
                 <li>
-                    The previous QA website is still <a className="underline hover:text-url" href={URL_OLD_QA_WEBSITE} target="_blank"> available here.</a>
+                    The previous QA website is still <a className="border-b hover:border-b-2 border-url hover:text-url" href={URL_OLD_QA_WEBSITE} target="_blank"> available here.</a>
                 </li>
                 {!IS_HID && <li>
-                    The source code for this website on <a className="underline hover:text-url" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here.</a>
+                    The source code for this website on <a className="border-b hover:border-b-2 border-url hover:text-url" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here.</a>
                 </li>}
                 <li>
                     This __BUILD_VER__ version of the QA website is built on __BUILD_DATE__<span>.</span>
