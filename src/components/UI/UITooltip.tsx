@@ -44,7 +44,7 @@ export function UITooltip({ trigger, children, arrow = false, runInPortal = true
         <div ref={setTriggerRef}>
             {trigger}
         </div>
-        <div style={{ '--tooltipBorder': 'red' } as React.CSSProperties}>{popper}</div>
+        {popper}
     </>);
 }
 

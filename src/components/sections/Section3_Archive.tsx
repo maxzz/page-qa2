@@ -4,10 +4,10 @@ import { byYearsAtom } from '@/store/store';
 import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
 import { Meta, OneYearExts } from '@/store/apis/file-archive-parse';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
-import iconClasses from './browser-icons.module.scss';
 import { ReleaseType } from '@/store/apis/file-archive';
-import { classNames } from '@/utils/classnames';
 import { UITooltip } from '../UI/UITooltip';
+import { classNames } from '@/utils/classnames';
+import iconClasses from './browser-icons.module.scss';
 
 function getClass(item?: Meta) {
     const types = {
