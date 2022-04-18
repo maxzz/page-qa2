@@ -80,7 +80,7 @@ function VersionItems({ items }: { items: Meta[]; }) {
         <UITooltip
             trigger={
                 <div>
-                    <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)} title={getTooltip(item)}>
+                    <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)}>
                         <GroupIcons orderedGroup={orderedGroup} />
                         <span className="hover:bg-slate-400/40">{item.version}</span>
                     </a>
@@ -89,9 +89,12 @@ function VersionItems({ items }: { items: Meta[]; }) {
             runInPortal={true}
             arrow={true}
             popperConfig={{ delayShow: 500 }}
-            containerClassNames={'p-0 text-xs'}
+            classNamesContainer={`p-0 bg-red-400`}
+            classNamesArrow={`border border-red-900`}
         >
-            tooltip
+            <div className="min-w-fit text-xs">
+                {getTooltip(item)}
+            </div>
         </UITooltip>
     );
 }

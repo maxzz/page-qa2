@@ -1,22 +1,23 @@
-import { classNames } from '@/utils/classnames';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Config, usePopperTooltip } from 'react-popper-tooltip';
+import { classNames } from '@/utils/classnames';
 import 'react-popper-tooltip/dist/styles.css';
 
 type UITooltipOptions = {
     arrow?: boolean;
     runInPortal?: boolean;
     popperConfig?: Config;
+    classNamesContainer?: string;
+    classNamesArrow?: string;
 };
 
 type UITooltipProps = UITooltipOptions & {
     trigger: React.ReactNode;
     children?: React.ReactNode;
-    containerClassNames?: string;
 };
 
-export function UITooltip({ trigger, children, arrow = false, runInPortal = true, popperConfig, containerClassNames }: UITooltipProps) {
+export function UITooltip({ trigger, children, arrow = false, runInPortal = true, popperConfig, classNamesContainer, classNamesArrow }: UITooltipProps) {
     const {
         getArrowProps,
         getTooltipProps,
@@ -28,10 +29,10 @@ export function UITooltip({ trigger, children, arrow = false, runInPortal = true
     const poperBody = visible && (
         <div
             ref={setTooltipRef}
-            {...getTooltipProps({ className: classNames('tooltip-container', containerClassNames) })} // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
+            {...getTooltipProps({ className: classNames('tooltip-container', classNamesContainer) })} // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
         >
             {children}
-            {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
+            {arrow && <div {...getArrowProps({ className: classNames('tooltip-arrow', classNamesArrow) })} />}
         </div>
     );
 
