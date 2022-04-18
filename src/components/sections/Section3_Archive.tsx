@@ -80,20 +80,24 @@ function VersionItems({ items }: { items: Meta[]; }) {
         <UITooltip
             trigger={
                 <div>
-                    <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)}>
+                    <div className="leading-6 flex items-center cursor-pointer">
                         <GroupIcons orderedGroup={orderedGroup} />
                         <span className="hover:bg-slate-400/40">{item.version}</span>
-                    </a>
+                    </div>
                 </div>
             }
             runInPortal={true}
             arrow={true}
-            popperConfig={{ delayShow: 500 }}
-            classNamesContainer={`p-0 bg-[#555] border border-[red]`}
-            arrowStyle={{ '--tooltipBorder': 'red', '--tooltipBackground': '#555' } as React.CSSProperties}
+            popperConfig={{ interactive: true, trigger: 'click', }}
         >
-            <div className="min-w-fit text-xs">
+            <div className="min-w-[20rem] text-sm">
                 {getTooltip(item)}
+
+                <a className="leading-6 flex items-center" href={getArchiveExtensionUrl(item.fname)}>
+                    <GroupIcons orderedGroup={orderedGroup} />
+                    <span className="hover:bg-slate-400/40">{item.version}</span>
+                </a>
+
             </div>
         </UITooltip>
     );

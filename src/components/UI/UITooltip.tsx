@@ -18,6 +18,10 @@ type UITooltipProps = UITooltipOptions & {
     children?: React.ReactNode;
 };
 
+// To customize borders with Tailwind:
+//      classNamesContainer={`p-0 bg-[#555] border border-[red]`}
+//      arrowStyle={{ '--tooltipBorder': 'red', '--tooltipBackground': '#555' } as React.CSSProperties}
+
 export function UITooltip({ trigger, children, arrow = false, runInPortal = true, popperConfig, classNamesContainer, classNamesArrow, arrowStyle }: UITooltipProps) {
     const {
         getArrowProps,
