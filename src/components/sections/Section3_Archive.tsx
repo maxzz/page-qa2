@@ -53,7 +53,7 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
                             className={classNames(
                                 `w-2 h-2 sm:w-4 sm:h-4 m-px rounded-full`,
                                 getClass(groupItem.main || groupItem.debug),
-                                groupItem.main && groupItem.debug && 'outline outline-2 outline-offset outline-green-500/50 sm:outline-green-500/30',
+                                groupItem.main && groupItem.debug && 'extension-small-icon-outline',
                             )}
                             key={idx}
                         />

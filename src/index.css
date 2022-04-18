@@ -6,4 +6,8 @@
     .hoverurl {
         @apply border-b hover:border-b-2 border-url hover:text-url;
     }
+
+    .extension-small-icon-outline {
+        @apply outline outline-2 outline-offset-1 outline-green-500/50 sm:outline-green-500/30;
+    }
 }
