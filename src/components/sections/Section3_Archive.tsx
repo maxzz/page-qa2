@@ -78,8 +78,6 @@ function VersionItem({ meta }: { meta?: Meta; }) {
     );
 }
 
-// TODO: Click item to download a specific version. Debug versions are protected. contact maxz to get access.
-
 function VersionItems({ items }: { items: Meta[]; }) {
     const item = items[0];
     if (!item) {
@@ -129,7 +127,10 @@ export function Section3_Archive() {
     return (
         <div className="py-2">
             <p className="text-sm">
-                List of previously released extensions that are still available on the HID server. You can download any version for testing purposes or for any other reason.
+                List of previously released extensions that are still available on the HID server. 
+                You can download any version for testing purposes or for any other reason.
+                Click an item to download a specific version. Debug versions are protected.
+                Contact Max Zakharzhevskiy at HID global for a password.
             </p>
 
             <div className="mt-1 px-0.5 text-[.65rem] sm:text-xs select-none cursor-default">
@@ -147,5 +148,3 @@ export function Section3_Archive() {
         </div>
     );
 }
-
-//TODO: group versions by browser (done) and add drop-down menu
