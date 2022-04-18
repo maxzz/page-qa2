@@ -92,7 +92,7 @@ function VersionItems({ items }: { items: Meta[]; }) {
             classNamesContainer={`p-0 bg-red-400`}
             classNamesArrow={`border border-blue-900`}
         >
-            <div className="min-w-fit text-xs" style={{ '--tooltipBorder': 'red' } as React.CSSProperties}>
+            <div className="min-w-fit text-xs">
                 {getTooltip(item)}
             </div>
         </UITooltip>
