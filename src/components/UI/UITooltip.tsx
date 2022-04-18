@@ -12,7 +12,7 @@ type UITooltipOptions = {
     classNamesArrow?: string;
 };
 
-type UITooltipProps = UITooltipOptions & {
+type UITooltipProps = React.HTMLAttributes<HTMLDivElement> & UITooltipOptions & {
     trigger: React.ReactNode;
     children?: React.ReactNode;
 };
