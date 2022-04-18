@@ -51,9 +51,9 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
                     {(groupItem.main || groupItem.debug) &&
                         <div
                             className={classNames(
-                                `w-4 h-4 m-px rounded-full`,
+                                `w-2 h-2 sm:w-4 sm:h-4 m-px rounded-full`,
                                 getClass(groupItem.main || groupItem.debug),
-                                groupItem.main && groupItem.debug ? 'outline outline-2 outline-offset outline-green-500/30' : '',
+                                groupItem.main && groupItem.debug ? 'outline outline-2 outline-offset outline-green-500/50 sm:outline-green-500/30' : '',
                             )}
                             key={idx}
                         />
@@ -132,7 +132,7 @@ export function Section3_Archive() {
                 List of previously released extensions that are still available on the HID server. You can download any version for testing purposes or for any other reason.
             </p>
 
-            <div className="mt-1 px-0.5 text-xs select-none cursor-default">
+            <div className="mt-1 px-0.5 text-[.65rem] sm:text-xs select-none cursor-default">
                 {byYears.map(({ year, items }) => (
                     <div key={year}>
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
