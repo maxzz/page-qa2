@@ -51,7 +51,7 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
                     {(groupItem.main || groupItem.debug) &&
                         <div
                             className={classNames(
-                                `w-2 h-2 sm:w-4 sm:h-4 m-px rounded-full`,
+                                `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
                                 getClass(groupItem.main?.browser || groupItem.debug?.browser),
                                 groupItem.main && groupItem.debug && 'extension-small-icon-outline',
                             )}
@@ -138,8 +138,10 @@ export function Section3_Archive() {
             </p>
 
             <div className="mt-1 px-0.5 text-[.65rem] sm:text-xs select-none cursor-default">
+                {/* All years */}
                 {byYears.map(({ year, items }) => (
                     <div key={year}>
+                        {/* Year items */}
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
                         <div className="columns-7">
                             {Object.entries(items).map(([version, items], idx) => (
