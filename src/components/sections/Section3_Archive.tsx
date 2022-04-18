@@ -64,7 +64,7 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
     );
 }
 
-function VersionItem({ meta }: { meta?: Meta; }) {
+function PopupVersionItem({ meta }: { meta?: Meta; }) {
     if (!meta) {
         return null;
     }
@@ -75,6 +75,17 @@ function VersionItem({ meta }: { meta?: Meta; }) {
                 {`${TBrowserName(meta.browser)} version ${meta.version}${meta.release === ReleaseType.debug ? ' debug' : ''}`}
             </div>
         </a>
+    );
+}
+
+function GridVersionItem({ orderedGroup, item }: { orderedGroup: OrderedGroup; item: Meta; }) {
+    return (
+        <div>
+            <div className="leading-6 flex items-center select-none cursor-pointer" title={getTooltip(item)}>
+                <GroupIcons orderedGroup={orderedGroup} />
+                <span>{item.version}</span>
+            </div>
+        </div>
     );
 }
 
@@ -92,14 +103,7 @@ function VersionItems({ items }: { items: Meta[]; }) {
 
     return (
         <UITooltip
-            trigger={
-                <div>
-                    <div className="leading-6 flex items-center select-none cursor-pointer" title={getTooltip(item)}>
-                        <GroupIcons orderedGroup={orderedGroup} />
-                        <span>{item.version}</span>
-                    </div>
-                </div>
-            }
+            trigger={<GridVersionItem orderedGroup={orderedGroup} item={item} />}
             runInPortal={true}
             arrow={true}
             popperConfig={{ interactive: true, trigger: 'click', }}
@@ -112,8 +116,8 @@ function VersionItems({ items }: { items: Meta[]; }) {
                 <div className="mt-2 mb-1">
                     {Object.entries(orderedGroup).map(([key, item], idx) => (
                         <Fragment key={idx}>
-                            <VersionItem meta={item.main} />
-                            <VersionItem meta={item.debug} />
+                            <PopupVersionItem meta={item.main} />
+                            <PopupVersionItem meta={item.debug} />
                         </Fragment>
                     ))}
                 </div>
