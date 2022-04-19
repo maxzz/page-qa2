@@ -9,22 +9,6 @@ import { UITooltip } from '../UI/UITooltip';
 import { classNames } from '@/utils/classnames';
 import { getExtensionIconClass } from './browser-icons';
 
-function getTooltip(item: Meta, multiple: boolean) {
-    return `Extension${multiple ? 's' : ''} released on ${item.date}`;
-}
-
-function getItemIdx(item: Meta) {
-    const types = {
-        [TBrowserShort.chrome]: item.release === ReleaseType.release ? 1 : 3,
-        [TBrowserShort.firefox]: item.release === ReleaseType.release ? 2 : 4,
-    };
-    return types[item.browser as keyof typeof types] || 5;
-}
-
-function sortGroup(group: Meta[]): Meta[] {
-    return group.sort((a, b) => getItemIdx(a) - getItemIdx(b));
-}
-
 type GroupItem = {
     main?: Meta;
     debug?: Meta;
@@ -55,6 +39,21 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
     );
 }
 
+function getTooltip(item: Meta, multiple: boolean) {
+    return `Extension${multiple ? 's' : ''} released on ${item.date}`;
+}
+
+function GridVersionItem({ orderedGroup, item, multiple }: { orderedGroup: OrderedGroup; item: Meta; multiple: boolean; }) {
+    return (
+        <div>
+            <div className="leading-6 flex items-center hover:text-url hover:font-bold select-none cursor-pointer" title={getTooltip(item, multiple)}>
+                <GroupIcons orderedGroup={orderedGroup} />
+                <span>{item.version}</span>
+            </div>
+        </div>
+    );
+}
+
 function PopupVersionItem({ meta }: { meta?: Meta; }) {
     if (!meta) {
         return null;
@@ -69,24 +68,13 @@ function PopupVersionItem({ meta }: { meta?: Meta; }) {
     );
 }
 
-function GridVersionItem({ orderedGroup, item, multiple }: { orderedGroup: OrderedGroup; item: Meta; multiple: boolean; }) {
-    return (
-        <div>
-            <div className="leading-6 flex items-center hover:text-url hover:font-bold select-none cursor-pointer" title={getTooltip(item, multiple)}>
-                <GroupIcons orderedGroup={orderedGroup} />
-                <span>{item.version}</span>
-            </div>
-        </div>
-    );
-}
-
 function VersionItems({ items }: { items: Meta[]; }) {
     const item = items[0];
     if (!item) {
         return null;
     }
 
-    const orderedGroup = sortGroup([...items]).reduce((acc, curr) => {
+    const orderedGroup = items.reduce((acc, curr) => {
         const item = acc[curr.browser] || (acc[curr.browser] = {});
         item[curr.release === ReleaseType.release ? 'main' : 'debug'] = curr;
         return acc;

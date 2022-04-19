@@ -1,4 +1,5 @@
-import { ArchiveExtensionMeta } from "./file-archive";
+import { TBrowserShort } from "./api-formats-g01";
+import { ArchiveExtensionMeta, ReleaseType } from "./file-archive";
 
 export type Meta = {
     date: string;
@@ -28,7 +29,15 @@ function splitToByYearsMap(archive: Meta[]): Record<string, Meta[]> {
     return res;
 }
 
-type YearExtsMap = Record<string, Meta[]>;
+function itemSortIndex(item: Meta) {
+    const types = {
+        [TBrowserShort.chrome]: item.release === ReleaseType.release ? 1 : 3,
+        [TBrowserShort.firefox]: item.release === ReleaseType.release ? 2 : 4,
+    };
+    return types[item.browser as keyof typeof types] || 5;
+}
+
+type YearExtsMap = Record<string, Meta[]>; // extension version -> browser extensions
 
 export type OneYearExts = {
     year: string;
@@ -43,13 +52,14 @@ function splitToVersionsMap(yearItems: Meta[]): YearExtsMap {
         }
         rv[item.version].push(item);
     });
+    Object.values(rv).forEach((version) => version.sort((a, b) => itemSortIndex(a) - itemSortIndex(b))); // sort items inside each version
     return rv;
 }
 
 export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null): OneYearExts[] {
     const withMeta: Meta[] = (archiveExtensions || []).map(transformToMeta);
     const byYearsMap = splitToByYearsMap(withMeta);
-    const byYearsArr = Object.entries(byYearsMap).map(([year, items]) => ({ year, items })); // can now sort if needed
+    const byYearsArr = Object.entries(byYearsMap).map(([year, items]) => ({ year, items })); // can now sort by year if needed
     const grouped = byYearsArr.map<OneYearExts>(({ year, items }) => ({ year, items: splitToVersionsMap(items) }));
     return grouped;
 }
