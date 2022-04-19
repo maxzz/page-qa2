@@ -7,16 +7,7 @@ import { getArchiveExtensionUrl } from '@/store/apis/constants';
 import { ReleaseType } from '@/store/apis/file-archive';
 import { UITooltip } from '../UI/UITooltip';
 import { classNames } from '@/utils/classnames';
-import iconClasses from './browser-icons.module.scss';
-
-function getClass(browser?: TBrowserShort | undefined) {
-    const types = {
-        [TBrowserShort.chrome]: 'iconCh',
-        [TBrowserShort.firefox]: 'iconFf',
-        [TBrowserShort.dev]: 'iconTt',
-    };
-    return iconClasses[types[browser as keyof typeof types || TBrowserShort.dev] || 'iconMs'];
-}
+import { getExtensionIconClass } from './browser-icons';
 
 function getTooltip(item: Meta, multiple: boolean) {
     return `Extension${multiple ? 's' : ''} released on ${item.date}`;
@@ -52,7 +43,7 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
                         <div
                             className={classNames(
                                 `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
-                                getClass(groupItem.main?.browser || groupItem.debug?.browser),
+                                getExtensionIconClass(groupItem.main?.browser || groupItem.debug?.browser),
                                 groupItem.main && groupItem.debug && 'extension-small-icon-outline',
                             )}
                             key={idx}
@@ -70,7 +61,7 @@ function PopupVersionItem({ meta }: { meta?: Meta; }) {
     }
     return (
         <a className="h-5 flex items-center space-x-1" href={getArchiveExtensionUrl(meta.fname)}>
-            <div className={classNames(`w-4 h-4 m-px rounded-full`, getClass(meta?.browser),)} />
+            <div className={classNames(`w-4 h-4 m-px rounded-full`, getExtensionIconClass(meta?.browser),)} />
             <div className="text-xs text-url hover:underline cursor-pointer">
                 {`${TBrowserName(meta.browser)} version ${meta.version}${meta.release === ReleaseType.debug ? ' with debug information' : ''}`}
             </div>
@@ -166,7 +157,7 @@ export function Section3_Archive() {
                         <div
                             className={classNames(
                                 `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
-                                getClass(br),
+                                getExtensionIconClass(br),
                                 (idx === 1 || idx === 3) ? 'extension-small-icon-outline' : '',
                             )}
                         />
