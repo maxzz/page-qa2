@@ -18,8 +18,8 @@ function getClass(browser?: TBrowserShort | undefined) {
     return iconClasses[types[browser as keyof typeof types || TBrowserShort.dev] || 'iconMs'];
 }
 
-function getTooltip(item: Meta) {
-    return `${TBrowserName(item.browser)} extension released on ${item.date}`;
+function getTooltip(item: Meta, multiple: boolean) {
+    return `Extension${multiple ? 's' : ''} released on ${item.date}`;
 }
 
 function getItemIdx(item: Meta) {
@@ -72,16 +72,16 @@ function PopupVersionItem({ meta }: { meta?: Meta; }) {
         <a className="h-5 flex items-center space-x-1" href={getArchiveExtensionUrl(meta.fname)}>
             <div className={classNames(`w-4 h-4 m-px rounded-full`, getClass(meta?.browser),)} />
             <div className="text-xs text-url hover:underline cursor-pointer">
-                {`${TBrowserName(meta.browser)} version ${meta.version}${meta.release === ReleaseType.debug ? ' debug' : ''}`}
+                {`${TBrowserName(meta.browser)} version ${meta.version}${meta.release === ReleaseType.debug ? ' with debug information' : ''}`}
             </div>
         </a>
     );
 }
 
-function GridVersionItem({ orderedGroup, item }: { orderedGroup: OrderedGroup; item: Meta; }) {
+function GridVersionItem({ orderedGroup, item, multiple }: { orderedGroup: OrderedGroup; item: Meta; multiple: boolean; }) {
     return (
         <div>
-            <div className="leading-6 flex items-center select-none cursor-pointer" title={getTooltip(item)}>
+            <div className="leading-6 flex items-center hover:text-url hover:font-bold select-none cursor-pointer" title={getTooltip(item, multiple)}>
                 <GroupIcons orderedGroup={orderedGroup} />
                 <span>{item.version}</span>
             </div>
@@ -103,11 +103,12 @@ function VersionItems({ items }: { items: Meta[]; }) {
 
     return (
         <UITooltip
-            trigger={<GridVersionItem orderedGroup={orderedGroup} item={item} />}
+            trigger={<GridVersionItem orderedGroup={orderedGroup} item={item} multiple={items.length > 1} />}
             runInPortal={true}
             arrow={true}
             popperConfig={{ interactive: true, trigger: 'click', }}
         >
+            {/* Popup body */}
             <div className="min-w-[18rem] text-sm cursor-default">
                 <div className="pl-1 pb-1 font-bold border-b border-slate-400">
                     Versions released on {item.date}
@@ -135,16 +136,17 @@ export function Section3_Archive() {
             <p className="">
                 List of previously released extensions that are still available on the HID server.
                 You can download any version for testing purposes or for any other reason.
-                Click an item to download a specific version. Debug versions are protected.
+                Click an item to download a specific version. Extensions with debug information are protected.
                 Contact Max Zakharzhevskiy at HID global for a password.
             </p>
 
+            {/* Grid */}
             <div className="mt-1 px-0.5 text-[.65rem] sm:text-xs select-none cursor-default">
                 {/* All years */}
                 {byYears.map(({ year, items }) => (
                     <div key={year}>
                         {/* Year items */}
-                        <div className="mt-2 mb-1 border-b border-slate-200 font-bold">{year}</div>
+                        <div className="mt-2 mb-1 border-b border-slate-200 font-bold">Year {year}</div>
                         <div className="columns-7">
                             {Object.entries(items).map(([version, items], idx) => (
                                 <VersionItems items={items} key={`${version || idx}`} />
@@ -154,8 +156,11 @@ export function Section3_Archive() {
                 ))}
             </div>
 
+            {/* Legend */}
             <div className="mt-2 text-xs sm:text-sm">
-                <div className="mb-0 sm:mb-1">Legend:</div>
+                <div className="mb-0 sm:mb-1">
+                    Legend:
+                </div>
                 {legendBrowsers.map((br, idx) => (
                     <div className="ml-1 flex items-center space-x-2" key={idx}>
                         <div
@@ -165,7 +170,7 @@ export function Section3_Archive() {
                                 (idx === 1 || idx === 3) ? 'extension-small-icon-outline' : '',
                             )}
                         />
-                        <div className="">{`${TBrowserName(br)} extension${(idx === 1 || idx === 3) ? ' with debug' : ''}`}</div>
+                        <div className="">{`${TBrowserName(br)} extension${(idx === 1 || idx === 3) ? ' with debug information' : ''}`}</div>
                     </div>
                 ))}
             </div>
