@@ -112,6 +112,26 @@ function VersionItems({ items }: { items: Meta[]; }) {
 
 const legendBrowsers = [TBrowserShort.chrome, TBrowserShort.chrome, TBrowserShort.firefox, TBrowserShort.firefox, TBrowserShort.firefox, TBrowserShort.dev];
 
+function YearsGrid() {
+    const byYears: OneYearExts[] = [...useAtomValue(byYearsAtom)].reverse();
+    return (
+        <div className="mt-1 px-0.5 text-[.65rem] sm:text-xs select-none cursor-default">
+            {/* All years */}
+            {byYears.map(({ year, items }) => (
+                <div key={year}>
+                    {/* Year items */}
+                    <div className="mt-2 mb-1 border-b border-slate-200 font-bold">Year {year}</div>
+                    <div className="columns-7">
+                        {Object.entries(items).map(([version, items], idx) => (
+                            <VersionItems items={items} key={`${version || idx}`} />
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
+
 function Legend() {
     return (
         <div className="mt-2 text-xs sm:text-sm">
@@ -140,7 +160,7 @@ function Legend() {
 }
 
 export function Section3_Archive() {
-    const byYears: OneYearExts[] = [...useAtomValue(byYearsAtom)].reverse();
+
     return (
         <div className="py-2 text-sm">
             <p>
@@ -149,23 +169,7 @@ export function Section3_Archive() {
                 Click an item to download a specific version. Extensions with debug information are protected.
                 Contact Max Zakharzhevskiy at HID global for a password.
             </p>
-
-            {/* Grid */}
-            <div className="mt-1 px-0.5 text-[.65rem] sm:text-xs select-none cursor-default">
-                {/* All years */}
-                {byYears.map(({ year, items }) => (
-                    <div key={year}>
-                        {/* Year items */}
-                        <div className="mt-2 mb-1 border-b border-slate-200 font-bold">Year {year}</div>
-                        <div className="columns-7">
-                            {Object.entries(items).map(([version, items], idx) => (
-                                <VersionItems items={items} key={`${version || idx}`} />
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
-
+            <YearsGrid />
             <Legend />
         </div>
     );
