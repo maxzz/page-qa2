@@ -27,9 +27,11 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
                         <div
                             className={classNames(
                                 `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
-                                (groupItem.main || groupItem.debug?.browser === TBrowserShort.dev) // i.e. debug Firefox wo/ release
-                                    ? getExtensionIconClass(groupItem.main?.browser || groupItem.debug?.browser)
-                                    : 'bg-green-500/30',
+                                getExtensionIconClass(groupItem.main?.browser || groupItem.debug?.browser),
+                                // (groupItem.main || groupItem.debug?.browser === TBrowserShort.dev) // i.e. debug Firefox wo/ release
+                                //     ? getExtensionIconClass(groupItem.main?.browser || groupItem.debug?.browser)
+                                //     : 'bg-green-500/30',
+                                (!groupItem.main && groupItem.debug?.browser !== TBrowserShort.dev) && 'hue-rotate-[293deg] extension-small-icon-outline', // i.e. debug Firefox wo/ release
                                 groupItem.main && groupItem.debug && 'extension-small-icon-outline',
                             )}
                             key={idx}
