@@ -57,10 +57,10 @@ function splitToVersionsMap(items: Meta[]): VersionsMap {
     return rv;
 }
 
-export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null, publicVersions: string[]): OneYearExts[] {
+export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null, publicVersions?: string[]): OneYearExts[] {
     const withMeta: Meta[] = (archiveExtensions || []).map(transformToMeta);
 
-    if (publicVersions.length) {
+    if (publicVersions?.length) {
         const versionsMap = splitToVersionsMap(withMeta);
         publicVersions.forEach((version) => {
             versionsMap[version]?.forEach((existingExt) => existingExt.published = true);

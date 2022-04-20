@@ -136,10 +136,10 @@ const runFetchReleaseNotesAtom = atom(
         async function fetchData() {
             set(releaseNotesStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
-                const data = await fetchReleaseNotes();
-                const markdown = marked(data);
+                const notesText = await fetchReleaseNotes();
+                const markdown = marked(notesText);
+                set(publicVersionsAtom, [...notesText.matchAll(regexMarkdownPublicVersions)].map((match) => match[1]));
                 set(releaseNotesStateAtom, { loading: false, error: null, data: markdown });
-                set(publicVersionsAtom, [...data.matchAll(regexMarkdownPublicVersions)].map((match) => match[1]));
             } catch (error) {
                 set(releaseNotesStateAtom, { loading: false, error, data: null });
                 set(publicVersionsAtom, undefined);
@@ -179,6 +179,13 @@ const correlateAtom = atom(
             return;
         }
 
+        const publicVersions = get(publicVersionsAtom);
+        const byYears = archiveByYears(stateArchive.data, publicVersions);
+        set(byYearsAtom, byYears);
+        //console.log('publicVersions', publicVersions);
+        //console.log('byYears', byYears);
+        
+
         if (stateNotes.error) {
             return;
         }
@@ -189,10 +196,6 @@ const correlateAtom = atom(
             return;
         }
 
-        const byYears = archiveByYears(stateArchive.data, []);
-        set(byYearsAtom, byYears);
-
-        const publicVersions = get(publicVersionsAtom);
         if (publicVersions && stateArchive.data) {
             //const archiveMap = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
             const archiveMap = stateArchive.data.reduce<Record<string, ArchiveExtensionMeta[]>>((acc, curr) => {
