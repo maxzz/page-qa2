@@ -42,17 +42,17 @@ const extensionMsAtom: LatestExtension = {
     icon: <IconMsLogo className="w-8 h-8" />,
 };
 
-function HeroImage() {
-    return (
-        <div>
-            <img className="h-full object-cover grayscale" src={HERO_IMAGE} alt="hero" />
-        </div>
-    );
-}
-
 const boxShadow = {
     boxShadow: '0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12)'
 };
+
+function HeroImage() {
+    return (
+        <div className="bg-slate-400" style={{...boxShadow, transition: "all .2s"}}>
+            <img className="h-full object-cover grayscale border border-slate-300 border-b-slate-400" src={HERO_IMAGE} alt="hero" />
+        </div>
+    );
+}
 
 function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtension, inAppExtnInfo: InAppExtnInfo; }) {
     const confettiRef = React.useRef<HTMLButtonElement>(null);
@@ -109,7 +109,7 @@ function CurrentVersions() {
 
 export function Section0_HeroSection() {
     return (
-        <div className="mt-4 grid grid-cols-[minmax(8rem,1fr),minmax(12rem,28rem)] gap-4">
+        <div className="mt-4 mb-3 h-60 grid grid-cols-[minmax(8rem,1fr),minmax(12rem,28rem)] gap-4">
             <HeroImage />
             <CurrentVersions />
         </div>
