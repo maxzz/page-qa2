@@ -52,7 +52,7 @@ function GridVersionItem({ orderedGroup, item, multiple }: { orderedGroup: Order
         <div>
             <div className="leading-6 flex items-center hover:text-url hover:font-bold select-none cursor-pointer" title={getTooltip(item, multiple)}>
                 <GroupIcons orderedGroup={orderedGroup} />
-                <span className={classNames(item.published && 'text-blue-500 font-bold')}>{item.version}</span>
+                <span className={classNames(item.published && 'text-green-600')}>{item.version}</span>
             </div>
         </div>
     );
@@ -157,6 +157,10 @@ export function Section3_Archive() {
                         <div>{`${TBrowserName(br)} extension${(idx === 1 || idx === 3) ? ' with debug information' : (idx === 4) ? ' (debug version only)': ''}`}</div>
                     </div>
                 ))}
+                <div className="ml-1 flex items-center space-x-2">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full bg-green-600"></div>
+                    <div className="">Published extensions</div>
+                </div>
             </div>
         </div>
     );
