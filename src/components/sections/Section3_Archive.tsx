@@ -49,11 +49,9 @@ function getTooltip(item: Meta, multiple: boolean) {
 
 function GridVersionItem({ orderedGroup, item, multiple }: { orderedGroup: OrderedGroup; item: Meta; multiple: boolean; }) {
     return (
-        <div>
-            <div className="leading-6 flex items-center hover:text-url hover:font-bold select-none cursor-pointer" title={getTooltip(item, multiple)}>
-                <GroupIcons orderedGroup={orderedGroup} />
-                <span className={classNames(item.published && 'bg-slate-300/40 rounded')}>{item.version}</span>
-            </div>
+        <div className="leading-6 flex items-center hover:text-url hover:font-bold select-none cursor-pointer" title={getTooltip(item, multiple)}>
+            <GroupIcons orderedGroup={orderedGroup} />
+            <div className={classNames(item.published && 'bg-slate-300/40 rounded')}>{item.version}</div>
         </div>
     );
 }
@@ -178,3 +176,5 @@ export function Section3_Archive() {
         </div>
     );
 }
+
+//TODO: fix firefox columns for year 2019 - done
