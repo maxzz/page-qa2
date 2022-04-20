@@ -52,7 +52,7 @@ function GridVersionItem({ orderedGroup, item, multiple }: { orderedGroup: Order
         <div>
             <div className="leading-6 flex items-center hover:text-url hover:font-bold select-none cursor-pointer" title={getTooltip(item, multiple)}>
                 <GroupIcons orderedGroup={orderedGroup} />
-                <span>{item.version}</span>
+                <span className={classNames(item.published && 'text-blue-500 font-bold')}>{item.version}</span>
             </div>
         </div>
     );
