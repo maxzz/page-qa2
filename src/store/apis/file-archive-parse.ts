@@ -37,16 +37,16 @@ function itemSortIndex(item: Meta) {
     return types[item.browser as keyof typeof types] || 5;
 }
 
-type YearExtsMap = Record<string, Meta[]>; // extension version -> browser extensions
+type VersionsMap = Record<string, Meta[]>; // extension version -> browser extensions
 
 export type OneYearExts = {
     year: string;
-    items: YearExtsMap;
+    items: VersionsMap;
 };
 
-function splitToVersionsMap(yearItems: Meta[]): YearExtsMap {
-    const rv: YearExtsMap = {};
-    yearItems.forEach((item) => {
+function splitToVersionsMap(items: Meta[]): VersionsMap {
+    const rv: VersionsMap = {};
+    items.forEach((item) => {
         if (!rv[item.version]) {
             rv[item.version] = [];
         }
@@ -60,6 +60,6 @@ export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null)
     const withMeta: Meta[] = (archiveExtensions || []).map(transformToMeta);
     const byYearsMap = splitToByYearsMap(withMeta);
     const byYearsArr = Object.entries(byYearsMap).map(([year, items]) => ({ year, items })); // can now sort by year if needed
-    const grouped = byYearsArr.map<OneYearExts>(({ year, items }) => ({ year, items: splitToVersionsMap(items) }));
+    const grouped = byYearsArr.map<OneYearExts>(({ year, items: yearItems }) => ({ year, items: splitToVersionsMap(yearItems) }));
     return grouped;
 }
