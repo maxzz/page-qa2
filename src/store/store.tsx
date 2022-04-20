@@ -96,9 +96,7 @@ const runFetchArchiveAtom = atom(
             try {
                 const existing: ArchiveExtensionMeta[] = await getExistingOnServer();
 
-                const byYears = archiveByYears(existing);
-                set(byYearsAtom, byYears);
-
+                set(byYearsAtom, archiveByYears(existing));
                 set(archiveStateAtom, { loading: false, error: null, data: existing });
             } catch (error) {
                 set(archiveStateAtom, { loading: false, error, data: null });
@@ -112,14 +110,6 @@ const runFetchArchiveAtom = atom(
 runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 
 export const byYearsAtom = atom<OneYearExts[]>([]);
-
-// export const byYearsAtom = atom<OneYearExts[]>(
-//     (get) => {
-//         const extArchiveState = get(archiveStateAtom);
-//         const byYears = archiveByYears(extArchiveState.data);
-//         return byYears;
-//     }
-// );
 
 //#endregion ServerArchive
 
