@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { Config, usePopperTooltip } from 'react-popper-tooltip';
 import { classNames } from '@/utils/classnames';
 import 'react-popper-tooltip/dist/styles.css';
@@ -42,7 +42,7 @@ export function UITooltip({ trigger, children, arrow = false, runInPortal = true
     );
 
     const popper = visible && (
-        runInPortal ? ReactDOM.createPortal((poperBody), document.getElementById('portal')!) : { poperBody }
+        runInPortal ? createPortal((poperBody), document.getElementById('portal')!) : { poperBody }
     );
 
     return (<>

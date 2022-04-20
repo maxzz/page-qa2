@@ -177,4 +177,3 @@ export function Section3_Archive() {
     );
 }
 
-//TODO: fix firefox columns for year 2019 - done
