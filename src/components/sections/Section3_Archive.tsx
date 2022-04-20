@@ -72,6 +72,25 @@ function PopupVersionItem({ meta }: { meta?: Meta; }) {
     );
 }
 
+function PopupBody({ orderedGroup, item }: { orderedGroup: OrderedGroup; item: Meta; }) {
+    return (
+        <div className="min-w-[18rem] text-sm cursor-default">
+            <div className="pl-1 pb-1 font-bold border-b border-slate-400">
+                Versions released on {item.date}
+            </div>
+
+            <div className="mt-2 mb-1">
+                {Object.entries(orderedGroup).map(([key, item], idx) => (
+                    <Fragment key={idx}>
+                        <PopupVersionItem meta={item.main} />
+                        <PopupVersionItem meta={item.debug} />
+                    </Fragment>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 function VersionItems({ items }: { items: Meta[]; }) {
     const item = items[0];
     if (!item) {
@@ -91,21 +110,7 @@ function VersionItems({ items }: { items: Meta[]; }) {
             arrow={true}
             popperConfig={{ interactive: true, trigger: 'click', }}
         >
-            {/* Popup body */}
-            <div className="min-w-[18rem] text-sm cursor-default">
-                <div className="pl-1 pb-1 font-bold border-b border-slate-400">
-                    Versions released on {item.date}
-                </div>
-
-                <div className="mt-2 mb-1">
-                    {Object.entries(orderedGroup).map(([key, item], idx) => (
-                        <Fragment key={idx}>
-                            <PopupVersionItem meta={item.main} />
-                            <PopupVersionItem meta={item.debug} />
-                        </Fragment>
-                    ))}
-                </div>
-            </div>
+            <PopupBody orderedGroup={orderedGroup} item={item} />
         </UITooltip>
     );
 }
