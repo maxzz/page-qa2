@@ -6,7 +6,6 @@ export interface InAppExtnInfo { // Extension info from config file
     brand?: TBrand;             // "dp"
     browser?: TBrowserShort;    // "c"
     qa?: boolean;               // true
-    //published?: boolean;        // published information from release notes
     version: string;            // "3.4.430"
     updated: string;            // "2022.03.04"
 }

@@ -4,6 +4,7 @@ import { ArchiveExtensionMeta, ReleaseType } from "./file-archive";
 export type Meta = {
     date: string;
     year: number;
+    published?: boolean;        // published information from release notes
 } & ArchiveExtensionMeta;
 
 const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -56,8 +57,16 @@ function splitToVersionsMap(items: Meta[]): VersionsMap {
     return rv;
 }
 
-export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null): OneYearExts[] {
+export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null, publicVersions: string[]): OneYearExts[] {
     const withMeta: Meta[] = (archiveExtensions || []).map(transformToMeta);
+
+    if (publicVersions.length) {
+        const versionsMap = splitToVersionsMap(withMeta);
+        publicVersions.forEach((version) => {
+            versionsMap[version]?.forEach((existingExt) => existingExt.published = true);
+        });
+    }
+
     const byYearsMap = splitToByYearsMap(withMeta);
     const byYearsArr = Object.entries(byYearsMap).map(([year, items]) => ({ year, items })); // can now sort by year if needed
     const grouped = byYearsArr.map<OneYearExts>(({ year, items: yearItems }) => ({ year, items: splitToVersionsMap(yearItems) }));

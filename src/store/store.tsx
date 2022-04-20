@@ -95,8 +95,6 @@ const runFetchArchiveAtom = atom(
             set(archiveStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const existing: ArchiveExtensionMeta[] = await getExistingOnServer();
-
-                set(byYearsAtom, archiveByYears(existing));
                 set(archiveStateAtom, { loading: false, error: null, data: existing });
             } catch (error) {
                 set(archiveStateAtom, { loading: false, error, data: null });
@@ -190,6 +188,9 @@ const correlateAtom = atom(
         if (stateConfig.error) {
             return;
         }
+
+        const byYears = archiveByYears(stateArchive.data, []);
+        set(byYearsAtom, byYears);
 
         const publicVersions = get(publicVersionsAtom);
         if (publicVersions && stateArchive.data) {
