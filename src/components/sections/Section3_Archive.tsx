@@ -18,6 +18,9 @@ type OrderedGroup = {
     [key in TBrowserShort]?: GroupItem;
 };
 
+const isFirefoxWoMain = (groupItem: GroupItem) => !groupItem.main && groupItem.debug?.browser !== TBrowserShort.dev;
+const isDevTools = (groupItem: GroupItem) => !groupItem.main || !groupItem.debug;
+
 function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
     return (
         <div className="w-10 flex">
@@ -28,8 +31,8 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
                             className={classNames(
                                 `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
                                 getExtensionIconClass(groupItem.main?.browser || groupItem.debug?.browser),
-                                (!groupItem.main && groupItem.debug?.browser !== TBrowserShort.dev) && 'hue-rotate-[293deg] extension-small-icon-outline', // i.e. debug Firefox wo/ release
-                                groupItem.main && groupItem.debug && 'extension-small-icon-outline',
+                                isFirefoxWoMain(groupItem) && 'extension-small-icon-outline hue-rotate-[293deg]',
+                                !isDevTools(groupItem) && 'extension-small-icon-outline',
                             )}
                             key={idx}
                         />
@@ -107,13 +110,13 @@ function VersionItems({ items }: { items: Meta[]; }) {
     );
 }
 
-const legendBrowsers = [TBrowserShort.chrome, TBrowserShort.chrome, TBrowserShort.firefox, TBrowserShort.firefox, TBrowserShort.dev];
+const legendBrowsers = [TBrowserShort.chrome, TBrowserShort.chrome, TBrowserShort.firefox, TBrowserShort.firefox, TBrowserShort.firefox, TBrowserShort.dev];
 
 export function Section3_Archive() {
     const byYears: OneYearExts[] = [...useAtomValue(byYearsAtom)].reverse();
     return (
         <div className="py-2 text-sm">
-            <p className="">
+            <p>
                 List of previously released extensions that are still available on the HID server.
                 You can download any version for testing purposes or for any other reason.
                 Click an item to download a specific version. Extensions with debug information are protected.
@@ -148,9 +151,10 @@ export function Section3_Archive() {
                                 `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
                                 getExtensionIconClass(br),
                                 (idx === 1 || idx === 3) && 'extension-small-icon-outline',
+                                (idx === 4) && 'extension-small-icon-outline hue-rotate-[293deg]',
                             )}
                         />
-                        <div className="">{`${TBrowserName(br)} extension${(idx === 1 || idx === 3) ? ' with debug information' : ''}`}</div>
+                        <div>{`${TBrowserName(br)} extension${(idx === 1 || idx === 3) ? ' with debug information' : (idx === 4) ? ' (debug version only)': ''}`}</div>
                     </div>
                 ))}
             </div>
