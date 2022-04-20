@@ -6,7 +6,7 @@ import { CurrentExtensions, getCurrentConfig } from './apis/file-current-config'
 import { fetchReleaseNotes } from './apis/file-release-notes';
 import { ArchiveExtensionMeta, getExistingOnServer } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
-import { archiveByYears } from './apis/file-archive-parse';
+import { archiveByYears, OneYearExts } from './apis/file-archive-parse';
 import { regexMarkdownPublicVersions } from './apis/constants';
 import { TBrowserShort } from './apis/api-formats-g01';
 
@@ -95,6 +95,10 @@ const runFetchArchiveAtom = atom(
             set(archiveStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const existing: ArchiveExtensionMeta[] = await getExistingOnServer();
+
+                const byYears = archiveByYears(existing);
+                set(byYearsAtom, byYears);
+
                 set(archiveStateAtom, { loading: false, error: null, data: existing });
             } catch (error) {
                 set(archiveStateAtom, { loading: false, error, data: null });
@@ -107,13 +111,15 @@ const runFetchArchiveAtom = atom(
 );
 runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 
-export const byYearsAtom = atom(
-    (get) => {
-        const extArchiveState = get(archiveStateAtom);
-        const byYears = archiveByYears(extArchiveState.data);
-        return byYears;
-    }
-);
+export const byYearsAtom = atom<OneYearExts[]>([]);
+
+// export const byYearsAtom = atom<OneYearExts[]>(
+//     (get) => {
+//         const extArchiveState = get(archiveStateAtom);
+//         const byYears = archiveByYears(extArchiveState.data);
+//         return byYears;
+//     }
+// );
 
 //#endregion ServerArchive
 
@@ -178,23 +184,27 @@ export const dataLoadAtom = atom(
 const correlateAtom = atom(
     null,
     (get, set) => {
-        const notes = get(releaseNotesStateAtom);
-        if (notes.loading || notes.error) {
+        const stateNotes = get(releaseNotesStateAtom);
+        const stateArchive = get(archiveStateAtom);
+        const stateConfig = get(configStateAtom);
+        if (stateNotes.loading || stateArchive.loading || stateConfig.loading) {
             return;
         }
-        const archive = get(archiveStateAtom);
-        if (archive.loading || archive.error) {
+
+        if (stateNotes.error) {
             return;
         }
-        const config = get(configStateAtom);
-        if (config.loading || config.error) {
+        if (stateArchive.error) {
+            return;
+        }
+        if (stateConfig.error) {
             return;
         }
 
         const publicVersions = get(publicVersionsAtom);
-        if (publicVersions && archive.data) {
+        if (publicVersions && stateArchive.data) {
             //const archiveMap = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
-            const archiveMap = archive.data.reduce<Record<string, ArchiveExtensionMeta[]>>((acc, curr) => {
+            const archiveMap = stateArchive.data.reduce<Record<string, ArchiveExtensionMeta[]>>((acc, curr) => {
                 if (!acc[curr.version]) {
                     acc[curr.version] = [];
                 }
@@ -205,8 +215,8 @@ const correlateAtom = atom(
             // console.log('published', archiveMap);
         }
 
-        if (archive.data) {
-            const reverse = [...archive.data].reverse();
+        if (stateArchive.data) {
+            const reverse = [...stateArchive.data].reverse();
             const latestCh = reverse.find((item) => item.browser === TBrowserShort.chrome);
             const latestFf = reverse.find((item) => item.browser === TBrowserShort.firefox);
 
