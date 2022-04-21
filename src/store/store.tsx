@@ -113,7 +113,7 @@ export const byYearsAtom = atom<OneYearExts[]>([]);
 
 //#region ServerReleaseNotes
 
-export const releaseNotesStateAtom = atom<LoadingDataState<string>>(loadingDataStateInit());
+const releaseNotesStateAtom = atom<LoadingDataState<string>>(loadingDataStateInit());
 
 // const renderer = {
 //     heading(text: string, level: number) {
@@ -152,7 +152,7 @@ const runFetchReleaseNotesAtom = atom(
 );
 runFetchReleaseNotesAtom.onMount = (runFetch) => runFetch();
 
-export const releaseNotesAtom = atom((get) => get(releaseNotesStateAtom).data || '');
+export const releaseNotesAtom = atom<string>((get) => get(releaseNotesStateAtom).data || '');
 
 //#endregion ServerReleaseNotes
 
@@ -163,9 +163,12 @@ export const latestFfAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
 
 export const dataLoadAtom = atom(
     (get) => {
-        get(runFetchReleaseNotesAtom);
-        get(runFetchArchiveAtom);
-        get(runFetchConfigAtom);
+        async function run() {
+            get(runFetchReleaseNotesAtom);
+            get(runFetchArchiveAtom);
+            get(runFetchConfigAtom);
+        }
+        run();
     }
 );
 
@@ -196,19 +199,20 @@ const correlateAtom = atom(
             return;
         }
 
-        if (publicVersions && stateArchive.data) {
-            //const archiveMap = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
-            const archiveMap = stateArchive.data.reduce<Record<string, ArchiveExtensionMeta[]>>((acc, curr) => {
-                if (!acc[curr.version]) {
-                    acc[curr.version] = [];
-                }
-                acc[curr.version].push(curr);
-                return acc;
-            }, {});
+        // if (publicVersions && stateArchive.data) {
+        //     //const archiveMap = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
+        //     const archiveMap = stateArchive.data.reduce<Record<string, ArchiveExtensionMeta[]>>((acc, curr) => {
+        //         if (!acc[curr.version]) {
+        //             acc[curr.version] = [];
+        //         }
+        //         acc[curr.version].push(curr);
+        //         return acc;
+        //     }, {});
 
-            // console.log('published', archiveMap);
-        }
+        //     // console.log('published', archiveMap);
+        // }
 
+        //TODO:
         if (stateArchive.data) {
             const reverse = [...stateArchive.data].reverse();
             const latestCh = reverse.find((item) => item.browser === TBrowserShort.chrome);
@@ -217,7 +221,6 @@ const correlateAtom = atom(
             set(latestChAtom, latestCh);
             set(latestFfAtom, latestFf);
         }
-
 
         // const latestCh = get(latestChAtom);
         // if (latestCh) {
