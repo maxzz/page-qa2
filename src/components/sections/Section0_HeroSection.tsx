@@ -49,7 +49,7 @@ const boxShadow = {
 function HeroImage() {
     return (
         <div className="bg-slate-400" style={{...boxShadow, transition: "all .2s"}}>
-            <img className="h-full object-cover grayscale border border-slate-300 border-b-slate-400" src={HERO_IMAGE} alt="hero" />
+            <img className="h-full object-cover border border-slate-300 border-b-slate-400" src={HERO_IMAGE} alt="hero" />
         </div>
     );
 }
