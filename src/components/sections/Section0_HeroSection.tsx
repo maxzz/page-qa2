@@ -37,8 +37,9 @@ function HeroImage() {
 
 const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
-function CurrentVersion({ browser, inAppExtnInfo }: { browser: TBrowserShort; inAppExtnInfo?: InAppExtnInfo; }) {
+function CurrentVersion({ browser, inAppExtnInfo, loading }: { browser: TBrowserShort; inAppExtnInfo?: InAppExtnInfo; loading: boolean; }) {
     const confettiRef = useRef<HTMLButtonElement>(null);
+    //TODO: distinguish null (unavailable) and undefined (as loading)
     return (
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ ...boxShadow, transition: "all .2s" }}>
 
@@ -46,8 +47,8 @@ function CurrentVersion({ browser, inAppExtnInfo }: { browser: TBrowserShort; in
             <div className="content-center place-self-center"><BrowserIcon browser={browser} className={"w-9 h-8"} style={iconShadow} /></div>
             <div className="ml-3 text-xs">
                 <div className="text-base font-bold scale-y-125 whitespace-nowrap">{TBrowserName(browser)} QA extension</div>
-                <div>Updated on {inAppExtnInfo?.updated ? beautifyDate(inAppExtnInfo.updated) : 'unavailable'}</div>
-                <div>{inAppExtnInfo?.version || 'version unavailable'}</div>
+                <div>Updated on {inAppExtnInfo?.updated ? beautifyDate(inAppExtnInfo.updated) : loading ? '&nbsp;' : 'unavailable'}</div>
+                <div>{inAppExtnInfo?.version || (loading ? '&nbsp;' : 'version unavailable')}</div>
             </div>
 
             {/* Action buttons */}
@@ -66,7 +67,7 @@ function CurrentVersion({ browser, inAppExtnInfo }: { browser: TBrowserShort; in
                 </a>
 
                 {/* Copy link */}
-                <button 
+                <button
                     className={classNames(
                         "p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5 select-none",
                         !inAppExtnInfo?.url && "invisible pointer-events-none",
@@ -91,8 +92,8 @@ function CurrentVersions() {
     const inAppExtnInfos = useAtomValue(configStateAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
-            <CurrentVersion browser={TBrowserShort.chrome} inAppExtnInfo={inAppExtnInfos.data?.chrome} />
-            <CurrentVersion browser={TBrowserShort.firefox} inAppExtnInfo={inAppExtnInfos.data?.firefox} />
+            <CurrentVersion browser={TBrowserShort.chrome} inAppExtnInfo={inAppExtnInfos.data?.chrome} loading={inAppExtnInfos.loading} />
+            <CurrentVersion browser={TBrowserShort.firefox} inAppExtnInfo={inAppExtnInfos.data?.firefox} loading={inAppExtnInfos.loading} />
         </div>
     );
 }
