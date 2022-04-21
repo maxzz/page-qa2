@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { useAtomValue } from 'jotai';
 import { byYearsAtom } from '@/store/store';
 import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
+import { ReleaseType } from '@/store/apis/file-archive';
 import { Meta, OneYearExts } from '@/store/apis/file-archive-parse';
 import { getArchiveExtensionUrl } from '@/store/apis/constants';
-import { ReleaseType } from '@/store/apis/file-archive';
-import { UITooltip } from '../UI/UITooltip';
 import { classNames } from '@/utils/classnames';
-import { BrowserIcon } from './browser-icons';
+import { BrowserIcon } from '../UI/UIIcons';
+import { UITooltip } from '../UI/UITooltip';
 
 type GroupItem = {
     main?: Meta;
@@ -27,15 +27,6 @@ function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
             {Object.values(orderedGroup).map((groupItem, idx) =>
                 <Fragment key={idx}>
                     {(groupItem.main || groupItem.debug) &&
-                        // <div
-                        //     className={classNames(
-                        //         `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
-                        //         getExtensionIconClass(groupItem.main?.browser || groupItem.debug?.browser),
-                        //         isFirefoxWoMain(groupItem) && 'extension-small-icon-outline hue-rotate-[293deg]',
-                        //         !isDevTools(groupItem) && 'extension-small-icon-outline',
-                        //     )}
-                        //     key={idx}
-                        // />
                         <BrowserIcon
                             browser={groupItem.main?.browser || groupItem.debug?.browser}
                             className={classNames(
@@ -71,7 +62,6 @@ function PopupVersionItem({ meta }: { meta?: Meta; }) {
     }
     return (
         <a className="h-5 flex items-center space-x-1" href={getArchiveExtensionUrl(meta.fname)}>
-            {/* <div className={classNames(`w-4 h-4 m-px rounded-full`, getExtensionIconClass(meta?.browser),)} /> */}
             <BrowserIcon browser={meta?.browser} className="w-4 h-4 m-px rounded-full" />
             <div className="text-xs text-url hover:underline cursor-pointer">
                 {`${TBrowserName(meta.browser)} version ${meta.version}${meta.release === ReleaseType.debug ? ' with debug information' : ''}`}
@@ -158,14 +148,6 @@ function Legend() {
             </div>
             {legendBrowsers.map((br, idx) => (
                 <div className="ml-1 flex items-center space-x-2" key={idx}>
-                    {/* <div
-                        className={classNames(
-                            `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
-                            getExtensionIconClass(br),
-                            (idx === 1 || idx === 3) && 'extension-small-icon-outline',
-                            (idx === 4) && 'extension-small-icon-outline hue-rotate-[293deg]',
-                        )}
-                    /> */}
                     <BrowserIcon browser={br}
                         className={classNames(
                             `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,

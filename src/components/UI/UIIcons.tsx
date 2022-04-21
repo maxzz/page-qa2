@@ -1,3 +1,4 @@
+import { TBrowserShort } from "@/store/apis/api-formats-g01";
 import { HTMLAttributes, SVGProps } from "react";
 
 export function IconHIDLogo(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
@@ -200,4 +201,13 @@ export function IconLogoIe(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSV
             <use xlinkHref="#icon-ie" />
         </svg>
     );
+}
+
+export function BrowserIcon({ browser, ...rest }: { browser?: TBrowserShort; } & HTMLAttributes<SVGSVGElement>) {
+    switch (browser) {
+        case TBrowserShort.chrome: return <IconLogoCr { ...rest } />
+        case TBrowserShort.firefox: return <IconLogoFf { ...rest } />
+        case TBrowserShort.edge: return <IconLogoMe { ...rest } />
+    }
+    return null;
 }
