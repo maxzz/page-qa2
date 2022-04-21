@@ -47,7 +47,7 @@ function CurrentVersion({ browser, inAppExtnInfo }: { browser: TBrowserShort; in
             <div className="ml-3 text-xs">
                 <div className="text-base font-bold scale-y-125 whitespace-nowrap">{TBrowserName(browser)} QA extension</div>
                 <div>Updated on {inAppExtnInfo?.updated ? beautifyDate(inAppExtnInfo.updated) : 'unavailable'}</div>
-                <div>{inAppExtnInfo?.version || ''}</div>
+                <div>{inAppExtnInfo?.version || 'version unavailable'}</div>
             </div>
 
             {/* Action buttons */}
