@@ -219,6 +219,8 @@ const correlateAtom = atom(
             set(latestFfAtom, latestFf);
         }
 
+        //TODO: split configStateAtom into versions and summary
+
         // const latestCh = get(latestChAtom);
         // if (latestCh) {
         //     console.log('latestCh', latestCh);

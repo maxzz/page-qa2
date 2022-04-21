@@ -39,7 +39,6 @@ const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
 function CurrentVersion({ browser, inAppExtnInfo, loading }: { browser: TBrowserShort; inAppExtnInfo?: InAppExtnInfo; loading: boolean; }) {
     const confettiRef = useRef<HTMLButtonElement>(null);
-    //TODO: distinguish null (unavailable) and undefined (as loading)
     return (
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ ...boxShadow, transition: "all .2s" }}>
 
