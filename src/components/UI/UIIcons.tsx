@@ -44,28 +44,30 @@ import ICO_CH from '../../assets/icons/browsers/chrome.svg';
 import ICO_FF from '../../assets/icons/browsers/firefox.svg';
 import ICO_MS from '../../assets/icons/browsers/edge.svg';
 
+const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)' };
+
 export function IconCrLogo2(props: HTMLAttributes<HTMLImageElement>) {
     return (
-        <img src={ICO_CH} style={{ filter: 'drop-shadow(1px 1px 1px #0002)' }} alt="Chrome logo" {...props} />
+        <img src={ICO_CH} style={iconShadow} alt="Chrome logo" {...props} />
     );
 }
 
 export function IconFfLogo(props: HTMLAttributes<HTMLImageElement>) {
     return (
         // <img src={ICO_FF} style={{filter: 'hue-rotate(270deg) drop-shadow(1px 1px 1px #0002)'}} alt="Firefox logo" {...props}/>
-        <img src={ICO_FF} style={{ filter: 'drop-shadow(1px 1px 1px #0002)' }} alt="Firefox logo" {...props} />
+        <img src={ICO_FF} style={iconShadow} alt="Firefox logo" {...props} />
     );
 }
 
 export function IconMsLogo(props: HTMLAttributes<HTMLImageElement>) {
     return (
-        <img src={ICO_MS} style={{ filter: 'drop-shadow(1px 1px 1px #0002)' }} alt="Microsoft Edge logo" {...props} />
+        <img src={ICO_MS} style={iconShadow} alt="Microsoft Edge logo" {...props} />
     );
 }
 
 export function IconCrLogo(props: HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg viewBox="0 0 24 24" style={{ filter: 'drop-shadow(1px 1px 1px #0002)' }} {...props}>
+        <svg viewBox="0 0 24 24" style={iconShadow} {...props}>
             <defs>
                 <clipPath id="a">
                     <circle cx="12" cy="11.99" r="11.2" fill="none" />
