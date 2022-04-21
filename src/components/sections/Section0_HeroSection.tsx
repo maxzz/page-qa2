@@ -47,8 +47,8 @@ function CurrentVersion({ browser, inAppExtnInfo, loading }: { browser: TBrowser
             <div className="content-center place-self-center"><BrowserIcon browser={browser} className={"w-9 h-8"} style={iconShadow} /></div>
             <div className="ml-3 text-xs">
                 <div className="text-base font-bold scale-y-125 whitespace-nowrap">{TBrowserName(browser)} QA extension</div>
-                <div>Updated on {inAppExtnInfo?.updated ? beautifyDate(inAppExtnInfo.updated) : loading ? '&nbsp;' : 'unavailable'}</div>
-                <div>{inAppExtnInfo?.version || (loading ? '&nbsp;' : 'version unavailable')}</div>
+                <div className="h-4">{inAppExtnInfo?.updated ? `Updated on ${beautifyDate(inAppExtnInfo.updated)}` : loading ? '' : 'update date not available'}</div>
+                <div className="h-4">{inAppExtnInfo?.version || (loading ? '' : 'version not available')}</div>
             </div>
 
             {/* Action buttons */}
