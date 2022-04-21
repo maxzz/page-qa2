@@ -62,7 +62,7 @@ function CurrentVersion({ browser, inAppExtnInfo }: { browser: TBrowserShort; in
                 {/* Download button */}
                 <a
                     className="p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
-                    href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.432_on_2022.03.16-r-chrome.zip"
+                    href={inAppExtnInfo.url}
                     title="Download extension"
                 >
                     <IconDownload className="w-6 h-6" strokeWidth={1} />
