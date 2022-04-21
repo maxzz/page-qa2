@@ -162,12 +162,10 @@ export function UISymbolsDefs() {
     );
 }
 
-const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)' };
-
 export function IconLogoCr(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     const { title, ...rest } = props;
     return (
-        <svg style={iconShadow} {...rest}>
+        <svg {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-ch" />
         </svg>
@@ -177,7 +175,7 @@ export function IconLogoCr(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSV
 export function IconLogoFf(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     const { title, ...rest } = props;
     return (
-        <svg style={iconShadow} {...rest}>
+        <svg {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-ff" />
         </svg>
@@ -187,7 +185,7 @@ export function IconLogoFf(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSV
 export function IconLogoMe(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     const { title, ...rest } = props;
     return (
-        <svg style={iconShadow} {...rest}>
+        <svg {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-me" />
         </svg>
@@ -197,7 +195,7 @@ export function IconLogoMe(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSV
 export function IconLogoIe(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     const { title, ...rest } = props;
     return (
-        <svg style={iconShadow} {...rest}>
+        <svg {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-ie" />
         </svg>
