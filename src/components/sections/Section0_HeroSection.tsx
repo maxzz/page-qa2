@@ -5,8 +5,9 @@ import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { beautifyDate } from '@/utils/helpers';
 import { toastSucceeded } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
-import { IconClipboard, IconCrLogo, IconDownload, IconFfLogo, IconMsLogo } from '../UI/UIIcons';
+import { IconClipboard, IconDownload, IconLogoCr, IconLogoFf, IconLogoMe } from '../UI/UIIcons';
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
+import { TBrowserShort } from '@/store/apis/api-formats-g01';
 
 const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
     angle: 90,
@@ -29,17 +30,17 @@ export type LatestExtension = {
 
 const extensionChAtom: LatestExtension = {
     name: 'Chrome',
-    icon: <IconCrLogo className="w-8 h-8" />,
+    icon: <IconLogoCr className="w-8 h-8" />,
 };
 
 const extensionFfAtom: LatestExtension = {
     name: 'Firefox',
-    icon: <IconFfLogo className="w-8 h-8" />,
+    icon: <IconLogoFf className="w-8 h-8" />,
 };
 
 const extensionMsAtom: LatestExtension = {
     name: 'Edge',
-    icon: <IconMsLogo className="w-8 h-8" />,
+    icon: <IconLogoMe className="w-8 h-8" />,
 };
 
 const boxShadow = {
@@ -54,7 +55,7 @@ function HeroImage() {
     );
 }
 
-function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtension, inAppExtnInfo: InAppExtnInfo; }) {
+function CurrentVersion({ browser, extension, inAppExtnInfo }: { browser: TBrowserShort; extension: LatestExtension, inAppExtnInfo: InAppExtnInfo; }) {
     const confettiRef = React.useRef<HTMLButtonElement>(null);
     return (
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{...boxShadow, transition: "all .2s"}}>
@@ -77,7 +78,7 @@ function CurrentVersion({ extension, inAppExtnInfo }: { extension: LatestExtensi
                     title="Download extension"
                 >
                     <IconDownload className="w-6 h-6" strokeWidth={1} />
-                    <div className="">Download</div>
+                    <div>Download</div>
                 </a>
 
                 {/* Copy link */}
@@ -101,8 +102,8 @@ function CurrentVersions() {
     const inAppExtnInfos = useAtomValue(configStateAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
-            {inAppExtnInfos.data?.chrome && <CurrentVersion extension={extensionChAtom} inAppExtnInfo={inAppExtnInfos.data.chrome} />}
-            {inAppExtnInfos.data?.firefox && <CurrentVersion extension={extensionFfAtom} inAppExtnInfo={inAppExtnInfos.data.firefox} />}
+            {inAppExtnInfos.data?.chrome && <CurrentVersion browser={TBrowserShort.chrome} extension={extensionChAtom} inAppExtnInfo={inAppExtnInfos.data.chrome} />}
+            {inAppExtnInfos.data?.firefox && <CurrentVersion browser={TBrowserShort.firefox} extension={extensionFfAtom} inAppExtnInfo={inAppExtnInfos.data.firefox} />}
         </div>
     );
 }
