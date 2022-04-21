@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { configStateAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
@@ -7,7 +7,7 @@ import { toastSucceeded } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
 import { IconClipboard, IconDownload, IconLogoCr, IconLogoFf, IconLogoMe } from '../UI/UIIcons';
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
-import { TBrowserShort } from '@/store/apis/api-formats-g01';
+import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
 
 const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
     angle: 90,
@@ -23,29 +23,7 @@ const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
     colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
 };
 
-export type LatestExtension = {
-    name: string;
-    icon: React.ReactNode;
-};
-
-const extensionChAtom: LatestExtension = {
-    name: 'Chrome',
-    icon: <IconLogoCr className="w-8 h-8" />,
-};
-
-const extensionFfAtom: LatestExtension = {
-    name: 'Firefox',
-    icon: <IconLogoFf className="w-8 h-8" />,
-};
-
-const extensionMsAtom: LatestExtension = {
-    name: 'Edge',
-    icon: <IconLogoMe className="w-8 h-8" />,
-};
-
-const boxShadow = {
-    boxShadow: '0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12)'
-};
+const boxShadow = { boxShadow: '0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12)', };
 
 function HeroImage() {
     return (
@@ -55,19 +33,29 @@ function HeroImage() {
     );
 }
 
-function CurrentVersion({ browser, extension, inAppExtnInfo }: { browser: TBrowserShort; extension: LatestExtension, inAppExtnInfo: InAppExtnInfo; }) {
+function BrowserIcon({browser, ...rest}: {browser: TBrowserShort} & HTMLAttributes<SVGSVGElement>) {
+    switch (browser) {
+        case TBrowserShort.chrome: return <IconLogoCr {...rest} />
+        case TBrowserShort.firefox: return <IconLogoFf {...rest} />
+        case TBrowserShort.edge: return <IconLogoMe {...rest} />
+    }
+    return null;
+}
+
+const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
+
+function CurrentVersion({ browser, inAppExtnInfo }: { browser: TBrowserShort; inAppExtnInfo: InAppExtnInfo; }) {
     const confettiRef = React.useRef<HTMLButtonElement>(null);
     return (
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{...boxShadow, transition: "all .2s"}}>
-            {/* Icon, name, version */}
 
-            <div className="content-center place-self-center">{extension.icon}</div>
+            {/* Icon, name, version, updated date */}
+            <div className="content-center place-self-center"><BrowserIcon browser={browser} className={"w-9 h-8"} style={iconShadow}/></div>
             <div className="ml-3">
-                <div className="font-bold scale-y-125 whitespace-nowrap">{extension.name} QA extension</div>
+                <div className="font-bold scale-y-125 whitespace-nowrap">{TBrowserName(browser)} QA extension</div>
                 <div className="text-xs">Updated on {beautifyDate(inAppExtnInfo.updated)}</div>
                 <div className="text-xs">{inAppExtnInfo.version}</div>
             </div>
-
 
             {/* Action buttons */}
             <div className="col-start-2 mt-2 sm:mt-0 flex items-center lg:justify-end space-x-2 text-sm">
@@ -102,8 +90,8 @@ function CurrentVersions() {
     const inAppExtnInfos = useAtomValue(configStateAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
-            {inAppExtnInfos.data?.chrome && <CurrentVersion browser={TBrowserShort.chrome} extension={extensionChAtom} inAppExtnInfo={inAppExtnInfos.data.chrome} />}
-            {inAppExtnInfos.data?.firefox && <CurrentVersion browser={TBrowserShort.firefox} extension={extensionFfAtom} inAppExtnInfo={inAppExtnInfos.data.firefox} />}
+            {inAppExtnInfos.data?.chrome && <CurrentVersion browser={TBrowserShort.chrome} inAppExtnInfo={inAppExtnInfos.data.chrome} />}
+            {inAppExtnInfos.data?.firefox && <CurrentVersion browser={TBrowserShort.firefox} inAppExtnInfo={inAppExtnInfos.data.firefox} />}
         </div>
     );
 }
