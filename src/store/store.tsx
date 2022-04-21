@@ -163,12 +163,9 @@ export const latestFfAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
 
 export const dataLoadAtom = atom(
     (get) => {
-        async function run() {
-            get(runFetchReleaseNotesAtom);
-            get(runFetchArchiveAtom);
-            get(runFetchConfigAtom);
-        }
-        run();
+        get(runFetchReleaseNotesAtom);
+        get(runFetchArchiveAtom);
+        get(runFetchConfigAtom);
     }
 );
 
@@ -187,7 +184,7 @@ const correlateAtom = atom(
         set(byYearsAtom, byYears);
         //console.log('publicVersions', publicVersions);
         //console.log('byYears', byYears);
-        
+
 
         if (stateNotes.error) {
             return;
