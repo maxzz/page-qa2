@@ -162,86 +162,44 @@ export function UISymbolsDefs() {
     );
 }
 
-import ICO_CH from '../../assets/icons/browsers/chrome.svg';
-import ICO_FF from '../../assets/icons/browsers/firefox.svg';
-import ICO_MS from '../../assets/icons/browsers/edge.svg';
-
 const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)' };
 
-// export function IconCrLogo2(props: HTMLAttributes<HTMLImageElement>) {
-//     return (
-//         <img src={ICO_CH} style={iconShadow} alt="Chrome logo" {...props} />
-//     );
-// }
-
 export function IconCrLogo(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+    const { title, ...rest } = props;
     return (
-        <svg style={iconShadow} className={`${className}`} {...rest}>
+        <svg style={iconShadow} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-ch" />
         </svg>
     );
 }
 
-// export function IconCrLogo(props: HTMLAttributes<SVGSVGElement>) {
-//     return (
-//         <svg viewBox="0 0 24 24" style={iconShadow} {...props}>
-//             <defs>
-//                 <clipPath id="cr-a">
-//                     <circle cx="12" cy="11.99" r="11.2" fill="none" />
-//                 </clipPath>
-//             </defs>
-//             <path d="M7.59 14.54 12 6.9h10a11.21 11.21 0 0 0-19.41-1v8.6Z" fill="#db4437" />
-//             <path d="M16.41 14.54H7.59l-5-8.6a11.22 11.22 0 0 0 8.9 17.25l4.94-4.94Z" fill="#0f9d58" />
-//             <path d="m12 6.9 4.41 7.64-4.94 8.65H12A11.21 11.21 0 0 0 22 6.9Z" fill="#ffcd40" />
-//             <g clipPath="url(#cr-a)">
-//                 <circle cx="12" cy="11.99" r="5.09" fill="#f1f1f1" />
-//                 <circle cx="12" cy="11.99" r="4.07" fill="#4285f4" />
-//             </g>
-//         </svg>
-//     );
-// }
-
-// export function IconFfLogo2(props: HTMLAttributes<HTMLImageElement>) {
-//     return (
-//         // <img src={ICO_FF} style={{filter: 'hue-rotate(270deg) drop-shadow(1px 1px 1px #0002)'}} alt="Firefox logo" {...props}/>
-//         <img src={ICO_FF} style={iconShadow} alt="Firefox logo" {...props} />
-//     );
-// }
-
 export function IconFfLogo(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+    const { title, ...rest } = props;
     return (
-        <svg style={iconShadow} className={`${className}`} {...rest}>
+        <svg style={iconShadow} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-ff" />
         </svg>
     );
 }
 
-export function IconIeLogo2(props: HTMLAttributes<HTMLImageElement>) {
+export function IconMsLogo(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+    const { title, ...rest } = props;
     return (
-        <img src={ICO_MS} style={iconShadow} alt="Microsoft Edge logo" {...props} />
-    );
-}
-
-export function IconIeLogo(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
-    return (
-        <svg style={iconShadow} className={`${className}`} {...rest}>
+        <svg style={iconShadow} {...rest}>
             {title && <title>{title}</title>}
-            <use xlinkHref="#icon-ie" />
+            <use xlinkHref="#icon-me" />
         </svg>
     );
 }
 
-export function IconMsLogo(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconIeLogo(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+    const { title, ...rest } = props;
     return (
-        <svg style={iconShadow} className={`${className}`} {...rest}>
+        <svg style={iconShadow} {...rest}>
             {title && <title>{title}</title>}
-            <use xlinkHref="#icon-me" />
+            <use xlinkHref="#icon-ie" />
         </svg>
     );
 }
