@@ -1,13 +1,14 @@
-import React, { HTMLAttributes } from 'react';
+import { useRef } from 'react';
 import { useAtomValue } from 'jotai';
 import { configStateAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { beautifyDate } from '@/utils/helpers';
 import { toastSucceeded } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
-import { IconClipboard, IconDownload, IconLogoCr, IconLogoFf, IconLogoMe } from '../UI/UIIcons';
+import { IconClipboard, IconDownload } from '../UI/UIIcons';
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
 import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
+import { BrowserIcon } from './browser-icons';
 
 const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
     angle: 90,
@@ -33,19 +34,10 @@ function HeroImage() {
     );
 }
 
-function BrowserIcon({browser, ...rest}: {browser: TBrowserShort} & HTMLAttributes<SVGSVGElement>) {
-    switch (browser) {
-        case TBrowserShort.chrome: return <IconLogoCr {...rest} />
-        case TBrowserShort.firefox: return <IconLogoFf {...rest} />
-        case TBrowserShort.edge: return <IconLogoMe {...rest} />
-    }
-    return null;
-}
-
 const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
 function CurrentVersion({ browser, inAppExtnInfo }: { browser: TBrowserShort; inAppExtnInfo: InAppExtnInfo; }) {
-    const confettiRef = React.useRef<HTMLButtonElement>(null);
+    const confettiRef = useRef<HTMLButtonElement>(null);
     return (
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{...boxShadow, transition: "all .2s"}}>
 
