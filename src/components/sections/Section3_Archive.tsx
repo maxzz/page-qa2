@@ -116,6 +116,11 @@ function VersionItems({ items }: { items: Meta[]; }) {
 
 function YearsGrid() {
     const byYears: OneYearExts[] = [...useAtomValue(byYearsAtom)].reverse();
+    if (!byYears.length) {
+        return (
+            <div className="my-4 text-red-600 font-bold">Data not received</div>
+        );
+    }
     return (
         <div className="mt-1 px-0.5 text-[.65rem] sm:text-xs select-none cursor-default">
             {/* All years */}
