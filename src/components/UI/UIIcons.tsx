@@ -62,6 +62,7 @@ export function UISymbolsDefs() {
                         <circle cx="12" cy="11.99" r="4.07" fill="#4285f4" />
                     </g>
                 </symbol>
+
                 <symbol id="icon-ff" viewBox="0 0 24 24">
                     <defs>
                         <radialGradient id="ff-a" cx="-269.32" cy="902.68" fx="-269.32" fy="902.68" r="25.85" gradientTransform="matrix(1 0 0 -1 290.3 908)" gradientUnits="userSpaceOnUse">
@@ -102,6 +103,7 @@ export function UISymbolsDefs() {
                     <path d="M21.12 5.97a6.37 6.37 0 0 0-1.4-2.31 8.51 8.51 0 0 0-2.56-1.85c-.82-.4-1.68-.71-2.56-.91a11.42 11.42 0 0 0-4.73 0 8.19 8.19 0 0 0-3.93 1.91A9.57 9.57 0 0 1 17.1 4.18c.47.46.88.97 1.22 1.54 1.42 2.28 1.28 5.13.17 6.78a5.43 5.43 0 0 1-4.13 2.42 6.73 6.73 0 0 0 6.18-3.1 6.93 6.93 0 0 0 .57-5.84Z"
                         fill="url(#ff-e)" />
                 </symbol>
+
                 <symbol id="icon-me" viewBox="0 0 24 24">
                     <defs>
                         <radialGradient id="me-b" cx="-306.26" cy="377.46" r="8.27" gradientTransform="matrix(1 0 0 .95 320.79 -342.22)" gradientUnits="userSpaceOnUse">
@@ -149,6 +151,12 @@ export function UISymbolsDefs() {
                     <path d="M14.11 13.81c-.07.09-.29.21-.29.49a.81.81 0 0 0 .41.62 7.12 7.12 0 0 0 3.6.76 5.32 5.32 0 0 0 5.26-5.31 7.61 7.61 0 0 0-1-3.81A11.12 11.12 0 0 0 12 .9 11.09 11.09 0 0 0 .91 11.84C1 8.67 4.09 6.12 7.84 6.12a8.43 8.43 0 0 1 3.64.88 6.2 6.2 0 0 1 2.67 2.53 5.52 5.52 0 0 1 .63 2.56 3.11 3.11 0 0 1-.67 1.72Z"
                         fill="url(#me-f)" />
                 </symbol>
+
+                <symbol id="icon-ie" viewBox="0 0 24 24">
+                    <path d="M8.05 14.13c0 .55.08 1.04.25 1.49.34.86.95 1.59 1.74 2.06.39.25.82.45 1.27.61.45.16.92.28 1.4.36 1.04.16 2.1.16 3.13-.02a12.3 12.3 0 0 0 3.06-.99c.5-.23 1-.48 1.52-.75v4.81c-1.09.53-2.24.95-3.42 1.24-.58.14-1.16.25-1.76.31s-1.21.1-1.85.1a9.96 9.96 0 0 1-4.69-1.13 9.11 9.11 0 0 1-1.91-1.34A8.49 8.49 0 0 1 4 14.49c0-.93.13-1.82.38-2.67A8.5 8.5 0 0 1 7.24 7.6a9.5 9.5 0 0 1 2.33-1.35 4.95 4.95 0 0 0-1.1 1.68 7.22 7.22 0 0 0-.51 1.94h8.08c0-.82-.08-1.52-.25-2.13s-.43-1.12-.8-1.52a3.37 3.37 0 0 0-1.43-.91 6.33 6.33 0 0 0-2.12-.3c-.97 0-1.95.14-2.92.44a13.1 13.1 0 0 0-5.2 3.05c-.72.68-1.34 1.45-1.86 2.3.11-.96.32-1.88.61-2.75a11.45 11.45 0 0 1 2.79-4.48 10.08 10.08 0 0 1 4.56-2.56c.89-.2 1.83-.32 2.82-.32.58 0 1.16.05 1.74.16a9.98 9.98 0 0 1 8.11 7.21c.3 1.05.46 2.15.46 3.29v2.82H8.05Z"
+                        fill="#0078d7" />
+                </symbol>
+
             </defs>
         </svg>
     );
@@ -212,9 +220,19 @@ export function IconFfLogo(props: SVGProps<SVGSVGElement> & { title?: string; })
     );
 }
 
-export function IconIeLogo(props: HTMLAttributes<HTMLImageElement>) {
+export function IconIeLogo2(props: HTMLAttributes<HTMLImageElement>) {
     return (
         <img src={ICO_MS} style={iconShadow} alt="Microsoft Edge logo" {...props} />
+    );
+}
+
+export function IconIeLogo(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+    const { className = '', title, ...rest } = props;
+    return (
+        <svg style={iconShadow} className={`${className}`} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#icon-ie" />
+        </svg>
     );
 }
 
