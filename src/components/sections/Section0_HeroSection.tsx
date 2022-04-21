@@ -6,9 +6,10 @@ import { beautifyDate } from '@/utils/helpers';
 import { toastSucceeded } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
 import { IconClipboard, IconDownload } from '../UI/UIIcons';
-import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
 import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
 import { BrowserIcon } from './browser-icons';
+import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
+import { classNames } from '@/utils/classnames';
 
 const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
     angle: 90,
@@ -28,7 +29,7 @@ const boxShadow = { boxShadow: '0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(
 
 function HeroImage() {
     return (
-        <div className="bg-slate-400" style={{...boxShadow, transition: "all .2s"}}>
+        <div className="bg-slate-400" style={{ ...boxShadow, transition: "all .2s" }}>
             <img className="h-full object-cover border border-slate-300 border-b-slate-400" src={HERO_IMAGE} alt="hero" />
         </div>
     );
@@ -36,25 +37,28 @@ function HeroImage() {
 
 const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
-function CurrentVersion({ browser, inAppExtnInfo }: { browser: TBrowserShort; inAppExtnInfo: InAppExtnInfo; }) {
+function CurrentVersion({ browser, inAppExtnInfo }: { browser: TBrowserShort; inAppExtnInfo?: InAppExtnInfo; }) {
     const confettiRef = useRef<HTMLButtonElement>(null);
     return (
-        <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{...boxShadow, transition: "all .2s"}}>
+        <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ ...boxShadow, transition: "all .2s" }}>
 
             {/* Icon, name, version, updated date */}
-            <div className="content-center place-self-center"><BrowserIcon browser={browser} className={"w-9 h-8"} style={iconShadow}/></div>
-            <div className="ml-3">
-                <div className="font-bold scale-y-125 whitespace-nowrap">{TBrowserName(browser)} QA extension</div>
-                <div className="text-xs">Updated on {beautifyDate(inAppExtnInfo.updated)}</div>
-                <div className="text-xs">{inAppExtnInfo.version}</div>
+            <div className="content-center place-self-center"><BrowserIcon browser={browser} className={"w-9 h-8"} style={iconShadow} /></div>
+            <div className="ml-3 text-xs">
+                <div className="text-base font-bold scale-y-125 whitespace-nowrap">{TBrowserName(browser)} QA extension</div>
+                <div>Updated on {inAppExtnInfo?.updated ? beautifyDate(inAppExtnInfo.updated) : 'unavailable'}</div>
+                <div>{inAppExtnInfo?.version || ''}</div>
             </div>
 
             {/* Action buttons */}
             <div className="col-start-2 mt-2 sm:mt-0 flex items-center lg:justify-end space-x-2 text-sm">
                 {/* Download button */}
                 <a
-                    className="p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
-                    href={inAppExtnInfo.url}
+                    className={classNames(
+                        "p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5 select-none",
+                        !inAppExtnInfo?.url && "invisible pointer-events-none",
+                    )}
+                    href={inAppExtnInfo?.url}
                     title="Download extension"
                 >
                     <IconDownload className="w-6 h-6" strokeWidth={1} />
@@ -62,12 +66,17 @@ function CurrentVersion({ browser, inAppExtnInfo }: { browser: TBrowserShort; in
                 </a>
 
                 {/* Copy link */}
-                <button ref={confettiRef} className="p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5"
+                <button 
+                    className={classNames(
+                        "p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5 select-none",
+                        !inAppExtnInfo?.url && "invisible pointer-events-none",
+                    )}
                     onClick={async () => {
-                        await navigator.clipboard.writeText(inAppExtnInfo.url);
+                        await navigator.clipboard.writeText(inAppExtnInfo?.url || '');
                         toastSucceeded('Link copied to clipboard');
                         confetti(confettiRef.current!, confettiConfig);
                     }}
+                    ref={confettiRef}
                     title="Copy extension URL to clipboard"
                 >
                     <IconClipboard className="w-6 h-6" strokeWidth={1} />
@@ -82,8 +91,8 @@ function CurrentVersions() {
     const inAppExtnInfos = useAtomValue(configStateAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
-            {inAppExtnInfos.data?.chrome && <CurrentVersion browser={TBrowserShort.chrome} inAppExtnInfo={inAppExtnInfos.data.chrome} />}
-            {inAppExtnInfos.data?.firefox && <CurrentVersion browser={TBrowserShort.firefox} inAppExtnInfo={inAppExtnInfos.data.firefox} />}
+            <CurrentVersion browser={TBrowserShort.chrome} inAppExtnInfo={inAppExtnInfos.data?.chrome} />
+            <CurrentVersion browser={TBrowserShort.firefox} inAppExtnInfo={inAppExtnInfos.data?.firefox} />
         </div>
     );
 }
