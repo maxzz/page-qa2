@@ -72,3 +72,13 @@ export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null,
     const grouped = byYearsArr.map<OneYearExts>(({ year, items: yearItems }) => ({ year, items: splitToVersionsMap(yearItems) }));
     return grouped;
 }
+
+export function isAVersionGreaterB(a?: string, b?: string) { // '3.4.429' vs. '3.4.430'
+    const aArr = a?.split('.') || [];
+    const bArr = b?.split('.') || [];
+    if (aArr.length !== bArr.length) {
+        return false;
+    }
+    const itemLess = aArr.find((ver, idx) => +ver < +bArr[idx]);
+    return !!itemLess;
+}

@@ -6,7 +6,7 @@ import { CurrentExtensions, getCurrentConfig, InAppExtnInfo } from './apis/file-
 import { fetchReleaseNotes } from './apis/file-release-notes';
 import { ArchiveExtensionMeta, getExistingOnServer } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
-import { archiveByYears, OneYearExts } from './apis/file-archive-parse';
+import { archiveByYears, isAVersionGreaterB, OneYearExts } from './apis/file-archive-parse';
 import { regexMarkdownPublicVersions } from './apis/constants';
 import { TBrowserShort } from './apis/api-formats-g01';
 
@@ -168,9 +168,8 @@ export const dataLoadAtom = atom(
 
 export const publicVersionsAtom = atom<string[] | undefined>(undefined); // ['3.4.419', '3.0.386', '3.0.378']
 
-export const latestChAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
-export const latestFfAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
-
+// const latestChAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
+// const latestFfAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
 
 export const latestChExtensionAtom = atom<InAppExtnInfo | undefined>(undefined);
 export const latestFfExtensionAtom = atom<InAppExtnInfo | undefined>(undefined);
@@ -203,9 +202,21 @@ const correlateAtom = atom(
             return;
         }
 
-        if (stateConfig.data) {
-            set(latestChExtensionAtom, stateConfig.data.chrome);
-            set(latestFfExtensionAtom, stateConfig.data.firefox);
+        const reverse = stateArchive.data ? [...stateArchive.data].reverse() : [];
+        const latestArchiveCh: ArchiveExtensionMeta | undefined = reverse.find((item) => item.browser === TBrowserShort.chrome);
+        const latestArchiveFf: ArchiveExtensionMeta | undefined = reverse.find((item) => item.browser === TBrowserShort.firefox);
+
+        if (stateConfig.data && stateArchive.data) {
+            const latestConfigCh = stateConfig.data.chrome;
+            const latestConfigFf = stateConfig.data.firefox;
+
+            console.log('vvv', isAVersionGreaterB(latestConfigCh.version, latestArchiveCh?.version), 'c:', latestConfigCh.version, 'a:', latestArchiveCh?.version, );
+            console.log('vvv', isAVersionGreaterB(latestConfigFf.version, latestArchiveFf?.version), 'c:', latestConfigFf.version, 'a:', latestArchiveFf?.version, );
+
+
+            set(latestChExtensionAtom, latestConfigCh);
+            set(latestFfExtensionAtom, latestConfigFf);
+
             set(summaryExtensionsAtom, stateConfig.data.summary);
         }
 
@@ -223,14 +234,14 @@ const correlateAtom = atom(
         // }
 
         //TODO:
-        if (stateArchive.data) {
-            const reverse = [...stateArchive.data].reverse();
-            const latestCh = reverse.find((item) => item.browser === TBrowserShort.chrome);
-            const latestFf = reverse.find((item) => item.browser === TBrowserShort.firefox);
+        // if (stateArchive.data) {
+        //     const reverse = [...stateArchive.data].reverse();
+        //     const latestCh = reverse.find((item) => item.browser === TBrowserShort.chrome);
+        //     const latestFf = reverse.find((item) => item.browser === TBrowserShort.firefox);
 
-            set(latestChAtom, latestCh);
-            set(latestFfAtom, latestFf);
-        }
+        //     set(latestChAtom, latestCh);
+        //     set(latestFfAtom, latestFf);
+        // }
 
         //TODO: split configStateAtom into versions and summary
 
