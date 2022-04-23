@@ -38,7 +38,8 @@ const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
 function ActionButtons({ url }: { url?: string; }) {
     const confettiRef = useRef<HTMLButtonElement>(null);
-    return (<>
+    return (
+    <div className="flex items-center lg:justify-end space-x-2 text-sm">
         {/* Download button */}
         <a
             className={classNames(
@@ -69,7 +70,8 @@ function ActionButtons({ url }: { url?: string; }) {
             <IconClipboard className="w-6 h-6" strokeWidth={1} />
             <div>Copy link</div>
         </button>
-    </>);
+    </div>
+    );
 }
 
 function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBrowserShort; extInfoAtom: Atom<InAppExtnInfo | undefined>; loading: boolean; }) {
@@ -86,7 +88,7 @@ function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBrowserSh
             </div>
 
             {/* Action buttons */}
-            <div className="col-start-2 mt-2 sm:mt-0 flex items-center lg:justify-end space-x-2 text-sm">
+            <div className="col-start-2 mt-2 sm:mt-0">
                 <ActionButtons url={inAppExtnInfo?.url} />
             </div>
         </div>
