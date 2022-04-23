@@ -191,22 +191,35 @@ const correlateAtom = atom(
         const latestArchive = getLatestArchiveVersions(stateArchive.data);
 
         if (stateConfig.data && stateArchive.data) {
-            let latestConfigFf = stateConfig.data.firefox;
             let latestConfigCh = stateConfig.data.chrome;
+            let latestConfigFf = stateConfig.data.firefox;
 
-            if (latestArchive.ch && isAVersionGreaterB(latestConfigCh.version, latestArchive.ch.version)) {
-                latestConfigCh = { ...latestConfigCh };
-                latestConfigCh.version = latestArchive.ch.version;
-                latestConfigCh.updated = latestArchive.ch.updated;
-                latestConfigCh.url = getArchiveExtensionUrl(latestArchive.ch.fname);
+            function replaceIfNeed(latestConfig: InAppExtnInfo, latestArchive?: ArchiveExtensionMeta) {
+                let rv = latestConfig;
+                if (latestArchive && isAVersionGreaterB(latestConfig.version, latestArchive.version)) {
+                    rv = { ...rv };
+                    rv.version = latestArchive.version;
+                    rv.updated = latestArchive.updated;
+                    rv.url = getArchiveExtensionUrl(latestArchive.fname);
+                }
+                return rv;
             }
+            latestConfigCh = replaceIfNeed(latestConfigCh, latestArchive.ch);
+            latestConfigFf = replaceIfNeed(latestConfigFf, latestArchive.ff);
 
-            if (latestArchive.ff && isAVersionGreaterB(latestConfigFf.version, latestArchive.ff.version)) {
-                latestConfigFf = { ...latestConfigFf };
-                latestConfigFf.version = latestArchive.ff.version;
-                latestConfigFf.updated = latestArchive.ff.updated;
-                latestConfigFf.url = getArchiveExtensionUrl(latestArchive.ff.fname);
-            }
+            // if (latestArchive.ch && isAVersionGreaterB(latestConfigCh.version, latestArchive.ch.version)) {
+            //     latestConfigCh = { ...latestConfigCh };
+            //     latestConfigCh.version = latestArchive.ch.version;
+            //     latestConfigCh.updated = latestArchive.ch.updated;
+            //     latestConfigCh.url = getArchiveExtensionUrl(latestArchive.ch.fname);
+            // }
+
+            // if (latestArchive.ff && isAVersionGreaterB(latestConfigFf.version, latestArchive.ff.version)) {
+            //     latestConfigFf = { ...latestConfigFf };
+            //     latestConfigFf.version = latestArchive.ff.version;
+            //     latestConfigFf.updated = latestArchive.ff.updated;
+            //     latestConfigFf.url = getArchiveExtensionUrl(latestArchive.ff.fname);
+            // }
 
             set(latestChExtensionAtom, latestConfigCh);
             set(latestFfExtensionAtom, latestConfigFf);
