@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useAtomValue } from 'jotai';
+import { Atom, useAtomValue } from 'jotai';
 import { configStateAtom, latestChExtensionAtom, latestFfExtensionAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { beautifyDate } from '@/utils/helpers';
@@ -36,7 +36,8 @@ function HeroImage() {
 
 const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
-function CurrentVersion({ browser, inAppExtnInfo, loading }: { browser: TBrowserShort; inAppExtnInfo?: InAppExtnInfo; loading: boolean; }) {
+function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBrowserShort; extInfoAtom: Atom<InAppExtnInfo | undefined>; loading: boolean; }) {
+    const inAppExtnInfo = useAtomValue(extInfoAtom);
     const confettiRef = useRef<HTMLButtonElement>(null);
     return (
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ ...boxShadow, transition: "all .2s" }}>
@@ -88,12 +89,10 @@ function CurrentVersion({ browser, inAppExtnInfo, loading }: { browser: TBrowser
 
 function CurrentVersions() {
     const configState = useAtomValue(configStateAtom);
-    const ch = useAtomValue(latestChExtensionAtom);
-    const ff = useAtomValue(latestFfExtensionAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
-            <CurrentVersion browser={TBrowserShort.chrome} inAppExtnInfo={ch} loading={configState.loading} />
-            <CurrentVersion browser={TBrowserShort.firefox} inAppExtnInfo={ff} loading={configState.loading} />
+            <CurrentVersion browser={TBrowserShort.chrome} extInfoAtom={latestChExtensionAtom} loading={configState.loading} />
+            <CurrentVersion browser={TBrowserShort.firefox} extInfoAtom={latestFfExtensionAtom} loading={configState.loading} />
         </div>
     );
 }
