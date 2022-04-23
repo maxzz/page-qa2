@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAtom } from 'jotai';
-import { configStateAtom } from '@/store/store';
+import { useAtomValue } from 'jotai';
+import { summaryExtensionsAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { TBrand, TBrandName, TBrowserShort, TBrowserName } from '@/store/apis/api-formats-g01';
 
@@ -77,8 +77,7 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort; table
 }
 
 export function Section2_CurrentVersions() {
-    const [extInfos] = useAtom(configStateAtom);
-    const summary = extInfos.data?.summary || [];
+    const summary = useAtomValue(summaryExtensionsAtom);
     const res = reduceToFlat(reduceForTable(summary));
     return (
         <div className="py-2 text-sm flex flex-col space-y-2">
