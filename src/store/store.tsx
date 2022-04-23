@@ -203,6 +203,12 @@ const correlateAtom = atom(
             return;
         }
 
+        if (stateConfig.data) {
+            set(latestChExtensionAtom, stateConfig.data.chrome);
+            set(latestFfExtensionAtom, stateConfig.data.firefox);
+            set(summaryExtensionsAtom, stateConfig.data.summary);
+        }
+
         // if (publicVersions && stateArchive.data) {
         //     //const archiveMap = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
         //     const archiveMap = stateArchive.data.reduce<Record<string, ArchiveExtensionMeta[]>>((acc, curr) => {
