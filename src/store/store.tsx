@@ -168,9 +168,6 @@ export const dataLoadAtom = atom(
 
 export const publicVersionsAtom = atom<string[] | undefined>(undefined); // ['3.4.419', '3.0.386', '3.0.378']
 
-// const latestChAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
-// const latestFfAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
-
 export const latestChExtensionAtom = atom<InAppExtnInfo | undefined>(undefined);
 export const latestFfExtensionAtom = atom<InAppExtnInfo | undefined>(undefined);
 export const summaryExtensionsAtom = atom<InAppExtnInfo[]>([]);
@@ -188,81 +185,32 @@ const correlateAtom = atom(
         const publicVersions = get(publicVersionsAtom);
         const byYears = archiveByYears(stateArchive.data, publicVersions);
         set(byYearsAtom, byYears);
-        //console.log('publicVersions', publicVersions);
-        //console.log('byYears', byYears);
-
-
-        if (stateNotes.error) {
-            return;
-        }
-        if (stateArchive.error) {
-            return;
-        }
-        if (stateConfig.error) {
-            return;
-        }
 
         const latestArchive = getLatestArchiveVersions(stateArchive.data);
 
         if (stateConfig.data && stateArchive.data) {
-            const latestConfigCh = stateConfig.data.chrome;
-            const latestConfigFf = stateConfig.data.firefox;
-
-            console.log('vvv', isAVersionGreaterB(latestConfigCh.version, latestArchive.ch?.version), 'c:', latestConfigCh, 'a:', latestArchive.ch );
-            console.log('vvv', isAVersionGreaterB(latestConfigFf.version, latestArchive.ff?.version), 'c:', latestConfigFf.version, 'a:', latestArchive.ff?.version );
-
-            let newConfigCh = latestConfigCh;
-            let newConfigFf = latestConfigFf;
+            let latestConfigFf = stateConfig.data.firefox;
+            let latestConfigCh = stateConfig.data.chrome;
 
             if (latestArchive.ch && isAVersionGreaterB(latestConfigCh.version, latestArchive.ch.version)) {
-                newConfigCh = {...latestConfigCh};
-                newConfigCh.version = latestArchive.ch.version;
-                newConfigCh.updated = latestArchive.ch.updated;
-                newConfigCh.url = getArchiveExtensionUrl(latestArchive.ch.fname);
+                latestConfigCh = { ...latestConfigCh };
+                latestConfigCh.version = latestArchive.ch.version;
+                latestConfigCh.updated = latestArchive.ch.updated;
+                latestConfigCh.url = getArchiveExtensionUrl(latestArchive.ch.fname);
             }
 
-            set(latestChExtensionAtom, newConfigCh);
-            set(latestFfExtensionAtom, newConfigFf);
+            if (latestArchive.ff && isAVersionGreaterB(latestConfigFf.version, latestArchive.ff.version)) {
+                latestConfigFf = { ...latestConfigFf };
+                latestConfigFf.version = latestArchive.ff.version;
+                latestConfigFf.updated = latestArchive.ff.updated;
+                latestConfigFf.url = getArchiveExtensionUrl(latestArchive.ff.fname);
+            }
+
+            set(latestChExtensionAtom, latestConfigCh);
+            set(latestFfExtensionAtom, latestConfigFf);
 
             set(summaryExtensionsAtom, stateConfig.data.summary);
         }
-
-        // if (publicVersions && stateArchive.data) {
-        //     //const archiveMap = Object.fromEntries(archive.data.map((item) => ([item.version, item])));
-        //     const archiveMap = stateArchive.data.reduce<Record<string, ArchiveExtensionMeta[]>>((acc, curr) => {
-        //         if (!acc[curr.version]) {
-        //             acc[curr.version] = [];
-        //         }
-        //         acc[curr.version].push(curr);
-        //         return acc;
-        //     }, {});
-
-        //     // console.log('published', archiveMap);
-        // }
-
-        //TODO:
-        // if (stateArchive.data) {
-        //     const reverse = [...stateArchive.data].reverse();
-        //     const latestCh = reverse.find((item) => item.browser === TBrowserShort.chrome);
-        //     const latestFf = reverse.find((item) => item.browser === TBrowserShort.firefox);
-
-        //     set(latestChAtom, latestCh);
-        //     set(latestFfAtom, latestFf);
-        // }
-
-        //TODO: split configStateAtom into versions and summary
-
-        // const latestCh = get(latestChAtom);
-        // if (latestCh) {
-        //     console.log('latestCh', latestCh);
-        // }
-
-        // const latestFf = get(latestFfAtom);
-        // if (latestFf) {
-        //     console.log('latestFf', latestFf);
-        // }
-
-        // console.log('ready to rock');
     }
 );
 
