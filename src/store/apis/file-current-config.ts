@@ -55,19 +55,19 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
 }
 
 export interface CurrentExtensions { // Extensions on Ftp server
-    firefox: InAppExtnInfo;
     chrome: InAppExtnInfo;
+    firefox: InAppExtnInfo;
     summary: InAppExtnInfo[];
 }
 
 function parseCurrentConfig(config: FormatCurrentCfg.FromFile): CurrentExtensions {
+    const extInfoChQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowserShort.chrome, true); // QA
+    const extInfoChPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowserShort.chrome, false); // public
     const extInfoFfQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowserShort.firefox, true);
-    const extInfoFfPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowserShort.firefox, false); // public
-    const extInfoChQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowserShort.chrome, true);
-    const extInfoChPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowserShort.chrome, false);
+    const extInfoFfPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowserShort.firefox, false);
     return {
-        firefox: extInfoFfQa[0],
         chrome: extInfoChQa[0],
+        firefox: extInfoFfQa[0],
         summary: [...extInfoFfQa, ...extInfoFfPu, ...extInfoChQa, ...extInfoChPu]
     };
 }

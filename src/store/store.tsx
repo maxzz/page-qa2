@@ -2,7 +2,7 @@ import { atom, Getter } from 'jotai';
 import { atomWithCallback, LoadingDataState, loadingDataStateInit } from '@/hooks/atomsX';
 import { debounce } from '@/utils/debounce';
 import { marked } from 'marked';
-import { CurrentExtensions, getCurrentConfig } from './apis/file-current-config';
+import { CurrentExtensions, getCurrentConfig, InAppExtnInfo } from './apis/file-current-config';
 import { fetchReleaseNotes } from './apis/file-release-notes';
 import { ArchiveExtensionMeta, getExistingOnServer } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
@@ -156,11 +156,6 @@ export const releaseNotesAtom = atom<string>((get) => get(releaseNotesStateAtom)
 
 //#endregion ServerReleaseNotes
 
-export const publicVersionsAtom = atom<string[] | undefined>(undefined); // ['3.4.419', '3.0.386', '3.0.378']
-
-export const latestChAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
-export const latestFfAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
-
 export const dataLoadAtom = atom(
     (get) => {
         get(runFetchReleaseNotesAtom);
@@ -168,6 +163,18 @@ export const dataLoadAtom = atom(
         get(runFetchConfigAtom);
     }
 );
+
+// Derivative data
+
+export const publicVersionsAtom = atom<string[] | undefined>(undefined); // ['3.4.419', '3.0.386', '3.0.378']
+
+export const latestChAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
+export const latestFfAtom = atom<ArchiveExtensionMeta | undefined>(undefined);
+
+
+export const latestChExtensionAtom = atom<InAppExtnInfo | undefined>(undefined);
+export const latestFfExtensionAtom = atom<InAppExtnInfo | undefined>(undefined);
+export const summaryExtensionsAtom = atom<InAppExtnInfo[]>([]);
 
 const correlateAtom = atom(
     null,
