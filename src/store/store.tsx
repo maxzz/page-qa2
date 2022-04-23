@@ -195,16 +195,12 @@ const correlateAtom = atom(
             let latestConfigFf = stateConfig.data.firefox;
 
             function replaceIfNeed(latestConfig: InAppExtnInfo, latestArchive?: ArchiveExtensionMeta) {
-                let rv = latestConfig;
-                if (latestArchive && isAVersionGreaterB(latestConfig.version, latestArchive.version)) {
-                    rv = {
-                        ...rv,
-                        version: latestArchive.version,
-                        updated: latestArchive.updated,
-                        url: getArchiveExtensionUrl(latestArchive.fname),
-                    };
-                }
-                return rv;
+                return latestArchive && isAVersionGreaterB(latestConfig.version, latestArchive.version) ? {
+                    ...latestConfig,
+                    version: latestArchive.version,
+                    updated: latestArchive.updated,
+                    url: getArchiveExtensionUrl(latestArchive.fname),
+                } : latestConfig;
             }
             latestConfigCh = replaceIfNeed(latestConfigCh, latestArchive.ch);
             latestConfigFf = replaceIfNeed(latestConfigFf, latestArchive.ff);
