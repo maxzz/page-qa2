@@ -197,10 +197,12 @@ const correlateAtom = atom(
             function replaceIfNeed(latestConfig: InAppExtnInfo, latestArchive?: ArchiveExtensionMeta) {
                 let rv = latestConfig;
                 if (latestArchive && isAVersionGreaterB(latestConfig.version, latestArchive.version)) {
-                    rv = { ...rv };
-                    rv.version = latestArchive.version;
-                    rv.updated = latestArchive.updated;
-                    rv.url = getArchiveExtensionUrl(latestArchive.fname);
+                    rv = {
+                        ...rv,
+                        version: latestArchive.version,
+                        updated: latestArchive.updated,
+                        url: getArchiveExtensionUrl(latestArchive.fname),
+                    };
                 }
                 return rv;
             }
