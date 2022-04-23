@@ -7,7 +7,7 @@ import { fetchReleaseNotes } from './apis/file-release-notes';
 import { ArchiveExtensionMeta, getExistingOnServer, ReleaseType } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
 import { archiveByYears, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts } from './apis/file-archive-parse';
-import { regexMarkdownPublicVersions } from './apis/constants';
+import { getArchiveExtensionUrl, regexMarkdownPublicVersions } from './apis/constants';
 import { TBrowserShort } from './apis/api-formats-g01';
 
 //#region LocalStorage
@@ -208,11 +208,21 @@ const correlateAtom = atom(
             const latestConfigCh = stateConfig.data.chrome;
             const latestConfigFf = stateConfig.data.firefox;
 
-            console.log('vvv', isAVersionGreaterB(latestConfigCh.version, latestArchive.ch?.version), 'c:', latestConfigCh.version, 'a:', latestArchive.ch?.version );
+            console.log('vvv', isAVersionGreaterB(latestConfigCh.version, latestArchive.ch?.version), 'c:', latestConfigCh, 'a:', latestArchive.ch );
             console.log('vvv', isAVersionGreaterB(latestConfigFf.version, latestArchive.ff?.version), 'c:', latestConfigFf.version, 'a:', latestArchive.ff?.version );
 
-            set(latestChExtensionAtom, latestConfigCh);
-            set(latestFfExtensionAtom, latestConfigFf);
+            let newConfigCh = latestConfigCh;
+            let newConfigFf = latestConfigFf;
+
+            if (latestArchive.ch && isAVersionGreaterB(latestConfigCh.version, latestArchive.ch.version)) {
+                newConfigCh = {...latestConfigCh};
+                newConfigCh.version = latestArchive.ch.version;
+                newConfigCh.updated = latestArchive.ch.updated;
+                newConfigCh.url = getArchiveExtensionUrl(latestArchive.ch.fname);
+            }
+
+            set(latestChExtensionAtom, newConfigCh);
+            set(latestFfExtensionAtom, newConfigFf);
 
             set(summaryExtensionsAtom, stateConfig.data.summary);
         }
