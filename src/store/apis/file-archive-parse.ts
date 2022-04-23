@@ -73,6 +73,8 @@ export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null,
     return grouped;
 }
 
+// FTP version correction
+
 export function isAVersionGreaterB(a?: string, b?: string) { // '3.4.429' vs. '3.4.430'
     const aArr = a?.split('.') || [];
     const bArr = b?.split('.') || [];
@@ -81,4 +83,14 @@ export function isAVersionGreaterB(a?: string, b?: string) { // '3.4.429' vs. '3
     }
     const itemLess = aArr.find((ver, idx) => +ver < +bArr[idx]);
     return !!itemLess;
+}
+
+export function getLatestArchiveVersions(archive?: ArchiveExtensionMeta[] | null) {
+    const reverse = archive ? [...archive].reverse() : [];
+    const latestArchiveCh: ArchiveExtensionMeta | undefined = reverse.find((item) => item.browser === TBrowserShort.chrome && item.release === ReleaseType.release);
+    const latestArchiveFf: ArchiveExtensionMeta | undefined = reverse.find((item) => item.browser === TBrowserShort.firefox && item.release === ReleaseType.release);
+    return {
+        ch: latestArchiveCh,
+        ff: latestArchiveFf,
+    }
 }

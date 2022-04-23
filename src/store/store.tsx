@@ -6,7 +6,7 @@ import { CurrentExtensions, getCurrentConfig, InAppExtnInfo } from './apis/file-
 import { fetchReleaseNotes } from './apis/file-release-notes';
 import { ArchiveExtensionMeta, getExistingOnServer, ReleaseType } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
-import { archiveByYears, isAVersionGreaterB, OneYearExts } from './apis/file-archive-parse';
+import { archiveByYears, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts } from './apis/file-archive-parse';
 import { regexMarkdownPublicVersions } from './apis/constants';
 import { TBrowserShort } from './apis/api-formats-g01';
 
@@ -202,17 +202,14 @@ const correlateAtom = atom(
             return;
         }
 
-        const reverse = stateArchive.data ? [...stateArchive.data].reverse() : [];
-        const latestArchiveCh: ArchiveExtensionMeta | undefined = reverse.find((item) => item.browser === TBrowserShort.chrome && item.release === ReleaseType.release);
-        const latestArchiveFf: ArchiveExtensionMeta | undefined = reverse.find((item) => item.browser === TBrowserShort.firefox && item.release === ReleaseType.release);
+        const latestArchive = getLatestArchiveVersions(stateArchive.data);
 
         if (stateConfig.data && stateArchive.data) {
             const latestConfigCh = stateConfig.data.chrome;
             const latestConfigFf = stateConfig.data.firefox;
 
-            console.log('vvv', isAVersionGreaterB(latestConfigCh.version, latestArchiveCh?.version), 'c:', latestConfigCh.version, 'a:', latestArchiveCh?.version );
-            console.log('vvv', isAVersionGreaterB(latestConfigFf.version, latestArchiveFf?.version), 'c:', latestConfigFf.version, 'a:', latestArchiveFf?.version );
-
+            console.log('vvv', isAVersionGreaterB(latestConfigCh.version, latestArchive.ch?.version), 'c:', latestConfigCh.version, 'a:', latestArchive.ch?.version );
+            console.log('vvv', isAVersionGreaterB(latestConfigFf.version, latestArchive.ff?.version), 'c:', latestConfigFf.version, 'a:', latestArchive.ff?.version );
 
             set(latestChExtensionAtom, latestConfigCh);
             set(latestFfExtensionAtom, latestConfigFf);
