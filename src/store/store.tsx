@@ -191,8 +191,6 @@ const correlateAtom = atom(
         const latestArchive = getLatestArchiveVersions(stateArchive.data);
 
         if (stateConfig.data && stateArchive.data) {
-            let latestConfigCh = stateConfig.data.chrome;
-            let latestConfigFf = stateConfig.data.firefox;
 
             function replaceConfigIfNeed(config: InAppExtnInfo, archive?: ArchiveExtensionMeta) {
                 return archive && isAVersionGreaterB(config.version, archive.version) ? {
@@ -202,8 +200,9 @@ const correlateAtom = atom(
                     url: getArchiveExtensionUrl(archive.fname),
                 } : config;
             }
-            latestConfigCh = replaceConfigIfNeed(latestConfigCh, latestArchive.ch);
-            latestConfigFf = replaceConfigIfNeed(latestConfigFf, latestArchive.ff);
+
+            const latestConfigCh = replaceConfigIfNeed(stateConfig.data.chrome, latestArchive.ch);
+            const latestConfigFf = replaceConfigIfNeed(stateConfig.data.firefox, latestArchive.ff);
 
             // if (latestArchive.ch && isAVersionGreaterB(latestConfigCh.version, latestArchive.ch.version)) {
             //     latestConfigCh = { ...latestConfigCh };
