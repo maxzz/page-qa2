@@ -182,10 +182,12 @@ const correlateAtom = atom(
             return;
         }
 
+        // 1. Combine extensions list with published information.
         const publicVersions = get(publicVersionsAtom);
         const byYears = archiveByYears(stateArchive.data, publicVersions);
         set(byYearsAtom, byYears);
 
+        // 2. Update stale config versions with the latest from FTP.
         const latestArchive = getLatestArchiveVersions(stateArchive.data);
 
         if (stateConfig.data && stateArchive.data) {
