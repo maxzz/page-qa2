@@ -4,7 +4,7 @@ import { debounce } from '@/utils/debounce';
 import { marked } from 'marked';
 import { CurrentExtensions, getCurrentConfig, InAppExtnInfo } from './apis/file-current-config';
 import { fetchReleaseNotes } from './apis/file-release-notes';
-import { ArchiveExtensionMeta, getExistingOnServer } from './apis/file-archive';
+import { ArchiveExtensionMeta, getExistingOnServer, ReleaseType } from './apis/file-archive';
 import { toastError } from '@/components/UI/UiToaster';
 import { archiveByYears, isAVersionGreaterB, OneYearExts } from './apis/file-archive-parse';
 import { regexMarkdownPublicVersions } from './apis/constants';
@@ -203,15 +203,15 @@ const correlateAtom = atom(
         }
 
         const reverse = stateArchive.data ? [...stateArchive.data].reverse() : [];
-        const latestArchiveCh: ArchiveExtensionMeta | undefined = reverse.find((item) => item.browser === TBrowserShort.chrome);
-        const latestArchiveFf: ArchiveExtensionMeta | undefined = reverse.find((item) => item.browser === TBrowserShort.firefox);
+        const latestArchiveCh: ArchiveExtensionMeta | undefined = reverse.find((item) => item.browser === TBrowserShort.chrome && item.release === ReleaseType.release);
+        const latestArchiveFf: ArchiveExtensionMeta | undefined = reverse.find((item) => item.browser === TBrowserShort.firefox && item.release === ReleaseType.release);
 
         if (stateConfig.data && stateArchive.data) {
             const latestConfigCh = stateConfig.data.chrome;
             const latestConfigFf = stateConfig.data.firefox;
 
-            console.log('vvv', isAVersionGreaterB(latestConfigCh.version, latestArchiveCh?.version), 'c:', latestConfigCh.version, 'a:', latestArchiveCh?.version, );
-            console.log('vvv', isAVersionGreaterB(latestConfigFf.version, latestArchiveFf?.version), 'c:', latestConfigFf.version, 'a:', latestArchiveFf?.version, );
+            console.log('vvv', isAVersionGreaterB(latestConfigCh.version, latestArchiveCh?.version), 'c:', latestConfigCh.version, 'a:', latestArchiveCh?.version );
+            console.log('vvv', isAVersionGreaterB(latestConfigFf.version, latestArchiveFf?.version), 'c:', latestConfigFf.version, 'a:', latestArchiveFf?.version );
 
 
             set(latestChExtensionAtom, latestConfigCh);
