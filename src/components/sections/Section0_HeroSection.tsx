@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useAtomValue } from 'jotai';
-import { configStateAtom } from '@/store/store';
+import { configStateAtom, latestChExtensionAtom, latestFfExtensionAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { beautifyDate } from '@/utils/helpers';
 import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
@@ -87,11 +87,13 @@ function CurrentVersion({ browser, inAppExtnInfo, loading }: { browser: TBrowser
 }
 
 function CurrentVersions() {
-    const inAppExtnInfos = useAtomValue(configStateAtom);
+    const configState = useAtomValue(configStateAtom);
+    const ch = useAtomValue(latestChExtensionAtom);
+    const ff = useAtomValue(latestFfExtensionAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
-            <CurrentVersion browser={TBrowserShort.chrome} inAppExtnInfo={inAppExtnInfos.data?.chrome} loading={inAppExtnInfos.loading} />
-            <CurrentVersion browser={TBrowserShort.firefox} inAppExtnInfo={inAppExtnInfos.data?.firefox} loading={inAppExtnInfos.loading} />
+            <CurrentVersion browser={TBrowserShort.chrome} inAppExtnInfo={ch} loading={configState.loading} />
+            <CurrentVersion browser={TBrowserShort.firefox} inAppExtnInfo={ff} loading={configState.loading} />
         </div>
     );
 }
@@ -104,3 +106,5 @@ export function Section0_HeroSection() {
         </div>
     );
 }
+
+//TODO: add loading state change animation
