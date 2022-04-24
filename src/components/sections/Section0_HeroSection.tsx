@@ -9,6 +9,7 @@ import { classNames } from '@/utils/classnames';
 import { toastSucceeded } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
+import { a, config, useSpring } from '@react-spring/web';
 
 const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
     angle: 90,
@@ -39,43 +40,45 @@ const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 function ActionButtons({ url }: { url?: string; }) {
     const confettiRef = useRef<HTMLButtonElement>(null);
     return (
-    <div className="flex items-center lg:justify-end space-x-2 text-sm">
-        {/* Download button */}
-        <a
-            className={classNames(
-                "p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5 select-none",
-                !url && "invisible pointer-events-none",
-            )}
-            href={url}
-            title="Download extension"
-        >
-            <IconDownload className="w-6 h-6" strokeWidth={1} />
-            <div>Download</div>
-        </a>
+        <div className="flex items-center lg:justify-end space-x-2 text-sm">
+            {/* Download button */}
+            <a
+                className={classNames(
+                    "p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5 select-none",
+                    !url && "invisible pointer-events-none",
+                )}
+                href={url}
+                title="Download extension"
+            >
+                <IconDownload className="w-6 h-6" strokeWidth={1} />
+                <div>Download</div>
+            </a>
 
-        {/* Copy link */}
-        <button
-            className={classNames(
-                "p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5 select-none",
-                !url && "invisible pointer-events-none",
-            )}
-            onClick={async () => {
-                await navigator.clipboard.writeText(url || '');
-                toastSucceeded('Link copied to clipboard');
-                confetti(confettiRef.current!, confettiConfig);
-            }}
-            ref={confettiRef}
-            title="Copy extension URL to clipboard"
-        >
-            <IconClipboard className="w-6 h-6" strokeWidth={1} />
-            <div>Copy link</div>
-        </button>
-    </div>
+            {/* Copy link */}
+            <button
+                className={classNames(
+                    "p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5 select-none",
+                    !url && "invisible pointer-events-none",
+                )}
+                onClick={async () => {
+                    await navigator.clipboard.writeText(url || '');
+                    toastSucceeded('Link copied to clipboard');
+                    confetti(confettiRef.current!, confettiConfig);
+                }}
+                ref={confettiRef}
+                title="Copy extension URL to clipboard"
+            >
+                <IconClipboard className="w-6 h-6" strokeWidth={1} />
+                <div>Copy link</div>
+            </button>
+        </div>
     );
 }
 
 function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBrowserShort; extInfoAtom: Atom<InAppExtnInfo | undefined>; loading: boolean; }) {
     const inAppExtnInfo = useAtomValue(extInfoAtom);
+    const vis = inAppExtnInfo?.url;
+    const styles = useSpring({ opacity: vis ? 1 : 0, scaleY: vis ? 1 : 0, config: { duration: 150 } });
     return (
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ ...boxShadow, transition: "all .2s" }}>
 
@@ -88,9 +91,9 @@ function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBrowserSh
             </div>
 
             {/* Action buttons */}
-            <div className="col-start-2 mt-2 sm:mt-0">
+            <a.div className="col-start-2 mt-2 sm:mt-0" style={styles}>
                 <ActionButtons url={inAppExtnInfo?.url} />
-            </div>
+            </a.div>
         </div>
     );
 }
