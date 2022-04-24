@@ -8,8 +8,8 @@ import { BrowserIcon, IconClipboard, IconDownload } from '../UI/UIIcons';
 import { classNames } from '@/utils/classnames';
 import { toastSucceeded } from '../UI/UiToaster';
 import { confetti } from 'dom-confetti';
+import { a, useSpring } from '@react-spring/web';
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';
-import { a, config, useSpring } from '@react-spring/web';
 
 const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
     angle: 90,

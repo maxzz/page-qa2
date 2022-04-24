@@ -1,5 +1,5 @@
 import React from 'react';
-import mainImage from '../../assets/testapps/2022-03-01_19-09-50.png';
+import sampleAppsImg from '../../assets/testapps/2022-03-01_19-09-50.png';
 
 export function Section4_TestApps() {
     return (
@@ -14,7 +14,7 @@ export function Section4_TestApps() {
             </ul>
 
             <div className="pt-3">
-                <img className="m-auto bg-slate-300" src={mainImage} width="200px" alt="test applications preview" />
+                <img className="m-auto bg-slate-300" src={sampleAppsImg} width="200px" alt="test applications preview" />
             </div>
 
         </div>

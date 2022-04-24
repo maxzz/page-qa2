@@ -214,6 +214,3 @@ export const section2_OpenAtom = atomWithCallback<boolean>(Storage.initialData.o
 export const section3_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open3, ({ get }) => Storage.save(get));
 export const section4_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open4, ({ get }) => Storage.save(get));
 export const section5_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open5, ({ get }) => Storage.save(get));
-
-//TODO: mark 432 as public
-//TODO: update tooltip date format in section: Current versions
