@@ -61,12 +61,7 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort; table
     return (
         <div className="cursor-default">
             <div className="flex items-center space-x-1">
-                {/* <div className="mb-1 text-sm font-bold">{`${TBrowserName(browser)} extensions`}</div> */}
-
-                {/* <BrowserIcon browser={browser} className="w-4 h-4 pb-0.5" />
-                <div className="mb-1 text-sm font-bold">{`${TBrowserName(browser)} extensions`}</div> */}
-
-                <div className="mb-1 px-3 text-sm font-bold">{`${TBrowserName(browser)}`}</div>
+                <div className="mb-1 pl-3 text-sm font-bold">{`${TBrowserName(browser)}`}</div>
                 <BrowserIcon browser={browser} className="w-3 h-3 opacity-70" />
                 <div className="mb-1 text-sm font-bold">{`extensions`}</div>
             </div>
