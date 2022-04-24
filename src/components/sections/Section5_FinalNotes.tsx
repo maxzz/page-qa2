@@ -16,6 +16,16 @@ export function Section5_FinalNotes() {
                 Additional documents are available on the <a className="hoverurl" href={URL_CONFLUENCE} target="_blank"> HID Confluence website.</a>
             </p>
 
+            <h2 className="mt-2 text-base font-semibold">Chrome web store links</h2>
+            <ul className="ml-4 list-disc">
+                <li>
+                    Chrome web store extension <a className="hoverurl" href="https://chrome.google.com/webstore/detail/digitalpersona/piimgpjgnagkckjlhjcppbkbjjfjmnbh" target="_blank">installation page.</a>
+                </li>
+                <li>
+                    DP extension <a className="hoverurl" href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html" target="_blank">installation page.</a>
+                </li>
+            </ul>
+
             <h2 className="mt-2 text-base font-semibold">QA website history</h2>
             <ul className="ml-4 list-disc">
                 <li>
