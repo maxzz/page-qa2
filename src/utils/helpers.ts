@@ -41,8 +41,8 @@ export function parseDate(date: string): Date | undefined {
     return dt.toString() !== 'Invalid Date' ? dt : undefined;
 }
 
-export function beautifyDate(dateStr: string) {
+export function beautifyDate(dateStr?: string): string {
     // 0. Parse '2022.03.04' format to string.
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return parseDate(dateStr)?.toLocaleDateString('en-US', options) || dateStr;
+    return dateStr && parseDate(dateStr)?.toLocaleDateString('en-US', options) || dateStr || '';
 }

@@ -7,14 +7,14 @@ export type Meta = {
     published?: boolean;        // published information from release notes
 } & ArchiveExtensionMeta;
 
-const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
 function transformToMeta(item: ArchiveExtensionMeta): Meta {
     const dt = new Date(item.updated.replace(/\./g, '-') + 'T00:00:00');
     const year = dt.getFullYear();
     return {
         ...item,
-        date: dt.toLocaleDateString('en-US', options),
+        date: dt.toLocaleDateString('en-US', dateOptions),
         year,
     } as Meta;
 }
