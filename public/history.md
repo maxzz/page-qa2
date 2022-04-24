@@ -1,4 +1,21 @@
-#### version 3.4.430 <span class="date">03.03.2021</span>
+#### version 3.4.437 <span class="date">04.12.2022</span>
+* Bug [89580](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89580)
+  Unable to train Ncontracts in automatic mode for use with Edge. This is single field login. 
+  This version fixes training and submitting the form on the second page. (3.4.437 04.12.2022)
+* Bug [68200](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=68200)
+  No PM icon on Chrome browser for website: www.concursolutions.com then shows PM icon upon reboot.. (Two page logon)
+  This version fixes training and submitting the form on the second page. (3.4.437 04.12.2022)
+
+#### version 3.4.432 <span class="date">03.16.2022</span> Public
+* Bug [88802](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89771)
+  Unexpected PM choose account (orphaned) dialogue box spawned from timed out background website.
+  Update the "immediate authentication" logic to only ask for login information when a browser tab is active.
+  A test page that refreshes when a tab is inactive can be found [here](https://maxzz.github.io/test-pm-domain-logins/#/apage?from=homeToLoginA).
+  To run the test, open two browser tabs (one for login A and one for login B) with this URL, create logins with the "authenticate immediately" option,
+  and set the refresh interval on the test pages to approximately 10 seconds.
+  Within 10 seconds, switch to a new tab. The authentication dialog should only appear when the tab with login A or login B becomes active.
+  (3.4.432 03.16.2022)
+#### version 3.4.430 <span class="date">03.03.2022</span>
 * Bug [89771](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89771)
   Add support for the customer website [www.isc.ca](https://www.isc.ca/SignedInHome/Pages/login.aspx) (3.4.430 03.03.2022)
 * Bug [90105](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90105)
