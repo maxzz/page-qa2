@@ -3,6 +3,7 @@ import { useAtomValue } from 'jotai';
 import { summaryExtensionsAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { TBrand, TBrandName, TBrowserShort, TBrowserName } from '@/store/apis/api-formats-g01';
+import { BrowserIcon } from '../UI/UIIcons';
 
 type Table = {
     [key in TBrowserShort]: {
@@ -58,7 +59,16 @@ function reduceToFlat(table: Table): FlatTable {
 function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort; table: FlatTableItem[]; }) {
     return (
         <div className="cursor-default">
-            <div className="mb-1 text-sm font-bold">{`${TBrowserName(browser)} extensions`}</div>
+            <div className="flex items-center space-x-1">
+                {/* <div className="mb-1 text-sm font-bold">{`${TBrowserName(browser)} extensions`}</div> */}
+
+                {/* <BrowserIcon browser={browser} className="w-4 h-4 pb-0.5" />
+                <div className="mb-1 text-sm font-bold">{`${TBrowserName(browser)} extensions`}</div> */}
+
+                <div className="mb-1 text-sm font-bold">{`${TBrowserName(browser)}`}</div>
+                <BrowserIcon browser={browser} className="w-3 h-3 opacity-70" />
+                <div className="mb-1 text-sm font-bold">{`extensions`}</div>
+            </div>
             <div className="grid grid-cols-3">
                 <div className="border-b text-xs">Brand</div>
                 <div className="border-b text-xs">QA</div>
@@ -83,8 +93,8 @@ export function Section2_CurrentVersions() {
         <div className="py-2 text-sm flex flex-col space-y-2">
             <p>Summary table of QA and currently published extensions.</p>
             <div className="max-w-2xl grid grid-cols-2 gap-x-2">
-                <TableToBrowser browser={TBrowserShort.firefox} table={res[TBrowserShort.firefox]} />
                 <TableToBrowser browser={TBrowserShort.chrome} table={res[TBrowserShort.chrome]} />
+                <TableToBrowser browser={TBrowserShort.firefox} table={res[TBrowserShort.firefox]} />
             </div>
             <div className="text-xs">
                 <p className="mb-1">Brand legend:</p>
