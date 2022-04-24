@@ -102,11 +102,11 @@ function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBrowserSh
 }
 
 function CurrentVersions() {
-    const configState = useAtomValue(configStateAtom);
+    const { loading } = useAtomValue(configStateAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
-            <CurrentVersion browser={TBrowserShort.chrome} extInfoAtom={latestChExtensionAtom} loading={configState.loading} />
-            <CurrentVersion browser={TBrowserShort.firefox} extInfoAtom={latestFfExtensionAtom} loading={configState.loading} />
+            <CurrentVersion browser={TBrowserShort.chrome} extInfoAtom={latestChExtensionAtom} loading={loading} />
+            <CurrentVersion browser={TBrowserShort.firefox} extInfoAtom={latestFfExtensionAtom} loading={loading} />
         </div>
     );
 }
@@ -119,5 +119,3 @@ export function Section0_HeroSection() {
         </div>
     );
 }
-
-//TODO: add loading state change animation
