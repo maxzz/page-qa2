@@ -4,6 +4,7 @@ import { summaryExtensionsAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { TBrand, TBrandName, TBrowserShort, TBrowserName } from '@/store/apis/api-formats-g01';
 import { BrowserIcon } from '../UI/UIIcons';
+import { beautifyDate } from '@/utils/helpers';
 
 type Table = {
     [key in TBrowserShort]: {
@@ -77,8 +78,8 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort; table
                 {table.map((item, idx) => (
                     <React.Fragment key={idx}>
                         <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`}><div className="px-3 pt-0.5">{TBrandName(item.brand)}</div></div>
-                        <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`} title={`${item.qa?.updated ? `Updated on ${item.qa?.updated}` : ''}`}>{item.qa?.version}</div>
-                        <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`} title={`${item.release?.updated ? `Updated on ${item.release?.updated}` : ''}`}>{item.release?.version}</div>
+                        <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`} title={`${item.qa?.updated ? `Updated on ${beautifyDate(item.qa?.updated)}` : ''}`}>{item.qa?.version}</div>
+                        <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`} title={`${item.release?.updated ? `Updated on ${beautifyDate(item.release?.updated)}` : ''}`}>{item.release?.version}</div>
                     </React.Fragment>))
                 }
             </div>
