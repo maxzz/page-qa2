@@ -5,8 +5,8 @@
                 "dp": {
                     "url": "https://chrome.google.com/webstore/detail/digitalpersona-altus/piimgpjgnagkckjlhjcppbkbjjfjmnbh",
                     "version": "3.4.432",
-                    "updated": "2022.04.16",
-                    "published": "2021.03.25"
+                    "updated": "2022.03.14",
+                    "published": "2022.03.16"
                 },
                 "hp": {
                     "url": "https://chrome.google.com/webstore/detail/hp-client-security-manage/pkdnjfgdoolnmiacpdamadcneoblphbj",
@@ -23,7 +23,7 @@
             },
             "qaUrl": {
                 "dp": {
-                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.437_on_2022.04.12-r-chrome.zip"
+                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.439_on_2022.04.25-r-chrome.zip"
                 }
             }
         },

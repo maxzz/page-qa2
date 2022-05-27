@@ -1,3 +1,6 @@
+#### version 3.4.439 <span class="date">04.25.2022</span>
+* Added parsing of URL query parameters to improve password change form detection.
+ 
 #### version 3.4.437 <span class="date">04.12.2022</span>
 * Bug [89580](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89580)
   Unable to train Ncontracts in automatic mode for use with Edge. This is single field login. 
