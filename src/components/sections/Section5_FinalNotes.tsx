@@ -13,7 +13,7 @@ export function Section5_FinalNotes() {
 
             <h2 className="mt-2 text-base font-semibold">Browser extensions installation instructions</h2>
             <p>
-                Additional documents are available on the <a className="hoverurl" href={URL_CONFLUENCE} target="_blank"> HID Confluence website.</a>
+                Additional documents are available on the <a className="hoverurl" href={URL_CONFLUENCE} target="_blank"> HID Confluence website</a> (HID internal site).
             </p>
 
             <h2 className="mt-2 text-base font-semibold">Chrome web store links</h2>
