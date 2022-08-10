@@ -119,3 +119,5 @@ export function selectLatest(config: InAppExtnInfo, archive?: ArchiveExtensionMe
         url: getArchiveExtensionUrl(archive.fname),
     } : config;
 }
+
+// TODO: add index.ts

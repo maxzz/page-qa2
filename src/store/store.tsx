@@ -192,19 +192,15 @@ const correlateAtom = atom(
 
         if (stateConfig.data && stateArchive.data) {
             // 2.1. Update 'Current Versions'
-            const latestPublicstr = publicVersions?.[0];
-            const latestPublic = getArchiveVersion([...stateArchive.data].reverse(), latestPublicstr);
-
-            if (latestPublicstr && latestPublic) {
+            const latestPublicStr = publicVersions?.[0];
+            const latestPublic = getArchiveVersion(stateArchive.data, latestPublicStr);
+            if (latestPublic) {
+                const lookupFor = { brand: TBrand.dp, browser: TBrowserShort.chrome, qa: false }; // No need this for Firefox at least now.
                 stateConfig.data.summary = stateConfig.data.summary.map((item) => {
-                    if (areTheSameBrowserBrandQa(item, {brand: TBrand.dp, browser: TBrowserShort.chrome, qa: false})) {
-                        if (isAVersionGreaterB(latestPublicstr, item.version)) {
-                            console.log('replace a', item);
-                            console.log('replace b', latestPublic);
-
-                            item.version = latestPublicstr;
-                            item.updated = latestPublic.updated;
-                        }
+                    const found = areTheSameBrowserBrandQa(item, lookupFor) && isAVersionGreaterB(latestPublicStr, item.version);
+                    if (found) {
+                        item.version = latestPublic.version;
+                        item.updated = latestPublic.updated;
                     }
                     return item;
                 });
