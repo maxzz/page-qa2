@@ -4,10 +4,11 @@ import { debounce } from '@/utils/debounce';
 import { marked } from 'marked';
 import { getArchiveExtensionUrl, regexMarkdownPublicVersions } from './apis/constants';
 import { CurrentExtensions, getCurrentConfig, InAppExtnInfo } from './apis/file-current-config';
-import { archiveByYears, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts } from './apis/file-archive-parse';
-import { ArchiveExtensionMeta, getExistingOnServer } from './apis/file-archive';
+import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts, getFromArchive, getArchiveVersion } from './apis/file-archive-parse';
+import { ArchiveExtensionMeta, getExistingOnServer, ReleaseType } from './apis/file-archive';
 import { fetchReleaseNotes } from './apis/file-release-notes';
 import { toastError } from '@/components/UI/UiToaster';
+import { TBrand, TBrowserShort } from './apis/api-formats-g01';
 
 //#region LocalStorage
 
@@ -190,18 +191,30 @@ const correlateAtom = atom(
         const latestArchive = getLatestArchiveVersions(stateArchive.data);
 
         if (stateConfig.data && stateArchive.data) {
+            // 2.1. Update 'Current Versions'
+            const latestPublicstr = publicVersions?.[0];
+            const latestPublic = getArchiveVersion([...stateArchive.data].reverse(), latestPublicstr);
 
-            function swapConfigToArchiveIfNeed(config: InAppExtnInfo, archive?: ArchiveExtensionMeta) {
-                return archive && isAVersionGreaterB(config.version, archive.version) ? {
-                    ...config,
-                    version: archive.version,
-                    updated: archive.updated,
-                    url: getArchiveExtensionUrl(archive.fname),
-                } : config;
+            if (latestPublicstr && latestPublic) {
+                stateConfig.data.summary = stateConfig.data.summary.map((item) => {
+                    if (areTheSameBrowserBrandQa(item, {brand: TBrand.dp, browser: TBrowserShort.chrome, qa: false})) {
+                        if (isAVersionGreaterB(latestPublicstr, item.version)) {
+                            console.log('replace a', item);
+                            console.log('replace b', latestPublic);
+
+                            item.version = latestPublicstr;
+                            item.updated = latestPublic.updated;
+                        }
+                    }
+                    return item;
+                });
             }
 
-            set(latestChExtensionAtom, swapConfigToArchiveIfNeed(stateConfig.data.chrome, latestArchive.ch));
-            set(latestFfExtensionAtom, swapConfigToArchiveIfNeed(stateConfig.data.firefox, latestArchive.ff));
+            // 2.2. Update QA latest
+            set(latestChExtensionAtom, selectLatest(stateConfig.data.chrome, latestArchive.ch));
+            set(latestFfExtensionAtom, selectLatest(stateConfig.data.firefox, latestArchive.ff));
+
+            // 2.3. Apply 'Current Versions'
             set(summaryExtensionsAtom, stateConfig.data.summary);
         }
     }
@@ -214,3 +227,5 @@ export const section2_OpenAtom = atomWithCallback<boolean>(Storage.initialData.o
 export const section3_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open3, ({ get }) => Storage.save(get));
 export const section4_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open4, ({ get }) => Storage.save(get));
 export const section5_OpenAtom = atomWithCallback<boolean>(Storage.initialData.open5, ({ get }) => Storage.save(get));
+
+//TODO: change archive view to grid instead of columns to have order left to right vs top down and left.

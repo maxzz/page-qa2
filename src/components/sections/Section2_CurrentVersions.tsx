@@ -15,7 +15,7 @@ type Table = {
     };
 };
 
-function reduceForTable(exts: InAppExtnInfo[]) {
+function reduceForTable(exts: InAppExtnInfo[]): Table {
     return exts.reduce<Table>((acc, cur) => {
         if (cur.browser && cur.brand) {
             if (!acc[cur.browser]) {
