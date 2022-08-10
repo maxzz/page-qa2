@@ -4,14 +4,14 @@
             "extensionUrl": {
                 "dp": {
                     "url": "https://chrome.google.com/webstore/detail/digitalpersona-altus/piimgpjgnagkckjlhjcppbkbjjfjmnbh",
-                    "version": "3.4.432",
-                    "updated": "2022.03.14",
+                    "version": "3.4.442",
+                    "updated": "2022.06.14",
                     "published": "2022.03.16"
                 },
                 "hp": {
                     "url": "https://chrome.google.com/webstore/detail/hp-client-security-manage/pkdnjfgdoolnmiacpdamadcneoblphbj",
-                    "version": "3.0.904",
-                    "updated": "2020.09.08",
+                    "version": "3.0.905",
+                    "updated": "2022.06.03",
                     "published": "2019.02.24"
                 },
                 "de": {
@@ -23,7 +23,7 @@
             },
             "qaUrl": {
                 "dp": {
-                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.439_on_2022.04.25-r-chrome.zip"
+                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.590_on_2022.08.08-r-chrome.zip"
                 }
             }
         },

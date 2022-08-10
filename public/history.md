@@ -1,6 +1,33 @@
-#### version 3.4.439 <span class="date">04.25.2022</span>
-* Added parsing of URL query parameters to improve password change form detection.
+#### version 3.4.590 <span class="date">08.08.2022</span>
+* Bug [90786](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90786)
+  Request extension customization for two page logon https://refundplus.alliedsolutions.net/account/login.
+  Use [https://refundplus.alliedsolutions.net/account/login](https://refundplus.alliedsolutions.net/account/login) for testing. (3.4.587 08.01.2022)
+* Bug [90785](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90785)
+  DP Icon Not Appearing at Logon Screen in Chrome Ext 3.4.0.442.
+  Use [https://www.sageworksanalyst.com](https://www.sageworksanalyst.com) for testing. (3.4.590 08.08.2022)
+
+#### version 3.4.585 <span class="date">07.23.2022</span> Public
+* Bug [90430](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90430)
+  Unable to PMAT Edge/Chrome train managed logon for banno.com/a/login [ShadowRoot DOM].
+  Added new customization for shadow DOM forms.
+  Use [https://banno.com/a/login](https://banno.com/a/login) for testing. (3.4.564 07.09.2022)
+* Bug [90589](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90589)
+  No input fields detected in the target screen message - thrivepatientportal.com [Shadow DOM]
+  * Use [https://thrivepatientportal.com](https://thrivepatientportal.com) for testing.
+  * Use [https://www.thrivepatientportal.com/oauth/sso](https://www.thrivepatientportal.com/oauth/sso/?client_id=thrive&scope=user/%2a.%2a+offline_access+openid+profile&state=2809647d-3b98-42c2-b225-0e159e610556&redirect_uri=https://www.thrivepatientportal.com/oauth/callback&_provider=provider&_tenant=texinst) for testing. (3.4.585 07.23.2022)
  
+#### version 3.0.905 <span class="date">06.03.2022</span>
+* Task [90559](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90559)
+  This is a modified old version of the HP extension, released at the request of Google.
+  I removed unused privileges as requested by Google.
+  The extension v3.0.905 (HP only) has been successfully published to the Chrome Web Store. (3.0.905 06.03.2022)
+
+#### version 3.4.442 <span class="date">05.10.2022</span> Public
+* Added parsing of URL query parameters to improve password change form detection. (3.4.439 04.25.2022)
+* Bug [90542](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90542)
+  PM icons in totally strange places. (3.4.439 04.25.2022)
+* Fixed detection of search forms as login forms (3.4.442 05.10.2022)
+
 #### version 3.4.437 <span class="date">04.12.2022</span>
 * Bug [89580](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89580)
   Unable to train Ncontracts in automatic mode for use with Edge. This is single field login. 
