@@ -29,12 +29,16 @@ export function Section4_TestApps() {
 
             <ul className="ml-8 list-disc">
                 <li><a className="hoverurl" href="https://maxzz.github.io/dropzone" target="_blank">Password Manager Investigation Tool (the latest version)</a></li>
-                <li><a className="hoverurl" href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pmit" target="_blank">Password Manager Investigation Tool (version under HID domain)</a></li>
+                <li><a className="hoverurl" href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pmit/index.html" target="_blank">Password Manager Investigation Tool (version under HID domain)</a></li>
             </ul>
 
             <div className="pt-3">
                 <img className="m-auto" src={samplePmitImg} width="200px" alt="test applications preview" />
             </div>
+
+            <ul className="ml-8 list-disc">
+                <li><a className="hoverurl" href="https://maxzz.github.io" target="_blank">All other project catalog</a></li>
+            </ul>
         </div>
     );
 }
