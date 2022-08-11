@@ -1,5 +1,5 @@
 import React from 'react';
-import { IS_HID, URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from '@/store/apis/constants';
+import { IS_HID, URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from '@/store/apis';
 
 export function Section5_FinalNotes() {
     return (

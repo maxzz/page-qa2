@@ -25,3 +25,5 @@ export { TBrandName, TBrowserName } from './api-formats-g01';
 
 export { getArchiveExtensionUrl } from './constants';
 export { ReleaseType } from './file-archive';
+
+export { IS_HID, URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from './constants';
