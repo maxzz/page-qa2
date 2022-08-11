@@ -2,11 +2,11 @@ import { atom, Getter } from 'jotai';
 import { atomWithCallback, LoadingDataState, loadingDataStateInit } from '@/hooks/atomsX';
 import { debounce } from '@/utils/debounce';
 import { marked } from 'marked';
-import { getArchiveExtensionUrl, regexMarkdownPublicVersions } from './apis/constants';
-import { CurrentExtensions, getCurrentConfig, InAppExtnInfo } from './apis/file-current-config';
-import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts, getFromArchive, getArchiveVersion } from './apis/file-archive-parse';
-import { ArchiveExtensionMeta, getExistingOnServer, ReleaseType } from './apis/file-archive';
-import { fetchReleaseNotes } from './apis/file-release-notes';
+import { regexMarkdownPublicVersions } from './apis/constants';
+import { CurrentExtensions, getCurrentConfig, InAppExtnInfo } from './apis';
+import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts, getArchiveVersion } from './apis';
+import { ArchiveExtensionMeta, getExistingOnServer } from './apis';
+import { fetchReleaseNotes } from './apis';
 import { toastError } from '@/components/UI/UiToaster';
 import { TBrand, TBrowserShort } from './apis/api-formats-g01';
 
