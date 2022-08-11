@@ -1,10 +1,7 @@
 import { Fragment } from 'react';
 import { useAtomValue } from 'jotai';
 import { byYearsAtom } from '@/store/store';
-import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
-import { ReleaseType } from '@/store/apis/file-archive';
-import { Meta, OneYearExts } from '@/store/apis/file-archive-parse';
-import { getArchiveExtensionUrl } from '@/store/apis/constants';
+import { getArchiveExtensionUrl, Meta, OneYearExts, ReleaseType, TBrowserName, TBrowserShort } from '@/store/apis';
 import { classNames } from '@/utils/classnames';
 import { BrowserIcon } from '../UI/UIIcons';
 import { UITooltip } from '../UI/UITooltip';

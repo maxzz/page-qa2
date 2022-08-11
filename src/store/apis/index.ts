@@ -1,4 +1,4 @@
-export type { OneYearExts } from './file-archive-parse';
+export type { Meta, OneYearExts } from './file-archive-parse';
 
 export {
     archiveByYears,
@@ -16,3 +16,12 @@ export type { ArchiveExtensionMeta } from './file-archive';
 export { getExistingOnServer } from './file-archive';
 
 export { fetchReleaseNotes } from './file-release-notes';
+
+export { TBrand, TBrowserShort } from './api-formats-g01';
+
+export { regexMarkdownPublicVersions } from './constants';
+
+export { TBrandName, TBrowserName } from './api-formats-g01';
+
+export { getArchiveExtensionUrl } from './constants';
+export { ReleaseType } from './file-archive';

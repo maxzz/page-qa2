@@ -2,9 +2,9 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { summaryExtensionsAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
-import { TBrand, TBrandName, TBrowserShort, TBrowserName } from '@/store/apis/api-formats-g01';
 import { BrowserIcon } from '../UI/UIIcons';
 import { beautifyDate } from '@/utils/helpers';
+import { TBrand, TBrandName, TBrowserName, TBrowserShort } from '@/store/apis';
 
 type Table = {
     [key in TBrowserShort]: {

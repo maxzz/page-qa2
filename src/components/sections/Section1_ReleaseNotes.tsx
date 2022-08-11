@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
-import { releaseNotesAtom } from '../../store/store';
+import { releaseNotesAtom } from '@/store/store';
 import './markdown.scss';
 
 export function Section1_ReleaseNotes() {

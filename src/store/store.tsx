@@ -2,13 +2,8 @@ import { atom, Getter } from 'jotai';
 import { atomWithCallback, LoadingDataState, loadingDataStateInit } from '@/hooks/atomsX';
 import { debounce } from '@/utils/debounce';
 import { marked } from 'marked';
-import { regexMarkdownPublicVersions } from './apis/constants';
-import { CurrentExtensions, getCurrentConfig, InAppExtnInfo } from './apis';
-import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts, getArchiveVersion } from './apis';
-import { ArchiveExtensionMeta, getExistingOnServer } from './apis';
-import { fetchReleaseNotes } from './apis';
+import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts, getArchiveVersion, CurrentExtensions, getCurrentConfig, InAppExtnInfo, TBrand, TBrowserShort, ArchiveExtensionMeta, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions } from './apis';
 import { toastError } from '@/components/UI/UiToaster';
-import { TBrand, TBrowserShort } from './apis/api-formats-g01';
 
 //#region LocalStorage
 
