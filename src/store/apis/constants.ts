@@ -2,12 +2,22 @@
 
 export const IS_HID = /hidglobal/.test(window?.location.host || '');
 
+const currentHost = (() => {
+    const reG01 = /([\s\S]*)\/g01\/([\s\S]*)/;
+
+    const m = (window.location.href || '').match(reG01);
+    // const m = ('https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pageqa1/index.html').match(reG01);
+    return m ? m[1] : 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons';
+})();
+
+//console.log('currentHostName', currentHost);
+
 export const URL_CONFLUENCE = 'https://wiki.hidglobal.com/display/ALTUS/Browser+extensions+installation';
-export const URL_OLD_QA_WEBSITE = 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pageqa1/index.html';
+export const URL_OLD_QA_WEBSITE = `${currentHost}/g01/pageqa1/index.html`;
 
-const ROOT_EXT_ARCHIVE = 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/';
+const ROOT_EXT_ARCHIVE = `${currentHost}/g01/current/`;
 
-const ROOT_HID_URL = 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/';
+const ROOT_HID_URL = `${currentHost}/g01/current/`;
 const ROOT_GITHUB_URL = './';
 
 const ROOT_WEB_URL = IS_HID ? ROOT_HID_URL : ROOT_GITHUB_URL;
