@@ -24,6 +24,9 @@ export function Section5_FinalNotes() {
                 <li>
                     DP extension <a className="hoverurl" href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html" target="_blank">installation page.</a>
                 </li>
+                <li>
+                    DP extension <a className="hoverurl" href="https://maxzz.github.io/page-extension-installation" target="_blank"> the new installation page test</a> (not in production yet).
+                </li>
             </ul>
 
             <h2 className="mt-2 text-base font-semibold">QA website history</h2>
