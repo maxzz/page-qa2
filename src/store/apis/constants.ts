@@ -5,7 +5,7 @@ export const IS_HID = /hidglobal/.test(window?.location.host || '');
 const currentHost = (() => {
     const reG01 = /([\s\S]*)\/g01\/([\s\S]*)/;
     const m = (window.location.href || '').match(reG01);
-    return m ? m[1] : 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons';
+    return m ? m[1] : 'https://www3.hidglobal.com/sites/default/files/crossmatch/AltusAddons';
 })();
 
 export const URL_CONFLUENCE = 'https://wiki.hidglobal.com/display/ALTUS/Browser+extensions+installation';
