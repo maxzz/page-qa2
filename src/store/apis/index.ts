@@ -1,4 +1,14 @@
-export type { Meta, OneYearExts } from './file-archive-parse';
+export {
+    IS_HID, URL_CONFLUENCE,
+    URL_OLD_QA_WEBSITE,
+    regexMarkdownPublicVersions,
+    getArchiveExtensionUrl
+} from './constants';
+
+export type {
+    Meta,
+    OneYearExts
+} from './file-archive-parse';
 
 export {
     archiveByYears,
@@ -9,21 +19,34 @@ export {
     getArchiveVersion
 } from './file-archive-parse';
 
-export type { CurrentExtensions, InAppExtnInfo } from './file-current-config';
-export { getCurrentConfig } from './file-current-config';
+export type {
+    CurrentExtensions,
+    InAppExtnInfo
+} from './file-current-config';
 
-export type { ArchiveExtensionMeta } from './file-archive';
-export { getExistingOnServer } from './file-archive';
+export {
+    getCurrentConfig
+} from './file-current-config';
 
-export { fetchReleaseNotes } from './file-release-notes';
+export type {
+    ArchiveExtensionMeta
+} from './file-archive';
 
-export { TBrand, TBrowserShort } from './api-formats-g01';
+export {
+    getExistingOnServer,
+    ReleaseType
+} from './file-archive';
 
-export { regexMarkdownPublicVersions } from './constants';
+export {
+    fetchReleaseNotes
+} from './file-release-notes';
 
-export { TBrandName, TBrowserName } from './api-formats-g01';
+export {
+    TBrand,
+    TBrowserShort
+} from './api-formats-g01';
 
-export { getArchiveExtensionUrl } from './constants';
-export { ReleaseType } from './file-archive';
-
-export { IS_HID, URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from './constants';
+export {
+    TBrandName,
+    TBrowserName
+} from './api-formats-g01';

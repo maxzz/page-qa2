@@ -201,7 +201,7 @@ const correlateAtom = atom(
                 });
             }
 
-            // 2.2. Update QA latest
+            // 2.2. Update and apply 'QA latest'
             set(latestChExtensionAtom, selectLatest(stateConfig.data.chrome, latestArchive.ch));
             set(latestFfExtensionAtom, selectLatest(stateConfig.data.firefox, latestArchive.ff));
 
