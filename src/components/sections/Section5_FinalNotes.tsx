@@ -13,7 +13,7 @@ export function Section5_FinalNotes() {
 
             <h2 className="mt-2 text-base font-semibold">Browser extensions installation instructions</h2>
             <p>
-                Additional documents are available on the <a className="hoverurl" href={URL_CONFLUENCE} target="_blank"> HID Confluence website</a> (HID internal site).
+                Additional documents are available on the <a className="hoverurl" href={URL_CONFLUENCE} target="_blank"> HID confluence (intranet) website</a>.
             </p>
 
             <h2 className="mt-2 text-base font-semibold">Google Store links</h2>
@@ -22,7 +22,7 @@ export function Section5_FinalNotes() {
                     Chrome web store extension <a className="hoverurl" href="https://chrome.google.com/webstore/detail/digitalpersona/piimgpjgnagkckjlhjcppbkbjjfjmnbh" target="_blank">installation page.</a>
                 </li>
                 <li>
-                    DP extension <a className="hoverurl" href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html" target="_blank">installation page.</a>
+                    DP extension <a className="hoverurl" href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html" target="_blank">installation page</a>.
                 </li>
                 <li>
                     DP extension <a className="hoverurl" href="https://maxzz.github.io/page-extension-installation" target="_blank"> the new installation page test</a> (not in production yet).
@@ -39,10 +39,10 @@ export function Section5_FinalNotes() {
             <h2 className="mt-2 text-base font-semibold">QA website history</h2>
             <ul className="ml-4 list-disc">
                 <li>
-                    The previous QA website is still <a className="hoverurl" href={URL_OLD_QA_WEBSITE} target="_blank"> available here.</a>
+                    The previous QA website is still <a className="hoverurl" href={URL_OLD_QA_WEBSITE} target="_blank"> available here</a>.
                 </li>
                 {!IS_HID && <li>
-                    The source code for this website on <a className="hoverurl" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here.</a>
+                    The source code for this website on <a className="hoverurl" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here</a>.
                 </li>}
                 <li>
                     This __BUILD_VER__ version of the QA website is built on __BUILD_DATE__<span>.</span>
