@@ -1,5 +1,5 @@
 import React from 'react';
-import { IS_HID, URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from '@/store/apis';
+import { getArchiveExtensionUrl, IS_HID, URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from '@/store/apis';
 
 export function Section5_FinalNotes() {
     return (
@@ -16,7 +16,7 @@ export function Section5_FinalNotes() {
                 Additional documents are available on the <a className="hoverurl" href={URL_CONFLUENCE} target="_blank"> HID Confluence website</a> (HID internal site).
             </p>
 
-            <h2 className="mt-2 text-base font-semibold">Chrome web store links</h2>
+            <h2 className="mt-2 text-base font-semibold">Google Store links</h2>
             <ul className="ml-4 list-disc">
                 <li>
                     Chrome web store extension <a className="hoverurl" href="https://chrome.google.com/webstore/detail/digitalpersona/piimgpjgnagkckjlhjcppbkbjjfjmnbh" target="_blank">installation page.</a>
@@ -26,6 +26,13 @@ export function Section5_FinalNotes() {
                 </li>
                 <li>
                     DP extension <a className="hoverurl" href="https://maxzz.github.io/page-extension-installation" target="_blank"> the new installation page test</a> (not in production yet).
+                </li>
+            </ul>
+
+            <h2 className="mt-2 text-base font-semibold">Experiments</h2>
+            <ul className="ml-4 list-disc">
+                <li>
+                    <a className="hoverurl" href={`${getArchiveExtensionUrl('../AltusAddons/../../maxz/pmac.zip.txt')}`} target="_blank">PMAC (Password Manager Administrator Commands) utility</a> (not in production yet).
                 </li>
             </ul>
 
