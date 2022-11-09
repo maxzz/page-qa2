@@ -32,6 +32,9 @@ export function Section5_FinalNotes() {
             <h2 className="mt-2 text-base font-semibold">Experiments</h2>
             <ul className="ml-4 list-disc">
                 <li>
+                    <a className="hoverurl" href="https://maxzz.github.io/dropzone" target="_blank">PMIT (Password Manager Inverstigation Tool) utility</a> (the latest version).
+                </li>
+                <li>
                     <a className="hoverurl" href={`${getArchiveExtensionUrl('../AltusAddons/../../maxz/pmac.zip.txt')}`} target="_blank">PMAC (Password Manager Administrator Commands) utility</a> (not in production yet).
                 </li>
             </ul>
