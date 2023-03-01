@@ -1,5 +1,5 @@
 import React from 'react';
-import { getArchiveExtensionUrl, IS_HID, URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from '@/store/apis';
+import { getArchiveExtensionUrl, IS_REMOTE, URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from '@/store/apis';
 
 export function Section5_FinalNotes() {
     return (
@@ -44,9 +44,11 @@ export function Section5_FinalNotes() {
                 <li>
                     The previous QA website is still <a className="hoverurl" href={URL_OLD_QA_WEBSITE} target="_blank"> available here</a>.
                 </li>
-                {!IS_HID && <li>
-                    The source code for this website on <a className="hoverurl" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here</a>.
-                </li>}
+                {!IS_REMOTE &&
+                    <li>
+                        The source code for this website on <a className="hoverurl" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here</a>.
+                    </li>
+                }
                 <li>
                     This __BUILD_VER__ version of the QA website is built on __BUILD_DATE__<span>.</span>
                 </li>

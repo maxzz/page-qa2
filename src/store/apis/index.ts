@@ -1,5 +1,5 @@
 export {
-    IS_HID, URL_CONFLUENCE,
+    IS_REMOTE, URL_CONFLUENCE,
     URL_OLD_QA_WEBSITE,
     regexMarkdownPublicVersions,
     getArchiveExtensionUrl

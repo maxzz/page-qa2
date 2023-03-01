@@ -1,28 +1,40 @@
 // Locations
 
-export const IS_HID = /hidglobal/.test(window?.location.host || '');
+//Old FTP: // https://www3.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pageqa/index.html
+//New FTP: // https://crossmatch.hid.gl/g02/pageqa/
 
-const currentHost = (() => {
-    const reG01 = /([\s\S]*)\/g01\/([\s\S]*)/;
-    const m = (window.location.href || '').match(reG01);
-    return m ? m[1] : 'https://www3.hidglobal.com/sites/default/files/crossmatch/AltusAddons';
+export const IS_REMOTE = /\/g0\d\//.test(window?.location.host || ''); // /hidglobal/.test(window?.location.host || '');
+
+type CurrentLocation = {
+    host: string;   // part before generation
+    gen: string;    // generation
+};
+
+const currentLocation: CurrentLocation = (() => {
+    const reG01 = /([\s\S]*)\/(g0\d)\/([\s\S]*)/; // 1:'https://www3.hidglobal.com/sites/default/files/crossmatch/AltusAddons' 2:'/g0(1|2)/' 3:'pageqa/index.html'
+
+    const m = (window.location.href || '').match(reG01);            //https://www3.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pageqa/index.html
+    return {
+        host: m ? m[1] : 'https://crossmatch.hid.gl/g02/pageqa',    //https://www3.hidglobal.com/sites/default/files/crossmatch/AltusAddons,,
+        gen: m ? m[2] : '',
+    };
 })();
 
-export const URL_CONFLUENCE = 'https://wiki.hidglobal.com/display/ALTUS/Browser+extensions+installation';
-export const URL_OLD_QA_WEBSITE = `${currentHost}/g01/pageqa1/index.html`;
+export const URL_CONFLUENCE = 'https://wiki.hidglobal.com/display/ALTUS/Browser+extensions+installation'; //TODO: make a local copy on this website
+export const URL_OLD_QA_WEBSITE = `${currentLocation.host}/${currentLocation.gen}/pageqa1/index.html`;
 
-const ROOT_EXT_ARCHIVE = `${currentHost}/g01/current/`;
+const ROOT_EXT_ARCHIVE = `${currentLocation.host}/${currentLocation.gen}/current/`;
 
-const ROOT_HID_URL = `${currentHost}/g01/current/`;
+const ROOT_HID_URL = `${currentLocation.host}/${currentLocation.gen}/current/`;
 const ROOT_GITHUB_URL = './';
 
-const ROOT_WEB_URL = IS_HID ? ROOT_HID_URL : ROOT_GITHUB_URL;
+const ROOT_WEB_URL = IS_REMOTE ? ROOT_HID_URL : ROOT_GITHUB_URL;
 const ROOT_TEST_URL = './';
 
 const API_URL = import.meta.env.PROD ? ROOT_WEB_URL : ROOT_TEST_URL;
 
 export const regexMarkdownPublicVersions = /#### version ([.\d]+) <span class="date">[.\d]+<\/span>.?public/gi; // to build ['3.4.419', '3.0.386', '3.0.378']
-export const regexFnameVerDate           = /dppm-(\d{1,3}\.\d{1,4}\.\d{1,5})_on_(\d\d\d\d\.\d\d\.\d\d)/i; // version and date
+export const regexFnameVerDate = /dppm-(\d{1,3}\.\d{1,4}\.\d{1,5})_on_(\d\d\d\d\.\d\d\.\d\d)/i; // version and date
 export const regexFnameVerDateRelBrouser = /dppm-(\d{1,3}\.\d{1,4}\.\d{1,5})_on_(\d\d\d\d\.\d\d\.\d\d)-(r|m)-(chrome|firefox|edge)/i; // version and date release browser
 
 // API generated locations
