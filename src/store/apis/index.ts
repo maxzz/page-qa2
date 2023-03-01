@@ -3,6 +3,8 @@ export {
     URL_OLD_QA_WEBSITE,
     URL_HID_PMIT,
     URL_HID_PMAC,
+    URL_INSTALL_DP_PAGE,
+    URL_INSTALL_GOOGLE_STORE,
     regexMarkdownPublicVersions,
     getArchiveExtensionUrl
 } from './constants';

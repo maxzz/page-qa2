@@ -1,5 +1,5 @@
 import React from 'react';
-import { IS_GITHUB, URL_CONFLUENCE, URL_HID_PMAC, URL_OLD_QA_WEBSITE } from '@/store/apis';
+import { IS_GITHUB, URL_CONFLUENCE, URL_INSTALL_DP_PAGE, URL_HID_PMAC, URL_OLD_QA_WEBSITE, URL_INSTALL_GOOGLE_STORE } from '@/store/apis';
 
 export function Section5_FinalNotes() {
     return (
@@ -19,10 +19,10 @@ export function Section5_FinalNotes() {
             <h2 className="mt-2 text-base font-semibold">Google Store links</h2>
             <ul className="ml-4 list-disc">
                 <li>
-                    Chrome web store extension <a className="hoverurl" href="https://chrome.google.com/webstore/detail/digitalpersona/piimgpjgnagkckjlhjcppbkbjjfjmnbh" target="_blank">installation page.</a>
+                    Chrome web store extension <a className="hoverurl" href={URL_INSTALL_GOOGLE_STORE} target="_blank">installation page.</a>
                 </li>
                 <li>
-                    DP extension <a className="hoverurl" href="https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html" target="_blank">installation page</a>.
+                    DP extension <a className="hoverurl" href={URL_INSTALL_DP_PAGE} target="_blank">installation page</a>.
                 </li>
                 <li>
                     DP extension <a className="hoverurl" href="https://maxzz.github.io/page-extension-installation" target="_blank"> the new installation page test</a> (not in production yet).
