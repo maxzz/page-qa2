@@ -50,13 +50,15 @@ export function getArchiveExtensionUrl(name: string) {
 
 // Special links
 
-export const URL_HID_PMAC = `${currentLocation.root}/maxz/pmac.zip.txt`;
-export const URL_HID_PMIT = 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pmit/index.html'; // it will(/should) be redirected to www3
-export const URL_OLD_QA_WEBSITE = `${currentLocation.root}/pageqa1/index.html`;
-export const URL_CONFLUENCE = 'https://wiki.hidglobal.com/display/ALTUS/Browser+extensions+installation'; //TODO: make a local copy on this website
+export const URLS = {
+    HID_PMIT: 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pmit/index.html', // it will(/should) be redirected to www3
+    HID_PMAC: `${currentLocation.root}/maxz/pmac.zip.txt`,
+    QA_WEBSITE_OLD: `${currentLocation.root}/pageqa1/index.html`,
+    CONFLUENCE_HINTS: 'https://wiki.hidglobal.com/display/ALTUS/Browser+extensions+installation', //TODO: make a local copy on this website
 
-export const URL_INSTALL_DP_PAGE = 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html';
-export const URL_INSTALL_GOOGLE_STORE = 'https://chrome.google.com/webstore/detail/digitalpersona/piimgpjgnagkckjlhjcppbkbjjfjmnbh';
+    INSTALL_DP_PAGE: 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html',
+    INSTALL_GOOGLE_STORE: 'https://chrome.google.com/webstore/detail/digitalpersona/piimgpjgnagkckjlhjcppbkbjjfjmnbh',
+};
 
 // Regexes
 
