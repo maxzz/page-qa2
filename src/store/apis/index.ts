@@ -1,6 +1,8 @@
 export {
-    IS_REMOTE, URL_CONFLUENCE,
+    IS_GITHUB, URL_CONFLUENCE,
     URL_OLD_QA_WEBSITE,
+    URL_HID_PMIT,
+    URL_HID_PMAC,
     regexMarkdownPublicVersions,
     getArchiveExtensionUrl
 } from './constants';

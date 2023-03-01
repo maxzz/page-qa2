@@ -1,5 +1,5 @@
 import React from 'react';
-import { getArchiveExtensionUrl, IS_REMOTE, URL_CONFLUENCE, URL_OLD_QA_WEBSITE } from '@/store/apis';
+import { IS_GITHUB, URL_CONFLUENCE, URL_HID_PMAC, URL_OLD_QA_WEBSITE } from '@/store/apis';
 
 export function Section5_FinalNotes() {
     return (
@@ -35,7 +35,7 @@ export function Section5_FinalNotes() {
                     <a className="hoverurl" href="https://maxzz.github.io/dropzone" target="_blank">PMIT (Password Manager Inverstigation Tool) utility</a> (the latest version).
                 </li>
                 <li>
-                    <a className="hoverurl" href={`${getArchiveExtensionUrl('../AltusAddons/../../maxz/pmac.zip.txt')}`} target="_blank">PMAC (Password Manager Administrator Commands) utility</a> (not in production yet).
+                    <a className="hoverurl" href={URL_HID_PMAC} target="_blank">PMAC (Password Manager Administrator Commands) utility</a> (not in production yet).
                 </li>
             </ul>
 
@@ -44,7 +44,7 @@ export function Section5_FinalNotes() {
                 <li>
                     The previous QA website is still <a className="hoverurl" href={URL_OLD_QA_WEBSITE} target="_blank"> available here</a>.
                 </li>
-                {!IS_REMOTE &&
+                {IS_GITHUB &&
                     <li>
                         The source code for this website on <a className="hoverurl" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here</a>.
                     </li>
