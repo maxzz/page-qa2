@@ -16,7 +16,7 @@ export function Section5_FinalNotes() {
                 Additional documents are available on the <a className="hoverurl" href={URLS.CONFLUENCE_HINTS} target="_blank"> HID confluence (intranet) website</a>.
             </p>
 
-            <h2 className="mt-2 text-base font-semibold">Google Store links</h2>
+            <h2 className="mt-2 text-base font-semibold">Links to install the extension</h2>
             <ul className="ml-4 list-disc">
                 <li>
                     Chrome web store extension <a className="hoverurl" href={URLS.INSTALL_GOOGLE_STORE} target="_blank">installation page.</a>

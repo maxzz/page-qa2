@@ -51,12 +51,12 @@ export function getArchiveExtensionUrl(name: string) {
 // Special links
 
 export const URLS = {
-    HID_PMIT: 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pmit/index.html', // it will(/should) be redirected to www3
+    HID_PMIT: `${currentLocation.root}/pmit/index.html`,
     HID_PMAC: `${currentLocation.root}/maxz/pmac.zip.txt`,
     QA_WEBSITE_OLD: `${currentLocation.root}/pageqa1/index.html`,
     CONFLUENCE_HINTS: 'https://wiki.hidglobal.com/display/ALTUS/Browser+extensions+installation', //TODO: make a local copy on this website
 
-    INSTALL_DP_PAGE: 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html',
+    INSTALL_DP_PAGE: 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html', // it will(/should) be redirected to www3
     INSTALL_GOOGLE_STORE: 'https://chrome.google.com/webstore/detail/digitalpersona/piimgpjgnagkckjlhjcppbkbjjfjmnbh',
 };
 

@@ -29,8 +29,8 @@ export function Section4_TestApps() {
             </div>
 
             <ul className="ml-8 list-disc">
-                <li><a className="hoverurl" href="https://maxzz.github.io/dropzone" target="_blank">Password Manager Investigation Tool (the latest version)</a></li>
                 <li><a className="hoverurl" href={URLS.HID_PMIT} target="_blank">Password Manager Investigation Tool (version under HID domain)</a></li>
+                <li><a className="hoverurl" href="https://maxzz.github.io/dropzone" target="_blank">Password Manager Investigation Tool (the latest version)</a></li>
             </ul>
 
             <div className="pt-3">
