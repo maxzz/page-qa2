@@ -32,11 +32,15 @@ export function Section4_TestApps() {
                 <li><a className="hoverurl" href={URLS.HID_PMIT} target="_blank">Password Manager Investigation Tool (version under HID domain)</a></li>
                 <li><a className="hoverurl" href="https://maxzz.github.io/dropzone" target="_blank">Password Manager Investigation Tool (the latest version)</a></li>
             </ul>
-
+            
             <div className="pt-3">
                 <img className="m-auto" width="200px" src={samplePmitImg} alt="test applications preview" />
             </div>
 
+            <div className="">Local test pages</div>
+            <ul className="ml-8 list-disc">
+                <li><a className="hoverurl" href={URLS.LOCAL_APP_FISERV} target="_blank">#90673 (Heritage), #91149 (BAC) fiserv</a></li>
+            </ul>
             <ul className="ml-8 list-disc">
                 <li><a className="hoverurl" href="https://maxzz.github.io" target="_blank">All other project catalog</a></li>
             </ul>
