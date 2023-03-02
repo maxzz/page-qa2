@@ -55,7 +55,7 @@ export const URLS = {
     HID_PMAC: `${currentLocation.root}/maxz/pmac.zip.txt`,
     QA_WEBSITE_OLD: `${currentLocation.root}/pageqa1/index.html`,
     CONFLUENCE_HINTS: 'https://wiki.hidglobal.com/display/ALTUS/Browser+extensions+installation', //TODO: make a local copy on this website
-    LOCAL_HINTS: `${currentLocation.root}/pages-wiki/installation`,
+    LOCAL_HINTS: `${currentLocation.root}/pages/wiki/installation`,
 
     INSTALL_DP_PAGE: 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html', // it will(/should) be redirected to www3
     INSTALL_GOOGLE_STORE: 'https://chrome.google.com/webstore/detail/digitalpersona/piimgpjgnagkckjlhjcppbkbjjfjmnbh',
