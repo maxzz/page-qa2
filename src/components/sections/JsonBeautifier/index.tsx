@@ -77,16 +77,34 @@ export function JsonBeautifier() {
                     </div>
 
                     {!!text.length &&
-                        <div className="relative py-0.5 bg-slate-200 rounded">
-                            
+                        <div className="relative py-0.5 min-h-[2.6rem] bg-slate-200 rounded">
+
                             <div className="px-3 max-h-[460px] text-[.75rem] whitespace-pre overflow-auto">
                                 {formatted}
                             </div>
 
-                            <div className="absolute top-0.5 right-4 p-1 bg-slate-200">
-                                <div className="px-2 py-1.5 text-xs border-slate-400 border rounded shadow">
+                            <div className="absolute top-0.5 right-4 p-1 bg-slate-200 flex space-x-0.5">
+                                <div className="px-2 py-1.5 text-xs border-slate-100 border rounded shadow">
                                     {nLines} line{nLines != 1 ? 's' : ''}
                                 </div>
+
+                                <button
+                                    className="px-2 py-1.5 text-xs border-slate-400 border rounded shadow"
+                                    onClick={() => {
+                                        setText('');
+                                    }}
+                                >
+                                    Clear
+                                </button>
+
+                                <button
+                                    className="px-2 py-1.5 text-xs border-slate-400 border rounded shadow"
+                                    onClick={async () => {
+                                        await navigator.clipboard.writeText(formatted);
+                                    }}
+                                >
+                                    Copy
+                                </button>
                             </div>
                         </div>
                     }
@@ -99,5 +117,5 @@ export function JsonBeautifier() {
 
 //TODO: persist perLine
 //TODO: persist text (useful for further investigation); or even to have history of values; or keep it simple so fars
-//TODO: clear formated
-//TODO: copy formated
+//TODO: clear formated - done
+//TODO: copy formated - done
