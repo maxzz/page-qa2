@@ -17,18 +17,20 @@ export function JsonBeautifier() {
             console.log('p', p);
         } catch (error) {
             console.log('invalid');
+            setFormatted('invalid');
         }
 
     }, []);
 
     return (
-        <div className="" onClick={() => setOpen((v) => !v)}>
-            <button className="">JSON beautifier...</button>
+        <div className="pr-1">
+            <button className="" onClick={() => setOpen((v) => !v)}>JSON beautifier...</button>
             {open &&
                 <div className="">
-
                     <input
                         type="text"
+                        className="my-2 w-full form-input text-sm text-inherit bg-slate-200 border-none rounded"
+                        spellCheck="false"
                         value={text}
                         onChange={(e) => {
                             const t = e.target.value;
@@ -36,7 +38,7 @@ export function JsonBeautifier() {
                             setFormatted(beautify(t, null, 4));
                         }} />
 
-                    <div className="max-h-[460px] text-[.75rem] whitespace-pre overflow-auto">
+                    <div className="max-h-[460px] text-[.75rem] text-slate-900 bg-slate-200 whitespace-pre overflow-auto">
                         {formatted}
                     </div>
                 </div>
