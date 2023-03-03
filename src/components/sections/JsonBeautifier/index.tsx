@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { beautify } from "./beautify";
 
-function format(text: string): { formated: string; error?: undefined; } | { error: string; formated?: undefined; } {
+function format(text: string, perLine: number): { formated: string; error?: undefined; } | { error: string; formated?: undefined; } {
     try {
         const o = JSON.parse(text);
-        const formated = beautify(o, null, 4);
+        const formated = beautify(o, null, 4, perLine);
         return {
             formated,
         };
@@ -18,6 +18,7 @@ function format(text: string): { formated: string; error?: undefined; } | { erro
 export function JsonBeautifier() {
     const [open, setOpen] = useState(false);
     const [text, setText] = useState('');
+    const [perLine, setPerLine] = useState(120);
     const [formatted, setFormatted] = useState('');
 
     useEffect(() => {
@@ -25,7 +26,7 @@ export function JsonBeautifier() {
         //const t = '{"opts":{"dogrb":true,"nlogins":false},"what":"profs"}';
         //const t = '{"s": 4}';
         setText(t);
-        setFormatted(format(t).formated || (t ? '?' : ''));
+        setFormatted(format(t, perLine).formated || (t ? '?' : ''));
     }, []);
 
     return (
@@ -33,16 +34,37 @@ export function JsonBeautifier() {
             <button className="" onClick={() => setOpen((v) => !v)}>JSON beautifier...</button>
             {open &&
                 <div className="">
-                    <input
-                        type="text"
-                        className="my-2 w-full form-input text-sm text-inherit bg-slate-200 border-none rounded shadow"
-                        spellCheck="false"
-                        value={text}
-                        onChange={(e) => {
-                            const t = e.target.value;
-                            setText(t);
-                            setFormatted(format(t).formated || (t ? '?' : ''));
-                        }} />
+
+                    <div className="grid grid-cols-[1fr_auto_auto] items-center gap-2">
+                        <input
+                            type="text"
+                            className="my-2 w-full form-input text-sm text-inherit bg-slate-200 border-none rounded shadow"
+                            spellCheck="false"
+                            value={text}
+                            onChange={(e) => {
+                                const t = e.target.value;
+                                setText(t);
+                                setFormatted(format(t, perLine).formated || (t ? '?' : ''));
+                            }} />
+
+                        <div className="ml-2">#</div>
+
+                        <input
+                            type="text"
+                            className="my-2 w-12 form-input text-sm text-inherit bg-slate-200 border-none rounded shadow"
+                            value={perLine}
+                            onChange={(e)=>{
+                                const t = e.target.value;
+                                const n = Number(t);
+                                if (!isNaN(n)) {
+                                    setPerLine(n);
+                                    setFormatted(format(text, n).formated || (t ? '?' : ''));
+                                }
+                            }}
+
+                        />
+
+                    </div>
 
                     <div className="py-0.5 bg-slate-200 rounded">
                         <div className="px-3 max-h-[460px] text-[.75rem] whitespace-pre overflow-auto">
