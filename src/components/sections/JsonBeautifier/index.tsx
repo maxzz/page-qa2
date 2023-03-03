@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { beautify } from "./beautify";
 
-function format(text: string, perLine: number): { formated: string; error?: undefined; } | { error: string; formated?: undefined; } {
+function format(text: string, perLine: number): { formated: string; lines: number; error?: undefined; } | { error: string; formated?: undefined; lines?: undefined; } {
     try {
         const o = JSON.parse(text);
         const formated = beautify(o, null, 4, perLine);
+        const lines = formated.split(/\r?\n/).length;
         return {
             formated,
+            lines,
         };
     } catch (error) {
         return {
@@ -18,7 +20,8 @@ function format(text: string, perLine: number): { formated: string; error?: unde
 export function JsonBeautifier() {
     const [open, setOpen] = useState(false);
     const [text, setText] = useState('');
-    const [perLine, setPerLine] = useState(120);
+    const [perLine, setPerLine] = useState(2000);
+    const [nLines, setNLines] = useState(0);
     const [formatted, setFormatted] = useState('');
 
     useEffect(() => {
@@ -26,7 +29,9 @@ export function JsonBeautifier() {
         //const t = '{"opts":{"dogrb":true,"nlogins":false},"what":"profs"}';
         //const t = '{"s": 4}';
         setText(t);
-        setFormatted(format(t, perLine).formated || (t ? '?' : ''));
+        const res = format(t, perLine);
+        setFormatted(res.formated || (t ? '?' : ''));
+        res.lines !== undefined && setNLines(res.lines);
     }, []);
 
     return (
@@ -44,33 +49,45 @@ export function JsonBeautifier() {
                             onChange={(e) => {
                                 const t = e.target.value;
                                 setText(t);
-                                setFormatted(format(t, perLine).formated || (t ? '?' : ''));
-                            }} />
+                                const res = format(t, perLine);
+                                setFormatted(res.formated || (t ? '?' : ''));
+                                res.lines !== undefined && setNLines(res.lines);
+                            }}
+                        />
 
-                        <div className="ml-2">#</div>
+                        <div className="ml-2" title="maximum number of characters per line">#</div>
 
                         <input
                             type="text"
-                            className="my-2 w-12 form-input text-sm text-inherit bg-slate-200 border-none rounded shadow"
+                            className="my-2 max-w-[64px] form-input text-sm text-center text-inherit bg-slate-200 border-none rounded shadow"
                             value={perLine}
-                            onChange={(e)=>{
+                            onChange={(e) => {
                                 const t = e.target.value;
                                 const n = Number(t);
                                 if (!isNaN(n)) {
                                     setPerLine(n);
-                                    setFormatted(format(text, n).formated || (t ? '?' : ''));
+                                    const res = format(text, n);
+                                    setFormatted(res.formated || (t ? '?' : ''));
+                                    res.lines !== undefined && setNLines(res.lines);
                                 }
                             }}
-
                         />
 
                     </div>
 
-                    <div className="py-0.5 bg-slate-200 rounded">
-                        <div className="px-3 max-h-[460px] text-[.75rem] whitespace-pre overflow-auto">
-                            {formatted}
+                    {!!text.length &&
+                        <div className="relative py-0.5 bg-slate-200 rounded">
+                            <div className="px-3 max-h-[460px] text-[.75rem] whitespace-pre overflow-auto">
+                                {formatted}
+                            </div>
+                            <div className="absolute top-0.5 right-4 p-1 bg-slate-200">
+                                <div className="px-2 py-0.5 text-xs border-slate-400 border rounded shadow">
+                                    {nLines} line{nLines != 1 ? 's' : ''}
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    }
+
                 </div>
             }
         </div >
