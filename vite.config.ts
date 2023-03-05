@@ -12,7 +12,7 @@ const buildAt = () => {
 
 const buildVersion = () => {
     const d = new Date();
-    return `${d.getFullYear().toString().substring(3)}.${d.getMonth() + 1}${d.getDate()} (${d.getHours()}${d.getMinutes()})`;
+    return `${d.getFullYear().toString().substring(3)}.${d.getMonth() + 1}${d.getDate()} (time: ${d.getHours()}:${d.getMinutes()})`;
 };
 
 // https://vitejs.dev/config/
