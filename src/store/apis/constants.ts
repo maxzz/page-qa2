@@ -4,7 +4,7 @@
 //Old FTP: // https://www3.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pageqa1/index.html
 //New FTP: // https://crossmatch.hid.gl/g02/pageqa/
 
-export const IS_GITHUB: boolean = !/\/g0\d\//.test(window?.location.host || ''); // /hidglobal/.test(window?.location.host || '');
+export const IS_GITHUB: boolean = !/\/g0\d\//.test(window?.location.href || ''); // /hidglobal/.test(window?.location.host || '');
 
 type CurrentLocation = {
     host: string;   // part before generation
