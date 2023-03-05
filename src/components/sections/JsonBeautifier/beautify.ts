@@ -76,7 +76,7 @@ function str(key: string, holder: any, limit: number): any {
 
     case 'boolean':
     //@ts-ignore
-    case 'null':
+    //case 'null':
 
 // If the value is a boolean or null, convert it to a string. Note:
 // typeof null does not produce 'null'. The case is included here in
