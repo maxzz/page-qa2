@@ -7,12 +7,12 @@ import replace from '@rollup/plugin-replace';
 const buildAt = () => {
     const d = new Date();
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return d.toLocaleDateString('en-US', options);
+    return `${d.toLocaleDateString('en-US', options)} at ${d.getHours()}:${d.getMinutes()}`;
 };
 
 const buildVersion = () => {
     const d = new Date();
-    return `${d.getFullYear().toString().substring(3)}.${d.getMonth() + 1}${d.getDate()} (time: ${d.getHours()}:${d.getMinutes()})`;
+    return `${d.getFullYear().toString().substring(3)}.${d.getMonth() + 1}${d.getDate()}`;
 };
 
 // https://vitejs.dev/config/
