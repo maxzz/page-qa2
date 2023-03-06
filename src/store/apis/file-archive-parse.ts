@@ -48,7 +48,7 @@ export type OneYearExts = {
 };
 
 function splitToVersionsMap(items: Meta[]): VersionsMap {
-    const rv: VersionsMap = {};
+    let rv: VersionsMap = {};
     items.forEach((item) => {
         if (!rv[item.version]) {
             rv[item.version] = [];
@@ -56,6 +56,11 @@ function splitToVersionsMap(items: Meta[]): VersionsMap {
         rv[item.version].push(item);
     });
     Object.values(rv).forEach((version) => version.sort((a, b) => itemSortIndex(a) - itemSortIndex(b))); // sort items inside each version
+
+    const entries = Object.entries(rv); // preserve insertion order.
+    entries.sort((a, b) => a[0].localeCompare(b[0]));
+    rv = Object.fromEntries(entries);
+
     return rv;
 }
 
@@ -103,8 +108,8 @@ export function getFromArchive(archive: ArchiveExtensionMeta[] | null, a: Pick<A
 
 export function getLatestArchiveVersions(archive?: ArchiveExtensionMeta[] | null): { ch: ArchiveExtensionMeta | undefined; ff: ArchiveExtensionMeta | undefined; } {
     const reversed = archive ? [...archive].reverse() : [];
-    const latestArchiveCh = getFromArchive(reversed, {browser: TBrowserShort.chrome, release: ReleaseType.release});
-    const latestArchiveFf = getFromArchive(reversed, {browser: TBrowserShort.firefox, release: ReleaseType.release});
+    const latestArchiveCh = getFromArchive(reversed, { browser: TBrowserShort.chrome, release: ReleaseType.release });
+    const latestArchiveFf = getFromArchive(reversed, { browser: TBrowserShort.firefox, release: ReleaseType.release });
     return {
         ch: latestArchiveCh,
         ff: latestArchiveFf,
