@@ -53,15 +53,8 @@ function preserveStringKeysOrder<T>(items: { [k: string]: T; }): { [k: string]: 
     return Object.fromEntries(entries);
 }
 
-// function preserveKeysOrder<T>(rv: T[], sort: (a: [PropertyKey, T], b: [PropertyKey, T]) => number): T[] {
-//     const entries = Object.entries<[PropertyKey, T]>(rv); // preserve insertion order.
-//     entries.sort(sort);
-//     rv = Object.fromEntries<[string, T][]>(entries);
-//     return rv;
-// }
-
 function splitToVersionsMap(items: Meta[]): VersionsMap {
-    let rv: VersionsMap = {};
+    const rv: VersionsMap = {};
     items.forEach((item) => {
         if (!rv[item.version]) {
             rv[item.version] = [];
@@ -70,12 +63,7 @@ function splitToVersionsMap(items: Meta[]): VersionsMap {
     });
     Object.values(rv).forEach((version) => version.sort((a, b) => itemSortIndex(a) - itemSortIndex(b))); // sort items inside each version
 
-    // const entries = Object.entries(rv); // preserve insertion order.
-    // entries.sort((a, b) => a[0].localeCompare(b[0]));
-    // rv = Object.fromEntries(entries);
-    rv = preserveStringKeysOrder(rv);
-
-    return rv;
+    return preserveStringKeysOrder(rv);
 }
 
 export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null, publicVersions?: string[]): OneYearExts[] {
