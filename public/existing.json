@@ -1,21 +1,6 @@
 [
     {
         "type": "-",
-        "name": "dppm-3.4.708_on_2023.03.05-r-chrome.zip",
-        "size": 124217,
-        "modifyTime": 1678054523000,
-        "accessTime": 1678054523000,
-        "rights": {
-            "user": "rw",
-            "group": "rw",
-            "other": "r"
-        },
-        "owner": 1000,
-        "group": 100,
-        "longname": "-rw-rw-r--    1 maksym   users      124217 Mar  5 16:15 dppm-3.4.708_on_2023.03.05-r-chrome.zip"
-    },
-    {
-        "type": "-",
         "name": "dppm-3.4.72_on_2020.06.05-r-chrome.zip",
         "size": 103639,
         "modifyTime": 1677708694000,
@@ -1008,8 +993,8 @@
         "type": "-",
         "name": "config.json",
         "size": 3123,
-        "modifyTime": 1678058426000,
-        "accessTime": 1678058711000,
+        "modifyTime": 1678069094000,
+        "accessTime": 1678069123000,
         "rights": {
             "user": "rw",
             "group": "rw",
@@ -1017,7 +1002,7 @@
         },
         "owner": 1000,
         "group": 100,
-        "longname": "-rw-rw-r--    1 maksym   users        3123 Mar  5 17:20 config.json"
+        "longname": "-rw-rw-r--    1 maksym   users        3123 Mar  5 20:18 config.json"
     },
     {
         "type": "-",
@@ -1786,21 +1771,6 @@
     },
     {
         "type": "-",
-        "name": "dppm-3.4.714_on_2023.03.05-r-chrome.zip",
-        "size": 124216,
-        "modifyTime": 1678058426000,
-        "accessTime": 1678057959000,
-        "rights": {
-            "user": "rw",
-            "group": "rw",
-            "other": "r"
-        },
-        "owner": 1000,
-        "group": 100,
-        "longname": "-rw-rw-r--    1 maksym   users      124216 Mar  5 17:20 dppm-3.4.714_on_2023.03.05-r-chrome.zip"
-    },
-    {
-        "type": "-",
         "name": "dppm-3.4.225_on_2020.12.07-r-chrome.zip",
         "size": 105697,
         "modifyTime": 1677708679000,
@@ -1848,8 +1818,8 @@
         "type": "-",
         "name": "update.json",
         "size": 346,
-        "modifyTime": 1678058426000,
-        "accessTime": 1678058424000,
+        "modifyTime": 1678069094000,
+        "accessTime": 1678069093000,
         "rights": {
             "user": "rw",
             "group": "rw",
@@ -1857,7 +1827,7 @@
         },
         "owner": 1000,
         "group": 100,
-        "longname": "-rw-rw-r--    1 maksym   users         346 Mar  5 17:20 update.json"
+        "longname": "-rw-rw-r--    1 maksym   users         346 Mar  5 20:18 update.json"
     },
     {
         "type": "-",
@@ -2431,6 +2401,21 @@
     },
     {
         "type": "-",
+        "name": "dppm-3.4.709_on_2023.03.05-r-chrome.zip",
+        "size": 124218,
+        "modifyTime": 1678069088000,
+        "accessTime": 1678069300000,
+        "rights": {
+            "user": "rw",
+            "group": "rw",
+            "other": "r"
+        },
+        "owner": 1000,
+        "group": 100,
+        "longname": "-rw-rw-r--    1 maksym   users      124218 Mar  5 20:18 dppm-3.4.709_on_2023.03.05-r-chrome.zip"
+    },
+    {
+        "type": "-",
         "name": "dppm-3.0.327_on_2018.11.02-r-firefox.xpi",
         "size": 192894,
         "modifyTime": 1677708664000,
@@ -2627,9 +2612,9 @@
     {
         "type": "-",
         "name": "existing.json",
-        "size": 123114,
-        "modifyTime": 1677986017000,
-        "accessTime": 1678054592000,
+        "size": 124040,
+        "modifyTime": 1678069272000,
+        "accessTime": 1678069285000,
         "rights": {
             "user": "rw",
             "group": "rw",
@@ -2637,7 +2622,7 @@
         },
         "owner": 1000,
         "group": 100,
-        "longname": "-rw-rw-r--    1 maksym   users      123114 Mar  4 21:13 existing.json"
+        "longname": "-rw-rw-r--    1 maksym   users      124040 Mar  5 20:21 existing.json"
     },
     {
         "type": "-",
@@ -3362,9 +3347,9 @@
     {
         "type": "-",
         "name": "history.md",
-        "size": 29235,
-        "modifyTime": 1677986016000,
-        "accessTime": 1678054592000,
+        "size": 29264,
+        "modifyTime": 1678069272000,
+        "accessTime": 1678069285000,
         "rights": {
             "user": "rw",
             "group": "rw",
@@ -3372,7 +3357,7 @@
         },
         "owner": 1000,
         "group": 100,
-        "longname": "-rw-rw-r--    1 maksym   users       29235 Mar  4 21:13 history.md"
+        "longname": "-rw-rw-r--    1 maksym   users       29264 Mar  5 20:21 history.md"
     },
     {
         "type": "-",
@@ -3703,6 +3688,21 @@
         "owner": 1000,
         "group": 100,
         "longname": "-rw-rw-r--    1 maksym   users      166838 Mar  1 16:11 dppm-3.0.240_on_2018.10.27-r-chrome.zip"
+    },
+    {
+        "type": "-",
+        "name": "dppm-3.4.709_on_2023.03.05-m-chrome.zip",
+        "size": 207823,
+        "modifyTime": 1678069094000,
+        "accessTime": 1678069094000,
+        "rights": {
+            "user": "rw",
+            "group": "rw",
+            "other": "r"
+        },
+        "owner": 1000,
+        "group": 100,
+        "longname": "-rw-rw-r--    1 maksym   users      207823 Mar  5 20:18 dppm-3.4.709_on_2023.03.05-m-chrome.zip"
     },
     {
         "type": "-",
