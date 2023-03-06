@@ -1,20 +1,49 @@
+#### version 3.4.709 <span class="date">02.26.2023</span>
+* Bug [91248](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=91248) 
+  PM icon and fill-in move to unprotected field except when not visible due to window resizing.
+  Added the ability to filter out the context script fields. (3.4.709 02.26.2023)
+* Bug [91315](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=91315) 
+  "Payroll people" website was supported in extension .439 but no longer works in .700.
+  Added a customization for working with this site. (3.4.702 01.30.2023)
+  
+#### version 3.4.700 <span class="date">12.04.2022</span>  Public
+* Bug [91153](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=91153) 
+  Disable use of personal logins if GPO Add personal logins is disabled. 
+  Added perosnal logins filter to drop personal logins if add new logins not allowed with GPO.
+* Bug [91149](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=91149)
+  "BAC" logon screen template does not submit.
+* Bug [90673](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90673)
+  Issues training template for customer internal portal logon with two password fields (and pw change).
+ 
+#### version 3.4.689 <span class="date">09.23.2022</span>
+* Bug [90589](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90589)
+  No input fields detected in the target screen message - thrivepatientportal.com [Shadow DOM].
+  I have added a new customization to send raw input thread events from DPAgent to a web page. This is a technical support release for testing with a customer.
+  Use [Exact link to test it](https://www.thrivepatientporta@l.com/oauth/sso/?client_id=thrive&scope=user/%2a.%2a+offline_access+openid+profile&state=2809647d-3b98-42c2-b225-0e159e610556&redirect_uri=https://www.thrivepatientporta@l.com/oauth/callback&_provider=provider&_tenant=texinst). (3.4.689 09.23.2022)
+
+#### version 3.0.906 <span class="date">08.23.2022</span>
+* Task [90559](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90559)
+  This is a modified old version of the HP extension, released at the request of Google.
+  I removed unused 'tabs' privilege as requested by Google.
+  The extension v3.0.906 (HP only) has been successfully published to the Chrome Web Store. (3.0.906 08.23.2022)
+
 #### version 3.4.590 <span class="date">08.08.2022</span>
 * Bug [90786](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90786)
-  Request extension customization for two page logon https://refundplus.alliedsolutions.net/account/login.
-  Use [https://refundplus.alliedsolutions.net/account/login](https://refundplus.alliedsolutions.net/account/login) for testing. (3.4.587 08.01.2022)
+  Request extension customization for two page logon https://refundplus.alliedsolution@s.net/account/login.
+  Use [https://refundplus.alliedsolution@s.net/account/login](https://refundplus.alliedsolution@s.net/account/login) for testing. (3.4.587 08.01.2022)
 * Bug [90785](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90785)
   DP Icon Not Appearing at Logon Screen in Chrome Ext 3.4.0.442.
-  Use [https://www.sageworksanalyst.com](https://www.sageworksanalyst.com) for testing. (3.4.590 08.08.2022)
+  Use [https://www.sageworksanalys@t.com](https://www.sageworksanalys@t.com) for testing. (3.4.590 08.08.2022)
 
 #### version 3.4.585 <span class="date">07.23.2022</span> Public
 * Bug [90430](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90430)
   Unable to PMAT Edge/Chrome train managed logon for banno.com/a/login [ShadowRoot DOM].
   Added new customization for shadow DOM forms.
-  Use [https://banno.com/a/login](https://banno.com/a/login) for testing. (3.4.564 07.09.2022)
+  Use [https://bann@o.com/a/login](https://bann@o.com/a/login) for testing. (3.4.564 07.09.2022)
 * Bug [90589](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90589)
   No input fields detected in the target screen message - thrivepatientportal.com [Shadow DOM]
-  * Use [https://thrivepatientportal.com](https://thrivepatientportal.com) for testing.
-  * Use [https://www.thrivepatientportal.com/oauth/sso](https://www.thrivepatientportal.com/oauth/sso/?client_id=thrive&scope=user/%2a.%2a+offline_access+openid+profile&state=2809647d-3b98-42c2-b225-0e159e610556&redirect_uri=https://www.thrivepatientportal.com/oauth/callback&_provider=provider&_tenant=texinst) for testing. (3.4.585 07.23.2022)
+  * Use [https://thrivepatientporta@l.com](https://thrivepatientporta@l.com) for testing.
+  * Use [https://www.thrivepatientporta@l.com/oauth/sso](https://www.thrivepatientporta@l.com/oauth/sso/?client_id=thrive&scope=user/%2a.%2a+offline_access+openid+profile&state=2809647d-3b98-42c2-b225-0e159e610556&redirect_uri=https://www.thrivepatientporta@l.com/oauth/callback&_provider=provider&_tenant=texinst) for testing. (3.4.585 07.23.2022)
  
 #### version 3.0.905 <span class="date">06.03.2022</span>
 * Task [90559](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90559)
@@ -47,9 +76,9 @@
   (3.4.432 03.16.2022)
 #### version 3.4.430 <span class="date">03.03.2022</span>
 * Bug [89771](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89771)
-  Add support for the customer website [www.isc.ca](https://www.isc.ca/SignedInHome/Pages/login.aspx) (3.4.430 03.03.2022)
+  Add support for the customer website [www.is@c.ca](https://www.is@c.ca/SignedInHome/Pages/login.aspx) (3.4.430 03.03.2022)
 * Bug [90105](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=90105)
-  Add support for the customer website [meridianlink.com](https://cs.consumer.meridianlink.com) (3.4.430 03.03.2022)
+  Add support for the customer website [meridianlin@k.com](https://cs.consumer.meridianlin@k.com) (3.4.430 03.03.2022)
 
 #### version 3.4.427 <span class="date">12.22.2021</span>
 * Bug [89777](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89777)
@@ -58,8 +87,8 @@
 #### version 3.4.425 <span class="date">12.21.2021</span>
 * Bug [89948](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89948)
   FIS eAccess intermittent initial logon fail
-    * Fix [auth.cashedge.com](https://auth.cashedge.com/am/UI/Login) where username was not recognized (aka fiserv website for Compass Identity Management). (3.4.421 12.21.2021)
-    * Add a two second delay before submitting data for https://www.efunds.com (hint: clear cookies to get back initial state). (3.4.424 12.21.2021)
+    * Fix [auth.cashedg@e.com](https://auth.cashedg@e.com/am/UI/Login) where username was not recognized (aka fiserv website for Compass Identity Management). (3.4.421 12.21.2021)
+    * Add a two second delay before submitting data for https://www.efund@s.com (hint: clear cookies to get back initial state). (3.4.424 12.21.2021)
 * Bug [89340](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89340)
   Unable to train "originate loans" site for use with Edge.  (3.4.425 12.21.2022)
 * Bug [89771](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89771) 
@@ -91,8 +120,8 @@
 
 #### version 3.4.375 <span class="date">08.31.2021</span> Public
 * Bug [89340](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89340) Help training originate loans site for use with Edge.
-    * added support for single field customer login on [account.docusign.com](https://account.docusign.com). (3.4.367 08.19.2021)
-    * added support for two usernames customer login on [velwww.scscu.com](https://velwww.scscu.com). (3.4.375 08.31.2021)
+    * added support for single field customer login on [account.docusig@n.com](https://account.docusig@n.com). (3.4.367 08.19.2021)
+    * added support for two usernames customer login on [velwww.scsc@u.com](https://velwww.scsc@u.com). (3.4.375 08.31.2021)
 * Bug [89407](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=89407) 
   'Web Track' website logon being detected as a change password screen. (3.4.367 08.31.2021)
 
@@ -108,7 +137,7 @@
 * Fixed bug [88975](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=88975) [QA] Getting one more field as USERNAME when we trying to do Grabbing credentials for personal logon (3.4.350 05.24.2021)
 * Updated minification algorithm for the production version of the extension. (3.4.341 05.10.2021)
 * Fixed bug [88787](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=88787) Unable to train jackhenry.com to match on Chrome as common issue and can be reused on other websites (3.4.315 05.09.2021)
-* Fixed bug [88607](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=88607) Unable to train https://bridger.lexisnexis.com/XgAuth/ to match on Chrome (3.4.315 05.09.2021)
+* Fixed bug [88607](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=88607) Unable to train https://bridger.lexisnexi@s.com/XgAuth/ to match on Chrome (3.4.315 05.09.2021)
 
 #### version 3.4.301 <span class="date">03.22.2021</span> Public
 * Fixed bug [88575](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=88575) PMAT incorrectly reports browser extension is not in place when training managed logon against Chrome. (3.4.301 03.22.2021)
@@ -131,7 +160,7 @@
 * Removed optional privilege requests for contextMenus and tabs (3.4.215 09.24.2020)
 * Fixed bug [87384](http://dp-tfs:8080/tfs/DefaultCollection/Prime/_workitems?id=87384) A new Managed logon Profile is created every time ... (3.4.214 09.08.2020)
 * Fixed bug [87375](http://dp-tfs:8080/tfs/DefaultCollection/Prime/_workitems?id=87375) "Help" option from the PM trained Icon ... (3.4.214 09.08.2020)
-* Added support for two fields login on [paycomonline.net](https://www.paycomonline.net/v4/ee/web.php/app/login). It may have side effect on the web pages recognition where the password change screen and login are under the exactly the same URL (however this is a theoretical case vs the customer case). (3.4.210 08.30.2020)
+* Added support for two fields login on [paycomonlin@e.net](https://www.paycomonlin@e.net/v4/ee/web.php/app/login). It may have side effect on the web pages recognition where the password change screen and login are under the exactly the same URL (however this is a theoretical case vs the customer case). (3.4.210 08.30.2020)
 * Added password protected debug build deployed to QA website. (3.4.207 08.16.2020)
 * Fixed bug [87197](http://dp-tfs:8080/tfs/DefaultCollection/Prime/_workitems?id=87197) [PMAT] Unexpected Grabbing Credentials pop up, if user typed same credentials manually on PM logon page (3.4.192 08.15.2020)
 * Fixed bug [87179](http://dp-tfs:8080/tfs/DefaultCollection/Prime/_workitems?id=87179) NMLS (Federal Registry) The website URL contains the 'registry' word and was treated as registration form. (3.4.184  08.02.2020)
@@ -139,7 +168,7 @@
 * Fixed bug [86849](http://dp-tfs:8080/tfs/DefaultCollection/Prime/_workitems?id=86849) VYI is not appearing for Grabbing credential after clicking 'Save'. (3.4.180  06.28.2020)
   
 #### version 3.4.118 <span class="date">06.18.2020</span>
-* Fixed bug [86680](http://dp-tfs:8080/tfs/DefaultCollection/Prime/_workitems?id=86680). Added support for [fiserv.com](https://www.intelligentworkplace.app.fiserv.com/#/authentication/login/Login) applications with passwords implemented as text and obfuscated with dotsfont.
+* Fixed bug [86680](http://dp-tfs:8080/tfs/DefaultCollection/Prime/_workitems?id=86680). Added support for [fiserv.com](https://www.intelligentworkplace.app.fiser@v.com/#/authentication/login/Login) applications with passwords implemented as text and obfuscated with dotsfont.
 * Fixed missing ID and name on form elements; matching new and existing logins but now the password change. (3.4.101  06.14.2020)
 * First release of extenson with Domain Credentials. (3.4.83  06.08.2020)
 * New version that supports PMAT queries and has new UI. (3.4.70  05.09.2020)

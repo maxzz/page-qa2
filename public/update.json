@@ -1,0 +1,12 @@
+{
+    "addons": {
+        "pasman@crossmatch.com": {
+            "updates": [
+                {
+                    "version": "3.4.350",
+                    "update_link": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.350_on_2021.05.24-r-firefox.xpi"
+                }
+            ]
+        }
+    }
+}

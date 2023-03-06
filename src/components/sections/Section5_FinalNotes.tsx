@@ -11,16 +11,6 @@ export function Section5_FinalNotes() {
                 ensure that all previous versions of the extension are uninstalled.
             </p>
 
-{/* 
-The links are obfuscated with @ sign before the last character of domain name to fight against crowling robits. Remove it before opening link.
-
-Links are masked with an @ sign before the last character of the domain name to combat crawling robots. Delete it before opening the link.
-Links are masked with the @ sign before the last character of the domain name to fight with web crawler robots. Delete it before opening the link.
-
-Links are masked with the @ sign before the last character of the domain name to fight search engine spiders. Delete @ character before opening the link.
-Links are masked with the @ sign before the last character of the domain name to fight search engine spiders (web crawler robots). Remove the @ symbol before opening the link.
- 
- */}
             <h2 className="mt-1 text-base font-semibold">Obfuscated links</h2>
             <p>
                 Links in the Release Notes section are masked with the @ sign before the last character of the domain name to fight search engine spiders (web crawler robots). Remove the @ symbol before opening the link.
