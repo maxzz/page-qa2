@@ -11,3 +11,23 @@
         @apply outline outline-1 sm:outline-2 outline-offset-1 outline-green-500 sm:outline-green-500/30;
     }
 }
+
+/* https://codepen.io/thebabydino/pen/WNKxOxY */
+
+.link-up {
+    --grad: linear-gradient(0deg, #876bf55d, #8181ff90, #4f5ec282);
+    /* padding: 2px; */
+    box-decoration-break: clone;
+    background: var(--grad), var(--grad) 0 100%/100% calc(100% - (1 - var(--hl, 0)) * (100% - 1px)) no-repeat;
+    -webkit-background-clip: text, border-box;
+    background-clip: text, border-box;
+    background-blend-mode: difference;
+    /* color: transparent; */
+    text-decoration: none;
+    transition: background-size 0.5s ease-out;
+}
+
+.link-up:hover,
+.link-up:focus {
+    --hl: 1;
+}

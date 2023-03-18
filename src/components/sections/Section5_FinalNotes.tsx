@@ -19,8 +19,8 @@ export function Section5_FinalNotes() {
             <h2 className="mt-2 text-base font-semibold">Browser extensions installation instructions</h2>
             <p>
                 Additional documents are available on <a
-                    className="hoverurl" href={URLS.LOCAL_HINTS} target="_blank">this website</a> and on the <a
-                        className="hoverurl" href={URLS.CONFLUENCE_HINTS} target="_blank">HID confluence (intranet)</a> website.
+                    className="hoverurl link-up" href={URLS.LOCAL_HINTS} target="_blank">this website</a> and on the <a
+                        className="hoverurl link-up" href={URLS.CONFLUENCE_HINTS} target="_blank">HID confluence (intranet)</a> website.
             </p>
 
             <h2 className="mt-2 text-base font-semibold">Links to install the extension</h2>
