@@ -57,6 +57,8 @@ export const URLS = {
     CONFLUENCE_HINTS: 'https://wiki.hidglobal.com/display/ALTUS/Browser+extensions+installation', //and https://wiki.hidglobal.com/pages/viewpage.action?spaceKey=ALTUS&title=Browser+extensions+installation
     LOCAL_HINTS: `${currentLocation.root}/pages/wiki/installation`, // local copy of CONFLUENCE_HINTS
     LOCAL_APP_FISERV: `${currentLocation.root}/pages/tests/fiserv`,
+    LOCAL_APP_BANK_UTICA: `${currentLocation.root}/pages/tests/91370-bank-utica`,
+    LOCAL_APP_BANK_WASHINGTON: `${currentLocation.root}/pages/tests/91506-bank-washington`,
 
     INSTALL_DP_PAGE: 'https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pagedp/index.html', // it will(/should) be redirected to www3
     INSTALL_GOOGLE_STORE: 'https://chrome.google.com/webstore/detail/digitalpersona/piimgpjgnagkckjlhjcppbkbjjfjmnbh',

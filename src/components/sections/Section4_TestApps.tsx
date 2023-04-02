@@ -40,11 +40,15 @@ export function Section4_TestApps() {
 
             <div className="">Local test pages</div>
             <ul className="ml-8 list-disc">
-                <li><a className="hoverurl" href={URLS.LOCAL_APP_FISERV} target="_blank">fiserv: #90673 (Heritage), #91149 (BAC) #91370 (Bank of Utica)</a></li>
+                <li><a className="hoverurl" href={URLS.LOCAL_APP_FISERV} target="_blank"># 90673 (fiserv:Heritage Bank), # 91149 (fiserv:BAC Bank)</a></li>
+                <li><a className="hoverurl" href={URLS.LOCAL_APP_BANK_UTICA} target="_blank"># 91370 (Bank of Utica)</a></li>
+                <li><a className="hoverurl" href={URLS.LOCAL_APP_BANK_WASHINGTON} target="_blank"># 91506 (Bank of Washington)</a></li>
             </ul>
+            
             <ul className="ml-8 list-disc">
-                <li><a className="hoverurl" href="https://maxzz.github.io" target="_blank">All other project catalog</a></li>
+                <li><a className="hoverurl" href="https://maxzz.github.io" target="_blank">All other projects catalog</a></li>
             </ul>
+
             <ul className="ml-8 list-disc">
                 <li><JsonBeautifier /></li>
             </ul>
