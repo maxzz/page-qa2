@@ -4,9 +4,9 @@
             "extensionUrl": {
                 "dp": {
                     "url": "https://chrome.google.com/webstore/detail/digitalpersona-altus/piimgpjgnagkckjlhjcppbkbjjfjmnbh",
-                    "version": "3.4.442",
-                    "updated": "2022.06.14",
-                    "published": "2022.03.16"
+                    "version": "3.4.700",
+                    "updated": "2022.12.04",
+                    "published": "2022.12.15"
                 },
                 "hp": {
                     "url": "https://chrome.google.com/webstore/detail/hp-client-security-manage/pkdnjfgdoolnmiacpdamadcneoblphbj",
@@ -23,7 +23,7 @@
             },
             "qaUrl": {
                 "dp": {
-                    "url": "https://crossmatch.hid.gl/g02/current/dppm-3.4.709_on_2023.03.05-r-chrome.zip"
+                    "url": "https://crossmatch.hid.gl/g02/current/dppm-3.4.710_on_2023.03.14-r-chrome.zip"
                 }
             }
         },
@@ -50,19 +50,19 @@
             },
             "qaUrl": {
                 "dp": {
-                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.220_on_2020.10.15-r-chrome.zip"
+                    "url": "https://crossmatch.hid.gl/g02/current/dppm-3.4.220_on_2020.10.15-r-chrome.zip"
                 }
             }
         },
         "firefox": {
             "extensionUrl": {
                 "dp": {
-                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.350_on_2021.05.24-r-firefox.xpi"
+                    "url": "https://crossmatch.hid.gl/g02/current/dppm-3.4.350_on_2021.05.24-r-firefox.xpi"
                 }
             },
             "qaUrl": {
                 "dp": {
-                    "url": "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.375_on_2021.08.31-r-firefox.xpi"
+                    "url": "https://crossmatch.hid.gl/g02/current/dppm-3.4.375_on_2021.08.31-r-firefox.xpi"
                 }
             }
         }
