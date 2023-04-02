@@ -22,20 +22,14 @@ export function Section4_TestApps() {
             <ul className="ml-8 list-disc">
                 <li><a className="hoverurl" href="https://maxzz.github.io/test-pm" target="_blank">Five customizable logins and password change screens</a></li>
             </ul>
-
-            <div className="pt-3">
-                <img className="m-auto bg-slate-300" width="200px" src={sampleAppsImg} alt="test applications preview" />
-            </div>
+            <img className="pt-3 m-auto bg-slate-300" width="200px" src={sampleAppsImg} alt="test applications preview" />
 
             {/* Page reload test */}
             <br />
             <ul className="ml-8 list-disc">
                 <li><a className="hoverurl" href="https://maxzz.github.io/test-pm-domain-logins22" target="_blank">Page reload test with login and corresponding password change screens on the same domain</a></li>
             </ul>
-
-            <div className="pt-3">
-                <img className="m-auto" width="200px" src={sampleApps22Img} alt="test applications preview" />
-            </div>
+            <img className="pt-3 m-auto" width="200px" src={sampleApps22Img} alt="test applications preview" />
 
             {/* PMIT */}
             <br />
@@ -43,10 +37,7 @@ export function Section4_TestApps() {
                 <li><a className="hoverurl" href={URLS.HID_PMIT} target="_blank">Password Manager Investigation Tool (version under HID domain)</a></li>
                 <li><a className="hoverurl" href="https://maxzz.github.io/dropzone" target="_blank">Password Manager Investigation Tool (the latest version)</a></li>
             </ul>
-
-            <div className="pt-3">
-                <img className="m-auto" width="200px" src={samplePmitImg} alt="test applications preview" />
-            </div>
+            <img className="pt-3 m-auto" width="200px" src={samplePmitImg} alt="test applications preview" />
 
             {/*  */}
             <br />
