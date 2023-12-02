@@ -3,7 +3,7 @@ import { atomWithCallback, LoadingDataState, loadingDataStateInit } from '@/hook
 import { debounce } from '@/utils/debounce';
 import { marked } from 'marked';
 import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts, getArchiveVersion, CurrentExtensions, getCurrentConfig, InAppExtnInfo, TBrand, TBrowserShort, ArchiveExtensionMeta, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions } from './apis';
-import { toastError } from '@/components/UI/UiToaster';
+import { toastError } from '@/components/ui/UiToaster';
 
 //#region LocalStorage
 

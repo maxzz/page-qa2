@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { summaryExtensionsAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
-import { BrowserIcon } from '../UI/UIIcons';
+import { BrowserIcon } from '../../ui/icons/UIIcons';
 import { beautifyDate } from '@/utils/helpers';
 import { TBrand, TBrandName, TBrowserName, TBrowserShort } from '@/store/apis';
 

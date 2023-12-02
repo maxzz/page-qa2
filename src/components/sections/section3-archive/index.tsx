@@ -3,8 +3,8 @@ import { useAtomValue } from 'jotai';
 import { byYearsAtom } from '@/store/store';
 import { getArchiveExtensionUrl, Meta, OneYearExts, ReleaseType, TBrowserName, TBrowserShort } from '@/store/apis';
 import { classNames } from '@/utils/classnames';
-import { BrowserIcon } from '../UI/UIIcons';
-import { UITooltip } from '../UI/UITooltip';
+import { BrowserIcon } from '../../ui/icons/UIIcons';
+import { UITooltip } from '../../ui/UITooltip';
 
 type GroupItem = {
     main?: Meta;
