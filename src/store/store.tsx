@@ -132,7 +132,7 @@ const runFetchReleaseNotesAtom = atom(
             set(releaseNotesStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const notesText = await fetchReleaseNotes();
-                const markdown = marked(notesText);
+                const markdown = await marked(notesText);
                 set(publicVersionsAtom, [...notesText.matchAll(regexMarkdownPublicVersions)].map((match) => match[1]));
                 set(releaseNotesStateAtom, { loading: false, error: null, data: markdown });
             } catch (error) {
