@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAtomValue } from 'jotai';
 import { releaseNotesAtom } from '@/store/store';
 import './markdown.scss';

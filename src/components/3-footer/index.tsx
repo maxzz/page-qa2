@@ -1,6 +1,4 @@
-import React from 'react';
-
-export function Section6_Footer() {
+export function Section6_Footer_Spacer() {
     return (
         <div className="py-4"></div>
     );

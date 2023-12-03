@@ -1,8 +1,8 @@
-import React from 'react';
+import { Fragment } from 'react';
 import { useAtomValue } from 'jotai';
 import { summaryExtensionsAtom } from '@/store/store';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
-import { BrowserIcon } from '../../ui/icons/UIIcons';
+import { BrowserIcon } from '@/components/ui/icons/UIIcons';
 import { beautifyDate } from '@/utils/helpers';
 import { TBrand, TBrandName, TBrowserName, TBrowserShort } from '@/store/apis';
 
@@ -71,11 +71,11 @@ function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort; table
                 <div className="border-b border-slate-200 text-xs">Public</div>
 
                 {table.map((item, idx) => (
-                    <React.Fragment key={idx}>
+                    <Fragment key={idx}>
                         <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`}><div className="px-3 pt-0.5">{TBrandName(item.brand)}</div></div>
                         <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`} title={`${item.qa?.updated ? `Updated on ${beautifyDate(item.qa?.updated)}` : ''}`}>{item.qa?.version}</div>
                         <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`} title={`${item.release?.updated ? `Updated on ${beautifyDate(item.release?.updated)}` : ''}`}>{item.release?.version}</div>
-                    </React.Fragment>))
+                    </Fragment>))
                 }
             </div>
         </div>
@@ -88,10 +88,12 @@ export function Section2_CurrentVersions() {
     return (
         <div className="py-2 text-sm flex flex-col space-y-2">
             <p>Summary table of QA and currently published extensions.</p>
+
             <div className="max-w-2xl grid grid-cols-2 gap-x-2">
                 <TableToBrowser browser={TBrowserShort.chrome} table={res[TBrowserShort.chrome]} />
                 <TableToBrowser browser={TBrowserShort.firefox} table={res[TBrowserShort.firefox]} />
             </div>
+
             <div className="text-xs">
                 <p className="mb-1">Brand legend:</p>
                 <ul className="ml-4 list-disc">
@@ -100,6 +102,7 @@ export function Section2_CurrentVersions() {
                     <li>Dell - extension for DELL Privacy Manager product</li>
                 </ul>
             </div>
+            
             <div className="text-xs">
                 <p className="mb-1">Notes:</p>
                 <ul className="ml-4 list-disc">

@@ -4,9 +4,9 @@ import { configStateAtom, latestChExtensionAtom, latestFfExtensionAtom } from '@
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { beautifyDate } from '@/utils/helpers';
 import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
-import { BrowserIcon, IconClipboard, IconDownload } from '../../ui/icons/UIIcons';
+import { BrowserIcon, IconClipboard, IconDownload } from '../../../ui/icons/UIIcons';
 import { classNames } from '@/utils/classnames';
-import { toastSucceeded } from '../../ui/UiToaster';
+import { toastSucceeded } from '../../../ui/UiToaster';
 import { confetti } from 'dom-confetti';
 import { a, easings, useSpring } from '@react-spring/web';
 import HERO_IMAGE from '@/assets/frontpage/qa-header.jpg';

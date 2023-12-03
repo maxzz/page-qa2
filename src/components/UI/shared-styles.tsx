@@ -1,0 +1,1 @@
+export const textShadow = { textShadow: '1px 1px 2px #000' };

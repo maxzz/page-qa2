@@ -1,9 +1,8 @@
-import React from 'react';
+import { URLS } from '@/store/apis';
+import { JsonBeautifier } from '../../../ui/JsonBeautifier';
 import sampleAppsImg from '@/assets/testapps/2022-03-01_19-09-50.png';
 import sampleApps22Img from '@/assets/testapps/2022-05-26_19-16-14gray2.jpg';
 import samplePmitImg from '@/assets/testapps/2022-07-23_18-05-43,pmit,gray.jpg';
-import { URLS } from '@/store/apis';
-import { JsonBeautifier } from '../../ui/JsonBeautifier';
 
 export function Section4_TestApps() {
     return (

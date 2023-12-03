@@ -1,4 +1,3 @@
-import React from 'react';
 import { IS_GITHUB, URLS } from '@/store/apis';
 
 export function Section5_FinalNotes() {
@@ -13,14 +12,15 @@ export function Section5_FinalNotes() {
 
             <h2 className="mt-1 text-base font-semibold">Obfuscated links</h2>
             <p>
-                Links in the Release Notes section are masked with the @ sign before the last character of the domain name to fight search engine spiders (web crawler robots). Remove the @ symbol before opening the link.
+                Links in the Release Notes section are masked with the @ sign before the last character of the domain name
+                to fight search engine spiders (web crawler robots). Remove the @ symbol before opening the link.
             </p>
 
             <h2 className="mt-2 text-base font-semibold">Browser extensions installation instructions</h2>
             <p>
-                Additional documents are available on <a
-                    className="hoverurl link-up" href={URLS.LOCAL_HINTS} target="_blank">this website</a> and on the <a
-                        className="hoverurl link-up" href={URLS.CONFLUENCE_HINTS} target="_blank">HID confluence (intranet)</a> website.
+                Additional documents are available on{' '}
+                <a className="hoverurl link-up" href={URLS.LOCAL_HINTS} target="_blank">this website</a> and on the{' '}
+                <a className="hoverurl link-up" href={URLS.CONFLUENCE_HINTS} target="_blank">HID confluence (intranet)</a> website.
             </p>
 
             <h2 className="mt-2 text-base font-semibold">Links to install the extension</h2>
@@ -32,17 +32,20 @@ export function Section5_FinalNotes() {
                     DP extension <a className="hoverurl" href={URLS.INSTALL_DP_PAGE} target="_blank">installation page</a>.
                 </li>
                 <li>
-                    DP extension <a className="hoverurl" href="https://maxzz.github.io/page-extension-installation" target="_blank"> the new installation page test</a> (not in production yet).
+                    DP extension <a className="hoverurl" href="https://maxzz.github.io/page-extension-installation" target="_blank">
+                        the new installation page test</a> (not in production yet).
                 </li>
             </ul>
 
             <h2 className="mt-2 text-base font-semibold">Experiments</h2>
             <ul className="ml-4 list-disc">
                 <li>
-                    <a className="hoverurl" href="https://maxzz.github.io/dropzone" target="_blank">PMIT (Password Manager Inverstigation Tool) utility</a> (the latest version).
+                    <a className="hoverurl" href="https://maxzz.github.io/dropzone" target="_blank">PMIT (Password Manager Inverstigation Tool) utility</a>{' '}
+                    (the latest version).
                 </li>
                 <li>
-                    <a className="hoverurl" href={URLS.HID_PMAC} target="_blank">PMAC (Password Manager Administrator Commands) utility</a> (not in production yet).
+                    <a className="hoverurl" href={URLS.HID_PMAC} target="_blank">PMAC (Password Manager Administrator Commands) utility</a>{' '}
+                    (not in production yet).
                 </li>
             </ul>
 

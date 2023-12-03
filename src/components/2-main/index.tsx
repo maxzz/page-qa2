@@ -1,8 +1,8 @@
 import { AppHeader } from '../1-header';
-import { Section } from '../ui/Section';
-import { Section0_HeroSection, Section1_ReleaseNotes, Section2_CurrentVersions, Section3_Archive, Section4_TestApps, Section5_FinalNotes } from '../sections';
+import { Section } from '../ui/section';
+import { Section0_HeroSection, Section1_ReleaseNotes, Section2_CurrentVersions, Section3_Archive, Section4_TestApps, Section5_FinalNotes } from './sections';
 import { section1_OpenAtom, section2_OpenAtom, section3_OpenAtom, section4_OpenAtom, section5_OpenAtom } from '@/store/store';
-import { Section6_Footer } from '../3-footer';
+import { Section6_Footer_Spacer } from '../3-footer';
 
 export function Frontpage() {
     return (
@@ -39,7 +39,7 @@ export function Frontpage() {
                         <Section5_FinalNotes />
                     </Section>
 
-                    <Section6_Footer />
+                    <Section6_Footer_Spacer />
                 </div>
             </div>
         </div>
