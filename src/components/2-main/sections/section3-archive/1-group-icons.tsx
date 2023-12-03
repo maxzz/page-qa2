@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Meta, TBrowserShort } from '@/store/apis';
 import { classNames } from '@/utils/classnames';
-import { BrowserIcon } from '@/components/ui/icons';
+import { IconBrowser } from '@/components/ui/icons';
 
 type GroupItem = {
     main?: Meta;
@@ -28,7 +28,7 @@ export function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
                 (groupItem, idx) => (
                     <Fragment key={idx}>
                         {(groupItem.main || groupItem.debug) && (
-                            <BrowserIcon
+                            <IconBrowser
                                 browser={groupItem.main?.browser || groupItem.debug?.browser}
                                 className={iconClasses(groupItem)}
                                 key={idx}

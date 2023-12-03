@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { BrowserIcon } from '@/components/ui/icons';
+import { IconBrowser } from '@/components/ui/icons';
 import { beautifyDate } from '@/utils/helpers';
 import { TBrandName, TBrowserName, TBrowserShort } from '@/store/apis';
 import { FlatTableItem } from './0-reduce-utils';
@@ -9,7 +9,7 @@ export function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort
         <div className="cursor-default">
             <div className="flex items-center space-x-1">
                 <div className="mb-1 pl-3 text-sm font-bold">{`${TBrowserName(browser)}`}</div>
-                <BrowserIcon browser={browser} className="w-3 h-3 opacity-70" />
+                <IconBrowser browser={browser} className="w-3 h-3 opacity-70" />
                 <div className="mb-1 text-sm font-bold">{`extensions`}</div>
             </div>
             <div className="py-1 grid grid-cols-3 bg-slate-100 shadow">

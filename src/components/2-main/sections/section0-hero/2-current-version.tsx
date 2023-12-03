@@ -2,7 +2,7 @@ import { Atom, useAtomValue } from 'jotai';
 import { InAppExtnInfo } from '@/store/apis/file-current-config';
 import { beautifyDate } from '@/utils/helpers';
 import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
-import { BrowserIcon } from '../../../ui/icons';
+import { IconBrowser } from '../../../ui/icons';
 import { a, useSpring } from '@react-spring/web';
 import { boxShadow } from './0-hero-image';
 import { ActionButtons } from './1-action-buttons';
@@ -18,7 +18,7 @@ export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBr
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ ...boxShadow, transition: "all .2s" }}>
 
             {/* Icon, name, version, updated date */}
-            <div className="content-center place-self-center"><BrowserIcon browser={browser} className={"w-9 h-8"} style={iconShadow} /></div>
+            <div className="content-center place-self-center"><IconBrowser browser={browser} className={"w-9 h-8"} style={iconShadow} /></div>
             <div className="ml-3 text-xs overflow-hidden">
                 <div className="text-base font-bold scale-y-125 whitespace-nowrap">{TBrowserName(browser)} QA extension</div>
                 <a.div style={txtStyles}>

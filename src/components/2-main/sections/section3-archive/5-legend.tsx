@@ -1,6 +1,6 @@
 import { TBrowserName, TBrowserShort } from '@/store/apis';
 import { classNames } from '@/utils/classnames';
-import { BrowserIcon } from '@/components/ui/icons';
+import { IconBrowser } from '@/components/ui/icons';
 
 export function Legend() {
     const legendBrowsers = [TBrowserShort.chrome, TBrowserShort.chrome, TBrowserShort.firefox, TBrowserShort.firefox, TBrowserShort.firefox, TBrowserShort.dev];
@@ -11,7 +11,7 @@ export function Legend() {
             </div>
             {legendBrowsers.map((br, idx) => (
                 <div className="ml-1 flex items-center space-x-2" key={idx}>
-                    <BrowserIcon browser={br}
+                    <IconBrowser browser={br}
                         className={classNames(
                             `w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full`,
                             (idx === 1 || idx === 3) && 'extension-small-icon-outline',
