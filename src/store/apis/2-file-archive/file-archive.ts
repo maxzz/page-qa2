@@ -1,5 +1,5 @@
-import { FormatCurrentCfg, TBrowserShort, TBrowserShortFromFname } from "./api-formats-g01";
-import { getFtpExtensionsUrl, regexFnameVerDateRelBrouser } from "./constants";
+import { FormatCurrentCfg, TBrowserShort, TBrowserShortFromFname } from "../types/api-formats-g01";
+import { getFtpExtensionsUrl, regexFnameVerDateRelBrouser } from "../constants";
 
 export enum ReleaseType {
     release = 'r',  // pucked version ready for release

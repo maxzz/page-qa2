@@ -1,7 +1,7 @@
 import { Atom, useAtomValue } from 'jotai';
-import { InAppExtnInfo } from '@/store/apis/file-current-config';
+import { InAppExtnInfo } from '@/store/apis/1-file-current-config/file-current-config';
 import { beautifyDate } from '@/utils/helpers';
-import { TBrowserName, TBrowserShort } from '@/store/apis/api-formats-g01';
+import { TBrowserName, TBrowserShort } from '@/store/apis/types/api-formats-g01';
 import { IconBrowser } from '../../../ui/icons';
 import { a, useSpring } from '@react-spring/web';
 import { boxShadow } from './0-hero-image';

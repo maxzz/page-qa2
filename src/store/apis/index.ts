@@ -8,7 +8,7 @@ export {
 export type {
     Meta,
     OneYearExts
-} from './file-archive-parse';
+} from './2-file-archive/file-archive-parse';
 
 export {
     archiveByYears,
@@ -17,36 +17,36 @@ export {
     getLatestArchiveVersions,
     isAVersionGreaterB,
     getArchiveVersion
-} from './file-archive-parse';
+} from './2-file-archive/file-archive-parse';
 
 export type {
     CurrentExtensions,
     InAppExtnInfo
-} from './file-current-config';
+} from './1-file-current-config/file-current-config';
 
 export {
     getCurrentConfig
-} from './file-current-config';
+} from './1-file-current-config/file-current-config';
 
 export type {
     ArchiveExtensionMeta
-} from './file-archive';
+} from './2-file-archive/file-archive';
 
 export {
     getExistingOnServer,
     ReleaseType
-} from './file-archive';
+} from './2-file-archive/file-archive';
 
 export {
     fetchReleaseNotes
-} from './file-release-notes';
+} from './3-file-release-notes/file-release-notes';
 
 export {
     TBrand,
     TBrowserShort
-} from './api-formats-g01';
+} from './types/api-formats-g01';
 
 export {
     TBrandName,
     TBrowserName
-} from './api-formats-g01';
+} from './types/api-formats-g01';

@@ -1,5 +1,5 @@
-import { FormatCurrentCfg, TBrand, TBrowserShort } from './api-formats-g01';
-import { getCurrentConfigUrl, regexFnameVerDate } from './constants';
+import { FormatCurrentCfg, TBrand, TBrowserShort } from '../types/api-formats-g01';
+import { getCurrentConfigUrl, regexFnameVerDate } from '../constants';
 
 export interface InAppExtnInfo { // Extension info from config file
     url: string;                // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"

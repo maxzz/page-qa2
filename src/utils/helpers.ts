@@ -1,4 +1,4 @@
-import { TBrowserShort } from "@/store/apis/api-formats-g01";
+import { TBrowserShort } from "@/store/apis/types/api-formats-g01";
 
 function getDpBrandFromLocation() {
     const brand = window.location.href.match(/page(dp|hp|de|qa)/i);

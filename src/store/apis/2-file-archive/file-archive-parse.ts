@@ -1,7 +1,7 @@
-import { TBrowserShort } from "./api-formats-g01";
-import { getArchiveExtensionUrl } from "./constants";
+import { TBrowserShort } from "../types/api-formats-g01";
+import { getArchiveExtensionUrl } from "../constants";
 import { ArchiveExtensionMeta, ReleaseType } from "./file-archive";
-import { InAppExtnInfo } from "./file-current-config";
+import { InAppExtnInfo } from "../1-file-current-config/file-current-config";
 
 export type Meta = {
     date: string;
