@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { BrowserIcon } from '@/components/ui/icons/UIIcons';
+import { BrowserIcon } from '@/components/ui/icons';
 import { beautifyDate } from '@/utils/helpers';
 import { TBrandName, TBrowserName, TBrowserShort } from '@/store/apis';
 import { FlatTableItem } from './0-reduce-utils';

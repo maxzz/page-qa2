@@ -1,6 +1,6 @@
 import { TBrowserName, TBrowserShort } from '@/store/apis';
 import { classNames } from '@/utils/classnames';
-import { BrowserIcon } from '@/components/ui/icons/UIIcons';
+import { BrowserIcon } from '@/components/ui/icons';
 
 export function Legend() {
     const legendBrowsers = [TBrowserShort.chrome, TBrowserShort.chrome, TBrowserShort.firefox, TBrowserShort.firefox, TBrowserShort.firefox, TBrowserShort.dev];

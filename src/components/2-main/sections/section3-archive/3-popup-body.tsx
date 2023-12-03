@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { getArchiveExtensionUrl, Meta, ReleaseType, TBrowserName } from '@/store/apis';
-import { BrowserIcon } from '@/components/ui/icons/UIIcons';
+import { BrowserIcon } from '@/components/ui/icons';
 import { OrderedGroup } from './1-group-icons';
 
 function PopupVersionItem({ meta }: { meta?: Meta; }) {

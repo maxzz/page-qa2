@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Meta, TBrowserShort } from '@/store/apis';
 import { classNames } from '@/utils/classnames';
-import { BrowserIcon } from '@/components/ui/icons/UIIcons';
+import { BrowserIcon } from '@/components/ui/icons';
 
 type GroupItem = {
     main?: Meta;
