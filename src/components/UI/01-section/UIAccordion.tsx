@@ -1,10 +1,10 @@
-import React from 'react';
+import { ReactNode, useState } from 'react';
+import { a, useSpring } from '@react-spring/web';
 import { useMeasure } from 'react-use';
-import { a, config, useSpring } from '@react-spring/web';
 
-export function UIAccordion({ toggle, children }: { toggle: boolean, children: React.ReactNode; }) {
+export function UIAccordion({ toggle, children }: { toggle: boolean, children: ReactNode; }) {
     const [ref, { height, top }] = useMeasure<HTMLDivElement>();
-    const [firstRun, setFirstRun] = React.useState(true);
+    const [firstRun, setFirstRun] = useState(true);
     const animation = useSpring({
         overflow: "hidden",
         height: toggle ? height + top : 0,
@@ -22,9 +22,9 @@ export function UIAccordion({ toggle, children }: { toggle: boolean, children: R
     );
 }
 
-// export function AccordionHorizontal({ toggle, children }: { toggle: boolean, children: React.ReactNode; }) {
+// export function AccordionHorizontal({ toggle, children }: { toggle: boolean, children: ReactNode; }) {
 //     const [ref, { width, left }] = useMeasure<HTMLDivElement>();
-//     const [firstRun, setFirstRun] = React.useState(true);
+//     const [firstRun, setFirstRun] = useState(true);
 //     const animation = useSpring({
 //         overflow: "hidden",
 //         width: toggle ? width + left : '300px',
@@ -55,4 +55,4 @@ export function UIAccordion({ toggle, children }: { toggle: boolean, children: R
 //         </div>
 //     );
 // }
-// const CanvasControlsPanelMemo = React.memo(CanvasControlsPanel);
+// const CanvasControlsPanelMemo = memo(CanvasControlsPanel);

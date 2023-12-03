@@ -1,9 +1,9 @@
-import React from "react";
+import { SVGAttributes } from "react";
 import { a, useSpring } from "@react-spring/web";
-import { classNames } from "../../utils/classnames";
 import { animationConfig } from "./UIListTransition";
+import { classNames } from "../../utils/classnames";
 
-export function UIIconUpDown({ open, className, ...rest }: { open: boolean; } & React.SVGAttributes<SVGSVGElement>) {
+export function UIIconUpDown({ open, className, ...rest }: { open: boolean; } & SVGAttributes<SVGSVGElement>) {
     const styles = useSpring({ open: open ? 1 : 0, ...animationConfig });
     return (
         <svg className={classNames("w-6 h-6 p-1 stroke-current stroke-[.6rem] fill-transparent", className)} viewBox="0 0 100 100" {...rest}>
