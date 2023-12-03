@@ -1,5 +1,5 @@
 import { AppHeader } from '../1-header';
-import { Section } from '../ui/section';
+import { Section } from '../ui/01-section';
 import { Section0_HeroSection, Section1_ReleaseNotes, Section2_CurrentVersions, Section3_Archive, Section4_TestApps, Section5_FinalNotes } from './sections';
 import { section1_OpenAtom, section2_OpenAtom, section3_OpenAtom, section4_OpenAtom, section5_OpenAtom } from '@/store/store';
 import { Section6_Footer_Spacer } from '../3-footer';
