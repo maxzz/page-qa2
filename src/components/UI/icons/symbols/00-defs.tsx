@@ -2,7 +2,7 @@ import { DefChrome } from "./01-chrome";
 import { DefFirefox } from "./02-firefox";
 import { DefMe } from "./03-edge";
 import { DefDev } from "./04-dev";
-import { DeIe } from "./05-ie";
+import { DefIe } from "./05-ie";
 
 export function UISymbolsDefs() {
     return (
@@ -16,7 +16,7 @@ export function UISymbolsDefs() {
                 {DefFirefox()}
                 {DefMe()}
                 {DefDev()}
-                {DeIe()}
+                {DefIe()}
             </defs>
         </svg>
     );

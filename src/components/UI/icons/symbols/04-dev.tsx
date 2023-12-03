@@ -1,8 +1,8 @@
 import { HTMLAttributes, SVGProps } from "react";
 
-export function DefDev() {
+export function DefDev() { // binary dev tools: old dp 3d logo
     return (
-        <symbol id="icon-dt" viewBox="0 0 24 24">
+        <symbol id="icon-de" viewBox="0 0 24 24">
             <path fill="#bb0202" d="M16.84 13.22q2.45.15 2.36 2.22c-.05 1.33-.12 2.66-.13 3.98 0 .47-.13.7-.72.84-3.55.84-7.09 1.72-10.62 2.63-.58.15-.89.05-1.08-.41l-.05-.07a7.36 7.36 0 0 1-1.75-5.7c.08-1.03-.04-2.08-.07-3.11l1.62.81c.21.1.49.29.57-.12.26.15.55.2.86.18 2.41-.18 4.83-.33 7.23-.55.4-.04 1.2.13 1.14-.64l.63-.04Zm-.43 1.93c-.73.78-.68 1.69-.39 2.54.23.69 1.46.75 1.96.13.6-.75.85-1.58.44-2.48.02-.52.08-1.13-.58-1.32-.72-.21-.94.47-1.31.83-.08.08-.08.21-.11.32Z" />
             <path fill="#2b2f37" d="M8.14 11.53c-3.82-2.1-3.61-7.45.38-9.59 1.21.72 2.1.41 2.27-.8 2.12-.35 3.87.36 5.46 1.46l-.45.07c-.59-.46-1.34-.31-2.03-.38-.23-.92-1.35-.81-1.72-.61-1.26.7-2.79.87-3.97 1.45-1.79.88-2.26 2.64-2.03 4.46a6 6 0 0 0 1.72 3.23c.09.25.44.39.36.71Z" />
             <path fill="#7f0000" d="M16.21 13.26c.05.77-.74.6-1.14.64-2.41.23-4.82.38-7.23.55-.31.02-.6-.02-.86-.18.31-.76 1.15-.7 1.83-.89l.35.02c.75-.18 1.52-.14 2.28-.18.72-.04 1.47.15 2.17-.13l2.6.15Z" />
@@ -28,12 +28,12 @@ export function DefDev() {
         </symbol>
     );
 }
-export function IconLogoDt(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function IconLogoDev(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     const { title, ...rest } = props;
     return (
         <svg {...rest}>
             {title && <title>{title}</title>}
-            <use xlinkHref="#icon-dt" />
+            <use xlinkHref="#icon-de" />
         </svg>
     );
 }
