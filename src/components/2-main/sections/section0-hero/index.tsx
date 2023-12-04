@@ -1,11 +1,11 @@
 import { useAtomValue } from 'jotai';
-import { configStateAtom, latestChExtensionAtom, latestFfExtensionAtom } from '@/store/store';
+import { loadingStateConfigAtom, latestChExtensionAtom, latestFfExtensionAtom } from '@/store/store';
 import { TBrowserShort } from '@/store/apis/types';
 import { HeroImage } from './0-hero-image';
 import { CurrentVersion } from './2-current-version';
 
 function CurrentVersions() {
-    const { loading } = useAtomValue(configStateAtom);
+    const { loading } = useAtomValue(loadingStateConfigAtom);
     return (
         <div className="flex flex-col justify-center space-y-2">
             <CurrentVersion browser={TBrowserShort.chrome} extInfoAtom={latestChExtensionAtom} loading={loading} />

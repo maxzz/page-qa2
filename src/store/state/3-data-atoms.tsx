@@ -4,14 +4,14 @@ import { OneYearExts, CurrentExtensions, InAppExtnInfo, ArchiveExtensionMeta } f
 
 // Internal loading state atoms
 
-export const configStateAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
-export const archiveStateAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
-export const releaseNotesStateAtom = atom<LoadingDataState<string>>(loadingDataStateInit());
+export const loadingStateConfigAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
+export const loadingStateArchiveAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
+export const loadingStateReleaseNotesAtom = atom<LoadingDataState<string>>(loadingDataStateInit());
 
 // UI state
 
 export const byYearsAtom = atom<OneYearExts[]>([]);
-export const releaseNotesAtom = atom<string>((get) => get(releaseNotesStateAtom).data || '');
+export const releaseNotesAtom = atom<string>((get) => get(loadingStateReleaseNotesAtom).data || '');
 
 // Derivative data
 

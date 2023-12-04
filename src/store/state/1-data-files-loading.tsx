@@ -2,20 +2,20 @@ import { atom } from 'jotai';
 import { marked } from 'marked';
 import { archiveByYears, getCurrentConfig, ArchiveExtensionMeta, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, updateCurrentVersions } from '../apis';
 import { toastError } from '@/components/ui/UiToaster';
-import { configStateAtom, archiveStateAtom, releaseNotesStateAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom } from './3-data-atoms';
+import { loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNotesAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom } from './3-data-atoms';
 
 const runFetchConfigAtom = atom(
-    (get) => get(configStateAtom),
+    (get) => get(loadingStateConfigAtom),
     (_get, set) => {
         fetchData();
 
         async function fetchData() {
-            set(configStateAtom, (prev) => ({ ...prev, loading: true }));
+            set(loadingStateConfigAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const data = await getCurrentConfig();
-                set(configStateAtom, { loading: false, error: null, data });
+                set(loadingStateConfigAtom, { loading: false, error: null, data });
             } catch (error) {
-                set(configStateAtom, { loading: false, error, data: null });
+                set(loadingStateConfigAtom, { loading: false, error, data: null });
                 toastError((error as Error).message);
             }
             set(correlateAtom);
@@ -25,17 +25,17 @@ const runFetchConfigAtom = atom(
 runFetchConfigAtom.onMount = (runFetch) => runFetch();
 
 const runFetchArchiveAtom = atom(
-    (get) => get(archiveStateAtom),
+    (get) => get(loadingStateArchiveAtom),
     (_get, set) => {
         fetchData();
 
         async function fetchData() {
-            set(archiveStateAtom, (prev) => ({ ...prev, loading: true }));
+            set(loadingStateArchiveAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const existing: ArchiveExtensionMeta[] = await getExistingOnServer();
-                set(archiveStateAtom, { loading: false, error: null, data: existing });
+                set(loadingStateArchiveAtom, { loading: false, error: null, data: existing });
             } catch (error) {
-                set(archiveStateAtom, { loading: false, error, data: null });
+                set(loadingStateArchiveAtom, { loading: false, error, data: null });
                 toastError((error as Error).message);
             }
             set(correlateAtom);
@@ -45,19 +45,19 @@ const runFetchArchiveAtom = atom(
 runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 
 const runFetchReleaseNotesAtom = atom(
-    (get) => get(releaseNotesStateAtom),
+    (get) => get(loadingStateReleaseNotesAtom),
     (_get, set) => {
         fetchData();
 
         async function fetchData() {
-            set(releaseNotesStateAtom, (prev) => ({ ...prev, loading: true }));
+            set(loadingStateReleaseNotesAtom, (prev) => ({ ...prev, loading: true }));
             try {
                 const notesText = await fetchReleaseNotes();
                 const markdown = await marked(notesText);
                 set(publicVersionsAtom, [...notesText.matchAll(regexMarkdownPublicVersions)].map((match) => match[1]));
-                set(releaseNotesStateAtom, { loading: false, error: null, data: markdown });
+                set(loadingStateReleaseNotesAtom, { loading: false, error: null, data: markdown });
             } catch (error) {
-                set(releaseNotesStateAtom, { loading: false, error, data: null });
+                set(loadingStateReleaseNotesAtom, { loading: false, error, data: null });
                 set(publicVersionsAtom, undefined);
                 toastError((error as Error).message);
             }
@@ -70,9 +70,9 @@ runFetchReleaseNotesAtom.onMount = (runFetch) => runFetch();
 const correlateAtom = atom(
     null,
     (get, set) => {
-        const stateNotes = get(releaseNotesStateAtom);
-        const stateArchive = get(archiveStateAtom);
-        const stateConfig = get(configStateAtom);
+        const stateNotes = get(loadingStateReleaseNotesAtom);
+        const stateArchive = get(loadingStateArchiveAtom);
+        const stateConfig = get(loadingStateConfigAtom);
 
         if (stateNotes.loading || stateArchive.loading || stateConfig.loading) {
             return;
@@ -80,6 +80,7 @@ const correlateAtom = atom(
 
         // 1. Combine extensions list with published information.
         const publicVersions = get(publicVersionsAtom);
+
         const byYears = archiveByYears(stateArchive.data, publicVersions);
         set(byYearsAtom, byYears);
 
