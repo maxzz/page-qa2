@@ -1,7 +1,7 @@
 import { getCurrentConfigUrl } from '../constants';
 import { CurrentExtensions, InAppExtnInfo, parseCurrentConfig } from './2-parse';
 
-export async function fetchCurrentConfig(): Promise<Response> {
+async function fetchCurrentConfig(): Promise<Response> {
     //console.log('Fetching: current config', getCurrentConfigUrl());
 
     const response = await fetch(getCurrentConfigUrl(), { cache: 'no-cache' });
