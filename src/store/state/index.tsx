@@ -22,18 +22,30 @@ namespace StorageIO {
     load();
 
     export const save = debounce(function _save(get: Getter) {
-        let newStore: AppStorage.Store = {
-            open1: get(section1_OpenAtom),
-            open2: get(section2_OpenAtom),
-            open3: get(section3_OpenAtom),
-            open4: get(section4_OpenAtom),
-            open5: get(section5_OpenAtom),
-        };
-        localStorage.setItem(AppStorage.KEY, JSON.stringify(newStore));
+        localStorage.setItem(AppStorage.KEY, JSON.stringify(createAppState(get)));
     }, 1000);
 }
 
 //#endregion LocalStorage
+
+// UI state
+
+export const section1_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open1, ({ get }) => StorageIO.save(get));
+export const section2_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open2, ({ get }) => StorageIO.save(get));
+export const section3_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open3, ({ get }) => StorageIO.save(get));
+export const section4_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open4, ({ get }) => StorageIO.save(get));
+export const section5_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open5, ({ get }) => StorageIO.save(get));
+
+function createAppState(get: Getter): AppStorage.Store {
+    let rv: AppStorage.Store = {
+        open1: get(section1_OpenAtom),
+        open2: get(section2_OpenAtom),
+        open3: get(section3_OpenAtom),
+        open4: get(section4_OpenAtom),
+        open5: get(section5_OpenAtom),
+    };
+    return rv;
+}
 
 // Data files
 
@@ -193,13 +205,5 @@ const correlateAtom = atom(
         }
     }
 );
-
-// UI state
-
-export const section1_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open1, ({ get }) => StorageIO.save(get));
-export const section2_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open2, ({ get }) => StorageIO.save(get));
-export const section3_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open3, ({ get }) => StorageIO.save(get));
-export const section4_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open4, ({ get }) => StorageIO.save(get));
-export const section5_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open5, ({ get }) => StorageIO.save(get));
 
 //TODO: change archive view to grid instead of columns to have order left to right vs top down and left.
