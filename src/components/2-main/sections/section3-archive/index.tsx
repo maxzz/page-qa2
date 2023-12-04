@@ -1,17 +1,22 @@
-import { YearsGrid } from './4-grid';
-import { Legend } from './5-legend';
+import { YearsGrid } from './5-grid';
+import { Legend } from './6-legend';
 
 export function Section3_Archive() {
     return (
-        <div className="py-2 text-sm">
+        <div className="py-2 text-sm space-y-2">
             <p>
-                List of previously released extensions that are still available on the HID server.
-                You can download any version for testing purposes or for any other reason.
-                Click an item to download a specific version. Extensions with debug information are protected.
-                Contact Max Zakharzhevskiy at HID global for a password.
+                The archive stores a list of previously released extensions that are still available on the HID server.
+                You can download any version for testing or for any other reason.
             </p>
+            <p>
+                Click an item to download a specific version. Extensions with debugging information are password protected.
+                Contact Max Zakharzhevskiy at HID global to obtain the password.
+            </p>
+
             <YearsGrid />
             <Legend />
         </div>
     );
 }
+
+//TODO: check properly state loading and error
