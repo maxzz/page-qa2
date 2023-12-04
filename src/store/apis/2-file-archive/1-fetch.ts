@@ -47,6 +47,14 @@ namespace FtpFiles {
     };
 }
 
+const traytools: ArchiveExtensionMeta = {
+    fname: '../../maxz/traytools.zip.txt',
+    version: '2.0.7234',
+    updated: '2017.10.20', // It was 2019.10.20 but moved in time to have it as a separate group.
+    release: ReleaseType.debug,
+    browser: TBrowserShort.dev,
+};
+
 export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
     //console.log('Fetching: extensions on server', getFtpExtensionsUrl());
 
@@ -54,21 +62,13 @@ export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
     if (!response.ok) {
         throw new Error(`No access to the HID server. Failed to get "${getFtpExtensionsUrl()}"`);
     }
-    let existingRaw: FtpFiles.FileRecord[] = await response.json();
+    let existing: FtpFiles.FileRecord[] = await response.json();
 
-    let existing: ArchiveExtensionMeta[] =
-        existingRaw
-            .map((file: FtpFiles.FileRecord) => metaFromFilename(file.name))
-            .filter((meta: ArchiveExtensionMeta) => meta.version); // skip empty non extension names not matched by regex pattern.
+    let rv: ArchiveExtensionMeta[] = existing
+        .map((file: FtpFiles.FileRecord) => metaFromFilename(file.name))
+        .filter((meta: ArchiveExtensionMeta) => meta.version); // skip empty non extension names not matched by regex pattern.
 
-    // added one more path to traytools.zip
-    existing.push({
-        fname: '../../maxz/traytools.zip.txt',
-        version: '2.0.7234',
-        updated: '2017.10.20', // It was 2019.10.20 but moved in time to have it as a separate group.
-        release: ReleaseType.debug,
-        browser: TBrowserShort.dev,
-    });
+    rv.push(traytools); // add one more path to traytools.zip
 
-    return existing;
+    return rv;
 }
