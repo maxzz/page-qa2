@@ -1,3 +1,5 @@
+import { Getter } from "jotai";
+
 export namespace AppStorage {
     export const KEY = 'react-page-qa2-01';
 
@@ -16,4 +18,7 @@ export namespace AppStorage {
         open4: false,
         open5: false,
     };
+
+    export let save: ((get: Getter) => void) | undefined;
+    export let createAppState: ((get: Getter) => Store) | undefined;
 }

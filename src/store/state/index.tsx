@@ -1,51 +1,22 @@
-import { atom, Getter } from 'jotai';
-import { atomWithCallback, LoadingDataState, loadingDataStateInit } from '@/hooks/atomsX';
-import { debounce } from '@/utils/debounce';
+import { atom } from 'jotai';
+import { LoadingDataState, loadingDataStateInit } from '@/hooks/atomsX';
 import { marked } from 'marked';
 import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts, getArchiveVersion, CurrentExtensions, getCurrentConfig, InAppExtnInfo, TBrowserShort, ArchiveExtensionMeta, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, FormatCurrentCfg } from '../apis';
 import { toastError } from '@/components/ui/UiToaster';
+
+import { StorageIO } from './2-load-save';
+StorageIO.load();
+
 import { AppStorage } from './1-types';
+import { createAppState } from './3-app-state';
 
-//#region LocalStorage
+export * from './2-load-save';
+export * from './3-app-state';
 
-namespace StorageIO {
-    function load() {
-        const s = localStorage.getItem(AppStorage.KEY);
-        if (s) {
-            try {
-                let obj = JSON.parse(s) as AppStorage.Store;
-                AppStorage.initialData = { ...AppStorage.initialData, ...obj };
-            } catch (error) {
-            }
-        }
-    }
-    load();
-
-    export const save = debounce(function _save(get: Getter) {
-        localStorage.setItem(AppStorage.KEY, JSON.stringify(createAppState(get)));
-    }, 1000);
-}
-
-//#endregion LocalStorage
+AppStorage.save = StorageIO.save;
+AppStorage.createAppState = createAppState;
 
 // UI state
-
-export const section1_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open1, ({ get }) => StorageIO.save(get));
-export const section2_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open2, ({ get }) => StorageIO.save(get));
-export const section3_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open3, ({ get }) => StorageIO.save(get));
-export const section4_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open4, ({ get }) => StorageIO.save(get));
-export const section5_OpenAtom = atomWithCallback<boolean>(AppStorage.initialData.open5, ({ get }) => StorageIO.save(get));
-
-function createAppState(get: Getter): AppStorage.Store {
-    let rv: AppStorage.Store = {
-        open1: get(section1_OpenAtom),
-        open2: get(section2_OpenAtom),
-        open3: get(section3_OpenAtom),
-        open4: get(section4_OpenAtom),
-        open5: get(section5_OpenAtom),
-    };
-    return rv;
-}
 
 // Data files
 
