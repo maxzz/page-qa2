@@ -17,7 +17,7 @@ function PopperRoot() {
     );
 }
 
-function App() {
+export function App() {
     return (<>
         <DataLoader />
         <UISymbolsDefs />
@@ -30,4 +30,4 @@ function App() {
     </>);
 }
 
-export default App;
+//TODO: change archive view to grid instead of columns to have order left to right vs top down and left.

@@ -4,13 +4,11 @@ import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiv
 import { toastError } from '@/components/ui/UiToaster';
 import { configStateAtom, archiveStateAtom, releaseNotesStateAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom } from './3-data-atoms';
 
-// Data files
-
-//#region ServerCurrentConfig
-
 const runFetchConfigAtom = atom(
     (get) => get(configStateAtom),
     (_get, set) => {
+        fetchData();
+
         async function fetchData() {
             set(configStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
@@ -21,20 +19,16 @@ const runFetchConfigAtom = atom(
                 toastError((error as Error).message);
             }
             set(correlateAtom);
-        };
-        fetchData();
+        }
     }
 );
 runFetchConfigAtom.onMount = (runFetch) => runFetch();
 
-//#endregion ServerCurrentConfig
-
-
-//#region ServerArchive
-
 const runFetchArchiveAtom = atom(
     (get) => get(archiveStateAtom),
     (_get, set) => {
+        fetchData();
+
         async function fetchData() {
             set(archiveStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
@@ -45,35 +39,16 @@ const runFetchArchiveAtom = atom(
                 toastError((error as Error).message);
             }
             set(correlateAtom);
-        };
-        fetchData();
+        }
     }
 );
 runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 
-//#endregion ServerArchive
-
-
-//#region ServerReleaseNotes
-
-// const renderer = {
-//     heading(text: string, level: number) {
-//         const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-//         return `
-//             <h${level}>
-//                 <a name="${escapedText}" class="anchor" href="#${escapedText}">
-//                     <span class="header-link">#</span>
-//                 </a>
-//                 ${text}
-//             </h${level}>
-//         `;
-//     }
-// };
-// marked.use({ renderer });
-
 const runFetchReleaseNotesAtom = atom(
     (get) => get(releaseNotesStateAtom),
     (_get, set) => {
+        fetchData();
+
         async function fetchData() {
             set(releaseNotesStateAtom, (prev) => ({ ...prev, loading: true }));
             try {
@@ -87,13 +62,10 @@ const runFetchReleaseNotesAtom = atom(
                 toastError((error as Error).message);
             }
             set(correlateAtom);
-        };
-        fetchData();
+        }
     }
 );
 runFetchReleaseNotesAtom.onMount = (runFetch) => runFetch();
-
-//#endregion ServerReleaseNotes
 
 const correlateAtom = atom(
     null,
@@ -101,6 +73,7 @@ const correlateAtom = atom(
         const stateNotes = get(releaseNotesStateAtom);
         const stateArchive = get(archiveStateAtom);
         const stateConfig = get(configStateAtom);
+
         if (stateNotes.loading || stateArchive.loading || stateConfig.loading) {
             return;
         }
@@ -113,29 +86,38 @@ const correlateAtom = atom(
         // 2. Update stale config versions with the latest from FTP.
         const latestArchive = getLatestArchiveVersions(stateArchive.data);
 
-        if (stateConfig.data && stateArchive.data) {
-            // 2.1. Update 'Current Versions'
-            const latestPublicStr = publicVersions?.[0];
-            const latestPublic = getArchiveVersion(stateArchive.data, latestPublicStr);
-            if (latestPublic) {
-                const lookupFor = { brand: FormatCurrentCfg.TBrand.dp, browser: TBrowserShort.chrome, qa: false }; // No need this for Firefox at least now.
-                stateConfig.data.summary = stateConfig.data.summary.map((item) => {
+        if (!stateConfig.data || !stateArchive.data) {
+            return;
+        }
+
+        // 2.1. Update 'Current Versions'
+        const latestPublicStr = publicVersions?.[0];
+        const latestPublic = getArchiveVersion(stateArchive.data, latestPublicStr);
+
+        if (latestPublic) {
+            const lookupFor = {
+                brand: FormatCurrentCfg.TBrand.dp,
+                browser: TBrowserShort.chrome, // No need this for Firefox at least now.
+                qa: false
+            };
+            stateConfig.data.summary = stateConfig.data.summary.map(
+                (item) => {
                     const found = areTheSameBrowserBrandQa(item, lookupFor) && isAVersionGreaterB(latestPublicStr, item.version);
                     if (found) {
                         item.version = latestPublic.version;
                         item.updated = latestPublic.updated;
                     }
                     return item;
-                });
-            }
-
-            // 2.2. Update and apply 'QA latest'
-            set(latestChExtensionAtom, selectLatest(stateConfig.data.chrome, latestArchive.ch));
-            set(latestFfExtensionAtom, selectLatest(stateConfig.data.firefox, latestArchive.ff));
-
-            // 2.3. Apply 'Current Versions'
-            set(summaryExtensionsAtom, stateConfig.data.summary);
+                }
+            );
         }
+
+        // 2.2. Update and apply 'QA latest'
+        set(latestChExtensionAtom, selectLatest(stateConfig.data.chrome, latestArchive.ch));
+        set(latestFfExtensionAtom, selectLatest(stateConfig.data.firefox, latestArchive.ff));
+
+        // 2.3. Apply 'Current Versions'
+        set(summaryExtensionsAtom, stateConfig.data.summary);
     }
 );
 
@@ -146,5 +128,3 @@ export const dataLoadAtom = atom(
         get(runFetchConfigAtom);
     }
 );
-
-//TODO: change archive view to grid instead of columns to have order left to right vs top down and left.
