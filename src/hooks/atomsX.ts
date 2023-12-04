@@ -28,5 +28,10 @@ export type Atomize<T> = {
     [key in keyof T & string as `${key}Atom`]: PrimitiveAtom<T[key]>;
 };
 
-export type LoadingDataState<T> = { loading: boolean, error: unknown | null, data: T | null; };
+export type LoadingDataState<T> = {
+    loading: boolean,
+    error: unknown | null,
+    data: T | null;
+};
+
 export const loadingDataStateInit = () => ({ loading: true, error: null, data: null });
