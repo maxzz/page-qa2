@@ -226,7 +226,15 @@ export enum TBrand {
     hp = 'hp',
     de = 'de'
 }
-export const TBrandName = (v?: TBrand) => v === TBrand.dp ? 'DP' : v === TBrand.hp ? 'HP' : v === TBrand.de ? 'Dell' : '?';
+
+export const TBrandName = (v?: TBrand) =>
+    v === TBrand.dp
+        ? 'DP'
+        : v === TBrand.hp
+            ? 'HP'
+            : v === TBrand.de
+                ? 'Dell'
+                : '?';
 
 export enum TBrowserShort {
     unknown = 'u',
@@ -237,7 +245,28 @@ export enum TBrowserShort {
     ie = 'i',
 }
 
-export const TBrowserName = (v?: TBrowserShort) => v === TBrowserShort.chrome ? 'Chrome' : v === TBrowserShort.firefox ? 'Firefox' : v === TBrowserShort.edge ? 'Microsoft Edge' : v === TBrowserShort.dev ? 'DevTools': v === TBrowserShort.ie ? 'IE' : '?';
-export const TBrowserShortFromFname = (v: FormatCurrentCfg.TBrowserFname) => v === 'chrome' ? TBrowserShort.chrome : v === 'firefox' ? TBrowserShort.firefox : v === 'me' ? TBrowserShort.edge : v === 'ie' ? TBrowserShort.ie : undefined;
+export const TBrowserName = (v?: TBrowserShort) =>
+    v === TBrowserShort.chrome
+        ? 'Chrome'
+        : v === TBrowserShort.firefox
+            ? 'Firefox'
+            : v === TBrowserShort.edge
+                ? 'Microsoft Edge'
+                : v === TBrowserShort.dev
+                    ? 'DevTools'
+                    : v === TBrowserShort.ie
+                        ? 'IE'
+                        : '?';
+
+export const TBrowserShortFromFname = (v: FormatCurrentCfg.TBrowserFname) =>
+    v === 'chrome'
+        ? TBrowserShort.chrome
+        : v === 'firefox'
+            ? TBrowserShort.firefox
+            : v === 'me'
+                ? TBrowserShort.edge
+                : v === 'ie'
+                    ? TBrowserShort.ie
+                    : undefined;
 
 //#endregion Common
