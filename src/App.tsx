@@ -19,10 +19,10 @@ function PopperRoot() {
 
 function App() {
     return (<>
-        <UIToaster />
-        <PopperRoot />
-        <UISymbolsDefs />
         <DataLoader />
+        <UISymbolsDefs />
+        <PopperRoot />
+        <UIToaster />
 
         <div className="min-h-full overflow-hidden bg-slate-50">
             <Frontpage />
