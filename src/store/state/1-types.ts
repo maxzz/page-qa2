@@ -1,24 +1,37 @@
-import { Getter } from "jotai";
+import { proxy, subscribe } from 'valtio';
 
-export namespace AppStorage {
-    export const KEY = 'react-page-qa2-01';
+const STORE_KEY = 'react-page-qa2-23';
 
-    export type Store = {
-        open1: boolean;
-        open2: boolean;
-        open3: boolean;
-        open4: boolean;
-        open5: boolean;
-    };
+export type AppSettings = {
+    open1: boolean;
+    open2: boolean;
+    open3: boolean;
+    open4: boolean;
+    open5: boolean;
+};
 
-    export let initialData: Store = {
-        open1: false,
-        open2: false,
-        open3: false,
-        open4: false,
-        open5: false,
-    };
+let defaultSettings: AppSettings = {
+    open1: false,
+    open2: false,
+    open3: false,
+    open4: false,
+    open5: false,
+};
 
-    export let save: ((get: Getter) => void) | undefined;
-    export let createAppState: ((get: Getter) => Store) | undefined;
+function initSettings(): AppSettings {
+    const savedSettings = localStorage.getItem(STORE_KEY);
+    if (savedSettings) {
+        try {
+            let obj = JSON.parse(savedSettings) as AppSettings;
+            return { ...defaultSettings, ...obj };
+        } catch (error) {
+        }
+    }
+    return defaultSettings;
 }
+
+export const appSettings = proxy<AppSettings>(initSettings());
+
+subscribe(appSettings, () => {
+    localStorage.setItem(STORE_KEY, JSON.stringify(appSettings));
+});

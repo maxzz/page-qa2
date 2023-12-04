@@ -4,18 +4,6 @@ import { marked } from 'marked';
 import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts, getArchiveVersion, CurrentExtensions, getCurrentConfig, InAppExtnInfo, TBrowserShort, ArchiveExtensionMeta, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, FormatCurrentCfg } from '../apis';
 import { toastError } from '@/components/ui/UiToaster';
 
-import { StorageIO } from './2-load-save';
-StorageIO.load();
-
-import { AppStorage } from './1-types';
-import { createAppState } from './3-app-state';
-
-export * from './2-load-save';
-export * from './3-app-state';
-
-AppStorage.save = StorageIO.save;
-AppStorage.createAppState = createAppState;
-
 // UI state
 
 // Data files
