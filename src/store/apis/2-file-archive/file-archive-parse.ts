@@ -1,4 +1,4 @@
-import { TBrowserShort } from "../types/api-formats-g01";
+import { TBrowserShort } from "../types";
 import { getArchiveExtensionUrl } from "../constants";
 import { ArchiveExtensionMeta, ReleaseType } from "./file-archive";
 import { InAppExtnInfo } from "../1-file-current-config/file-current-config";

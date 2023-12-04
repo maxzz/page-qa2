@@ -2,7 +2,7 @@ import { atom, Getter } from 'jotai';
 import { atomWithCallback, LoadingDataState, loadingDataStateInit } from '@/hooks/atomsX';
 import { debounce } from '@/utils/debounce';
 import { marked } from 'marked';
-import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts, getArchiveVersion, CurrentExtensions, getCurrentConfig, InAppExtnInfo, TBrand, TBrowserShort, ArchiveExtensionMeta, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions } from './apis';
+import { archiveByYears, areTheSameBrowserBrandQa, selectLatest, getLatestArchiveVersions, isAVersionGreaterB, OneYearExts, getArchiveVersion, CurrentExtensions, getCurrentConfig, InAppExtnInfo, TBrowserShort, ArchiveExtensionMeta, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, FormatCurrentCfg } from './apis';
 import { toastError } from '@/components/ui/UiToaster';
 
 //#region LocalStorage
@@ -190,7 +190,7 @@ const correlateAtom = atom(
             const latestPublicStr = publicVersions?.[0];
             const latestPublic = getArchiveVersion(stateArchive.data, latestPublicStr);
             if (latestPublic) {
-                const lookupFor = { brand: TBrand.dp, browser: TBrowserShort.chrome, qa: false }; // No need this for Firefox at least now.
+                const lookupFor = { brand: FormatCurrentCfg.TBrand.dp, browser: TBrowserShort.chrome, qa: false }; // No need this for Firefox at least now.
                 stateConfig.data.summary = stateConfig.data.summary.map((item) => {
                     const found = areTheSameBrowserBrandQa(item, lookupFor) && isAVersionGreaterB(latestPublicStr, item.version);
                     if (found) {

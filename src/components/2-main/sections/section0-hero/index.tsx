@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { configStateAtom, latestChExtensionAtom, latestFfExtensionAtom } from '@/store/store';
-import { TBrowserShort } from '@/store/apis/types/api-formats-g01';
+import { TBrowserShort } from '@/store/apis/types';
 import { HeroImage } from './0-hero-image';
 import { CurrentVersion } from './2-current-version';
 

@@ -1,13 +1,13 @@
-import { FormatCurrentCfg, TBrand, TBrowserShort } from '../types/api-formats-g01';
+import { FormatCurrentCfg, TBrowserShort } from '../types';
 import { getCurrentConfigUrl, regexFnameVerDate } from '../constants';
 
-export interface InAppExtnInfo { // Extension info from config file
-    url: string;                // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
-    brand?: TBrand;             // "dp"
-    browser?: TBrowserShort;    // "c"
-    qa?: boolean;               // true
-    version: string;            // "3.4.430"
-    updated: string;            // "2022.03.04"
+export interface InAppExtnInfo {    // Extension info from config file
+    url: string;                    // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
+    brand?: FormatCurrentCfg.TBrand; // "dp"
+    browser?: TBrowserShort;        // "c"
+    qa?: boolean;                   // true
+    version: string;                // "3.4.430"
+    updated: string;                // "2022.03.04"
 }
 
 function fnameVersionDate(fname: string) {
@@ -20,14 +20,14 @@ function fnameVersionDate(fname: string) {
     return meta;
 }
 
-function findInfo(extensions: InAppExtnInfo[], brand: TBrand, browser: TBrowserShort, qa: boolean): InAppExtnInfo | undefined {
+function findInfo(extensions: InAppExtnInfo[], brand: FormatCurrentCfg.TBrand, browser: TBrowserShort, qa: boolean): InAppExtnInfo | undefined {
     return extensions.find((item: InAppExtnInfo) => item.brand === brand && item.browser === browser && item.qa === qa);
 }
 
 function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowserShort, qa: boolean): InAppExtnInfo[] {
     const rv: InAppExtnInfo[] = [];
 
-    [TBrand.dp, TBrand.hp, TBrand.de].forEach((brand: TBrand) => {
+    [FormatCurrentCfg.TBrand.dp, FormatCurrentCfg.TBrand.hp, FormatCurrentCfg.TBrand.de].forEach((brand: FormatCurrentCfg.TBrand) => {
         const meta: FormatCurrentCfg.SingleExtensionInfo = brands[brand];
         if (meta) {
             const fromName = fnameVersionDate(meta.url);
@@ -44,12 +44,12 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
 
     // Fill out missing
 
-    let dp: InAppExtnInfo | undefined = findInfo(rv, TBrand.dp, browser, qa);
+    let dp: InAppExtnInfo | undefined = findInfo(rv, FormatCurrentCfg.TBrand.dp, browser, qa);
     if (!dp) {
         throw new Error('DP info is missing. At least DP info should exist.');
     }
-    !findInfo(rv, TBrand.hp, browser, qa) && rv.push({ ...dp, brand: TBrand.hp, });
-    !findInfo(rv, TBrand.de, browser, qa) && rv.push({ ...dp, brand: TBrand.de, });
+    !findInfo(rv, FormatCurrentCfg.TBrand.hp, browser, qa) && rv.push({ ...dp, brand: FormatCurrentCfg.TBrand.hp, });
+    !findInfo(rv, FormatCurrentCfg.TBrand.de, browser, qa) && rv.push({ ...dp, brand: FormatCurrentCfg.TBrand.de, });
 
     return rv;
 }

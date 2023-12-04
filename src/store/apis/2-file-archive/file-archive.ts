@@ -1,4 +1,4 @@
-import { FormatCurrentCfg, TBrowserShort, TBrowserShortFromFname } from "../types/api-formats-g01";
+import { FormatCurrentCfg, TBrowserShort, TBrowserShortFromFname } from "../types";
 import { getFtpExtensionsUrl, regexFnameVerDateRelBrouser } from "../constants";
 
 export enum ReleaseType {
