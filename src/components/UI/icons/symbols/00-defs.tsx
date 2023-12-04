@@ -3,6 +3,7 @@ import { DefFirefox } from "./02-firefox";
 import { DefMe } from "./03-edge";
 import { DefDev } from "./04-dev";
 import { DefIe } from "./05-ie";
+import { DefMan3 } from "./06-manifest3";
 
 export function UISymbolsDefs() {
     return (
@@ -17,6 +18,7 @@ export function UISymbolsDefs() {
                 {DefMe()}
                 {DefDev()}
                 {DefIe()}
+                {DefMan3()}
             </defs>
         </svg>
     );
