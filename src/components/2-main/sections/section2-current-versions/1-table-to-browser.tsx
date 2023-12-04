@@ -17,13 +17,15 @@ export function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort
                 <div className="border-b border-slate-200 text-xs">QA</div>
                 <div className="border-b border-slate-200 text-xs">Public</div>
 
-                {table.map((item, idx) => (
-                    <Fragment key={idx}>
-                        <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`}><div className="px-3 pt-0.5">{TBrandName(item.brand)}</div></div>
-                        <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`} title={`${item.qa?.updated ? `Updated on ${beautifyDate(item.qa?.updated)}` : ''}`}>{item.qa?.version}</div>
-                        <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`} title={`${item.release?.updated ? `Updated on ${beautifyDate(item.release?.updated)}` : ''}`}>{item.release?.version}</div>
-                    </Fragment>))
-                }
+                {table.map(
+                    (item, idx) => (
+                        <Fragment key={idx}>
+                            <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`}><div className="px-3 pt-0.5">{TBrandName(item.brand)}</div></div>
+                            <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`} title={`${item.qa?.updated ? `Updated on ${beautifyDate(item.qa?.updated)}` : ''}`}>{item.qa?.version}</div>
+                            <div className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`} title={`${item.release?.updated ? `Updated on ${beautifyDate(item.release?.updated)}` : ''}`}>{item.release?.version}</div>
+                        </Fragment>
+                    )
+                )}
             </div>
         </div>
     );

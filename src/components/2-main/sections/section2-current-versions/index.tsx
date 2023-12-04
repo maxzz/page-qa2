@@ -7,6 +7,10 @@ import { TableToBrowser } from './1-table-to-browser';
 export function Section2_CurrentVersions() {
     const summary = useAtomValue(summaryExtensionsAtom);
     const res = reduceToFlat(reduceForTable(summary));
+    const loaded = res[TBrowserShort.chrome] && res[TBrowserShort.firefox];
+    if (!loaded) {
+        return null;
+    }
     return (
         <div className="py-2 text-sm flex flex-col space-y-2">
             <p>Summary table of QA and currently published extensions.</p>
