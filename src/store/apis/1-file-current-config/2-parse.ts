@@ -1,5 +1,5 @@
 import { FormatCurrentCfg, TBrowserShort } from '../types';
-import { getCurrentConfigUrl, regexFnameVerDate } from '../constants';
+import { regexFnameVerDate } from '../constants';
 
 export interface InAppExtnInfo {        // Extension info from config file
     url: string;                        // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
@@ -60,7 +60,7 @@ export interface CurrentExtensions { // Extensions on Ftp server
     summary: InAppExtnInfo[];
 }
 
-function parseCurrentConfig(config: FormatCurrentCfg.FromFile): CurrentExtensions {
+export function parseCurrentConfig(config: FormatCurrentCfg.FromFile): CurrentExtensions {
     const extInfoChQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowserShort.chrome, true); // QA
     const extInfoChPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowserShort.chrome, false); // public
     const extInfoFfQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowserShort.firefox, true);
@@ -71,31 +71,3 @@ function parseCurrentConfig(config: FormatCurrentCfg.FromFile): CurrentExtension
         summary: [...extInfoFfQa, ...extInfoFfPu, ...extInfoChQa, ...extInfoChPu]
     };
 }
-
-//#region Data Fetch
-
-export async function fetchCurrentConfig(): Promise<Response> {
-    //console.log('Fetching: current config', getCurrentConfigUrl());
-
-    const response = await fetch(getCurrentConfigUrl(), { cache: 'no-cache' });
-    if (!response.ok) {
-        throw new Error(`No access to the HID server. Failed to get "${getCurrentConfigUrl()}"`);
-    }
-    return response;
-}
-
-export async function getCurrentConfig(): Promise<CurrentExtensions> {
-    const response = await fetchCurrentConfig();
-    const json = await response.json();
-    return parseCurrentConfig(json);
-}
-
-export function extInfoNotAvailable(): InAppExtnInfo {
-    return {
-        url: 'Not avialable',
-        version: '',
-        updated: ''
-    };
-}
-
-//#endregion Data Fetch

@@ -1,7 +1,7 @@
 import { TBrowserShort } from "../types";
 import { getArchiveExtensionUrl } from "../constants";
 import { ArchiveExtensionMeta, ReleaseType } from "./1-fetch";
-import { InAppExtnInfo } from "../1-file-current-config/file-current-config";
+import { InAppExtnInfo } from "../1-file-current-config";
 
 // FTP version correction
 

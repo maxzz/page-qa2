@@ -1,5 +1,5 @@
 import { Atom, useAtomValue } from 'jotai';
-import { InAppExtnInfo } from '@/store/apis/1-file-current-config/file-current-config';
+import { InAppExtnInfo } from '@/store/apis/1-file-current-config';
 import { beautifyDate } from '@/utils/helpers';
 import { TBrowserName, TBrowserShort } from '@/store/apis/types';
 import { IconBrowser } from '@/components/ui/icons';

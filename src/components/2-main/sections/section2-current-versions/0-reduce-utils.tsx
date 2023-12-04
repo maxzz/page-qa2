@@ -1,4 +1,4 @@
-import { InAppExtnInfo } from '@/store/apis/1-file-current-config/file-current-config';
+import { InAppExtnInfo } from '@/store/apis/1-file-current-config';
 import { FormatCurrentCfg, TBrowserShort } from '@/store/apis';
 
 type Table = {
