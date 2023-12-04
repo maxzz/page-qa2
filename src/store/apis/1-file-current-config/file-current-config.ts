@@ -1,13 +1,13 @@
 import { FormatCurrentCfg, TBrowserShort } from '../types';
 import { getCurrentConfigUrl, regexFnameVerDate } from '../constants';
 
-export interface InAppExtnInfo {    // Extension info from config file
-    url: string;                    // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
-    brand?: FormatCurrentCfg.TBrand; // "dp"
-    browser?: TBrowserShort;        // "c"
-    qa?: boolean;                   // true
-    version: string;                // "3.4.430"
-    updated: string;                // "2022.03.04"
+export interface InAppExtnInfo {        // Extension info from config file
+    url: string;                        // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
+    brand?: FormatCurrentCfg.TBrand;    // "dp"
+    browser?: TBrowserShort;            // "c"
+    qa?: boolean;                       // true
+    version: string;                    // "3.4.430"
+    updated: string;                    // "2022.03.04"
 }
 
 function fnameVersionDate(fname: string) {
