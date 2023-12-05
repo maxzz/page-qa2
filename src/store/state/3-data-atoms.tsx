@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { LoadingDataState, loadingDataStateInit } from '@/hooks/atomsX';
-import { OneYearExts, CurrentExtensions, InAppExtnInfo, FilenameMeta } from '../apis';
+import { OneYearExts, CurrentExtensions, ConfigExtn, FilenameMeta } from '../apis';
 
 // Internal loading state atoms
 
@@ -18,6 +18,6 @@ export const releaseNotesAtom = atom<string>((get) => get(loadingStateReleaseNot
 
 export const publicVersionsAtom = atom<string[] | undefined>(undefined); // ['3.4.419', '3.0.386', '3.0.378']
 
-export const latestChExtensionAtom = atom<InAppExtnInfo | undefined>(undefined);
-export const latestFfExtensionAtom = atom<InAppExtnInfo | undefined>(undefined);
-export const summaryExtensionsAtom = atom<InAppExtnInfo[]>([]);
+export const latestChExtensionAtom = atom<ConfigExtn | undefined>(undefined);
+export const latestFfExtensionAtom = atom<ConfigExtn | undefined>(undefined);
+export const summaryExtensionsAtom = atom<ConfigExtn[]>([]);

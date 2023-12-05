@@ -1,16 +1,15 @@
-import { InAppExtnInfo } from '@/store/apis/1-file-current-config';
-import { TBrand, TBrowserShort } from '@/store/apis';
+import { ConfigExtn, TBrand, TBrowserShort } from '@/store/apis';
 
 type Table = {
     [key in TBrowserShort]: {
         [key in TBrand]?: {
-            qa?: InAppExtnInfo;
-            release?: InAppExtnInfo;
+            qa?: ConfigExtn;
+            release?: ConfigExtn;
         }
     };
 };
 
-export function reduceForTable(exts: InAppExtnInfo[]): Table {
+export function reduceForTable(exts: ConfigExtn[]): Table {
     return exts.reduce<Table>((acc, cur) => {
         if (cur.browser && cur.brand) {
             if (!acc[cur.browser]) {
@@ -27,8 +26,8 @@ export function reduceForTable(exts: InAppExtnInfo[]): Table {
 
 export type FlatTableItem = {
     brand: TBrand;
-    qa?: InAppExtnInfo;
-    release?: InAppExtnInfo;
+    qa?: ConfigExtn;
+    release?: ConfigExtn;
 };
 
 type FlatTable = {
@@ -41,7 +40,7 @@ export function reduceToFlat(table: Table): FlatTable {
         if (!res[brKey]) {
             res[brKey] = [];
         }
-        for (const [bdKey, bdVal] of Object.entries(brVal) as [TBrand, { qa?: InAppExtnInfo; release?: InAppExtnInfo; }][]) {
+        for (const [bdKey, bdVal] of Object.entries(brVal) as [TBrand, { qa?: ConfigExtn; release?: ConfigExtn; }][]) {
             res[brKey].push({
                 brand: bdKey,
                 qa: bdVal.qa,

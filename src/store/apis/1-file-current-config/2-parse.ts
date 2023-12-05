@@ -1,15 +1,13 @@
-import { FormatCurrentCfg, TBrand, TBrowserShort } from '../types';
+import { FilenameMeta, FormatCurrentCfg, TBrand, TBrowserShort } from '../types';
 import { regexFnameVerDate } from '../constants';
 
-export interface InAppExtnInfo {    // Extension info from config file
-    url: string;                    // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
-    version: string;                // "3.4.430"
-    updated: string;                // "2022.03.04"
-    browser: TBrowserShort;         // "c"
-    
-    qa?: boolean;                   // true
-    brand?: TBrand;                 // "dp"
-}
+export type ConfigExtn = Prettify<  // Extension info from config file
+    & Omit<FilenameMeta, 'release' | 'isV3'>
+    & {
+        qa?: boolean;               // true
+        brand?: TBrand;             // "dp"
+    }
+>;
 
 function fnameVersionDate(fname: string) {
     // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
@@ -21,19 +19,19 @@ function fnameVersionDate(fname: string) {
     return meta;
 }
 
-function findInfo(extensions: InAppExtnInfo[], brand: TBrand, browser: TBrowserShort, qa: boolean): InAppExtnInfo | undefined {
-    return extensions.find((item: InAppExtnInfo) => item.brand === brand && item.browser === browser && item.qa === qa);
+function findInfo(extensions: ConfigExtn[], brand: TBrand, browser: TBrowserShort, qa: boolean): ConfigExtn | undefined {
+    return extensions.find((item: ConfigExtn) => item.brand === brand && item.browser === browser && item.qa === qa);
 }
 
-function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowserShort, qa: boolean): InAppExtnInfo[] {
-    const rv: InAppExtnInfo[] = [];
+function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowserShort, qa: boolean): ConfigExtn[] {
+    const rv: ConfigExtn[] = [];
 
     [TBrand.dp, TBrand.hp, TBrand.de].forEach((brand: TBrand) => {
         const meta: FormatCurrentCfg.SingleExtensionInfo = brands[brand];
         if (meta) {
             const fromName = fnameVersionDate(meta.url);
             rv.push({
-                url: meta.url, // "https://crossmatch.hid.gl/g02/current/dppm-3.4.710_on_2023.03.14-r-chrome.zip"
+                fname: meta.url, // "https://crossmatch.hid.gl/g02/current/dppm-3.4.710_on_2023.03.14-r-chrome.zip"
                 brand,
                 browser,
                 qa,
@@ -43,9 +41,9 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
         }
     });
 
-    // Fill out missing
+    // Fill out missing extensions
 
-    let dp: InAppExtnInfo | undefined = findInfo(rv, TBrand.dp, browser, qa);
+    let dp: ConfigExtn | undefined = findInfo(rv, TBrand.dp, browser, qa);
     if (!dp) {
         throw new Error('DP info is missing. At least DP info should exist.');
     }
@@ -57,16 +55,17 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
 }
 
 export interface CurrentExtensions { // Extensions on Ftp server
-    chrome: InAppExtnInfo;
-    firefox: InAppExtnInfo;
-    summary: InAppExtnInfo[];
+    chrome: ConfigExtn;
+    firefox: ConfigExtn;
+    summary: ConfigExtn[];
 }
 
 export function parseCurrentConfig(config: FormatCurrentCfg.FromFile): CurrentExtensions {
-    const extInfoChQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowserShort.chrome, true); // QA
-    const extInfoChPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowserShort.chrome, false); // public
-    const extInfoFfQa: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowserShort.firefox, true);
-    const extInfoFfPu: InAppExtnInfo[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowserShort.firefox, false);
+    const extInfoChQa: ConfigExtn[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowserShort.chrome, true); // QA
+    const extInfoChPu: ConfigExtn[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowserShort.chrome, false); // public
+    
+    const extInfoFfQa: ConfigExtn[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowserShort.firefox, true);
+    const extInfoFfPu: ConfigExtn[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowserShort.firefox, false);
     return {
         chrome: extInfoChQa[0],
         firefox: extInfoFfQa[0],
