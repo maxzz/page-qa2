@@ -4,11 +4,12 @@ import { convFname2TBrowserShort, TBrowserFname } from "./7-names-browser-fname"
 import { ReleaseType } from "./8-names-release";
 
 export type FilenameMeta = { // Extension info from archive (or full url) filename
-    fname: string;
-    version: string;
-    updated: string;
+    fname: string;          // short filename or url "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
+    version: string;        // "3.4.430"
+    updated: string;        // "2022.03.04"
+    browser: TBrowserShort; // "c"
+    
     release: ReleaseType;
-    browser: TBrowserShort;
     isV3: boolean;
 };
 

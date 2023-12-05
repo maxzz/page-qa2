@@ -3,11 +3,12 @@ import { regexFnameVerDate } from '../constants';
 
 export interface InAppExtnInfo {    // Extension info from config file
     url: string;                    // "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
-    brand?: TBrand;                 // "dp"
-    browser?: TBrowserShort;        // "c"
-    qa?: boolean;                   // true
     version: string;                // "3.4.430"
     updated: string;                // "2022.03.04"
+    browser: TBrowserShort;         // "c"
+    
+    qa?: boolean;                   // true
+    brand?: TBrand;                 // "dp"
 }
 
 function fnameVersionDate(fname: string) {

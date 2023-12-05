@@ -1,5 +1,5 @@
 import { urlCurrentConfig } from '../constants';
-import { CurrentExtensions, InAppExtnInfo, parseCurrentConfig } from './2-parse';
+import { CurrentExtensions, parseCurrentConfig } from './2-parse';
 
 async function fetchCurrentConfig(): Promise<Response> {
     //console.log('Fetching: current config', getCurrentConfigUrl());
@@ -15,12 +15,4 @@ export async function getCurrentConfig(): Promise<CurrentExtensions> {
     const response = await fetchCurrentConfig();
     const json = await response.json();
     return parseCurrentConfig(json);
-}
-
-export function extInfoNotAvailable(): InAppExtnInfo {
-    return {
-        url: 'Not avialable',
-        version: '',
-        updated: ''
-    };
 }
