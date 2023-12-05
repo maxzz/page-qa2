@@ -1,7 +1,7 @@
 import { urlCurrentConfig } from '../constants';
 import { CurrentExtensions, parseCurrentConfig } from './2-parse';
 
-async function fetchCurrentConfig(): Promise<Response> {
+async function _fetchCurrentConfig(): Promise<Response> {
     //console.log('Fetching: current config', getCurrentConfigUrl());
 
     const response = await fetch(urlCurrentConfig(), { cache: 'no-cache' });
@@ -11,8 +11,8 @@ async function fetchCurrentConfig(): Promise<Response> {
     return response;
 }
 
-export async function getCurrentConfig(): Promise<CurrentExtensions> {
-    const response = await fetchCurrentConfig();
+export async function fetchCurrentConfig(): Promise<CurrentExtensions> {
+    const response = await _fetchCurrentConfig();
     const json = await response.json();
     return parseCurrentConfig(json);
 }

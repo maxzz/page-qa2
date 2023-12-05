@@ -10,7 +10,7 @@ const traytools: FilenameMeta = {
     isV3: false,
 };
 
-export async function getExistingOnServer(): Promise<FilenameMeta[]> {
+export async function fetchExistingOnServer(): Promise<FilenameMeta[]> {
     //console.log('Fetching: extensions on server', getFtpExtensionsUrl());
 
     const response = await fetch(urlFtpExtensions(), { cache: 'no-cache' });

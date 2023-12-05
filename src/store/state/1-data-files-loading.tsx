@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { marked } from 'marked';
-import { archiveByYears, getCurrentConfig, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, updateCurrentVersions, FilenameMeta } from '../apis';
+import { archiveByYears, fetchCurrentConfig, fetchExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, updateCurrentVersions, FilenameMeta } from '../apis';
 import { toastError } from '@/components/ui/UiToaster';
 import { loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNotesAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom, loadFailedAtom } from './3-data-atoms';
 
@@ -12,7 +12,7 @@ const runFetchConfigAtom = atom(
         async function fetchData() {
             set(loadingStateConfigAtom, (prev) => ({ ...prev, loading: true }));
             try {
-                const data = await getCurrentConfig();
+                const data = await fetchCurrentConfig();
                 set(loadingStateConfigAtom, { loading: false, error: null, data });
             } catch (error) {
                 set(loadingStateConfigAtom, { loading: false, error, data: null });
@@ -32,7 +32,7 @@ const runFetchArchiveAtom = atom(
         async function fetchData() {
             set(loadingStateArchiveAtom, (prev) => ({ ...prev, loading: true }));
             try {
-                const existing: FilenameMeta[] = await getExistingOnServer();
+                const existing: FilenameMeta[] = await fetchExistingOnServer();
                 set(loadingStateArchiveAtom, { loading: false, error: null, data: existing });
             } catch (error) {
                 set(loadingStateArchiveAtom, { loading: false, error, data: null });
