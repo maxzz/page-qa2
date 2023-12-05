@@ -1,5 +1,4 @@
-import { ReleaseType, TBrowserShort } from "../types";
-import { FilenameMeta } from "../0-file-name";
+import { FilenameMeta, ReleaseType, TBrowserShort } from "../types";
 
 export type Meta = {
     date: string;

@@ -1,25 +1,5 @@
-import { ReleaseType, TBrowserShort } from "../types";
+import { FilenameMeta, FtpFiles, ReleaseType, TBrowserShort, filename2Meta } from "../types";
 import { getFtpExtensionsUrl } from "../constants";
-import { FilenameMeta, filename2Meta } from "../0-file-name";
-
-namespace FtpFiles {
-    export type FileRecord = {
-        type: string;
-        name: string;
-        size: number;
-        modifyTime: number;
-        accessTime: number;
-        rights: FileRights;
-        owner: number;
-        group: number;
-    };
-
-    export type FileRights = {
-        user: string;
-        group: string;
-        other: string;
-    };
-}
 
 const traytools: FilenameMeta = {
     fname: '../../maxz/traytools.zip.txt',

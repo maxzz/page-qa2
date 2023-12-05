@@ -1,5 +1,7 @@
 import { regexFnameVerDateRelBrowser } from "../constants";
-import { TBrowserShort, convFname2TBrowserShort, TBrowserFname, ReleaseType } from "../types/4-names";
+import { TBrowserShort } from "./6-names-browser-short";
+import { convFname2TBrowserShort, TBrowserFname } from "./7-names-browser-fname";
+import { ReleaseType } from "./8-names-release";
 
 export type FilenameMeta = { // Extension info from archive (or any) filename
     fname: string;

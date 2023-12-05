@@ -1,5 +1,4 @@
-import { ReleaseType, TBrand, TBrowserShort } from "../types";
-import { FilenameMeta } from "../0-file-name";
+import { FilenameMeta, ReleaseType, TBrand, TBrowserShort } from "../types";
 import { getArchiveExtensionUrl } from "../constants";
 import { CurrentExtensions, InAppExtnInfo } from "../1-file-current-config";
 import { LoadingDataState } from "@/hooks/atomsX";

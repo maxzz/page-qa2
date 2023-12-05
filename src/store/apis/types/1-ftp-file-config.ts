@@ -1,4 +1,5 @@
-import { TBrand, TBrowserFname } from "./4-names";
+import { TBrand } from "./5-names-brand";
+import { TBrowserFname } from "./7-names-browser-fname";
 
 export namespace FormatCurrentCfg {
 
