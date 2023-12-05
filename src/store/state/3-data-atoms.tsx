@@ -1,11 +1,11 @@
 import { atom } from 'jotai';
 import { LoadingDataState, loadingDataStateInit } from '@/hooks/atomsX';
-import { OneYearExts, CurrentExtensions, InAppExtnInfo, ArchiveExtensionMeta } from '../apis';
+import { OneYearExts, CurrentExtensions, InAppExtnInfo, FilenameMeta } from '../apis';
 
 // Internal loading state atoms
 
 export const loadingStateConfigAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
-export const loadingStateArchiveAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
+export const loadingStateArchiveAtom = atom<LoadingDataState<FilenameMeta[]>>(loadingDataStateInit());
 export const loadingStateReleaseNotesAtom = atom<LoadingDataState<string>>(loadingDataStateInit());
 export const loadFailedAtom = atom<boolean>(false); // true if any of the above failed
 

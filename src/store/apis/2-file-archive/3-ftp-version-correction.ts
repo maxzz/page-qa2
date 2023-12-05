@@ -1,6 +1,6 @@
-import { TBrand, TBrowserShort } from "../types";
+import { ReleaseType, TBrand, TBrowserShort } from "../types";
+import { FilenameMeta } from "../0-file-name";
 import { getArchiveExtensionUrl } from "../constants";
-import { ArchiveExtensionMeta, ReleaseType } from "../0-file-name";
 import { CurrentExtensions, InAppExtnInfo } from "../1-file-current-config";
 import { LoadingDataState } from "@/hooks/atomsX";
 
@@ -22,15 +22,15 @@ function areTheSameBrowserBrandQa(a: Pick<InAppExtnInfo, 'brand' | 'browser' | '
     return a_browser === b_browser && a_brand === b_brand && a_qa === b_qa;
 }
 
-function getArchiveVersion(archive: ArchiveExtensionMeta[] | null, version?: string): ArchiveExtensionMeta | undefined {
+function getArchiveVersion(archive: FilenameMeta[] | null, version?: string): FilenameMeta | undefined {
     return version ? archive?.find((item) => item.version === version) : undefined;
 }
 
-function getFromArchive(archive: ArchiveExtensionMeta[] | null, a: Pick<ArchiveExtensionMeta, 'browser' | 'release'>): ArchiveExtensionMeta | undefined {
+function getFromArchive(archive: FilenameMeta[] | null, a: Pick<FilenameMeta, 'browser' | 'release'>): FilenameMeta | undefined {
     return archive?.find((item) => item.browser === a.browser && item.release === a.release);
 }
 
-function getLatestArchiveVersions(archive?: ArchiveExtensionMeta[] | null): { ch: ArchiveExtensionMeta | undefined; ff: ArchiveExtensionMeta | undefined; } {
+function getLatestArchiveVersions(archive?: FilenameMeta[] | null): { ch: FilenameMeta | undefined; ff: FilenameMeta | undefined; } {
     const reversed = archive ? [...archive].reverse() : [];
     const latestArchiveCh = getFromArchive(reversed, { browser: TBrowserShort.chrome, release: ReleaseType.release });
     const latestArchiveFf = getFromArchive(reversed, { browser: TBrowserShort.firefox, release: ReleaseType.release });
@@ -40,7 +40,7 @@ function getLatestArchiveVersions(archive?: ArchiveExtensionMeta[] | null): { ch
     };
 }
 
-function selectLatest(config: InAppExtnInfo, archive?: ArchiveExtensionMeta): InAppExtnInfo {
+function selectLatest(config: InAppExtnInfo, archive?: FilenameMeta): InAppExtnInfo {
     return archive && isAVersionGreaterB(archive.version, config.version) ? {
         ...config,
         version: archive.version,
@@ -51,7 +51,7 @@ function selectLatest(config: InAppExtnInfo, archive?: ArchiveExtensionMeta): In
 
 export function updateCurrentVersions(
     publicVersions: string[] | undefined,
-    stateArchive: LoadingDataState<ArchiveExtensionMeta[]>,
+    stateArchive: LoadingDataState<FilenameMeta[]>,
     stateConfig: LoadingDataState<CurrentExtensions>
 ) {
     // 0. Update stale config versions with the latest version from FTP files.

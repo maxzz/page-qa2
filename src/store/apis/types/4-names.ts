@@ -1,12 +1,12 @@
-export type TBrowserFname = 'chrome3' | 'chrome' | 'firefox' | 'me' | 'ie'; // Browser name as defined into config file. 'chrome3' exists only in the filename.
+// Brand
 
 export enum TBrand {
     dp = 'dp',
     hp = 'hp',
-    de = 'de'
+    de = 'de',
 }
 
-export const convTBrand2Name = (v?: TBrand) =>
+export const convTBrand2Name = (v?: TBrand): string =>
     v === TBrand.dp
         ? 'DP'
         : v === TBrand.hp
@@ -14,6 +14,8 @@ export const convTBrand2Name = (v?: TBrand) =>
             : v === TBrand.de
                 ? 'Dell'
                 : '?';
+
+// Browser short name
 
 export enum TBrowserShort {
     unknown = 'u',
@@ -25,7 +27,7 @@ export enum TBrowserShort {
     ie = 'i',
 }
 
-export const convTBrowserShort2Name = (v?: TBrowserShort) =>
+export const convTBrowserShort2Name = (v?: TBrowserShort): string =>
     v === TBrowserShort.chrome3
         ? 'Chrome v3'
         : v === TBrowserShort.chrome
@@ -40,7 +42,11 @@ export const convTBrowserShort2Name = (v?: TBrowserShort) =>
                             ? 'IE'
                             : '?';
 
-export const convFname2TBrowserShort = (v: TBrowserFname) =>
+// Browser short name from filename
+
+export type TBrowserFname = 'chrome3' | 'chrome' | 'firefox' | 'me' | 'ie'; // Browser name as defined into config file. 'chrome3' exists only in the filename.
+
+export const convFname2TBrowserShort = (v: TBrowserFname): TBrowserShort | undefined =>
     v === 'chrome3'
         ? TBrowserShort.chrome3
         : v === 'chrome'
@@ -52,3 +58,10 @@ export const convFname2TBrowserShort = (v: TBrowserFname) =>
                     : v === 'ie'
                         ? TBrowserShort.ie
                         : undefined;
+
+// Build type
+
+export enum ReleaseType {
+    release = 'r',          // packed version ready for release
+    debug = 'm',            // unpacked but password protected version; not for release
+}

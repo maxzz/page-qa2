@@ -1,6 +1,6 @@
-import { TBrowserShort } from "../types";
+import { ReleaseType, TBrowserShort } from "../types";
 import { getFtpExtensionsUrl } from "../constants";
-import { ArchiveExtensionMeta, ReleaseType, metaFromFilename } from "../0-file-name";
+import { FilenameMeta, filename2Meta } from "../0-file-name";
 
 namespace FtpFiles {
     export type FileRecord = {
@@ -21,7 +21,7 @@ namespace FtpFiles {
     };
 }
 
-const traytools: ArchiveExtensionMeta = {
+const traytools: FilenameMeta = {
     fname: '../../maxz/traytools.zip.txt',
     version: '2.0.7234',
     updated: '2017.10.20', // It was 2019.10.20 but moved in time to have it as a separate group.
@@ -30,7 +30,7 @@ const traytools: ArchiveExtensionMeta = {
     isV3: false,
 };
 
-export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
+export async function getExistingOnServer(): Promise<FilenameMeta[]> {
     //console.log('Fetching: extensions on server', getFtpExtensionsUrl());
 
     const response = await fetch(getFtpExtensionsUrl(), { cache: 'no-cache' });
@@ -39,9 +39,9 @@ export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
     }
     let existing: FtpFiles.FileRecord[] = await response.json();
 
-    let rv: ArchiveExtensionMeta[] = existing
-        .map((file: FtpFiles.FileRecord) => metaFromFilename(file.name))
-        .filter((meta: ArchiveExtensionMeta) => meta.version); // skip empty non extension names not matched by regex pattern.
+    let rv: FilenameMeta[] = existing
+        .map((file: FtpFiles.FileRecord) => filename2Meta(file.name))
+        .filter((meta: FilenameMeta) => meta.version); // skip empty non extension names not matched by regex pattern.
 
     rv.push(traytools);
 

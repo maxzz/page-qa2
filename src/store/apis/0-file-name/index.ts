@@ -1,12 +1,7 @@
 import { regexFnameVerDateRelBrowser } from "../constants";
-import { TBrowserShort, convFname2TBrowserShort, FormatCurrentCfg, TBrowserFname } from "../types";
+import { TBrowserShort, convFname2TBrowserShort, TBrowserFname, ReleaseType } from "../types/4-names";
 
-export enum ReleaseType {
-    release = 'r',  // pucked version ready for release
-    debug = 'm',    // unpucked password protected version not for release
-}
-
-export type ArchiveExtensionMeta = { // Extension info from filename
+export type FilenameMeta = { // Extension info from archive (or any) filename
     fname: string;
     version: string;
     updated: string;
@@ -26,11 +21,11 @@ export type ArchiveExtensionMeta = { // Extension info from filename
     Group 4:	chrome3
     ```
 */
-export function metaFromFilename(fname: string): ArchiveExtensionMeta {
+export function filename2Meta(fname: string): FilenameMeta {
     const match = fname.match(regexFnameVerDateRelBrowser);
     const browser = (match ? convFname2TBrowserShort(match[4] as TBrowserFname) : undefined) || TBrowserShort.chrome;
     const isV3 = browser === TBrowserShort.chrome3;
-    const meta: ArchiveExtensionMeta = {
+    const meta: FilenameMeta = {
         fname,
         version: match && match[1] || '',
         updated: match && match[2] || '',

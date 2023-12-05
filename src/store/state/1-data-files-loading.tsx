@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { marked } from 'marked';
-import { archiveByYears, getCurrentConfig, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, updateCurrentVersions, ArchiveExtensionMeta } from '../apis';
+import { archiveByYears, getCurrentConfig, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, updateCurrentVersions, FilenameMeta } from '../apis';
 import { toastError } from '@/components/ui/UiToaster';
 import { loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNotesAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom, loadFailedAtom } from './3-data-atoms';
 
@@ -32,7 +32,7 @@ const runFetchArchiveAtom = atom(
         async function fetchData() {
             set(loadingStateArchiveAtom, (prev) => ({ ...prev, loading: true }));
             try {
-                const existing: ArchiveExtensionMeta[] = await getExistingOnServer();
+                const existing: FilenameMeta[] = await getExistingOnServer();
                 set(loadingStateArchiveAtom, { loading: false, error: null, data: existing });
             } catch (error) {
                 set(loadingStateArchiveAtom, { loading: false, error, data: null });

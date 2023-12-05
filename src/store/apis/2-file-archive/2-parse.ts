@@ -1,15 +1,15 @@
-import { ArchiveExtensionMeta, ReleaseType } from "../0-file-name";
-import { TBrowserShort } from "../types";
+import { ReleaseType, TBrowserShort } from "../types";
+import { FilenameMeta } from "../0-file-name";
 
 export type Meta = {
     date: string;
     year: number;
     published?: boolean;        // published information from release notes
-} & ArchiveExtensionMeta;
+} & FilenameMeta;
 
 const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
-function transformToMeta(item: ArchiveExtensionMeta): Meta {
+function transformToMeta(item: FilenameMeta): Meta {
     const dt = new Date(item.updated.replace(/\./g, '-') + 'T00:00:00');
     const year = dt.getFullYear();
     return {
@@ -64,7 +64,7 @@ function splitToVersionsMap(items: Meta[]): VersionsMap {
     return preserveStringKeysOrder(rv);
 }
 
-export function archiveByYears(archiveExtensions: ArchiveExtensionMeta[] | null, publicVersions?: string[]): OneYearExts[] {
+export function archiveByYears(archiveExtensions: FilenameMeta[] | null, publicVersions?: string[]): OneYearExts[] {
     const withMeta: Meta[] = (archiveExtensions || []).map(transformToMeta);
 
     if (publicVersions?.length) {
