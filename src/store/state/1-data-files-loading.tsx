@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 import { marked } from 'marked';
 import { archiveByYears, getCurrentConfig, ArchiveExtensionMeta, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, updateCurrentVersions } from '../apis';
 import { toastError } from '@/components/ui/UiToaster';
-import { loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNotesAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom } from './3-data-atoms';
+import { loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNotesAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom, loadFailedAtom } from './3-data-atoms';
 
 const runFetchConfigAtom = atom(
     (get) => get(loadingStateConfigAtom),
@@ -75,6 +75,12 @@ const correlateAtom = atom(
         const stateConfig = get(loadingStateConfigAtom);
 
         if (stateNotes.loading || stateArchive.loading || stateConfig.loading) {
+            return;
+        }
+
+        const failed = !!stateNotes.error || !!stateArchive.error || !!stateConfig.error;
+        set(loadFailedAtom, failed);
+        if (failed) {
             return;
         }
 

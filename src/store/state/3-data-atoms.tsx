@@ -7,6 +7,7 @@ import { OneYearExts, CurrentExtensions, InAppExtnInfo, ArchiveExtensionMeta } f
 export const loadingStateConfigAtom = atom<LoadingDataState<CurrentExtensions>>(loadingDataStateInit());
 export const loadingStateArchiveAtom = atom<LoadingDataState<ArchiveExtensionMeta[]>>(loadingDataStateInit());
 export const loadingStateReleaseNotesAtom = atom<LoadingDataState<string>>(loadingDataStateInit());
+export const loadFailedAtom = atom<boolean>(false); // true if any of the above failed
 
 // UI state
 
