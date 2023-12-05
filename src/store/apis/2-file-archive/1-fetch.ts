@@ -1,5 +1,5 @@
 import { FormatCurrentCfg, TBrowserShort, TBrowserShortFromFname } from "../types";
-import { getFtpExtensionsUrl, regexFnameVerDateRelBrouser } from "../constants";
+import { getFtpExtensionsUrl, regexFnameVerDateRelBrowser } from "../constants";
 
 export enum ReleaseType {
     release = 'r',  // pucked version ready for release
@@ -12,18 +12,20 @@ export type ArchiveExtensionMeta = { // Extension info from filename
     updated: string;
     release: ReleaseType;
     browser: TBrowserShort;
+    isV3: boolean;
 };
 
 function metaFromFilename(fname: string): ArchiveExtensionMeta {
     // 0. Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
-    const match = fname.match(regexFnameVerDateRelBrouser);
-    const browser = match ? TBrowserShortFromFname(match[4] as FormatCurrentCfg.TBrowserFname) : undefined;
+    const match = fname.match(regexFnameVerDateRelBrowser);
+    const browser = (match ? TBrowserShortFromFname(match[4] as FormatCurrentCfg.TBrowserFname) : undefined) || TBrowserShort.chrome;
     const meta: ArchiveExtensionMeta = {
         fname,
         version: match ? match[1] : '',
         updated: match ? match[2] : '',
         release: match ? match[3] === 'r' ? ReleaseType.release : ReleaseType.debug : ReleaseType.debug,
-        browser: browser || TBrowserShort.chrome,
+        browser: browser === TBrowserShort.chrome3 ? TBrowserShort.chrome : browser,
+        isV3: browser === TBrowserShort.chrome3,
     };
     return meta;
 }
@@ -53,6 +55,7 @@ const traytools: ArchiveExtensionMeta = {
     updated: '2017.10.20', // It was 2019.10.20 but moved in time to have it as a separate group.
     release: ReleaseType.debug,
     browser: TBrowserShort.dev,
+    isV3: false,
 };
 
 export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {

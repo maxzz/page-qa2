@@ -48,6 +48,7 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
     if (!dp) {
         throw new Error('DP info is missing. At least DP info should exist.');
     }
+    
     !findInfo(rv, FormatCurrentCfg.TBrand.hp, browser, qa) && rv.push({ ...dp, brand: FormatCurrentCfg.TBrand.hp, });
     !findInfo(rv, FormatCurrentCfg.TBrand.de, browser, qa) && rv.push({ ...dp, brand: FormatCurrentCfg.TBrand.de, });
 
