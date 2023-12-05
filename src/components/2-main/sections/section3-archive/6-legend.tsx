@@ -1,4 +1,4 @@
-import { TBrowserName, TBrowserShort } from '@/store/apis';
+import { convTBrowserShort2Name, TBrowserShort } from '@/store/apis';
 import { classNames } from '@/utils/classnames';
 import { IconBrowser } from '@/components/ui/icons';
 
@@ -26,7 +26,7 @@ export function Legend() {
                             (idx === 4) && "hue-rotate-[293deg]",
                         )}
                     />
-                    <div>{`${TBrowserName(br)} extension${(idx === 1 || idx === 3) ? ' with debug information' : (idx === 4) ? ' (debug version only)' : ''}`}</div>
+                    <div>{`${convTBrowserShort2Name(br)} extension${(idx === 1 || idx === 3) ? ' with debug information' : (idx === 4) ? ' (debug version only)' : ''}`}</div>
                 </div>
             ))}
             <div className="ml-1 flex items-center space-x-2">

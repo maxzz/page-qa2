@@ -1,11 +1,17 @@
-import { FormatCurrentCfg } from "./1-ftp-file-config";
+export type TBrowserFname = 'chrome3' | 'chrome' | 'firefox' | 'me' | 'ie'; // Browser name as defined into config file. 'chrome3' exists only in the filename.
 
-export const TBrandName = (v?: FormatCurrentCfg.TBrand) =>
-    v === FormatCurrentCfg.TBrand.dp
+export enum TBrand {
+    dp = 'dp',
+    hp = 'hp',
+    de = 'de'
+}
+
+export const convTBrand2Name = (v?: TBrand) =>
+    v === TBrand.dp
         ? 'DP'
-        : v === FormatCurrentCfg.TBrand.hp
+        : v === TBrand.hp
             ? 'HP'
-            : v === FormatCurrentCfg.TBrand.de
+            : v === TBrand.de
                 ? 'Dell'
                 : '?';
 
@@ -19,7 +25,7 @@ export enum TBrowserShort {
     ie = 'i',
 }
 
-export const TBrowserName = (v?: TBrowserShort) =>
+export const convTBrowserShort2Name = (v?: TBrowserShort) =>
     v === TBrowserShort.chrome3
         ? 'Chrome v3'
         : v === TBrowserShort.chrome
@@ -34,7 +40,7 @@ export const TBrowserName = (v?: TBrowserShort) =>
                             ? 'IE'
                             : '?';
 
-export const TBrowserShortFromFname = (v: FormatCurrentCfg.TBrowserFname) =>
+export const convFname2TBrowserShort = (v: TBrowserFname) =>
     v === 'chrome3'
         ? TBrowserShort.chrome3
         : v === 'chrome'

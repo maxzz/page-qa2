@@ -1,5 +1,5 @@
+import { ArchiveExtensionMeta, ReleaseType } from "../0-file-name";
 import { TBrowserShort } from "../types";
-import { ArchiveExtensionMeta, ReleaseType } from "./1-fetch";
 
 export type Meta = {
     date: string;

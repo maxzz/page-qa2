@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { marked } from 'marked';
-import { archiveByYears, getCurrentConfig, ArchiveExtensionMeta, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, updateCurrentVersions } from '../apis';
+import { archiveByYears, getCurrentConfig, getExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, updateCurrentVersions, ArchiveExtensionMeta } from '../apis';
 import { toastError } from '@/components/ui/UiToaster';
 import { loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNotesAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom, loadFailedAtom } from './3-data-atoms';
 

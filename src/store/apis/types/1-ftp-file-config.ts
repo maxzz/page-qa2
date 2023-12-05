@@ -1,3 +1,5 @@
+import { TBrand, TBrowserFname } from "./4-names";
+
 export namespace FormatCurrentCfg {
 
     export type MetaFromFilename = {
@@ -22,14 +24,6 @@ export namespace FormatCurrentCfg {
         extensionUrl: BrandExtensionVersions;
         qaUrl: BrandExtensionVersions;
     };
-
-    export type TBrowserFname = 'chrome3' | 'chrome' | 'firefox' | 'me' | 'ie'; // Browser name as defined into config file. 'chrome3' exists only in the filename.
-
-    export enum TBrand {
-        dp = 'dp',
-        hp = 'hp',
-        de = 'de'
-    }
 
     export type ExtensionsPerBrowser = {
         [key in TBrowserFname]: QaReleaseForBrowser; // key: 'chrome' | 'firefox' | 'me' | 'ie' -> value: IConfigBrowser

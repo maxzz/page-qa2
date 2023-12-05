@@ -1,6 +1,6 @@
-import { FormatCurrentCfg, TBrowserShort } from "../types";
+import { TBrand, TBrowserShort } from "../types";
 import { getArchiveExtensionUrl } from "../constants";
-import { ArchiveExtensionMeta, ReleaseType } from "./1-fetch";
+import { ArchiveExtensionMeta, ReleaseType } from "../0-file-name";
 import { CurrentExtensions, InAppExtnInfo } from "../1-file-current-config";
 import { LoadingDataState } from "@/hooks/atomsX";
 
@@ -68,7 +68,7 @@ export function updateCurrentVersions(
     // 1. Update 'Current Versions'
     if (latestPublic) {
         const lookupFor = {
-            brand: FormatCurrentCfg.TBrand.dp,
+            brand: TBrand.dp,
             browser: TBrowserShort.chrome, // No need this for Firefox at least now.
             qa: false
         };

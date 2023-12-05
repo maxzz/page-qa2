@@ -1,34 +1,6 @@
-import { FormatCurrentCfg, TBrowserShort, TBrowserShortFromFname } from "../types";
-import { getFtpExtensionsUrl, regexFnameVerDateRelBrowser } from "../constants";
-
-export enum ReleaseType {
-    release = 'r',  // pucked version ready for release
-    debug = 'm',    // unpucked password protected version not for release
-}
-
-export type ArchiveExtensionMeta = { // Extension info from filename
-    fname: string;
-    version: string;
-    updated: string;
-    release: ReleaseType;
-    browser: TBrowserShort;
-    isV3: boolean;
-};
-
-function metaFromFilename(fname: string): ArchiveExtensionMeta {
-    // 0. Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
-    const match = fname.match(regexFnameVerDateRelBrowser);
-    const browser = (match ? TBrowserShortFromFname(match[4] as FormatCurrentCfg.TBrowserFname) : undefined) || TBrowserShort.chrome;
-    const meta: ArchiveExtensionMeta = {
-        fname,
-        version: match ? match[1] : '',
-        updated: match ? match[2] : '',
-        release: match ? match[3] === 'r' ? ReleaseType.release : ReleaseType.debug : ReleaseType.debug,
-        browser: browser === TBrowserShort.chrome3 ? TBrowserShort.chrome : browser,
-        isV3: browser === TBrowserShort.chrome3,
-    };
-    return meta;
-}
+import { TBrowserShort } from "../types";
+import { getFtpExtensionsUrl } from "../constants";
+import { ArchiveExtensionMeta, ReleaseType, metaFromFilename } from "../0-file-name";
 
 namespace FtpFiles {
     export type FileRecord = {
@@ -71,7 +43,7 @@ export async function getExistingOnServer(): Promise<ArchiveExtensionMeta[]> {
         .map((file: FtpFiles.FileRecord) => metaFromFilename(file.name))
         .filter((meta: ArchiveExtensionMeta) => meta.version); // skip empty non extension names not matched by regex pattern.
 
-    rv.push(traytools); // add one more path to traytools.zip
+    rv.push(traytools);
 
     return rv;
 }
