@@ -1,5 +1,5 @@
 import { FilenameMeta, ReleaseType, TBrand, TBrowserShort } from "../types";
-import { getArchiveExtensionUrl } from "../constants";
+import { urlArchiveExtension } from "../constants";
 import { CurrentExtensions, InAppExtnInfo } from "../1-file-current-config";
 import { LoadingDataState } from "@/hooks/atomsX";
 
@@ -44,7 +44,7 @@ function selectLatest(config: InAppExtnInfo, archive?: FilenameMeta): InAppExtnI
         ...config,
         version: archive.version,
         updated: archive.updated,
-        url: getArchiveExtensionUrl(archive.fname),
+        url: urlArchiveExtension(archive.fname),
     } : config;
 }
 

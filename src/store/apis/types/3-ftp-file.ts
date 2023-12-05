@@ -1,21 +1,3 @@
-export namespace FormatFtp {
-
-    export type IFtpFile = {
-        type: '-' | 'd' | 'l',    // file type: 'd'- directory; '-' - file; (or 'l' for symlink on **\*NIX only**)
-        name: string,             // file name
-        size: number,             // file size
-        modifyTime: number,       // file timestamp of modified time
-        accessTime: number,       // file timestamp of access time
-        rights: {
-            user: string,         // "rwx"
-            group: string,        // "rwx"
-            other: string;        // "rwx"
-        },
-        owner: number,            // user ID
-        group: number;            // group ID
-    };
-} //namespace FormatFtp
-
 /**
  * ```js
  *   {

@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { getArchiveExtensionUrl, Meta, ReleaseType, convTBrowserShort2Name } from '@/store/apis';
+import { urlArchiveExtension, Meta, ReleaseType, convTBrowserShort2Name } from '@/store/apis';
 import { IconBrowser } from '@/components/ui/icons';
 import { OrderedGroup } from './1-group-icons';
 
@@ -9,7 +9,7 @@ function PopupVersionItem({ meta }: { meta?: Meta; }) {
     }
     const name = `${convTBrowserShort2Name(meta.browser)} version ${meta.version}${meta.release === ReleaseType.debug ? ' with debug information' : ''}`;
     return (
-        <a className="h-5 flex items-center space-x-1" href={getArchiveExtensionUrl(meta.fname)}>
+        <a className="h-5 flex items-center space-x-1" href={urlArchiveExtension(meta.fname)}>
             <IconBrowser browser={meta?.browser} className="w-4 h-4 m-px rounded-full" />
             <div className="text-xs text-url hover:underline cursor-pointer">
                 {name}

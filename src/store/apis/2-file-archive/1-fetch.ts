@@ -1,5 +1,5 @@
 import { FilenameMeta, FtpFiles, ReleaseType, TBrowserShort, filename2Meta } from "../types";
-import { getFtpExtensionsUrl } from "../constants";
+import { urlFtpExtensions } from "../constants";
 
 const traytools: FilenameMeta = {
     fname: '../../maxz/traytools.zip.txt',
@@ -13,9 +13,9 @@ const traytools: FilenameMeta = {
 export async function getExistingOnServer(): Promise<FilenameMeta[]> {
     //console.log('Fetching: extensions on server', getFtpExtensionsUrl());
 
-    const response = await fetch(getFtpExtensionsUrl(), { cache: 'no-cache' });
+    const response = await fetch(urlFtpExtensions(), { cache: 'no-cache' });
     if (!response.ok) {
-        throw new Error(`No access to the HID server. Failed to get "${getFtpExtensionsUrl()}"`);
+        throw new Error(`No access to the HID server. Failed to get "${urlFtpExtensions()}"`);
     }
     let existing: FtpFiles.FileRecord[] = await response.json();
 

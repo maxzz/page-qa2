@@ -3,7 +3,7 @@ import { TBrowserShort } from "./6-names-browser-short";
 import { convFname2TBrowserShort, TBrowserFname } from "./7-names-browser-fname";
 import { ReleaseType } from "./8-names-release";
 
-export type FilenameMeta = { // Extension info from archive (or any) filename
+export type FilenameMeta = { // Extension info from archive (or full url) filename
     fname: string;
     version: string;
     updated: string;
@@ -15,14 +15,14 @@ export type FilenameMeta = { // Extension info from archive (or any) filename
 /**
  * Gets version and release date from: dppm-3.0.137_on_2018.08.09-r-firefox.xpi
  *  ```
-    on: https://crossmatch.hid.gl/g02/current/dppm-3.4.710_on_2023.03.14-r-chrome3.zip
-    Match 1:	dppm-3.4.710_on_2023.03.14-r-chrome3
-    Group 1:	3.4.710
-    Group 2:	2023.03.14
-    Group 3:	r
-    Group 4:	chrome3
-    ```
-*/
+ *  // From: https://crossmatch.hid.gl/g02/current/dppm-3.4.710_on_2023.03.14-r-chrome3.zip
+ *  Match 1: 'dppm-3.4.710_on_2023.03.14-r-chrome3'
+ *  Group 1: '3.4.710'
+ *  Group 2: '2023.03.14'
+ *  Group 3: 'r'
+ *  Group 4: 'chrome3'
+ *  ```
+ */
 export function filename2Meta(fname: string): FilenameMeta {
     const match = fname.match(regexFnameVerDateRelBrowser);
     const browser = (match ? convFname2TBrowserShort(match[4] as TBrowserFname) : undefined) || TBrowserShort.chrome;
