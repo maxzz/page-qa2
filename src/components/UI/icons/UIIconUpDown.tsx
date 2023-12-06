@@ -1,7 +1,11 @@
 import { SVGAttributes } from "react";
 import { a, useSpring } from "@react-spring/web";
-import { animationConfig } from "./UIListTransition";
-import { classNames } from "../../utils/classnames";
+import { classNames } from "@/utils/classnames";
+
+export const animationConfig = {
+    //config: { mass: 0.2, tension: 692, clamp: true },
+    config: { duration: 200 },
+};
 
 export function UIIconUpDown({ open, className, ...rest }: { open: boolean; } & SVGAttributes<SVGSVGElement>) {
     const styles = useSpring({ open: open ? 1 : 0, ...animationConfig });

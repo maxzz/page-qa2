@@ -8,8 +8,8 @@ import { IconLogoMan3 } from "./06-manifest3";
 
 export function IconBrowser({ browser, ...rest }: { browser?: TBrowserShort; } & HTMLAttributes<SVGSVGElement>) {
     switch (browser) {
-        // case TBrowserShort.chrome: return <IconLogoCr {...rest} />;
-        case TBrowserShort.chrome: return <IconLogoMan3 {...rest} />;
+        case TBrowserShort.chrome: return <IconLogoCr {...rest} />;
+        case TBrowserShort.chrome3: return <IconLogoMan3 {...rest} />;
         case TBrowserShort.firefox: return <IconLogoFf {...rest} />;
         case TBrowserShort.dev: return <IconLogoDev {...rest} />;
         case TBrowserShort.edge: return <IconLogoMe {...rest} />;
