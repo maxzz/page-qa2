@@ -5,7 +5,7 @@ import { toastError } from '@/components/ui/UiToaster';
 import { loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNotesAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom, loadFailedAtom } from './3-data-atoms';
 
 const runFetchConfigAtom = atom(
-    (get) => get(loadingStateConfigAtom),
+    null,
     (_get, set) => {
         fetchDataCo();
 
@@ -25,7 +25,7 @@ const runFetchConfigAtom = atom(
 runFetchConfigAtom.onMount = (runFetch) => runFetch();
 
 const runFetchArchiveAtom = atom(
-    (get) => get(loadingStateArchiveAtom),
+    null,
     (_get, set) => {
         fetchDataAr();
 
@@ -45,7 +45,7 @@ const runFetchArchiveAtom = atom(
 runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 
 const runFetchReleaseNotesAtom = atom(
-    (get) => get(loadingStateReleaseNotesAtom),
+    null,
     (_get, set) => {
         fetchDataRn();
 
