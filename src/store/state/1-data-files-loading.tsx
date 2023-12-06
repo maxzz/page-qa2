@@ -67,6 +67,8 @@ const runFetchReleaseNotesAtom = atom(
 );
 runFetchReleaseNotesAtom.onMount = (runFetch) => runFetch();
 
+const runOnceAtom = atom(false);
+
 const correlateAtom = atom(
     null,
     (get, set) => {
@@ -77,12 +79,17 @@ const correlateAtom = atom(
         if (stateNotes.loading || stateArchive.loading || stateConfig.loading) {
             return;
         }
-
+        
         const failed = !!stateNotes.error || !!stateArchive.error || !!stateConfig.error;
         set(loadFailedAtom, failed);
         if (failed) {
             return;
         }
+
+        if (get(runOnceAtom)) {
+            return;
+        }
+        set(runOnceAtom, true);
 
         // 1. Combine extensions list with published information.
         const publicVersions = get(publicVersionsAtom);
