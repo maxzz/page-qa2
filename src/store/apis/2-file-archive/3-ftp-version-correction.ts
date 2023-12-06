@@ -5,16 +5,6 @@ import { LoadingDataState } from "@/hooks/atomsX";
 
 // FTP version correction
 
-function isAVersionGreaterB(a?: string, b?: string): boolean { // '3.4.429' vs. '3.4.430'
-    const aArr = a?.split('.') || [];
-    const bArr = b?.split('.') || [];
-    if (aArr.length !== bArr.length) {
-        return false;
-    }
-    const itemLess = aArr.find((ver, idx) => +ver < +bArr[idx]);
-    return !itemLess;
-}
-
 function areTheSameBrowserBrandQa(a: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>, b: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>): boolean {
     const { brand: a_brand, browser: a_browser, qa: a_qa } = a;
     const { brand: b_brand, browser: b_browser, qa: b_qa } = b;
@@ -25,10 +15,6 @@ function getArchiveVersion(archive: FilenameMeta[] | null, version?: string): Fi
     return version ? archive?.find((item) => item.version === version) : undefined;
 }
 
-function getFromArchive(archive: FilenameMeta[] | null, a: Pick<FilenameMeta, 'browser' | 'release'>): FilenameMeta | undefined {
-    return archive?.find((item) => item.browser === a.browser && item.release === a.release);
-}
-
 function getLatestArchiveVersions(archive?: FilenameMeta[] | null): { ch: FilenameMeta | undefined; ff: FilenameMeta | undefined; } {
     const reversed = archive ? [...archive].reverse() : [];
     const latestArchiveCh = getFromArchive(reversed, { browser: TBrowserShort.chrome, release: ReleaseType.release });
@@ -37,6 +23,20 @@ function getLatestArchiveVersions(archive?: FilenameMeta[] | null): { ch: Filena
         ch: latestArchiveCh,
         ff: latestArchiveFf,
     };
+
+    function getFromArchive(archive: FilenameMeta[] | null, a: Pick<FilenameMeta, 'browser' | 'release'>): FilenameMeta | undefined {
+        return archive?.find((item) => item.browser === a.browser && item.release === a.release);
+    }
+}
+
+function isAVersionGreaterB(a?: string, b?: string): boolean { // '3.4.429' vs. '3.4.430'
+    const aArr = a?.split('.') || [];
+    const bArr = b?.split('.') || [];
+    if (aArr.length !== bArr.length) {
+        return false;
+    }
+    const itemLess = aArr.find((ver, idx) => +ver < +bArr[idx]);
+    return !itemLess;
 }
 
 function selectLatest(config: ExtnFromConfig, archive?: FilenameMeta): ExtnFromConfig {

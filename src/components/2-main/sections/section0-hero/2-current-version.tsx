@@ -10,11 +10,13 @@ import { ActionButtons } from './1-action-buttons';
 const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
 export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBrowserShort; extInfoAtom: Atom<ExtnFromConfig | undefined>; loading: boolean; }) {
-    const inAppExtnInfo = useAtomValue(extInfoAtom);
-    const vis = inAppExtnInfo?.fname;
+    const extnFromConfig = useAtomValue(extInfoAtom);
+    const vis = extnFromConfig?.fname;
+    const browser2: TBrowserShort = extnFromConfig?.isV3 ? TBrowserShort.chrome3 : (extnFromConfig?.browser || TBrowserShort.unknown);
 
     const btnStyles = useSpring({ opacity: vis ? 1 : 0, scaleY: vis ? 1 : 0, config: { duration: 150 }, });
     const txtStyles = useSpring({ opacity: vis ? 1 : 0, x: vis ? 0 : 200, config: { duration: 150 }, });
+    
     return (
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ ...boxShadow, transition: "all .2s" }}>
 
@@ -30,17 +32,17 @@ export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBr
 
                 <a.div style={txtStyles}>
                     <div className="h-4">
-                        {inAppExtnInfo?.updated ? `Updated on ${beautifyDate(inAppExtnInfo.updated)}` : loading ? '' : 'update date not available'}
+                        {extnFromConfig?.updated ? `Updated on ${beautifyDate(extnFromConfig.updated)}` : loading ? '' : 'update date not available'}
                     </div>
                     <div className="h-4">
-                        {inAppExtnInfo?.version || (loading ? '' : 'version not available')}
+                        {extnFromConfig?.version || (loading ? '' : 'version not available')}
                     </div>
                 </a.div>
             </div>
 
             {/* Action buttons */}
             <a.div className="col-start-2 mt-2 sm:mt-0" style={btnStyles}>
-                <ActionButtons url={inAppExtnInfo?.fname} />
+                <ActionButtons url={extnFromConfig?.fname} />
             </a.div>
         </div>
     );

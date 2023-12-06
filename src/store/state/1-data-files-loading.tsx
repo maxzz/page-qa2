@@ -7,10 +7,10 @@ import { loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNot
 const runFetchConfigAtom = atom(
     (get) => get(loadingStateConfigAtom),
     (_get, set) => {
-        fetchData();
+        fetchDataCo();
 
-        async function fetchData() {
-            set(loadingStateConfigAtom, (prev) => ({ ...prev, loading: true }));
+        async function fetchDataCo() {
+            set(loadingStateConfigAtom, { loading: true, error: null, data: null });
             try {
                 const data = await fetchCurrentConfig();
                 set(loadingStateConfigAtom, { loading: false, error: null, data });
@@ -27,10 +27,10 @@ runFetchConfigAtom.onMount = (runFetch) => runFetch();
 const runFetchArchiveAtom = atom(
     (get) => get(loadingStateArchiveAtom),
     (_get, set) => {
-        fetchData();
+        fetchDataAr();
 
-        async function fetchData() {
-            set(loadingStateArchiveAtom, (prev) => ({ ...prev, loading: true }));
+        async function fetchDataAr() {
+            set(loadingStateArchiveAtom, { loading: true, error: null, data: null });
             try {
                 const existing: FilenameMeta[] = await fetchExistingOnServer();
                 set(loadingStateArchiveAtom, { loading: false, error: null, data: existing });
@@ -47,10 +47,10 @@ runFetchArchiveAtom.onMount = (runFetch) => runFetch();
 const runFetchReleaseNotesAtom = atom(
     (get) => get(loadingStateReleaseNotesAtom),
     (_get, set) => {
-        fetchData();
+        fetchDataRn();
 
-        async function fetchData() {
-            set(loadingStateReleaseNotesAtom, (prev) => ({ ...prev, loading: true }));
+        async function fetchDataRn() {
+            set(loadingStateReleaseNotesAtom, { loading: true, error: null, data: null });
             try {
                 const notesText = await fetchReleaseNotes();
                 const markdown = await marked(notesText);
