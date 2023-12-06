@@ -1,8 +1,9 @@
+import { classNames } from "@/utils/classnames";
 import { HTMLAttributes, SVGProps } from "react";
 
 export function DefMan3() {
     return (
-        <symbol id="icon-man3" viewBox="0 0 24 24"fill="none" strokeWidth="1.5" stroke="red" className="w-12 h-12">
+        <symbol id="icon-man3" viewBox="0 0 24 24">
             <path d="M17.35 8.2c-1.04.82-1.01 2.14-1.21 3.75s-.55 4.51-1.07 5.31c-.3.52-.71.9-1.25 1.01" />
             <path d="M15.07 17.18 11.99 5.73" />
             <path d="M18.81 8.2h-2.9" />
@@ -15,9 +16,9 @@ export function DefMan3() {
 }
 
 export function IconLogoMan3(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-    const { title, ...rest } = props;
+    const { title, className, ...rest } = props;
     return (
-        <svg {...rest}>
+        <svg className={classNames("w-12 h-12 fill-none stroke-[1.5] stroke-sky-700", className)} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-man3" />
         </svg>
