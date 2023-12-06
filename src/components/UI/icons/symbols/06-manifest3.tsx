@@ -18,7 +18,7 @@ export function DefMan3() {
 export function IconLogoMan3(props: SVGProps<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     const { title, className, ...rest } = props;
     return (
-        <svg className={classNames("w-12 h-12 fill-none stroke-[1.5] stroke-sky-700", className)} {...rest}>
+        <svg className={classNames("fill-none stroke-[1.5] stroke-sky-700", className)} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-man3" />
         </svg>
