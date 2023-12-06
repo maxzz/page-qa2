@@ -1,23 +1,12 @@
-import { FilenameMeta, FormatCurrentCfg, TBrand, TBrowserShort } from '../types';
-import { regexFnameVerDate } from '../constants';
+import { FilenameMeta, FormatCurrentCfg, TBrand, TBrowserShort, filename2Meta } from '../types';
 
 export type ExtnFromConfig = Prettify<  // Extension info from config file
-    & Omit<FilenameMeta, 'release' | 'isV3'>
+    & FilenameMeta
     & {
         qa?: boolean;                   // true
         brand?: TBrand;                 // "dp"
     }
 >;
-
-function fnameVersionDate(fname: string) {
-    // 0. Gets version and release date from: "dppm-3.0.137_on_2018.08.09-r-firefox.xpi"
-    const match = fname.match(regexFnameVerDate);
-    const meta = {
-        version: match ? match[1] : '',
-        updated: match ? match[2] : '',
-    };
-    return meta;
-}
 
 function findInfo(extensions: ExtnFromConfig[], brand: TBrand, browser: TBrowserShort, qa: boolean): ExtnFromConfig | undefined {
     return extensions.find((item: ExtnFromConfig) => item.brand === brand && item.browser === browser && item.qa === qa);
@@ -29,14 +18,16 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
     [TBrand.dp, TBrand.hp, TBrand.de].forEach((brand: TBrand) => {
         const meta: FormatCurrentCfg.SingleExtensionInfo = brands[brand];
         if (meta) {
-            const fromName = fnameVersionDate(meta.url);
+            const filenameMeta = filename2Meta(meta.url);
             rv.push({
                 fname: meta.url, // "https://crossmatch.hid.gl/g02/current/dppm-3.4.710_on_2023.03.14-r-chrome.zip"
-                brand,
+                version: meta.version || filenameMeta.version,
+                updated: meta.updated || filenameMeta.updated,
                 browser,
+                release: filenameMeta.release,
+                isV3: filenameMeta.isV3,
+                brand,
                 qa,
-                version: meta.version || fromName.version,
-                updated: meta.updated || fromName.updated,
             });
         }
     });
