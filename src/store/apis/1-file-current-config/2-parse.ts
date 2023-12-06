@@ -1,11 +1,11 @@
 import { FilenameMeta, FormatCurrentCfg, TBrand, TBrowserShort } from '../types';
 import { regexFnameVerDate } from '../constants';
 
-export type ConfigExtn = Prettify<  // Extension info from config file
+export type ExtnFromConfig = Prettify<  // Extension info from config file
     & Omit<FilenameMeta, 'release' | 'isV3'>
     & {
-        qa?: boolean;               // true
-        brand?: TBrand;             // "dp"
+        qa?: boolean;                   // true
+        brand?: TBrand;                 // "dp"
     }
 >;
 
@@ -19,12 +19,12 @@ function fnameVersionDate(fname: string) {
     return meta;
 }
 
-function findInfo(extensions: ConfigExtn[], brand: TBrand, browser: TBrowserShort, qa: boolean): ConfigExtn | undefined {
-    return extensions.find((item: ConfigExtn) => item.brand === brand && item.browser === browser && item.qa === qa);
+function findInfo(extensions: ExtnFromConfig[], brand: TBrand, browser: TBrowserShort, qa: boolean): ExtnFromConfig | undefined {
+    return extensions.find((item: ExtnFromConfig) => item.brand === brand && item.browser === browser && item.qa === qa);
 }
 
-function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowserShort, qa: boolean): ConfigExtn[] {
-    const rv: ConfigExtn[] = [];
+function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowserShort, qa: boolean): ExtnFromConfig[] {
+    const rv: ExtnFromConfig[] = [];
 
     [TBrand.dp, TBrand.hp, TBrand.de].forEach((brand: TBrand) => {
         const meta: FormatCurrentCfg.SingleExtensionInfo = brands[brand];
@@ -43,7 +43,7 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
 
     // Fill out missing extensions
 
-    let dp: ConfigExtn | undefined = findInfo(rv, TBrand.dp, browser, qa);
+    let dp: ExtnFromConfig | undefined = findInfo(rv, TBrand.dp, browser, qa);
     if (!dp) {
         throw new Error('DP info is missing. At least DP info should exist.');
     }
@@ -55,17 +55,17 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
 }
 
 export interface CurrentExtensions { // Extensions on Ftp server
-    chrome: ConfigExtn;
-    firefox: ConfigExtn;
-    summary: ConfigExtn[];
+    chrome: ExtnFromConfig;
+    firefox: ExtnFromConfig;
+    summary: ExtnFromConfig[];
 }
 
 export function parseCurrentConfig(config: FormatCurrentCfg.FromFile): CurrentExtensions {
-    const extInfoChQa: ConfigExtn[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowserShort.chrome, true); // QA
-    const extInfoChPu: ConfigExtn[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowserShort.chrome, false); // public
-    
-    const extInfoFfQa: ConfigExtn[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowserShort.firefox, true);
-    const extInfoFfPu: ConfigExtn[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowserShort.firefox, false);
+    const extInfoChQa: ExtnFromConfig[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowserShort.chrome, true); // QA
+    const extInfoChPu: ExtnFromConfig[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowserShort.chrome, false); // public
+
+    const extInfoFfQa: ExtnFromConfig[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowserShort.firefox, true);
+    const extInfoFfPu: ExtnFromConfig[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowserShort.firefox, false);
     return {
         chrome: extInfoChQa[0],
         firefox: extInfoFfQa[0],

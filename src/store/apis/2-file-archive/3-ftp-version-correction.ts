@@ -1,6 +1,6 @@
 import { FilenameMeta, ReleaseType, TBrand, TBrowserShort } from "../types";
 import { urlArchiveExtension } from "../constants";
-import { CurrentExtensions, ConfigExtn } from "../1-file-current-config";
+import { CurrentExtensions, ExtnFromConfig } from "../1-file-current-config";
 import { LoadingDataState } from "@/hooks/atomsX";
 
 // FTP version correction
@@ -15,7 +15,7 @@ function isAVersionGreaterB(a?: string, b?: string): boolean { // '3.4.429' vs. 
     return !itemLess;
 }
 
-function areTheSameBrowserBrandQa(a: Pick<ConfigExtn, 'brand' | 'browser' | 'qa'>, b: Pick<ConfigExtn, 'brand' | 'browser' | 'qa'>): boolean {
+function areTheSameBrowserBrandQa(a: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>, b: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>): boolean {
     const { brand: a_brand, browser: a_browser, qa: a_qa } = a;
     const { brand: b_brand, browser: b_browser, qa: b_qa } = b;
     return a_browser === b_browser && a_brand === b_brand && a_qa === b_qa;
@@ -39,7 +39,7 @@ function getLatestArchiveVersions(archive?: FilenameMeta[] | null): { ch: Filena
     };
 }
 
-function selectLatest(config: ConfigExtn, archive?: FilenameMeta): ConfigExtn {
+function selectLatest(config: ExtnFromConfig, archive?: FilenameMeta): ExtnFromConfig {
     return archive && isAVersionGreaterB(archive.version, config.version) ? {
         ...config,
         version: archive.version,

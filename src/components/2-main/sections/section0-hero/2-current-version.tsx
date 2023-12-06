@@ -1,7 +1,7 @@
 import { Atom, useAtomValue } from 'jotai';
 import { a, useSpring } from '@react-spring/web';
 import { convTBrowserShort2Name, TBrowserShort } from '@/store/apis/types';
-import { ConfigExtn } from '@/store/apis';
+import { ExtnFromConfig } from '@/store/apis';
 import { beautifyDate } from '@/utils/helpers';
 import { IconBrowser } from '@/components/ui/icons';
 import { boxShadow } from './0-hero-image';
@@ -9,10 +9,10 @@ import { ActionButtons } from './1-action-buttons';
 
 const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
-export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBrowserShort; extInfoAtom: Atom<ConfigExtn | undefined>; loading: boolean; }) {
+export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: TBrowserShort; extInfoAtom: Atom<ExtnFromConfig | undefined>; loading: boolean; }) {
     const inAppExtnInfo = useAtomValue(extInfoAtom);
     const vis = inAppExtnInfo?.fname;
-    
+
     const btnStyles = useSpring({ opacity: vis ? 1 : 0, scaleY: vis ? 1 : 0, config: { duration: 150 }, });
     const txtStyles = useSpring({ opacity: vis ? 1 : 0, x: vis ? 0 : 200, config: { duration: 150 }, });
     return (
