@@ -1,8 +1,16 @@
 import { Fragment } from 'react';
+import { convTBrand2Name, convTBrowserShort2Name, ExtnFromConfig, TBrowserShort } from '@/store/apis';
+import { FlatTableItem } from './0-reduce-utils';
 import { IconBrowser } from '@/components/ui/icons';
 import { beautifyDate } from '@/utils/helpers';
-import { convTBrand2Name, convTBrowserShort2Name, TBrowserShort } from '@/store/apis';
-import { FlatTableItem } from './0-reduce-utils';
+
+function VersionItem({ idx, item }: { idx: number; item: ExtnFromConfig | undefined; }) {
+    return (
+        <div className={tableItemClasses(idx)} title={`Updated on ${beautifyDate(item?.updated)}`}>
+            {item?.version}
+        </div>
+    );
+}
 
 const tableHeaderClasses = "border-b border-slate-200 text-xs";
 const tableItemClasses = (idx: number) => `text-xs ${!idx ? 'pt-0.5' : 'opacity-25'}`;
@@ -43,18 +51,20 @@ export function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort
                                 <div className="px-3 pt-0.5">{convTBrand2Name(item.brand)}</div>
                             </div>
 
-                            <div className={tableItemClasses(idx)} title={`Updated on ${beautifyDate(item.qa?.updated)}`}>
+                            <VersionItem idx={idx} item={item.qa} />
+                            {/* <div className={tableItemClasses(idx)} title={`Updated on ${beautifyDate(item.qa?.updated)}`}>
                                 {item.qa?.version}
-                            </div>
+                            </div> */}
 
-                            <div className={tableItemClasses(idx)} title={`Updated on ${beautifyDate(item.release?.updated)}`}>
+                            <VersionItem idx={idx} item={item.release} />
+                            {/* <div className={tableItemClasses(idx)} title={`Updated on ${beautifyDate(item.release?.updated)}`}>
                                 {item.release?.version}
-                            </div>
+                            </div> */}
                         </Fragment>
                     )
                 )}
             </div>
-            
+
         </div>
     );
 }
