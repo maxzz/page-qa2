@@ -4,33 +4,33 @@ import { Browser, BuildType, FilenameMeta } from "../types";
 export type FilenameMetaEx = Prettify<
     & FilenameMeta
     & {
-        createDate: string;     // when extension was created
         year: number;           // year when extension was created
+        createDate: string;     // when extension was created
         published: boolean;     // published information from release notes
     }
 >;
 
-type VersionsMap = Record<string, FilenameMetaEx[]>; // extension version -> browser extensions
+type VersionsMap = Record<string, FilenameMetaEx[]>; // extension version ("3.4.709") -> browser extensions []
 
-export type OneYearExts = {
+export type YearExts = {
     yearStr: string;            // TODO: check why it is string
     items: VersionsMap;
 };
 
 const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
-function transformToMeta(item: FilenameMeta): FilenameMetaEx {
-    const dt = stringToDate(item.updated);
-    const year = dt.getFullYear();
+function convToFilenameMetaEx(item: FilenameMeta): FilenameMetaEx {
+    const date = stringToDate(item.updated);
+    const year = date.getFullYear();
     return {
         ...item,
-        createDate: dt.toLocaleDateString('en-US', dateOptions),
         year,
+        createDate: date.toLocaleDateString('en-US', dateOptions),
         published: false,
     };
 }
 
-function splitToByYearsMap(archive: FilenameMetaEx[]): Record<string, FilenameMetaEx[]> {
+function convToByYearsMap(archive: FilenameMetaEx[]): Record<string, FilenameMetaEx[]> {
     const res: Record<string, FilenameMetaEx[]> = {};
     archive.forEach((item) => {
         if (!res[item.year]) {
@@ -41,7 +41,84 @@ function splitToByYearsMap(archive: FilenameMetaEx[]): Record<string, FilenameMe
     return res;
 }
 
-function splitToVersionsMap(items: FilenameMetaEx[]): VersionsMap {
+/**
+ * @returns
+ *```
+    {
+        "3.4.700": [
+            {
+                "fname": "dppm-3.4.700_on_2022.12.04-r-chrome3.zip",
+                "version": "3.4.700",
+                "updated": "2022.12.04",
+                "build": "r",
+                "browser": "c",
+                "broIcon": "3",
+                "isV3": true,
+                "createDate": "December 4, 2022",
+                "year": 2022,
+                "published": false
+            }
+        ],
+        "3.4.711": [
+            {
+                "fname": "dppm-3.4.711_on_2023.03.25-r-chrome3.zip",
+                "version": "3.4.711",
+                "updated": "2023.03.25",
+                "build": "r",
+                "browser": "c",
+                "broIcon": "3",
+                "isV3": true,
+                "createDate": "March 25, 2023",
+                "year": 2023,
+                "published": false
+            }
+        ],
+        "3.4.709": [
+            {
+                "fname": "dppm-3.4.709_on_2023.03.05-r-chrome.zip",
+                "version": "3.4.709",
+                "updated": "2023.03.05",
+                "build": "r",
+                "browser": "c",
+                "broIcon": "c",
+                "isV3": false,
+                "createDate": "March 5, 2023",
+                "year": 2023,
+                "published": false
+            }
+        ],
+        "3.4.72": [
+            {
+                "fname": "dppm-3.4.72_on_2020.06.05-r-chrome.zip",
+                "version": "3.4.72",
+                "updated": "2020.06.05",
+                "build": "r",
+                "browser": "c",
+                "broIcon": "c",
+                "isV3": false,
+                "createDate": "June 5, 2020",
+                "year": 2020,
+                "published": false
+            }
+        ],
+        "2.0.7234": [
+            {
+                "fname": "../../maxz/traytools.zip.txt",
+                "version": "2.0.7234",
+                "updated": "2017.10.20",
+                "build": "m",
+                "browser": "d",
+                "broIcon": "d",
+                "isV3": false,
+                "createDate": "October 20, 2017",
+                "year": 2017,
+                "published": false
+            }
+        ]
+    }
+    ```
+ */
+function convToVersionsMap(items: FilenameMetaEx[]): VersionsMap {
     const rv: VersionsMap = {};
     items.forEach((item) => {
         if (!rv[item.version]) {
@@ -68,21 +145,24 @@ function splitToVersionsMap(items: FilenameMetaEx[]): VersionsMap {
     }
 }
 
-export function archiveByYears(archiveExtensions: FilenameMeta[] | null, publicVersions?: string[]): OneYearExts[] {
-    const withMeta: FilenameMetaEx[] = (archiveExtensions || []).map(transformToMeta);
+export function archiveByYears(archiveExtensions: FilenameMeta[] | null, publicVersions?: string[]): YearExts[] {
+    const withMeta: FilenameMetaEx[] = (archiveExtensions || []).map(convToFilenameMetaEx);
 
+    // 1. update published info
     if (publicVersions?.length) {
-        const versionsMap = splitToVersionsMap(withMeta);
+        const versionsMap = convToVersionsMap(withMeta);
         publicVersions.forEach((version) => {
             versionsMap[version]?.forEach((existingExt) => existingExt.published = true);
         });
     }
 
-    const byYearsMap = splitToByYearsMap(withMeta);
+    // 2. group by years
+    const byYearsMap = convToByYearsMap(withMeta);
     const byYearsArr = Object.entries(byYearsMap).map(([year, items]) => ({ year, items })); // can now sort by year if needed
-    const grouped = byYearsArr.map<OneYearExts>(({ year, items: yearItems }) => ({
+    const grouped = byYearsArr.map<YearExts>(({ year, items: yearItems }) => ({
         yearStr: year,
-        items: splitToVersionsMap(yearItems),
+        items: convToVersionsMap(yearItems),
     }));
+
     return grouped;
 }

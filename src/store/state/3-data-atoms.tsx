@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { LoadingDataState, loadingDataStateInit } from '@/hooks/atomsX';
-import { OneYearExts, CurrentExtensions, ExtnFromConfig, FilenameMeta } from '../apis';
+import { YearExts, CurrentExtensions, ExtnFromConfig, FilenameMeta } from '../apis';
 
 // Internal loading state atoms
 
@@ -11,7 +11,7 @@ export const loadFailedAtom = atom<boolean>(false); // true if any of the above 
 
 // UI state
 
-export const byYearsAtom = atom<OneYearExts[]>([]);
+export const byYearsAtom = atom<YearExts[]>([]);
 export const releaseNotesAtom = atom<string>((get) => get(loadingStateReleaseNotesAtom).data || '');
 
 // Derivative data

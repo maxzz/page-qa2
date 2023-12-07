@@ -1,10 +1,10 @@
 import { useAtomValue } from 'jotai';
 import { byYearsAtom } from '@/store/store';
-import { OneYearExts } from '@/store/apis';
+import { YearExts } from '@/store/apis';
 import { YearItems } from './4-grid-item';
 
 export function YearsGrid() {
-    const byYears: OneYearExts[] = [...useAtomValue(byYearsAtom)].reverse();
+    const byYears: YearExts[] = [...useAtomValue(byYearsAtom)].reverse();
     if (!byYears.length) {
         return null;
         // return ( //TODO: check state loading and error
