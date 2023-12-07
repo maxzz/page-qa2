@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { convTBrand2Name, convTBrowserShort2Name, ExtnFromConfig, TBrowserShort } from '@/store/apis';
+import { convBrand2Name, convBrowserShort2Name, ExtnFromConfig, BrowserShort } from '@/store/apis';
 import { FlatTableItem } from './0-reduce-utils';
 import { IconBrowser } from '@/components/ui/icons';
 import { beautifyDate } from '@/utils/helpers';
@@ -18,13 +18,13 @@ function VersionItem({ idx, item }: { idx: number; item: ExtnFromConfig | undefi
     );
 }
 
-export function BrowserVersionsTable({ browser, table = [] }: { browser: TBrowserShort; table: FlatTableItem[]; }) {
+export function BrowserVersionsTable({ browser, table = [] }: { browser: BrowserShort; table: FlatTableItem[]; }) {
     return (
         <div className="cursor-default">
 
             {/* Table caption */}
             <div className="mb-1 text-sm font-semibold">
-                {`${convTBrowserShort2Name(browser)} extensions`}
+                {`${convBrowserShort2Name(browser)} extensions`}
             </div>
 
             {/* Table columns: Brand, QA, Public */}
@@ -45,7 +45,7 @@ export function BrowserVersionsTable({ browser, table = [] }: { browser: TBrowse
                     (item, idx) => (
                         <Fragment key={idx}>
                             <div className={tableItemClasses(idx)}>
-                                <div className="px-3 pt-0.5">{convTBrand2Name(item.brand)}</div>
+                                <div className="px-3 pt-0.5">{convBrand2Name(item.brand)}</div>
                             </div>
                             <VersionItem idx={idx} item={item.qa} />
                             <VersionItem idx={idx} item={item.release} />

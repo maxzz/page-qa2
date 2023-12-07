@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Meta, TBrowserShort } from '@/store/apis';
+import { Meta, BrowserShort } from '@/store/apis';
 import { classNames } from '@/utils/classnames';
 import { IconBrowser } from '@/components/ui/icons';
 
@@ -9,10 +9,10 @@ type GroupItem = {
 };
 
 export type OrderedGroup = {
-    [key in TBrowserShort]?: GroupItem;
+    [key in BrowserShort]?: GroupItem;
 };
 
-const isFirefoxWoMain = (groupItem: GroupItem) => !groupItem.main && groupItem.debug?.browser !== TBrowserShort.dev;
+const isFirefoxWoMain = (groupItem: GroupItem) => !groupItem.main && groupItem.debug?.browser !== BrowserShort.dev;
 const isDevTools = (groupItem: GroupItem) => !groupItem.main || !groupItem.debug;
 
 const iconClasses = (groupItem: GroupItem) => classNames(

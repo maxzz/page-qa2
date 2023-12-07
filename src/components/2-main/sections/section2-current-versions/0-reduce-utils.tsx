@@ -1,8 +1,8 @@
-import { ExtnFromConfig, TBrand, TBrowserShort } from '@/store/apis';
+import { ExtnFromConfig, Brand, BrowserShort } from '@/store/apis';
 
 type Table = {
-    [key in TBrowserShort]: {
-        [key in TBrand]?: {
+    [key in BrowserShort]: {
+        [key in Brand]?: {
             qa?: ExtnFromConfig;
             release?: ExtnFromConfig;
         }
@@ -25,22 +25,22 @@ export function reduceForTable(exts: ExtnFromConfig[]): Table {
 }
 
 export type FlatTableItem = {
-    brand: TBrand;
+    brand: Brand;
     qa?: ExtnFromConfig;
     release?: ExtnFromConfig;
 };
 
 type FlatTable = {
-    [key in TBrowserShort]: FlatTableItem[]
+    [key in BrowserShort]: FlatTableItem[]
 };
 
 export function reduceToFlat(table: Table): FlatTable {
     const res = {} as FlatTable;
-    for (const [brKey, brVal] of Object.entries(table) as [TBrowserShort, Table[TBrowserShort]][]) {
+    for (const [brKey, brVal] of Object.entries(table) as [BrowserShort, Table[BrowserShort]][]) {
         if (!res[brKey]) {
             res[brKey] = [];
         }
-        for (const [bdKey, bdVal] of Object.entries(brVal) as [TBrand, { qa?: ExtnFromConfig; release?: ExtnFromConfig; }][]) {
+        for (const [bdKey, bdVal] of Object.entries(brVal) as [Brand, { qa?: ExtnFromConfig; release?: ExtnFromConfig; }][]) {
             res[brKey].push({
                 brand: bdKey,
                 qa: bdVal.qa,

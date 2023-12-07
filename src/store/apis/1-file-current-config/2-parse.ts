@@ -1,13 +1,13 @@
-import { CurrentExtensions, ExtnFromConfig, FormatCurrentCfg, TBrand, TBrowserShort, filename2Meta } from '../types';
+import { CurrentExtensions, ExtnFromConfig, FormatCurrentCfg, Brand, BrowserShort, filename2Meta } from '../types';
 
-function findInfo(extensions: ExtnFromConfig[], brand: TBrand, browser: TBrowserShort, qa: boolean): ExtnFromConfig | undefined {
+function findInfo(extensions: ExtnFromConfig[], brand: Brand, browser: BrowserShort, qa: boolean): ExtnFromConfig | undefined {
     return extensions.find((item: ExtnFromConfig) => item.brand === brand && item.browser === browser && item.qa === qa);
 }
 
-function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: TBrowserShort, qa: boolean): ExtnFromConfig[] {
+function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: BrowserShort, qa: boolean): ExtnFromConfig[] {
     const rv: ExtnFromConfig[] = [];
 
-    [TBrand.dp, TBrand.hp, TBrand.de].forEach((brand: TBrand) => {
+    [Brand.dp, Brand.hp, Brand.de].forEach((brand: Brand) => {
         const meta: FormatCurrentCfg.SingleExtensionInfo = brands[brand];
         if (meta) {
             const filenameMeta = filename2Meta(meta.url);
@@ -17,7 +17,7 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
                 updated: meta.updated || filenameMeta.updated,
                 browser,
                 broIcon: filenameMeta.broIcon,
-                release: filenameMeta.release,
+                build: filenameMeta.build,
                 isV3: filenameMeta.isV3,
                 brand,
                 qa,
@@ -27,23 +27,23 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
 
     // Fill out missing extensions
 
-    let dp: ExtnFromConfig | undefined = findInfo(rv, TBrand.dp, browser, qa);
+    let dp: ExtnFromConfig | undefined = findInfo(rv, Brand.dp, browser, qa);
     if (!dp) {
         throw new Error('DP info is missing. At least DP info should exist.');
     }
 
-    !findInfo(rv, TBrand.hp, browser, qa) && rv.push({ ...dp, brand: TBrand.hp, });
-    !findInfo(rv, TBrand.de, browser, qa) && rv.push({ ...dp, brand: TBrand.de, });
+    !findInfo(rv, Brand.hp, browser, qa) && rv.push({ ...dp, brand: Brand.hp, });
+    !findInfo(rv, Brand.de, browser, qa) && rv.push({ ...dp, brand: Brand.de, });
 
     return rv;
 }
 
 export function parseCurrentConfig(config: FormatCurrentCfg.FromFile): CurrentExtensions {
-    const extInfoChQa: ExtnFromConfig[] = getExtensionInfo(config.browsers['chrome'].qaUrl, TBrowserShort.chrome, true); // QA
-    const extInfoChPu: ExtnFromConfig[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, TBrowserShort.chrome, false); // public
+    const extInfoChQa: ExtnFromConfig[] = getExtensionInfo(config.browsers['chrome'].qaUrl, BrowserShort.chrome, true); // QA
+    const extInfoChPu: ExtnFromConfig[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, BrowserShort.chrome, false); // public
 
-    const extInfoFfQa: ExtnFromConfig[] = getExtensionInfo(config.browsers['firefox'].qaUrl, TBrowserShort.firefox, true);
-    const extInfoFfPu: ExtnFromConfig[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, TBrowserShort.firefox, false);
+    const extInfoFfQa: ExtnFromConfig[] = getExtensionInfo(config.browsers['firefox'].qaUrl, BrowserShort.firefox, true);
+    const extInfoFfPu: ExtnFromConfig[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, BrowserShort.firefox, false);
     return {
         chrome: extInfoChQa[0],
         firefox: extInfoFfQa[0],

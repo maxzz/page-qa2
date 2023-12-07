@@ -1,19 +1,35 @@
-import { CurrentExtensions, ExtnFromConfig, FilenameMeta, ReleaseType, TBrand, TBrowserShort } from "../types";
+import { BuildType, CurrentExtensions, ExtnFromConfig, FilenameMeta, Brand, BrowserShort } from "../types";
 import { urlArchiveExtension } from "../constants";
 
 // FTP version correction
 
+type ItemWithVersion = {
+    item: FilenameMeta;
+    readonly version: [number, number, number];
+};
+
+function filenameMeta2ItemWithVersion(item: FilenameMeta): ItemWithVersion {
+    let version = item.version.split('.').map((v) => +v) as [number, number, number];
+    if (version.length !== 3) {
+        version = [0, 0, 0];
+    }
+    return {
+        item,
+        version: version,
+    };
+}
+
 function getLatestArchiveVersions(archive?: FilenameMeta[] | null): { ch: FilenameMeta | undefined; ff: FilenameMeta | undefined; } {
     const reversed = archive ? [...archive].reverse() : [];
-    const latestArchiveCh = getFromArchive(reversed, { browser: TBrowserShort.chrome, release: ReleaseType.release });
-    const latestArchiveFf = getFromArchive(reversed, { browser: TBrowserShort.firefox, release: ReleaseType.release });
+    const latestArchiveCh = getFromArchive(reversed, { browser: BrowserShort.chrome, build: BuildType.release });
+    const latestArchiveFf = getFromArchive(reversed, { browser: BrowserShort.firefox, build: BuildType.release });
     return {
         ch: latestArchiveCh,
         ff: latestArchiveFf,
     };
 
-    function getFromArchive(archive: FilenameMeta[] | null, a: Pick<FilenameMeta, 'browser' | 'release'>): FilenameMeta | undefined {
-        return archive?.find((item) => item.browser === a.browser && item.release === a.release);
+    function getFromArchive(archive: FilenameMeta[] | null, lookupFor: Pick<FilenameMeta, 'browser' | 'build'>): FilenameMeta | undefined {
+        return archive?.find((item) => item.browser === lookupFor.browser && item.build === lookupFor.build);
     }
 }
 
@@ -27,7 +43,7 @@ function areTheSameBrowserBrandQa(a: Pick<ExtnFromConfig, 'brand' | 'browser' | 
     return a_browser === b_browser && a_brand === b_brand && a_qa === b_qa;
 }
 
-function isAVersionGreaterB(a?: string, b?: string): boolean { // '3.4.429' vs. '3.4.430'
+function isVersionAGreaterB(a?: string, b?: string): boolean { // '3.4.429' vs. '3.4.430'
     const aArr = a?.split('.') || [];
     const bArr = b?.split('.') || [];
     if (aArr.length !== bArr.length) {
@@ -39,7 +55,7 @@ function isAVersionGreaterB(a?: string, b?: string): boolean { // '3.4.429' vs. 
 
 function selectLatest(extnConfig: ExtnFromConfig, extnArchive?: FilenameMeta): ExtnFromConfig {
     return (
-        extnArchive && isAVersionGreaterB(extnArchive.version, extnConfig.version)
+        extnArchive && isVersionAGreaterB(extnArchive.version, extnConfig.version)
             ? {
                 ...extnConfig,
                 version: extnArchive.version,
@@ -68,13 +84,13 @@ export function updateCurrentVersions(
     // 1. Update 'Current Versions'
     if (latestPublic) {
         const lookupFor = {
-            brand: TBrand.dp,
-            browser: TBrowserShort.chrome, // No need this for Firefox at least now.
+            brand: Brand.dp,
+            browser: BrowserShort.chrome, // No need this for Firefox at least now.
             qa: false
         };
         fromConfig.summary = fromConfig.summary.map(
             (item) => {
-                const found = areTheSameBrowserBrandQa(item, lookupFor) && isAVersionGreaterB(latestPublicStr, item.version);
+                const found = areTheSameBrowserBrandQa(item, lookupFor) && isVersionAGreaterB(latestPublicStr, item.version);
                 if (found) {
                     item.version = latestPublic.version;
                     item.updated = latestPublic.updated;

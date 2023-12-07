@@ -1,4 +1,4 @@
-import { Meta, ReleaseType } from '@/store/apis';
+import { Meta, BuildType } from '@/store/apis';
 import { UITooltip } from '@/components/ui/UITooltip';
 import { OrderedGroup } from './1-group-icons';
 import { GridVersionItem } from './2-grid-item';
@@ -13,7 +13,7 @@ export function YearItems({ items }: { items: Meta[]; }) {
     const orderedGroup = items.reduce(
         (acc, curr) => {
             const item = acc[curr.browser] || (acc[curr.browser] = {});
-            item[curr.release === ReleaseType.release ? 'main' : 'debug'] = curr;
+            item[curr.build === BuildType.release ? 'main' : 'debug'] = curr;
             return acc;
         }, {} as OrderedGroup
     );

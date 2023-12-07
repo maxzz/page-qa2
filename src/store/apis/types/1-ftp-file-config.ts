@@ -1,5 +1,5 @@
-import { TBrand } from "./5-names-brand";
-import { TBrowserFname } from "./7-names-browser-fname";
+import { Brand } from "./5-names-brand";
+import { BrowserFname } from "./8-names-browser-fname";
 
 export namespace FormatCurrentCfg {
 
@@ -18,7 +18,7 @@ export namespace FormatCurrentCfg {
     export type BrandExtensionVersions = {
         // At least one 'dp' should be defined, missing one will be defaulted to 'dp'.
         // Firefox extension has a single shared update.jsom file, so it cannot be realy branded now.
-        [brand in TBrand]: SingleExtensionInfo; // key: 'dp' | 'hp' | 'de' --> value: metadata
+        [brand in Brand]: SingleExtensionInfo; // key: 'dp' | 'hp' | 'de' --> value: metadata
     };
 
     export type QaReleaseForBrowser = {
@@ -27,7 +27,7 @@ export namespace FormatCurrentCfg {
     };
 
     export type ExtensionsPerBrowser = {
-        [key in TBrowserFname]: QaReleaseForBrowser; // key: 'chrome' | 'firefox' | 'me' | 'ie' -> value: IConfigBrowser
+        [key in BrowserFname]: QaReleaseForBrowser; // key: 'chrome' | 'firefox' | 'me' | 'ie' -> value: IConfigBrowser
     };
 
     export type Languages = {
@@ -36,7 +36,7 @@ export namespace FormatCurrentCfg {
 
     export type FromFile = {
         browsers: ExtensionsPerBrowser;
-        brand: TBrand; // 'dp' | 'hp' | 'de'
+        brand: Brand; // 'dp' | 'hp' | 'de'
         languages: Languages;
     };
 

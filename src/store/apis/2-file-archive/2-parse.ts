@@ -1,4 +1,4 @@
-import { FilenameMeta, ReleaseType, TBrowserShort } from "../types";
+import { FilenameMeta, BuildType, BrowserShort } from "../types";
 
 export type Meta = {
     date: string;
@@ -31,8 +31,8 @@ function splitToByYearsMap(archive: Meta[]): Record<string, Meta[]> {
 
 function itemSortIndex(item: Meta): number {
     const types = {
-        [TBrowserShort.chrome]: item.release === ReleaseType.release ? 1 : 3,
-        [TBrowserShort.firefox]: item.release === ReleaseType.release ? 2 : 4,
+        [BrowserShort.chrome]: item.build === BuildType.release ? 1 : 3,
+        [BrowserShort.firefox]: item.build === BuildType.release ? 2 : 4,
     };
     return types[item.browser as keyof typeof types] || 5;
 }

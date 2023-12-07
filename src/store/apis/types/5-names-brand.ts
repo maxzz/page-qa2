@@ -1,16 +1,16 @@
 // Brand
 
-export enum TBrand {
+export enum Brand {
     dp = 'dp',
     hp = 'hp',
     de = 'de',
 }
 
-export const convTBrand2Name = (v?: TBrand): string =>
-    v === TBrand.dp
+export const convBrand2Name = (v?: Brand): string =>
+    v === Brand.dp
         ? 'DP'
-        : v === TBrand.hp
+        : v === Brand.hp
             ? 'HP'
-            : v === TBrand.de
+            : v === Brand.de
                 ? 'Dell'
                 : '?';

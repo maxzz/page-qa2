@@ -1,23 +1,23 @@
-import { convTBrowserShort2Name, TBrowserShort } from '@/store/apis';
+import { convBrowserShort2Name, BrowserShort } from '@/store/apis';
 import { classNames } from '@/utils/classnames';
 import { IconBrowser } from '@/components/ui/icons';
 
 const legendBrowsers = [
-    TBrowserShort.chrome,   // 0. Chrome extension
-    TBrowserShort.chrome,   // 1. Chrome extension with debug information
-    TBrowserShort.chrome3,  // 2. Chrome extension v3
-    TBrowserShort.chrome3,  // 3. Chrome extension v3 with debug information
-    TBrowserShort.firefox,  // 4. Firefox extension
-    TBrowserShort.firefox,  // 5. Firefox extension with debug information
-    TBrowserShort.firefox,  // 6. Firefox extension (debug version only)
-    TBrowserShort.dev       // 7. Dev extension with binaries
+    BrowserShort.chrome,   // 0. Chrome extension
+    BrowserShort.chrome,   // 1. Chrome extension with debug information
+    BrowserShort.chrome3,  // 2. Chrome extension v3
+    BrowserShort.chrome3,  // 3. Chrome extension v3 with debug information
+    BrowserShort.firefox,  // 4. Firefox extension
+    BrowserShort.firefox,  // 5. Firefox extension with debug information
+    BrowserShort.firefox,  // 6. Firefox extension (debug version only)
+    BrowserShort.dev       // 7. Dev extension with binaries
 ];
 
 const withDebugText = (idx: number) => idx === 1 || idx === 3 || idx === 5;
 const withDebugCyrcle = (idx: number) => idx === 1 || idx === 3 || idx === 5 || idx === 6;
 
-function iconText(br: TBrowserShort, idx: number) {
-    return `${convTBrowserShort2Name(br)} extension${withDebugText(idx) ? ' with debug information' : (idx === 6) ? ' (debug version only)' : ''}`;
+function iconText(br: BrowserShort, idx: number) {
+    return `${convBrowserShort2Name(br)} extension${withDebugText(idx) ? ' with debug information' : (idx === 6) ? ' (debug version only)' : ''}`;
 }
 
 const iconCommonClasses = "w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 m-px rounded-full";

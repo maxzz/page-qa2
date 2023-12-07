@@ -1,16 +1,22 @@
-import { TBrand } from "./5-names-brand";
+import { Brand } from "./5-names-brand";
 import { FilenameMeta } from "./9-names-file-name";
 
-export type ExtnFromConfig = Prettify<  // Extension info from config file
+/**
+ * Extension info from config.json
+ */
+export type ExtnFromConfig = Prettify<
     & FilenameMeta
     & {
         qa?: boolean;                   // true
-        brand?: TBrand;                 // "dp"
+        brand?: Brand;                 // "dp"
     }
 >;
 
-export interface CurrentExtensions { // Extensions on Ftp server
+/**
+ * Summary on extensions from FTP files list and config.json
+ */
+export type CurrentExtensions = {
     chrome: ExtnFromConfig;
     firefox: ExtnFromConfig;
     summary: ExtnFromConfig[];
-}
+};

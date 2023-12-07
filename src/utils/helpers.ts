@@ -1,11 +1,11 @@
-import { TBrowserShort } from "@/store/apis/types";
+import { BrowserShort } from "@/store/apis/types";
 
 function getDpBrandFromLocation() {
     const brand = window.location.href.match(/page(dp|hp|de|qa)/i);
     return !!brand ? brand[1] : '';
 }
 
-function getBrowserType(): TBrowserShort | undefined {
+function getBrowserType(): BrowserShort | undefined {
     const ua = navigator.userAgent.toLowerCase();
     
     const isIE = ua.indexOf('msie ') !== -1 || ua.indexOf('trident/') > -1;
@@ -13,7 +13,7 @@ function getBrowserType(): TBrowserShort | undefined {
     const isFirefox = ua.indexOf('firefox') !== -1;
     const isEdge = ua.indexOf('edge/') !== -1 && !isChrome;
 
-    return isChrome ? TBrowserShort.chrome : isFirefox ? TBrowserShort.firefox : isIE ? TBrowserShort.ie : isEdge ? TBrowserShort.edge : undefined;
+    return isChrome ? BrowserShort.chrome : isFirefox ? BrowserShort.firefox : isIE ? BrowserShort.ie : isEdge ? BrowserShort.edge : undefined;
 }
 
 export function copyToClipboard(el: any): boolean | undefined {
