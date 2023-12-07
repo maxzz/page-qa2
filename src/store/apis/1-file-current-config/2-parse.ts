@@ -1,12 +1,4 @@
-import { FilenameMeta, FormatCurrentCfg, TBrand, TBrowserShort, filename2Meta } from '../types';
-
-export type ExtnFromConfig = Prettify<  // Extension info from config file
-    & FilenameMeta
-    & {
-        qa?: boolean;                   // true
-        brand?: TBrand;                 // "dp"
-    }
->;
+import { CurrentExtensions, ExtnFromConfig, FormatCurrentCfg, TBrand, TBrowserShort, filename2Meta } from '../types';
 
 function findInfo(extensions: ExtnFromConfig[], brand: TBrand, browser: TBrowserShort, qa: boolean): ExtnFromConfig | undefined {
     return extensions.find((item: ExtnFromConfig) => item.brand === brand && item.browser === browser && item.qa === qa);
@@ -44,12 +36,6 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
     !findInfo(rv, TBrand.de, browser, qa) && rv.push({ ...dp, brand: TBrand.de, });
 
     return rv;
-}
-
-export interface CurrentExtensions { // Extensions on Ftp server
-    chrome: ExtnFromConfig;
-    firefox: ExtnFromConfig;
-    summary: ExtnFromConfig[];
 }
 
 export function parseCurrentConfig(config: FormatCurrentCfg.FromFile): CurrentExtensions {

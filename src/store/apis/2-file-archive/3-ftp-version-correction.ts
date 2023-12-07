@@ -1,7 +1,5 @@
-import { FilenameMeta, ReleaseType, TBrand, TBrowserShort } from "../types";
+import { CurrentExtensions, ExtnFromConfig, FilenameMeta, ReleaseType, TBrand, TBrowserShort } from "../types";
 import { urlArchiveExtension } from "../constants";
-import { CurrentExtensions, ExtnFromConfig } from "../1-file-current-config";
-import { LoadingDataState } from "@/hooks/atomsX";
 
 // FTP version correction
 
@@ -39,28 +37,32 @@ function isAVersionGreaterB(a?: string, b?: string): boolean { // '3.4.429' vs. 
     return !itemLess;
 }
 
-function selectLatest(config: ExtnFromConfig, archive?: FilenameMeta): ExtnFromConfig {
-    return archive && isAVersionGreaterB(archive.version, config.version) ? {
-        ...config,
-        version: archive.version,
-        updated: archive.updated,
-        fname: urlArchiveExtension(archive.fname),
-    } : config;
+function selectLatest(extnConfig: ExtnFromConfig, extnArchive?: FilenameMeta): ExtnFromConfig {
+    return (
+        extnArchive && isAVersionGreaterB(extnArchive.version, extnConfig.version)
+            ? {
+                ...extnConfig,
+                version: extnArchive.version,
+                updated: extnArchive.updated,
+                fname: urlArchiveExtension(extnArchive.fname),
+            }
+            : extnConfig
+    );
 }
 
 export function updateCurrentVersions(
-    publicVersions: string[] | undefined, // ['3.4.585', '3.4.442', '3.4.432', ... ]
+    publicVersions: string[] | undefined,
     fromArchive: FilenameMeta[] | null,
     fromConfig: CurrentExtensions | null,
 ) {
     // 0. Update stale config versions with the latest version from FTP files.
-    if (!fromConfig || !fromArchive ) {
+    if (!fromConfig || !fromArchive) {
         return;
     }
 
     const latestArchive = getLatestArchiveVersions(fromArchive);
 
-    const latestPublicStr = publicVersions?.[0];
+    const latestPublicStr = publicVersions?.[0]; // ['3.4.585', '3.4.442', '3.4.432', ... ] from history.md file are sorted in descending order.
     const latestPublic = getArchiveVersion(fromArchive, latestPublicStr);
 
     // 1. Update 'Current Versions'
