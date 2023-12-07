@@ -2,7 +2,7 @@ import { useAtomValue } from 'jotai';
 import { summaryExtensionsAtom } from '@/store/store';
 import { TBrowserShort } from '@/store/apis';
 import { reduceToFlat, reduceForTable } from './0-reduce-utils';
-import { TableToBrowser } from './1-table-to-browser';
+import { BrowserVersionsTable } from './1-browser-versions-table';
 
 export function Section2_CurrentVersions() {
     const summary = useAtomValue(summaryExtensionsAtom);
@@ -16,8 +16,8 @@ export function Section2_CurrentVersions() {
             <p>Summary table of QA and currently published extensions.</p>
 
             <div className="max-w-2xl grid grid-cols-2 gap-x-2">
-                <TableToBrowser browser={TBrowserShort.chrome} table={res[TBrowserShort.chrome]} />
-                <TableToBrowser browser={TBrowserShort.firefox} table={res[TBrowserShort.firefox]} />
+                <BrowserVersionsTable browser={TBrowserShort.chrome} table={res[TBrowserShort.chrome]} />
+                <BrowserVersionsTable browser={TBrowserShort.firefox} table={res[TBrowserShort.firefox]} />
             </div>
 
             <div className="text-xs">

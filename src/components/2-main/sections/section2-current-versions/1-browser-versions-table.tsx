@@ -18,7 +18,7 @@ function VersionItem({ idx, item }: { idx: number; item: ExtnFromConfig | undefi
     );
 }
 
-export function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort; table: FlatTableItem[]; }) {
+export function BrowserVersionsTable({ browser, table = [] }: { browser: TBrowserShort; table: FlatTableItem[]; }) {
     return (
         <div className="cursor-default">
 
