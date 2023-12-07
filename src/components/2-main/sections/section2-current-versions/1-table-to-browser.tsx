@@ -9,7 +9,7 @@ const tableItemClasses = (idx: number) => `text-xs ${!idx ? '' : 'opacity-25'}`;
 
 function VersionItem({ idx, item }: { idx: number; item: ExtnFromConfig | undefined; }) {
     return (
-        <div className="flex items-center space-x-0.5" title={`Updated on ${beautifyDate(item?.updated)}`}>
+        <div className="flex items-center space-x-0.5" title={`Created ${beautifyDate(item?.updated)}`}>
             <IconBrowser browser={item?.broIcon} className="w-3 h-3 opacity-50" />
             <div className={tableItemClasses(idx)}>
                 {item?.version}
