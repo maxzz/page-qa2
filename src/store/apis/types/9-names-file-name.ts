@@ -8,6 +8,7 @@ export type FilenameMeta = { // Extension info from archive (or full url) filena
     version: string;        // "3.4.430"
     updated: string;        // "2022.03.04"
     browser: TBrowserShort; // "c"
+    broIcon: TBrowserShort; // browser icon
     
     release: ReleaseType;
     isV3: boolean;
@@ -34,6 +35,7 @@ export function filename2Meta(fname: string): FilenameMeta {
         updated: match && match[2] || '',
         release: match && match[3] === 'r' ? ReleaseType.release : ReleaseType.debug,
         browser: isV3 ? TBrowserShort.chrome : browser,
+        broIcon: isV3 ? TBrowserShort.chrome3 : browser,
         isV3,
     };
     return meta;

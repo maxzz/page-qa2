@@ -24,6 +24,7 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
                 version: meta.version || filenameMeta.version,
                 updated: meta.updated || filenameMeta.updated,
                 browser,
+                broIcon: filenameMeta.broIcon,
                 release: filenameMeta.release,
                 isV3: filenameMeta.isV3,
                 brand,

@@ -7,6 +7,7 @@ const traytools: FilenameMeta = {
     updated: '2017.10.20', // It was 2019.10.20 but moved in time to have it as a separate group.
     release: ReleaseType.debug,
     browser: TBrowserShort.dev,
+    broIcon: TBrowserShort.dev,
     isV3: false,
 };
 
