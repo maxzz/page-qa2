@@ -5,12 +5,13 @@ import { convTBrand2Name, convTBrowserShort2Name, TBrowserShort } from '@/store/
 import { FlatTableItem } from './0-reduce-utils';
 
 const tableHeaderClasses = "border-b border-slate-200 text-xs";
+const tableItemClasses = (idx: number) => `text-xs ${!idx ? 'pt-0.5' : 'opacity-25'}`;
 
 export function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort; table: FlatTableItem[]; }) {
     return (
         <div className="cursor-default">
 
-            {/* Caption */}
+            {/* Table caption */}
             <div className="flex items-center space-x-1">
                 <div className="mb-1 pl-3 text-sm font-bold">
                     {`${convTBrowserShort2Name(browser)}`}
@@ -38,29 +39,22 @@ export function TableToBrowser({ browser, table = [] }: { browser: TBrowserShort
                 {table.map(
                     (item, idx) => (
                         <Fragment key={idx}>
-                            <div
-                                className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`}
-                            >
+                            <div className={tableItemClasses(idx)}>
                                 <div className="px-3 pt-0.5">{convTBrand2Name(item.brand)}</div>
                             </div>
 
-                            <div
-                                className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`}
-                                title={`${item.qa?.updated ? `Updated on ${beautifyDate(item.qa?.updated)}` : ''}`}
-                            >
+                            <div className={tableItemClasses(idx)} title={`Updated on ${beautifyDate(item.qa?.updated)}`}>
                                 {item.qa?.version}
                             </div>
 
-                            <div
-                                className={`text-xs ${idx ? 'opacity-25' : ''} ${!idx ? 'pt-0.5' : ''}`}
-                                title={`${item.release?.updated ? `Updated on ${beautifyDate(item.release?.updated)}` : ''}`}
-                            >
+                            <div className={tableItemClasses(idx)} title={`Updated on ${beautifyDate(item.release?.updated)}`}>
                                 {item.release?.version}
                             </div>
                         </Fragment>
                     )
                 )}
             </div>
+            
         </div>
     );
 }
