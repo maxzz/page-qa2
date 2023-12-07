@@ -1,18 +1,18 @@
-import { BrowserShort } from "./7-names-browser-short";
+import { Browser } from "./7-names-browser-short";
 
 // Browser short name from filename
 
 export type BrowserFname = 'chrome3' | 'chrome' | 'firefox' | 'me' | 'ie'; // Browser name as defined into config file. 'chrome3' exists only in the filename.
 
-export const convBrowserFname2BrowserShort = (v: BrowserFname): BrowserShort | undefined =>
+export const convBrowserFname2Browser = (v: BrowserFname): Browser | undefined =>
     v === 'chrome3'
-        ? BrowserShort.chrome3
+        ? Browser.chrome3
         : v === 'chrome'
-            ? BrowserShort.chrome
+            ? Browser.chrome
             : v === 'firefox'
-                ? BrowserShort.firefox
+                ? Browser.firefox
                 : v === 'me'
-                    ? BrowserShort.edge
+                    ? Browser.edge
                     : v === 'ie'
-                        ? BrowserShort.ie
+                        ? Browser.ie
                         : undefined;

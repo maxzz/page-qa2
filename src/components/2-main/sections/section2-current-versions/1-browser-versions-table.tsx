@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { convBrand2Name, convBrowserShort2Name, ExtnFromConfig, BrowserShort } from '@/store/apis';
+import { convBrand2Name, convBrowser2Name, ExtnFromConfig, Browser } from '@/store/apis';
 import { FlatTableItem } from './0-reduce-utils';
 import { IconBrowser } from '@/components/ui/icons';
 import { beautifyDate } from '@/utils/helpers';
@@ -18,13 +18,13 @@ function VersionItem({ idx, item }: { idx: number; item: ExtnFromConfig | undefi
     );
 }
 
-export function BrowserVersionsTable({ browser, table = [] }: { browser: BrowserShort; table: FlatTableItem[]; }) {
+export function BrowserVersionsTable({ browser, table = [] }: { browser: Browser; table: FlatTableItem[]; }) {
     return (
         <div className="cursor-default">
 
             {/* Table caption */}
             <div className="mb-1 text-sm font-semibold">
-                {`${convBrowserShort2Name(browser)} extensions`}
+                {`${convBrowser2Name(browser)} extensions`}
             </div>
 
             {/* Table columns: Brand, QA, Public */}

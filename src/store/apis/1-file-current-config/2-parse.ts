@@ -1,10 +1,10 @@
-import { CurrentExtensions, ExtnFromConfig, FormatCurrentCfg, Brand, BrowserShort, filename2Meta } from '../types';
+import { CurrentExtensions, ExtnFromConfig, FormatCurrentCfg, Brand, Browser, filename2Meta } from '../types';
 
-function findInfo(extensions: ExtnFromConfig[], brand: Brand, browser: BrowserShort, qa: boolean): ExtnFromConfig | undefined {
+function findInfo(extensions: ExtnFromConfig[], brand: Brand, browser: Browser, qa: boolean): ExtnFromConfig | undefined {
     return extensions.find((item: ExtnFromConfig) => item.brand === brand && item.browser === browser && item.qa === qa);
 }
 
-function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: BrowserShort, qa: boolean): ExtnFromConfig[] {
+function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, browser: Browser, qa: boolean): ExtnFromConfig[] {
     const rv: ExtnFromConfig[] = [];
 
     [Brand.dp, Brand.hp, Brand.de].forEach((brand: Brand) => {
@@ -39,11 +39,11 @@ function getExtensionInfo(brands: FormatCurrentCfg.BrandExtensionVersions, brows
 }
 
 export function parseCurrentConfig(config: FormatCurrentCfg.FromFile): CurrentExtensions {
-    const extInfoChQa: ExtnFromConfig[] = getExtensionInfo(config.browsers['chrome'].qaUrl, BrowserShort.chrome, true); // QA
-    const extInfoChPu: ExtnFromConfig[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, BrowserShort.chrome, false); // public
+    const extInfoChQa: ExtnFromConfig[] = getExtensionInfo(config.browsers['chrome'].qaUrl, Browser.chrome, true); // QA
+    const extInfoChPu: ExtnFromConfig[] = getExtensionInfo(config.browsers['chrome'].extensionUrl, Browser.chrome, false); // public
 
-    const extInfoFfQa: ExtnFromConfig[] = getExtensionInfo(config.browsers['firefox'].qaUrl, BrowserShort.firefox, true);
-    const extInfoFfPu: ExtnFromConfig[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, BrowserShort.firefox, false);
+    const extInfoFfQa: ExtnFromConfig[] = getExtensionInfo(config.browsers['firefox'].qaUrl, Browser.firefox, true);
+    const extInfoFfPu: ExtnFromConfig[] = getExtensionInfo(config.browsers['firefox'].extensionUrl, Browser.firefox, false);
     return {
         chrome: extInfoChQa[0],
         firefox: extInfoFfQa[0],

@@ -15,12 +15,12 @@ export function YearsGrid() {
         <div className="mt-1 px-0.5 text-[.65rem] sm:text-xs select-none cursor-default">
             {/* All years */}
             {byYears.map(
-                ({ year, items }) => (
-                    <div key={year}>
+                ({ yearStr, items }) => (
+                    <div key={yearStr}>
 
                         {/* Year items */}
                         <div className="mt-2 mb-1 border-b border-slate-200 font-bold">
-                            Year {year}
+                            Year {yearStr}
                         </div>
 
                         <div className="columns-7">

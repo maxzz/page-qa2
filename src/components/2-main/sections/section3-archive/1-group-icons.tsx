@@ -1,18 +1,18 @@
 import { Fragment } from 'react';
-import { Meta, BrowserShort } from '@/store/apis';
+import { FilenameMetaEx, Browser } from '@/store/apis';
 import { classNames } from '@/utils/classnames';
 import { IconBrowser } from '@/components/ui/icons';
 
 type GroupItem = {
-    main?: Meta;
-    debug?: Meta;
+    main?: FilenameMetaEx;
+    debug?: FilenameMetaEx;
 };
 
 export type OrderedGroup = {
-    [key in BrowserShort]?: GroupItem;
+    [key in Browser]?: GroupItem;
 };
 
-const isFirefoxWoMain = (groupItem: GroupItem) => !groupItem.main && groupItem.debug?.browser !== BrowserShort.dev;
+const isFirefoxWoMain = (groupItem: GroupItem) => !groupItem.main && groupItem.debug?.browser !== Browser.dev;
 const isDevTools = (groupItem: GroupItem) => !groupItem.main || !groupItem.debug;
 
 const iconClasses = (groupItem: GroupItem) => classNames(

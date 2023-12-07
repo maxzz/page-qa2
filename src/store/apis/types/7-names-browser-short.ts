@@ -1,6 +1,6 @@
 // Browser short name
 
-export enum BrowserShort {
+export enum Browser {
     unknown = 'u',
     chrome = 'c',
     chrome3 = '3',
@@ -10,18 +10,18 @@ export enum BrowserShort {
     ie = 'i',
 }
 
-export const convBrowserShort2Name = (v?: BrowserShort): string =>
-    v === BrowserShort.chrome3
+export const convBrowser2Name = (v?: Browser): string =>
+    v === Browser.chrome3
         ? 'Chrome v3'
-        : v === BrowserShort.chrome
+        : v === Browser.chrome
             ? 'Chrome'
-            : v === BrowserShort.firefox
+            : v === Browser.firefox
                 ? 'Firefox'
-                : v === BrowserShort.edge
+                : v === Browser.edge
                     ? 'Microsoft Edge'
-                    : v === BrowserShort.dev
+                    : v === Browser.dev
                         ? 'DevTools'
-                        : v === BrowserShort.ie
+                        : v === Browser.ie
                             ? 'IE'
                             : '?';
 

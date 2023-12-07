@@ -1,7 +1,7 @@
-import { ExtnFromConfig, Brand, BrowserShort } from '@/store/apis';
+import { ExtnFromConfig, Brand, Browser } from '@/store/apis';
 
 type Table = {
-    [key in BrowserShort]: {
+    [key in Browser]: {
         [key in Brand]?: {
             qa?: ExtnFromConfig;
             release?: ExtnFromConfig;
@@ -31,12 +31,12 @@ export type FlatTableItem = {
 };
 
 type FlatTable = {
-    [key in BrowserShort]: FlatTableItem[]
+    [key in Browser]: FlatTableItem[]
 };
 
 export function reduceToFlat(table: Table): FlatTable {
     const res = {} as FlatTable;
-    for (const [brKey, brVal] of Object.entries(table) as [BrowserShort, Table[BrowserShort]][]) {
+    for (const [brKey, brVal] of Object.entries(table) as [Browser, Table[Browser]][]) {
         if (!res[brKey]) {
             res[brKey] = [];
         }

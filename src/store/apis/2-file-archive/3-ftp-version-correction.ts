@@ -1,4 +1,4 @@
-import { BuildType, CurrentExtensions, ExtnFromConfig, FilenameMeta, Brand, BrowserShort } from "../types";
+import { Brand, Browser, BuildType, CurrentExtensions, ExtnFromConfig, FilenameMeta} from "../types";
 import { urlArchiveExtension } from "../constants";
 
 // FTP version correction
@@ -21,8 +21,8 @@ function filenameMeta2ItemWithVersion(item: FilenameMeta): ItemWithVersion {
 
 function getLatestArchiveVersions(archive?: FilenameMeta[] | null): { ch: FilenameMeta | undefined; ff: FilenameMeta | undefined; } {
     const reversed = archive ? [...archive].reverse() : [];
-    const latestArchiveCh = getFromArchive(reversed, { browser: BrowserShort.chrome, build: BuildType.release });
-    const latestArchiveFf = getFromArchive(reversed, { browser: BrowserShort.firefox, build: BuildType.release });
+    const latestArchiveCh = getFromArchive(reversed, { browser: Browser.chrome, build: BuildType.release });
+    const latestArchiveFf = getFromArchive(reversed, { browser: Browser.firefox, build: BuildType.release });
     return {
         ch: latestArchiveCh,
         ff: latestArchiveFf,
@@ -85,7 +85,7 @@ export function updateCurrentVersions(
     if (latestPublic) {
         const lookupFor = {
             brand: Brand.dp,
-            browser: BrowserShort.chrome, // No need this for Firefox at least now.
+            browser: Browser.chrome, // No need this for Firefox at least now.
             qa: false
         };
         fromConfig.summary = fromConfig.summary.map(

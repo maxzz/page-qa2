@@ -1,6 +1,6 @@
 import { Atom, useAtomValue } from 'jotai';
 import { a, useSpring } from '@react-spring/web';
-import { convBrowserShort2Name, BrowserShort } from '@/store/apis/types';
+import { convBrowser2Name, Browser } from '@/store/apis/types';
 import { ExtnFromConfig } from '@/store/apis';
 import { beautifyDate } from '@/utils/helpers';
 import { IconBrowser } from '@/components/ui/icons';
@@ -9,10 +9,10 @@ import { ActionButtons } from './1-action-buttons';
 
 const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
-export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: BrowserShort; extInfoAtom: Atom<ExtnFromConfig | undefined>; loading: boolean; }) {
+export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Browser; extInfoAtom: Atom<ExtnFromConfig | undefined>; loading: boolean; }) {
     const extnFromConfig = useAtomValue(extInfoAtom);
     const vis = extnFromConfig?.fname;
-    const broIcon: BrowserShort = extnFromConfig?.broIcon || browser;
+    const broIcon: Browser = extnFromConfig?.broIcon || browser;
 
     const btnStyles = useSpring({ opacity: vis ? 1 : 0, scaleY: vis ? 1 : 0, config: { duration: 150 }, });
     const txtStyles = useSpring({ opacity: vis ? 1 : 0, x: vis ? 0 : 200, config: { duration: 150 }, });
@@ -26,7 +26,7 @@ export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Bro
             </div>
 
             <div className="ml-3 text-xs overflow-hidden">
-                <div className="text-base font-bold scale-y-125 whitespace-nowrap">{convBrowserShort2Name(browser)}
+                <div className="text-base font-bold scale-y-125 whitespace-nowrap">{convBrowser2Name(browser)}
                     {' '}QA extension
                 </div>
 

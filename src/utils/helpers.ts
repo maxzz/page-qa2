@@ -1,19 +1,19 @@
-import { BrowserShort } from "@/store/apis/types";
+import { Browser } from "@/store/apis/types";
 
 function getDpBrandFromLocation() {
     const brand = window.location.href.match(/page(dp|hp|de|qa)/i);
     return !!brand ? brand[1] : '';
 }
 
-function getBrowserType(): BrowserShort | undefined {
+function getBrowserType(): Browser | undefined {
     const ua = navigator.userAgent.toLowerCase();
-    
+
     const isIE = ua.indexOf('msie ') !== -1 || ua.indexOf('trident/') > -1;
     const isChrome = ua.indexOf('chrome') !== -1 && typeof (<any>window).chrome !== 'undefined' && typeof (window as any).chrome.runtime !== 'undefined';
     const isFirefox = ua.indexOf('firefox') !== -1;
     const isEdge = ua.indexOf('edge/') !== -1 && !isChrome;
 
-    return isChrome ? BrowserShort.chrome : isFirefox ? BrowserShort.firefox : isIE ? BrowserShort.ie : isEdge ? BrowserShort.edge : undefined;
+    return isChrome ? Browser.chrome : isFirefox ? Browser.firefox : isIE ? Browser.ie : isEdge ? Browser.edge : undefined;
 }
 
 export function copyToClipboard(el: any): boolean | undefined {
@@ -35,9 +35,13 @@ export function copyToClipboard(el: any): boolean | undefined {
     return done;
 }
 
+export function stringToDate(date: string): Date {
+    return new Date((date || '').replace(/\./g, '-') + 'T00:00:00');
+}
+
 export function parseDate(date: string): Date | undefined {
     // 0. Parse '2022.03.04' format to Date | string.
-    const dt = new Date(date.replace(/\./g, '-') + 'T00:00:00');
+    const dt = stringToDate(date);
     return dt.toString() !== 'Invalid Date' ? dt : undefined;
 }
 

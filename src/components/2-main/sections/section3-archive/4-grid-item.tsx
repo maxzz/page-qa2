@@ -1,10 +1,10 @@
-import { Meta, BuildType } from '@/store/apis';
+import { FilenameMetaEx, BuildType } from '@/store/apis';
 import { UITooltip } from '@/components/ui/UITooltip';
 import { OrderedGroup } from './1-group-icons';
 import { GridVersionItem } from './2-grid-item';
 import { PopupBody } from './3-popup-body';
 
-export function YearItems({ items }: { items: Meta[]; }) {
+export function YearItems({ items }: { items: FilenameMetaEx[]; }) {
     const item = items[0];
     if (!item) {
         return null;
