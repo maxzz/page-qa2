@@ -98,7 +98,7 @@ const correlateAtom = atom(
         set(byYearsAtom, byYears);
 
         // 2. Update stale config versions with the latest from FTP.
-        const res = updateCurrentVersions(publicVersions, stateArchive, stateConfig);
+        const res = updateCurrentVersions(publicVersions, stateArchive.data, stateConfig.data);
         if (res) {
             set(latestChExtensionAtom, res.latestChExtension);
             set(latestFfExtensionAtom, res.latestFfExtension);

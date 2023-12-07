@@ -5,16 +5,6 @@ import { LoadingDataState } from "@/hooks/atomsX";
 
 // FTP version correction
 
-function areTheSameBrowserBrandQa(a: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>, b: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>): boolean {
-    const { brand: a_brand, browser: a_browser, qa: a_qa } = a;
-    const { brand: b_brand, browser: b_browser, qa: b_qa } = b;
-    return a_browser === b_browser && a_brand === b_brand && a_qa === b_qa;
-}
-
-function getArchiveVersion(archive: FilenameMeta[] | null, version?: string): FilenameMeta | undefined {
-    return version ? archive?.find((item) => item.version === version) : undefined;
-}
-
 function getLatestArchiveVersions(archive?: FilenameMeta[] | null): { ch: FilenameMeta | undefined; ff: FilenameMeta | undefined; } {
     const reversed = archive ? [...archive].reverse() : [];
     const latestArchiveCh = getFromArchive(reversed, { browser: TBrowserShort.chrome, release: ReleaseType.release });
@@ -27,6 +17,16 @@ function getLatestArchiveVersions(archive?: FilenameMeta[] | null): { ch: Filena
     function getFromArchive(archive: FilenameMeta[] | null, a: Pick<FilenameMeta, 'browser' | 'release'>): FilenameMeta | undefined {
         return archive?.find((item) => item.browser === a.browser && item.release === a.release);
     }
+}
+
+function getArchiveVersion(archive: FilenameMeta[] | null, version?: string): FilenameMeta | undefined {
+    return version ? archive?.find((item) => item.version === version) : undefined;
+}
+
+function areTheSameBrowserBrandQa(a: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>, b: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>): boolean {
+    const { brand: a_brand, browser: a_browser, qa: a_qa } = a;
+    const { brand: b_brand, browser: b_browser, qa: b_qa } = b;
+    return a_browser === b_browser && a_brand === b_brand && a_qa === b_qa;
 }
 
 function isAVersionGreaterB(a?: string, b?: string): boolean { // '3.4.429' vs. '3.4.430'
@@ -49,20 +49,19 @@ function selectLatest(config: ExtnFromConfig, archive?: FilenameMeta): ExtnFromC
 }
 
 export function updateCurrentVersions(
-    publicVersions: string[] | undefined,
-    stateArchive: LoadingDataState<FilenameMeta[]>,
-    stateConfig: LoadingDataState<CurrentExtensions>
+    publicVersions: string[] | undefined, // ['3.4.585', '3.4.442', '3.4.432', ... ]
+    fromArchive: FilenameMeta[] | null,
+    fromConfig: CurrentExtensions | null,
 ) {
     // 0. Update stale config versions with the latest version from FTP files.
-
-    if (!stateConfig.data || !stateArchive.data) {
+    if (!fromConfig || !fromArchive ) {
         return;
     }
 
-    const latestArchive = getLatestArchiveVersions(stateArchive.data);
+    const latestArchive = getLatestArchiveVersions(fromArchive);
 
     const latestPublicStr = publicVersions?.[0];
-    const latestPublic = getArchiveVersion(stateArchive.data, latestPublicStr);
+    const latestPublic = getArchiveVersion(fromArchive, latestPublicStr);
 
     // 1. Update 'Current Versions'
     if (latestPublic) {
@@ -71,7 +70,7 @@ export function updateCurrentVersions(
             browser: TBrowserShort.chrome, // No need this for Firefox at least now.
             qa: false
         };
-        stateConfig.data.summary = stateConfig.data.summary.map(
+        fromConfig.summary = fromConfig.summary.map(
             (item) => {
                 const found = areTheSameBrowserBrandQa(item, lookupFor) && isAVersionGreaterB(latestPublicStr, item.version);
                 if (found) {
@@ -84,11 +83,11 @@ export function updateCurrentVersions(
     }
 
     // 2. Update and apply 'QA latest'
-    const latestChExtension = selectLatest(stateConfig.data.chrome, latestArchive.ch);
-    const latestFfExtension = selectLatest(stateConfig.data.firefox, latestArchive.ff);
+    const latestChExtension = selectLatest(fromConfig.chrome, latestArchive.ch);
+    const latestFfExtension = selectLatest(fromConfig.firefox, latestArchive.ff);
 
     // 3. Apply 'Current Versions'
-    const summaryExtensions = stateConfig.data.summary;
+    const summaryExtensions = fromConfig.summary;
 
     return { latestChExtension, latestFfExtension, summaryExtensions };
 }
