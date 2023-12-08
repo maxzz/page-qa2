@@ -4,21 +4,25 @@ import { isVersionAGreaterB, updateSummary } from "./3-update-summary";
 
 // FTP version correction
 
-type VersioTuple = [number, number, number];
+type VersionTuple = [number, number, number];
 
 type FilenameMetaVersion = {
     item: FilenameMeta;
-    readonly version: VersioTuple;
+    readonly version: VersionTuple;
 };
 
-function convToFilenameMetaVersion(item: FilenameMeta): FilenameMetaVersion {
-    let version = item.version.split('.').map((v) => +v) as VersioTuple;
-    if (version.length !== 3) {
-        version = [0, 0, 0];
+function strToVersionTuple(version: string): VersionTuple {
+    let v = version.split('.').map((v) => +v) as VersionTuple;
+    if (v.length !== 3) {
+        v = [0, 0, 0];
     }
+    return v;
+}
+
+function convToFilenameMetaVersion(item: FilenameMeta): FilenameMetaVersion {
     return {
         item,
-        version: version,
+        version: strToVersionTuple(item.version),
     };
 }
 
