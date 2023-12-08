@@ -22,27 +22,25 @@ function selectTheLatestFrom(extnConfig: ExtnFromConfig, extnArchive?: FilenameM
     );
 }
 
-export function correctFtpVsConfigVersions(publicVersions: string[] | undefined, fromArchive: FilenameMeta[] | null, fromConfig: CurrentExtensions | null) {
-    // 0. Update stale config versions with the latest version from FTP files.
+export function correctArchiveVsConfigVersions(fromArchive: FilenameMeta[] | null, fromConfig: CurrentExtensions | null, publicVersions: string[] | undefined) {
+    // 0. Update possibly stale config versions with the latest version from the FTP archive files.
     if (!fromConfig || !fromArchive) {
         return;
     }
 
     const archiveWithVersions = fromArchive.map(convToFilenameMetaVersion);
     const sortedArchive = archiveWithVersions.sort(compareFilenameMetaVersions).reverse();
-    const pureArchive = sortedArchive.map((item) => item.item);
-    console.log('sortedArchive', pureArchive);
 
     // 2. Update and apply 'QA latest'
-    const archiveLatestCh = getLatestPublic(sortedArchive, Browser.chrome )?.item;
-    const archiveLatestFf = getLatestPublic(sortedArchive, Browser.firefox )?.item;
-
-    const latestChExtension = selectTheLatestFrom(fromConfig.chrome, archiveLatestCh);
-    const latestFfExtension = selectTheLatestFrom(fromConfig.firefox, archiveLatestFf);
+    const latestChExtension = selectTheLatestFrom(fromConfig.chrome, getLatestPublic(sortedArchive, Browser.chrome )?.item);
+    const latestFfExtension = selectTheLatestFrom(fromConfig.firefox, getLatestPublic(sortedArchive, Browser.firefox )?.item);
    
     // 3. Apply 'Current Versions'
-    fromConfig.summary = updateSummary(publicVersions, fromArchive, fromConfig);
+    fromConfig.summary = updateSummary(fromArchive, fromConfig, publicVersions);
     const summaryExtensions = fromConfig.summary;
+
+    const pureArchive = sortedArchive.map((item) => item.item);
+    console.log('sortedArchive', pureArchive);
 
     return {
         latestChExtension,

@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { marked } from 'marked';
-import { archiveByYears, fetchCurrentConfig, fetchExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, correctFtpVsConfigVersions, FilenameMeta } from '../apis';
+import { archiveByYears, fetchCurrentConfig, fetchExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, correctArchiveVsConfigVersions, FilenameMeta } from '../apis';
 import { toastError } from '@/components/ui/UiToaster';
 import { loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNotesAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom, loadFailedAtom } from './3-data-atoms';
 
@@ -98,7 +98,7 @@ const correlateAtom = atom(
         set(byYearsAtom, byYears);
 
         // 2. Update stale config versions with the latest from FTP.
-        const res = correctFtpVsConfigVersions(publicVersions, stateArchive.data, stateConfig.data);
+        const res = correctArchiveVsConfigVersions(stateArchive.data, stateConfig.data, publicVersions);
         if (res) {
             set(latestChExtensionAtom, res.latestChExtension);
             set(latestFfExtensionAtom, res.latestFfExtension);

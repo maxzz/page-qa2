@@ -1,7 +1,7 @@
 import { Brand, Browser, CurrentExtensions, ExtnFromConfig, FilenameMeta } from "../types";
 import { isVersionAGreaterB } from "./3-filename-meta-version";
 
-export function updateSummary(publicVersions: string[] | undefined, fromArchive: FilenameMeta[], fromConfig: CurrentExtensions) {
+export function updateSummary(fromArchive: FilenameMeta[], fromConfig: CurrentExtensions, publicVersions: string[] | undefined) {
     const latestPublicStr = publicVersions?.[0]; // ['3.4.585', '3.4.442', '3.4.432', ... ] from history.md file are sorted in descending order.
     const latestPublic = getArchiveByVersion(fromArchive, latestPublicStr);
 
