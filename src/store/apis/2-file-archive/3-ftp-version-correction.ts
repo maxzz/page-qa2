@@ -57,11 +57,7 @@ function selectTheLatestFrom(extnConfig: ExtnFromConfig, extnArchive?: FilenameM
     );
 }
 
-export function updateCurrentVersions(
-    publicVersions: string[] | undefined, // ['3.4.585', '3.4.442', '3.4.432', ... ] from history.md file are sorted in descending order.
-    fromArchive: FilenameMeta[] | null,
-    fromConfig: CurrentExtensions | null,
-) {
+export function updateCurrentVersions(publicVersions: string[] | undefined, fromArchive: FilenameMeta[] | null, fromConfig: CurrentExtensions | null,) {
     // 0. Update stale config versions with the latest version from FTP files.
     if (!fromConfig || !fromArchive) {
         return;
@@ -69,31 +65,9 @@ export function updateCurrentVersions(
 
     const latestArchive = getLatestArchiveVersions(fromArchive);
 
-
-
     const latestPublicStr = publicVersions?.[0]; // ['3.4.585', '3.4.442', '3.4.432', ... ] from history.md file are sorted in descending order.
-    const latestPublic = getArchiveVersion(fromArchive, latestPublicStr);
 
-    // 1. Update 'Current Versions'
-    if (latestPublic) {
-        const lookupFor = {
-            brand: Brand.dp,
-            browser: Browser.chrome, // No need this for Firefox at least now.
-            qa: false
-        };
-        fromConfig.summary = fromConfig.summary.map(
-            (item) => {
-                const found = areTheSameBrowserBrandQa(item, lookupFor) && isVersionAGreaterB(latestPublicStr, item.version);
-                if (found) {
-                    item.version = latestPublic.version;
-                    item.updated = latestPublic.updated;
-                }
-                return item;
-            }
-        );
-    }
-
-    fromConfig.summary = updateSummary(publicVersions?.[0], fromArchive, fromConfig);
+    fromConfig.summary = updateSummary(latestPublicStr, fromArchive, fromConfig);
 
     // 2. Update and apply 'QA latest'
     const latestChExtension = selectTheLatestFrom(fromConfig.chrome, latestArchive.ch);
