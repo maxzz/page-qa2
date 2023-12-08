@@ -4,6 +4,7 @@ import { FilenameMetaVersion, isVersionAGreaterB } from "./3-filename-meta-versi
 export function updateSummary(fromArchive: FilenameMetaVersion[], fromConfig: CurrentExtensions, publicVersions: string[] | undefined) {
     const latestPublicStr = publicVersions?.[0]; // ['3.4.585', '3.4.442', '3.4.432', ... ] from history.md file are sorted in descending order.
     const latestPublic = getArchiveByVersion(fromArchive, latestPublicStr)?.item;
+    // console.log('latestPublic', latestPublicStr, 'publicVersions', publicVersions, 'latestPublicStr', latestPublicStr, 'fromArchive', fromArchive);
 
     // 1. Update 'Current Versions'
     if (latestPublic) {
@@ -28,7 +29,7 @@ export function updateSummary(fromArchive: FilenameMetaVersion[], fromConfig: Cu
 }
 
 function getArchiveByVersion(archive: FilenameMetaVersion[] | null, version?: string): FilenameMetaVersion | undefined {
-    return version ? archive?.find(({item}) => item.version === version) : undefined;
+    return version ? archive?.find(({ item }) => item.version === version) : undefined;
 }
 
 function areTheSameBrandBrowserQa(a: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>, b: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>): boolean {

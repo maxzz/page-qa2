@@ -12,7 +12,7 @@ type CurrentLocation = {
     root: string;   // `${currentLocation.host}/${currentLocation.gen}'
 };
 
-const runLocation: CurrentLocation = (() => {
+export const runLocation: CurrentLocation = (() => {
     const reG01 = /([\s\S]*)\/(g0\d)\/([\s\S]*)/; // 1:'https://www3.hidglobal.com/sites/default/files/crossmatch/AltusAddons' 2:'/g0(1|2)/' 3:'pageqa/index.html'
 
     const m = (window.location.href || '').match(reG01); //https://www3.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pageqa/index.html
@@ -25,8 +25,6 @@ const runLocation: CurrentLocation = (() => {
         root: `${host}/${gen}`,
     };
 })();
-
-console.log('Run from location', runLocation);
 
 const ROOT_WEB_URL = IS_GITHUB ? './' : `${runLocation.root}/current/`;
 const ROOT_TEST_URL = './';

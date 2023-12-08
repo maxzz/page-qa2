@@ -1,4 +1,4 @@
-import { IS_GITHUB, URLS } from '@/store/apis';
+import { IS_GITHUB, URLS, runLocation } from '@/store/apis';
 
 export function Section5_FinalNotes() {
     return (
@@ -59,8 +59,17 @@ export function Section5_FinalNotes() {
                         The source code for this website on <a className="hoverurl" href="https://github.com/maxzz/page-qa2" target="_blank">GitHub is here</a>.
                     </li>
                 }
+            </ul>
+
+            <h2 className="mt-2 text-base font-semibold">About</h2>
+            <ul className="ml-4 list-disc">
                 <li>
                     This __BUILD_VER__ version of the QA website is built on __BUILD_DATE__<span>.</span>
+                </li>
+                <li className="text-xs whitespace-pre">
+                    Running from location:
+                    <br />
+                    {JSON.stringify(runLocation, null, 4)}
                 </li>
             </ul>
         </div>
