@@ -38,11 +38,11 @@ export function correctArchiveVsConfigVersions(fromArchive: FilenameMeta[] | nul
     const latestFfExtension = selectTheLatestFrom(fromConfig.firefox, getLatestReleaseBuild(sortedArchive, Browser.firefox )?.item);
    
     // 3. Apply 'Current Versions'
-    fromConfig.summary = updateSummary(fromArchive, fromConfig, publicVersions);
+    fromConfig.summary = updateSummary(sortedArchive, fromConfig, publicVersions);
     const summaryExtensions = fromConfig.summary;
 
-    const pureArchive = sortedArchive.map((item) => item.item);
-    console.log('sortedArchive', pureArchive);
+    // const pureArchive = sortedArchive.map((item) => item.item);
+    // console.log('sortedArchive', pureArchive);
 
     return {
         latestChExtension,

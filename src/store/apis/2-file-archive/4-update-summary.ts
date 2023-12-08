@@ -1,9 +1,9 @@
-import { Brand, Browser, CurrentExtensions, ExtnFromConfig, FilenameMeta } from "../types";
-import { isVersionAGreaterB } from "./3-filename-meta-version";
+import { Brand, Browser, CurrentExtensions, ExtnFromConfig } from "../types";
+import { FilenameMetaVersion, isVersionAGreaterB } from "./3-filename-meta-version";
 
-export function updateSummary(fromArchive: FilenameMeta[], fromConfig: CurrentExtensions, publicVersions: string[] | undefined) {
+export function updateSummary(fromArchive: FilenameMetaVersion[], fromConfig: CurrentExtensions, publicVersions: string[] | undefined) {
     const latestPublicStr = publicVersions?.[0]; // ['3.4.585', '3.4.442', '3.4.432', ... ] from history.md file are sorted in descending order.
-    const latestPublic = getArchiveByVersion(fromArchive, latestPublicStr);
+    const latestPublic = getArchiveByVersion(fromArchive, latestPublicStr)?.item;
 
     // 1. Update 'Current Versions'
     if (latestPublic) {
@@ -27,8 +27,8 @@ export function updateSummary(fromArchive: FilenameMeta[], fromConfig: CurrentEx
     return fromConfig.summary;
 }
 
-function getArchiveByVersion(archive: FilenameMeta[] | null, version?: string): FilenameMeta | undefined {
-    return version ? archive?.find((item) => item.version === version) : undefined;
+function getArchiveByVersion(archive: FilenameMetaVersion[] | null, version?: string): FilenameMetaVersion | undefined {
+    return version ? archive?.find(({item}) => item.version === version) : undefined;
 }
 
 function areTheSameBrandBrowserQa(a: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>, b: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>): boolean {
