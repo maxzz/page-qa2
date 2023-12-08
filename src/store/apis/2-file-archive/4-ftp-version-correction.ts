@@ -1,6 +1,6 @@
 import { Browser, BuildType, CurrentExtensions, ExtnFromConfig, FilenameMeta } from "../types";
 import { urlArchiveExtension } from "../constants";
-import { isVersionAGreaterB, updateSummary } from "./4-update-summary";
+import { isVersionAGreaterB, updateSummary } from "./3-update-summary";
 
 // FTP version correction
 
