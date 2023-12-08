@@ -1,22 +1,28 @@
 import { Browser, BuildType, CurrentExtensions, ExtnFromConfig, FilenameMeta } from "../types";
 import { urlArchiveExtension } from "../constants";
 import { updateSummary } from "./4-update-summary";
-import { compareFilenameMetaVersions, convToFilenameMetaVersion, isVersionAGreaterB } from "./3-filename-meta-version";
+import { FilenameMetaVersion, compareFilenameMetaVersions, convToFilenameMetaVersion, isVersionAGreaterB } from "./3-filename-meta-version";
 
 // FTP version correction
 
-function getLatestPublicVersions(archive?: FilenameMeta[] | null): { ch: FilenameMeta | undefined; ff: FilenameMeta | undefined; } {
-    const reversed = archive ? [...archive].reverse() : [];
+// function getLatestPublicVersions(archive?: FilenameMeta[] | null): { ch: FilenameMeta | undefined; ff: FilenameMeta | undefined; } {
+//     const reversed = archive ? [...archive].reverse() : [];
 
-    return {
-        ch: getFromArchive(reversed, { browser: Browser.chrome, build: BuildType.release }), // latest archive chrome
-        ff: getFromArchive(reversed, { browser: Browser.firefox, build: BuildType.release }), // latest archive firefox
-    };
+//     return {
+//         ch: getFromArchive(reversed, { browser: Browser.chrome, build: BuildType.release }), // latest archive chrome
+//         ff: getFromArchive(reversed, { browser: Browser.firefox, build: BuildType.release }), // latest archive firefox
+//     };
 
-    function getFromArchive(archive: FilenameMeta[] | null, lookupFor: Pick<FilenameMeta, 'browser' | 'build'>): FilenameMeta | undefined {
-        const { browser: lookupForBrowser, build: lookupForBuild } = lookupFor;
-        return archive?.find(({ browser, build }) => browser === lookupForBrowser && build === lookupForBuild);
-    }
+// }
+
+// function getFromArchive(archive: FilenameMeta[] | null, lookupFor: Pick<FilenameMeta, 'browser' | 'build'>): FilenameMeta | undefined {
+//     const { browser: lookupForBrowser, build: lookupForBuild } = lookupFor;
+//     return archive?.find(({ browser, build }) => browser === lookupForBrowser && build === lookupForBuild);
+// }
+
+function getFromArchive2(archive: FilenameMetaVersion[] | null, lookupFor: Pick<FilenameMeta, 'browser' | 'build'>): FilenameMetaVersion | undefined {
+    const { browser: lookupForBrowser, build: lookupForBuild } = lookupFor;
+    return archive?.find(({item: { browser, build }}) => browser === lookupForBrowser && build === lookupForBuild);
 }
 
 function selectTheLatestFrom(extnConfig: ExtnFromConfig, extnArchive?: FilenameMeta): ExtnFromConfig {
@@ -43,13 +49,16 @@ export function correctFtpVsConfigVersions(publicVersions: string[] | undefined,
     const pureArchive = sortedArchive.map((item) => item.item);
     console.log('sortedArchive', pureArchive);
 
-    const latestArchive = getLatestPublicVersions(fromArchive);
+    // const latestArchive = getLatestPublicVersions(fromArchive);
+
+    const archiveLatestCh = getFromArchive2(sortedArchive, { browser: Browser.chrome, build: BuildType.release })?.item;
+    const archiveLatestFf = getFromArchive2(sortedArchive, { browser: Browser.firefox, build: BuildType.release })?.item;
 
     fromConfig.summary = updateSummary(publicVersions, fromArchive, fromConfig);
 
     // 2. Update and apply 'QA latest'
-    const latestChExtension = selectTheLatestFrom(fromConfig.chrome, latestArchive.ch);
-    const latestFfExtension = selectTheLatestFrom(fromConfig.firefox, latestArchive.ff);
+    const latestChExtension = selectTheLatestFrom(fromConfig.chrome, archiveLatestCh);
+    const latestFfExtension = selectTheLatestFrom(fromConfig.firefox, archiveLatestFf);
 
     // 3. Apply 'Current Versions'
     const summaryExtensions = fromConfig.summary;
