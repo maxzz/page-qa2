@@ -14,7 +14,8 @@ function getLatestPublicVersions(archive?: FilenameMeta[] | null): { ch: Filenam
     };
 
     function getFromArchive(archive: FilenameMeta[] | null, lookupFor: Pick<FilenameMeta, 'browser' | 'build'>): FilenameMeta | undefined {
-        return archive?.find((item) => item.browser === lookupFor.browser && item.build === lookupFor.build);
+        const { browser: lookupForBrowser, build: lookupForBuild } = lookupFor;
+        return archive?.find(({ browser, build }) => browser === lookupForBrowser && build === lookupForBuild);
     }
 }
 
