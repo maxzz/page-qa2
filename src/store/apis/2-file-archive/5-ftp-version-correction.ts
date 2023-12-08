@@ -4,28 +4,6 @@ import { isVersionAGreaterB, updateSummary } from "./3-update-summary";
 
 // FTP version correction
 
-type VersionTuple = [number, number, number];
-
-type FilenameMetaVersion = {
-    item: FilenameMeta;
-    readonly version: VersionTuple;
-};
-
-function strToVersionTuple(version: string): VersionTuple {
-    let v = version.split('.').map((v) => +v) as VersionTuple;
-    if (v.length !== 3) {
-        v = [0, 0, 0];
-    }
-    return v;
-}
-
-function convToFilenameMetaVersion(item: FilenameMeta): FilenameMetaVersion {
-    return {
-        item,
-        version: strToVersionTuple(item.version),
-    };
-}
-
 function getLatestArchiveVersions(archive?: FilenameMeta[] | null): { ch: FilenameMeta | undefined; ff: FilenameMeta | undefined; } {
     const reversed = archive ? [...archive].reverse() : [];
 
