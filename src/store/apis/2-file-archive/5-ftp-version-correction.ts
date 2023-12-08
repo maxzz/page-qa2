@@ -1,6 +1,7 @@
 import { Browser, BuildType, CurrentExtensions, ExtnFromConfig, FilenameMeta } from "../types";
 import { urlArchiveExtension } from "../constants";
 import { isVersionAGreaterB, updateSummary } from "./4-update-summary";
+import { convToFilenameMetaVersion } from "./3-filename-meta-version";
 
 // FTP version correction
 
@@ -35,6 +36,10 @@ export function updateCurrentVersions(publicVersions: string[] | undefined, from
     if (!fromConfig || !fromArchive) {
         return;
     }
+
+    const archiveWithVersions = fromArchive.map(convToFilenameMetaVersion);
+    //TODO: sort by version in descending order // const sortedArchive = archiveWithVersions.sort((a, b) => +b.version - +a.version); // sort by version in descending order
+    const sortedArchive = archiveWithVersions.map((item) => item.item);
 
     const latestArchive = getLatestArchiveVersions(fromArchive);
 
