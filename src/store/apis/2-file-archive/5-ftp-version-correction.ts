@@ -5,7 +5,7 @@ import { compareFilenameMetaVersions, convToFilenameMetaVersion, isVersionAGreat
 
 // FTP version correction
 
-function getLatestArchiveVersions(archive?: FilenameMeta[] | null): { ch: FilenameMeta | undefined; ff: FilenameMeta | undefined; } {
+function getLatestPublicVersions(archive?: FilenameMeta[] | null): { ch: FilenameMeta | undefined; ff: FilenameMeta | undefined; } {
     const reversed = archive ? [...archive].reverse() : [];
 
     return {
@@ -31,19 +31,18 @@ function selectTheLatestFrom(extnConfig: ExtnFromConfig, extnArchive?: FilenameM
     );
 }
 
-export function updateCurrentVersions(publicVersions: string[] | undefined, fromArchive: FilenameMeta[] | null, fromConfig: CurrentExtensions | null,) {
+export function correctFtpVsConfigVersions(publicVersions: string[] | undefined, fromArchive: FilenameMeta[] | null, fromConfig: CurrentExtensions | null) {
     // 0. Update stale config versions with the latest version from FTP files.
     if (!fromConfig || !fromArchive) {
         return;
     }
 
     const archiveWithVersions = fromArchive.map(convToFilenameMetaVersion);
-    //TODO: sort by version in descending order // const sortedArchive = archiveWithVersions.sort((a, b) => +b.version - +a.version); // sort by version in descending order
-    const sortedArchive = archiveWithVersions.sort(compareFilenameMetaVersions);
-    const pureArchive = archiveWithVersions.map((item) => item.item);
+    const sortedArchive = archiveWithVersions.sort(compareFilenameMetaVersions).reverse();
+    const pureArchive = sortedArchive.map((item) => item.item);
     console.log('sortedArchive', pureArchive);
 
-    const latestArchive = getLatestArchiveVersions(fromArchive);
+    const latestArchive = getLatestPublicVersions(fromArchive);
 
     fromConfig.summary = updateSummary(publicVersions, fromArchive, fromConfig);
 
