@@ -13,8 +13,9 @@ export function AppHeader() {
                 </div>
 
                 <div className="pb-1 text-3xl tracking-tighter font-light text-slate-100 uppercase whitespace-nowrap" style={textShadow}>
-                    QA Extensions
+                    PM QA Extensions
                 </div>
+                {/* Password Manager QA Extensions */}
             </div>
         </div>
         
