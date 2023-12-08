@@ -30,8 +30,8 @@ const iconClasses = (idx: number) => classNames(
 
 export function Legend() {
     return (
-        <div className="mt-2 text-xs sm:text-sm">
-            <div className="mb-0 sm:mb-1">
+        <div className="mt-2 text-xs md:text-sm">
+            <div className="mb-0 md:mb-1">
                 Legend:
             </div>
 

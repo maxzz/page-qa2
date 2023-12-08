@@ -8,7 +8,7 @@ export enum Brand {
 
 export const convBrand2Name = (v?: Brand): string =>
     v === Brand.dp
-        ? 'DP'
+        ? 'HID'
         : v === Brand.hp
             ? 'HP'
             : v === Brand.de
