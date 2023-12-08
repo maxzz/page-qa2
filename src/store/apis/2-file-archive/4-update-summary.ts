@@ -13,13 +13,13 @@ export function updateSummary(fromArchive: FilenameMeta[], fromConfig: CurrentEx
             qa: false,
         };
         fromConfig.summary = fromConfig.summary.map(
-            (item) => {
-                const found = areTheSameBrandBrowserQa(item, lookupFor) && isVersionAGreaterB(latestPublicStr, item.version);
-                if (found) {
-                    item.version = latestPublic.version;
-                    item.updated = latestPublic.updated;
+            (configItem) => {
+                const foundStale = areTheSameBrandBrowserQa(configItem, lookupFor) && isVersionAGreaterB(latestPublicStr, configItem.version);
+                if (foundStale) {
+                    configItem.version = latestPublic.version;
+                    configItem.updated = latestPublic.updated;
                 }
-                return item;
+                return configItem;
             }
         );
     }
