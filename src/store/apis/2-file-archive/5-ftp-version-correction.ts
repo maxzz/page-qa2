@@ -46,8 +46,8 @@ export function correctArchiveVsConfigVersions(fromArchive: FilenameMeta[] | nul
     fromConfig.summary = updateSummary(sortedArchive, fromConfig, publicVersions);
     const summaryExtensions = fromConfig.summary;
 
-    const pureArchive = sortedArchive.map((item) => item.item);
-    console.log('sortedArchive', pureArchive);
+    // const pureArchive = sortedArchive.map((item) => item.item);
+    // console.log('sortedArchive', pureArchive);
 
     return {
         latestChExtension,

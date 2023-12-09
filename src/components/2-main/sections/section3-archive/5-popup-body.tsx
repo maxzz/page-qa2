@@ -3,7 +3,7 @@ import { urlArchiveExtension, FilenameMetaEx, BuildType, convBrowser2Name } from
 import { IconBrowser } from '@/components/ui/icons';
 import { OrderedGroup } from './1-group-icons';
 
-function PopupVersionItem({ meta }: { meta?: FilenameMetaEx; }) {
+function PopupBodyRow({ meta }: { meta?: FilenameMetaEx; }) {
     if (!meta) {
         return null;
     }
@@ -31,8 +31,8 @@ export function PopupBody({ orderedGroup, item }: { orderedGroup: OrderedGroup; 
                 {Object.entries(orderedGroup).map(
                     ([key, item], idx) => (
                         <Fragment key={idx}>
-                            <PopupVersionItem meta={item.main} />
-                            <PopupVersionItem meta={item.debug} />
+                            <PopupBodyRow meta={item.main} />
+                            <PopupBodyRow meta={item.debug} />
                         </Fragment>
                     )
                 )}

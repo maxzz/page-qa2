@@ -7,6 +7,7 @@ import { BrowserVersionsTable } from './1-browser-versions-table';
 export function Section2_CurrentVersions() {
     const summary = useAtomValue(summaryExtensionsAtom);
     const rows = convToFlatTableRows(reduceForTable(summary));
+
     const loaded = rows[Browser.chrome] && rows[Browser.firefox];
     if (!loaded) {
         return null;

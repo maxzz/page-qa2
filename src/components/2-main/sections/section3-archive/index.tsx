@@ -1,4 +1,4 @@
-import { YearsGrid } from './5-grid';
+import { GridAllYears } from './4-grid';
 import { Legend } from './6-legend';
 
 export function Section3_Archive() {
@@ -13,7 +13,7 @@ export function Section3_Archive() {
                 Contact Max Zakharzhevskiy at HID global to obtain the password.
             </p>
 
-            <YearsGrid />
+            <GridAllYears />
             <Legend />
         </div>
     );

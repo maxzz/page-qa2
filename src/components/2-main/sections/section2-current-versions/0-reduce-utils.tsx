@@ -198,6 +198,7 @@ type FlatTableRows = {
  */
 export function convToFlatTableRows(table: Table): FlatTableRows {
     const rv = {} as FlatTableRows;
+
     for (const [brKey, brVal] of Object.entries(table) as [Browser, Table[Browser]][]) {
         if (!rv[brKey]) {
             rv[brKey] = [];
@@ -210,7 +211,7 @@ export function convToFlatTableRows(table: Table): FlatTableRows {
             });
         }
     }
-    console.log('rows', rv);
     
+    // console.log('rows', rv);
     return rv;
 }

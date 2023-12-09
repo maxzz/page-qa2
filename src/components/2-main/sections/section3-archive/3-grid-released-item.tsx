@@ -1,10 +1,10 @@
 import { FilenameMetaEx, BuildType } from '@/store/apis';
 import { UITooltip } from '@/components/ui/UITooltip';
 import { OrderedGroup } from './1-group-icons';
-import { GridVersionItem } from './2-grid-item';
-import { PopupBody } from './3-popup-body';
+import { ReleasedItem } from './2-grid-item';
+import { PopupBody } from './5-popup-body';
 
-export function YearItems({ items }: { items: FilenameMetaEx[]; }) {
+export function ReleasedItemParent({ items }: { items: FilenameMetaEx[]; }) {
     const item = items[0];
     if (!item) {
         return null;
@@ -20,7 +20,7 @@ export function YearItems({ items }: { items: FilenameMetaEx[]; }) {
 
     return (
         <UITooltip
-            trigger={<GridVersionItem orderedGroup={orderedGroup} item={item} multiple={items.length > 1} />}
+            trigger={<ReleasedItem orderedGroup={orderedGroup} item={item} multiple={items.length > 1} />}
             runInPortal={true}
             arrow={true}
             popperConfig={{ interactive: true, trigger: 'click', }}
