@@ -1,18 +1,4 @@
-#### version 4.0.023 <span class="date">08.13.2023</span> Public
-* The extension is built using a new build system and a new branch to provide future support for v2 and v3 manifests.
-* Bug [91453](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=91453) 
-  Password fill-in issue on "Client360" (client360.fiservapps.com)
-  Updated the algorithm for populating form values to provide an asynchronous chain of events.
-
-#### version 3.4.711 <span class="date">04.02.2023</span>
-* Bug [91506](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=91248) 
-  Bank of Washington: Unable to create managed logon (two password protected fields for username and password)
-  Added a customization for working with this site. (3.4.711 04.02.2023)
-* Bug [91370](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=91370) 
-  Bank of Utica - Navigator (FiServ) site not trainable and doesn't submit
-  Added a customization for working with this site. (3.4.711 04.02.2023)
-* The extension is built using the new build system.
-#### version 3.4.709 <span class="date">02.26.2023</span> Public
+#### version 3.4.709 <span class="date">02.26.2023</span>
 * Bug [91248](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=91248) 
   PM icon and fill-in move to unprotected field except when not visible due to window resizing.
   Added the ability to filter out the context script fields. (3.4.709 02.26.2023)
@@ -20,7 +6,7 @@
   "Payroll people" website was supported in extension .439 but no longer works in .700.
   Added a customization for working with this site. (3.4.702 01.30.2023)
   
-#### version 3.4.700 <span class="date">12.04.2022</span> Public
+#### version 3.4.700 <span class="date">12.04.2022</span>  Public
 * Bug [91153](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=91153) 
   Disable use of personal logins if GPO Add personal logins is disabled. 
   Added perosnal logins filter to drop personal logins if add new logins not allowed with GPO.
