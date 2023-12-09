@@ -1,0 +1,62 @@
+[
+    {
+        "type": "-",
+        "name": "dppm-3.4.700_on_2022.12.04-r-chrome3.zip",
+        "size": 124014,
+        "modifyTime": 1677708694000,
+        "accessTime": 1677708693000,
+        "rights": {
+            "user": "rw",
+            "group": "rw",
+            "other": "r"
+        },
+        "owner": 1000,
+        "group": 100,
+        "longname": "-rw-rw-r--    1 maksym   users      124014 Mar  1 16:11 dppm-3.4.700_on_2022.12.04-r-chrome.zip"
+    },
+    {
+        "type": "-",
+        "name": "dppm-3.4.711_on_2023.03.25-r-chrome3.zip",
+        "size": 207823,
+        "modifyTime": 1678069094000,
+        "accessTime": 1678069094000,
+        "rights": {
+            "user": "rw",
+            "group": "rw",
+            "other": "r"
+        },
+        "owner": 1000,
+        "group": 100,
+        "longname": "-rw-rw-r--    1 maksym   users      207823 Mar  5 20:18 dppm-3.4.709_on_2023.03.05-m-chrome.zip"
+    },
+    {
+        "type": "-",
+        "name": "dppm-3.4.709_on_2023.03.05-r-chrome.zip",
+        "size": 124218,
+        "modifyTime": 1678069088000,
+        "accessTime": 1678290103000,
+        "rights": {
+            "user": "rw",
+            "group": "rw",
+            "other": "r"
+        },
+        "owner": 1000,
+        "group": 100,
+        "longname": "-rw-rw-r--    1 maksym   users      124218 Mar  5 20:18 dppm-3.4.709_on_2023.03.05-r-chrome.zip"
+    },
+    {
+        "type": "-",
+        "name": "dppm-3.4.72_on_2020.06.05-r-chrome.zip",
+        "size": 103639,
+        "modifyTime": 1677708694000,
+        "accessTime": 1677708694000,
+        "rights": {
+            "user": "rw",
+            "group": "rw",
+            "other": "r"
+        },
+        "owner": 1000,
+        "group": 100,
+        "longname": "-rw-rw-r--    1 maksym   users      103639 Mar  1 16:11 dppm-3.4.72_on_2020.06.05-r-chrome.zip"
+    }
+]
