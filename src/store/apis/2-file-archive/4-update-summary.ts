@@ -8,7 +8,7 @@ function getFilenameMetaVersionByVersion(archive: FilenameMetaVersion[] | null, 
 function areTheSameBrandBrowserQa(a: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>, b: Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>): boolean {
     const { brand: a_brand, browser: a_browser, qa: a_qa } = a;
     const { brand: b_brand, browser: b_browser, qa: b_qa } = b;
-    return a_browser === b_browser && a_brand === b_brand && a_qa === b_qa;
+    return (b_brand === undefined || a_brand === b_brand) && a_browser === b_browser && a_qa === b_qa;
 }
 
 function updatePublic(fromArchive: FilenameMetaVersion[], fromConfig: CurrentExtensions, publicVersions: string[] | undefined) {
@@ -47,7 +47,7 @@ function updateQa(fromArchive: FilenameMetaVersion[], fromConfig: CurrentExtensi
 
     if (latestQa) {
         const lookupFor = {
-            brand: Brand.dp,
+            brand: undefined,
             browser: Browser.chrome,
             qa: true,
         };
