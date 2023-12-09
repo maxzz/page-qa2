@@ -1,13 +1,13 @@
 import { useAtomValue } from 'jotai';
-import { summaryExtensionsAtom } from '@/store/store';
 import { Browser } from '@/store/apis';
-import { reduceToFlat, reduceForTable } from './0-reduce-utils';
+import { summaryExtensionsAtom } from '@/store/store';
+import { convToFlatTableRows, reduceForTable } from './0-reduce-utils';
 import { BrowserVersionsTable } from './1-browser-versions-table';
 
 export function Section2_CurrentVersions() {
     const summary = useAtomValue(summaryExtensionsAtom);
-    const res = reduceToFlat(reduceForTable(summary));
-    const loaded = res[Browser.chrome] && res[Browser.firefox];
+    const rows = convToFlatTableRows(reduceForTable(summary));
+    const loaded = rows[Browser.chrome] && rows[Browser.firefox];
     if (!loaded) {
         return null;
     }
@@ -16,8 +16,8 @@ export function Section2_CurrentVersions() {
             <p>Summary table of QA and currently published HID Password Manager extensions.</p>
 
             <div className="max-w-2xl grid grid-cols-2 gap-x-2">
-                <BrowserVersionsTable browser={Browser.chrome} table={res[Browser.chrome]} />
-                <BrowserVersionsTable browser={Browser.firefox} table={res[Browser.firefox]} />
+                <BrowserVersionsTable browser={Browser.chrome} table={rows[Browser.chrome]} />
+                <BrowserVersionsTable browser={Browser.firefox} table={rows[Browser.firefox]} />
             </div>
 
             <div className="text-xs md:text-sm">

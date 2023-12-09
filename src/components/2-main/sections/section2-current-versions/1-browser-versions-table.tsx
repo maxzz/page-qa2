@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { convBrand2Name, convBrowser2Name, ExtnFromConfig, Browser } from '@/store/apis';
-import { FlatTableItem } from './0-reduce-utils';
+import { FlatTableRow } from './0-reduce-utils';
 import { IconBrowser } from '@/components/ui/icons';
 import { beautifyDate } from '@/utils/helpers';
 
@@ -18,7 +18,7 @@ function VersionItem({ idx, item }: { idx: number; item: ExtnFromConfig | undefi
     );
 }
 
-export function BrowserVersionsTable({ browser, table = [] }: { browser: Browser; table: FlatTableItem[]; }) {
+export function BrowserVersionsTable({ browser, table = [] }: { browser: Browser; table: FlatTableRow[]; }) {
     return (
         <div className="cursor-default">
 

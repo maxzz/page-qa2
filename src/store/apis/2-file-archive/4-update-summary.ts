@@ -5,7 +5,7 @@ export function updateSummary(fromArchive: FilenameMetaVersion[], fromConfig: Cu
     const latestPublicStr = publicVersions?.[0]; // ['3.4.700', '3.4.585', '3.4.442', ... ] from history.md file are sorted in descending order.
     const latestPublic = getFilenameMetaVersionByVersion(fromArchive, latestPublicStr)?.item;
 
-    console.log('fromConfig.summary', fromConfig.summary.map((item) => ({qa: item.qa, ...item})));
+    console.log('fromConfig.summary', fromConfig.summary.map((item) => ({ bro: item.browser, qa: item.qa, ...item })));
     console.log('fromArchive', fromArchive);
 
     // 1. Update 'Current Versions'
@@ -23,7 +23,7 @@ export function updateSummary(fromArchive: FilenameMetaVersion[], fromConfig: Cu
                     configItem.updated = latestPublic.updated;
                     configItem.broIcon = latestPublic.broIcon;
                     configItem.isV3 = latestPublic.isV3;
-                    
+
                     console.log('configItem', configItem);
                 }
                 return configItem;

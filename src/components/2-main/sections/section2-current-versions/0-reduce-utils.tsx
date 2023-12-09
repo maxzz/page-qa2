@@ -24,29 +24,193 @@ export function reduceForTable(exts: ExtnFromConfig[]): Table {
     }, {} as Table);
 }
 
-export type FlatTableItem = {
+export type FlatTableRow = {
     brand: Brand;
     qa?: ExtnFromConfig;
     release?: ExtnFromConfig;
 };
 
-type FlatTable = {
-    [key in Browser]: FlatTableItem[]
+type FlatTableRows = {
+    [key in Browser]: FlatTableRow[];
 };
 
-export function reduceToFlat(table: Table): FlatTable {
-    const res = {} as FlatTable;
+/**
+ * 
+ * @param table 
+ * @returns ```
+ {
+    "f": [
+        {
+            "brand": "dp",
+            "qa": {
+                "fname": "https://crossmatch.hid.gl/g02/current/dppm-3.4.375_on_2021.08.31-r-firefox.xpi",
+                "version": "3.4.375",
+                "updated": "2021.08.31",
+                "browser": "f",
+                "broIcon": "f",
+                "build": "r",
+                "isV3": false,
+                "brand": "dp",
+                "qa": true
+            },
+            "release": {
+                "fname": "https://crossmatch.hid.gl/g02/current/dppm-3.4.350_on_2021.05.24-r-firefox.xpi",
+                "version": "3.4.350",
+                "updated": "2021.05.24",
+                "browser": "f",
+                "broIcon": "f",
+                "build": "r",
+                "isV3": false,
+                "brand": "dp",
+                "qa": false
+            }
+        },
+        {
+            "brand": "hp",
+            "qa": {
+                "fname": "https://crossmatch.hid.gl/g02/current/dppm-3.4.375_on_2021.08.31-r-firefox.xpi",
+                "version": "3.4.375",
+                "updated": "2021.08.31",
+                "browser": "f",
+                "broIcon": "f",
+                "build": "r",
+                "isV3": false,
+                "brand": "hp",
+                "qa": true
+            },
+            "release": {
+                "fname": "https://crossmatch.hid.gl/g02/current/dppm-3.4.350_on_2021.05.24-r-firefox.xpi",
+                "version": "3.4.350",
+                "updated": "2021.05.24",
+                "browser": "f",
+                "broIcon": "f",
+                "build": "r",
+                "isV3": false,
+                "brand": "hp",
+                "qa": false
+            }
+        },
+        {
+            "brand": "de",
+            "qa": {
+                "fname": "https://crossmatch.hid.gl/g02/current/dppm-3.4.375_on_2021.08.31-r-firefox.xpi",
+                "version": "3.4.375",
+                "updated": "2021.08.31",
+                "browser": "f",
+                "broIcon": "f",
+                "build": "r",
+                "isV3": false,
+                "brand": "de",
+                "qa": true
+            },
+            "release": {
+                "fname": "https://crossmatch.hid.gl/g02/current/dppm-3.4.350_on_2021.05.24-r-firefox.xpi",
+                "version": "3.4.350",
+                "updated": "2021.05.24",
+                "browser": "f",
+                "broIcon": "f",
+                "build": "r",
+                "isV3": false,
+                "brand": "de",
+                "qa": false
+            }
+        }
+    ],
+    "c": [
+        {
+            "brand": "dp",
+            "qa": {
+                "fname": "https://crossmatch.hid.gl/g02/current/dppm-3.4.710_on_2023.03.14-r-chrome3.zip",
+                "version": "3.4.710",
+                "updated": "2023.03.14",
+                "browser": "c",
+                "broIcon": "3",
+                "build": "r",
+                "isV3": true,
+                "brand": "dp",
+                "qa": true
+            },
+            "release": {
+                "fname": "https://chrome.google.com/webstore/detail/digitalpersona-altus/piimgpjgnagkckjlhjcppbkbjjfjmnbh",
+                "version": "3.4.700",
+                "updated": "2022.12.04",
+                "browser": "c",
+                "broIcon": "3",
+                "build": "m",
+                "isV3": true,
+                "brand": "dp",
+                "qa": false
+            }
+        },
+        {
+            "brand": "hp",
+            "qa": {
+                "fname": "https://crossmatch.hid.gl/g02/current/dppm-3.4.710_on_2023.03.14-r-chrome3.zip",
+                "version": "3.4.710",
+                "updated": "2023.03.14",
+                "browser": "c",
+                "broIcon": "3",
+                "build": "r",
+                "isV3": true,
+                "brand": "hp",
+                "qa": true
+            },
+            "release": {
+                "fname": "https://chrome.google.com/webstore/detail/hp-client-security-manage/pkdnjfgdoolnmiacpdamadcneoblphbj",
+                "version": "3.0.905",
+                "updated": "2022.06.03",
+                "browser": "c",
+                "broIcon": "c",
+                "build": "m",
+                "isV3": false,
+                "brand": "hp",
+                "qa": false
+            }
+        },
+        {
+            "brand": "de",
+            "qa": {
+                "fname": "https://crossmatch.hid.gl/g02/current/dppm-3.4.710_on_2023.03.14-r-chrome3.zip",
+                "version": "3.4.710",
+                "updated": "2023.03.14",
+                "browser": "c",
+                "broIcon": "3",
+                "build": "r",
+                "isV3": true,
+                "brand": "de",
+                "qa": true
+            },
+            "release": {
+                "fname": "https://chrome.google.com/webstore/detail/digitalpersona-altus/piimgpjgnagkckjlhjcppbkbjjfjmnbh",
+                "version": "1.4.0.6562",
+                "updated": "2016.12.08",
+                "browser": "c",
+                "broIcon": "c",
+                "build": "m",
+                "isV3": false,
+                "brand": "de",
+                "qa": false
+            }
+        }
+    ]
+} 
+```
+ */
+export function convToFlatTableRows(table: Table): FlatTableRows {
+    const rv = {} as FlatTableRows;
     for (const [brKey, brVal] of Object.entries(table) as [Browser, Table[Browser]][]) {
-        if (!res[brKey]) {
-            res[brKey] = [];
+        if (!rv[brKey]) {
+            rv[brKey] = [];
         }
         for (const [bdKey, bdVal] of Object.entries(brVal) as [Brand, { qa?: ExtnFromConfig; release?: ExtnFromConfig; }][]) {
-            res[brKey].push({
+            rv[brKey].push({
                 brand: bdKey,
                 qa: bdVal.qa,
                 release: bdVal.release,
             });
         }
     }
-    return res;
+    console.log('rows', rv);
+    
+    return rv;
 }
