@@ -34,6 +34,6 @@ export function isVersionAGreaterB(a?: string, b?: string): boolean { // '3.4.42
     if (aArr.length !== bArr.length) {
         return false;
     }
-    const itemLess = aArr.find((ver, idx) => +ver < +bArr[idx]);
+    const itemLess = aArr.some((ver, idx) => +ver < +bArr[idx]);
     return !itemLess;
 }

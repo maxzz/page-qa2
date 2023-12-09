@@ -33,16 +33,19 @@ export function correctArchiveVsConfigVersions(fromArchive: FilenameMeta[] | nul
     const archiveWithVersions = fromArchive.map(convToFilenameMetaVersion);
     const sortedArchive = archiveWithVersions.sort(compareFilenameMetaVersions).reverse();
 
+    const latestChFromArchive = getLatestReleaseBuild(sortedArchive, Browser.chrome )?.item;
+    const latestFfFromArchive = getLatestReleaseBuild(sortedArchive, Browser.firefox )?.item;
+
     // 2. Update and apply 'QA latest'
-    const latestChExtension = selectTheLatestFrom(fromConfig.chrome, getLatestReleaseBuild(sortedArchive, Browser.chrome )?.item);
-    const latestFfExtension = selectTheLatestFrom(fromConfig.firefox, getLatestReleaseBuild(sortedArchive, Browser.firefox )?.item);
+    const latestChExtension = selectTheLatestFrom(fromConfig.chrome, latestChFromArchive);
+    const latestFfExtension = selectTheLatestFrom(fromConfig.firefox, latestFfFromArchive);
    
     // 3. Apply 'Current Versions'
     fromConfig.summary = updateSummary(sortedArchive, fromConfig, publicVersions);
     const summaryExtensions = fromConfig.summary;
 
-    // const pureArchive = sortedArchive.map((item) => item.item);
-    // console.log('sortedArchive', pureArchive);
+    const pureArchive = sortedArchive.map((item) => item.item);
+    console.log('sortedArchive', pureArchive);
 
     return {
         latestChExtension,
