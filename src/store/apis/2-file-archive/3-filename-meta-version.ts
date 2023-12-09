@@ -7,8 +7,8 @@ export type FilenameMetaVersion = {
     readonly version: VersionTuple;
 };
 
-export function strToVersionTuple(version: string): VersionTuple {
-    let v = version.split('.').map((v) => +v) as VersionTuple;
+export function strToVersionTuple(version: string | undefined): VersionTuple {
+    let v = (version || '').split('.').map((v) => +v) as VersionTuple;
     if (v.length !== 3) {
         v = [0, 0, 0];
     }
@@ -29,11 +29,8 @@ export function compareFilenameMetaVersions(a: FilenameMetaVersion, b: FilenameM
 }
 
 export function isVersionAGreaterB(a?: string, b?: string): boolean { // '3.4.429' vs. '3.4.430'
-    const aArr = a?.split('.') || [];
-    const bArr = b?.split('.') || [];
-    if (aArr.length !== bArr.length) {
-        return false;
-    }
-    const itemLess = aArr.some((ver, idx) => +ver < +bArr[idx]);
-    return !itemLess;
+    const [a1, a2, a3] = strToVersionTuple(a);
+    const [b1, b2, b3] = strToVersionTuple(b);
+    const res = a1 - b1 || a2 - b2 || a3 - b3;
+    return res > 0;
 }
