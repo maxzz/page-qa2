@@ -14,10 +14,12 @@ function selectTheLatestFrom(extnConfig: ExtnFromConfig, extnArchive?: FilenameM
         extnArchive && isVersionAGreaterB(extnArchive.version, extnConfig.version)
             ? {
                 ...extnConfig,
+                fname: urlArchiveExtension(extnArchive.fname),
                 version: extnArchive.version,
                 updated: extnArchive.updated,
-                fname: urlArchiveExtension(extnArchive.fname),
-            }
+                broIcon: extnArchive.broIcon,
+                isV3: extnArchive.isV3,
+        }
             : extnConfig
     );
 }
