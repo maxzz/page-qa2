@@ -13,6 +13,7 @@ export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Bro
     const extnFromConfig = useAtomValue(extInfoAtom);
     const vis = extnFromConfig?.fname;
     const broIcon: Browser = extnFromConfig?.broIcon || browser;
+    //console.log('CurrentVersion', { browser, extnFromConfig, loading, vis, broIcon });
 
     const btnStyles = useSpring({ opacity: vis ? 1 : 0, scaleY: vis ? 1 : 0, config: { duration: 150 }, });
     const txtStyles = useSpring({ opacity: vis ? 1 : 0, x: vis ? 0 : 200, config: { duration: 150 }, });

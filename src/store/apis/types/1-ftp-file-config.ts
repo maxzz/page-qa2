@@ -36,8 +36,8 @@ export namespace FormatCurrentCfg {
 
     export type FromFile = {
         browsers: ExtensionsPerBrowser;
-        brand: Brand; // 'dp' | 'hp' | 'de'
-        languages: Languages;
+        brand: Brand; // 'dp' | 'hp' | 'de' // not used anymore
+        languages: Languages;               // not used anymore
     };
 
     /*

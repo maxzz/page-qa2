@@ -2,9 +2,11 @@ import { Brand, Browser, CurrentExtensions, ExtnFromConfig } from "../types";
 import { FilenameMetaVersion, isVersionAGreaterB } from "./3-filename-meta-version";
 
 export function updateSummary(fromArchive: FilenameMetaVersion[], fromConfig: CurrentExtensions, publicVersions: string[] | undefined) {
-    const latestPublicStr = publicVersions?.[0]; // ['3.4.585', '3.4.442', '3.4.432', ... ] from history.md file are sorted in descending order.
-    const latestPublic = getArchiveByVersion(fromArchive, latestPublicStr)?.item;
-    // console.log('latestPublic', latestPublicStr, 'publicVersions', publicVersions, 'latestPublicStr', latestPublicStr, 'fromArchive', fromArchive);
+    const latestPublicStr = publicVersions?.[0]; // ['3.4.700', '3.4.585', '3.4.442', ... ] from history.md file are sorted in descending order.
+    const latestPublic = getFilenameMetaVersionByVersion(fromArchive, latestPublicStr)?.item;
+
+    console.log('fromConfig.summary', fromConfig.summary.map((item) => ({qa: item.qa, ...item})));
+    console.log('fromArchive', fromArchive);
 
     // 1. Update 'Current Versions'
     if (latestPublic) {
@@ -19,6 +21,10 @@ export function updateSummary(fromArchive: FilenameMetaVersion[], fromConfig: Cu
                 if (foundStale) {
                     configItem.version = latestPublic.version;
                     configItem.updated = latestPublic.updated;
+                    configItem.broIcon = latestPublic.broIcon;
+                    configItem.isV3 = latestPublic.isV3;
+                    
+                    console.log('configItem', configItem);
                 }
                 return configItem;
             }
@@ -28,7 +34,7 @@ export function updateSummary(fromArchive: FilenameMetaVersion[], fromConfig: Cu
     return fromConfig.summary;
 }
 
-function getArchiveByVersion(archive: FilenameMetaVersion[] | null, version?: string): FilenameMetaVersion | undefined {
+function getFilenameMetaVersionByVersion(archive: FilenameMetaVersion[] | null, version?: string): FilenameMetaVersion | undefined {
     return version ? archive?.find(({ item }) => item.version === version) : undefined;
 }
 
