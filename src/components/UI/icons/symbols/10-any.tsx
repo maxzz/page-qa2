@@ -13,6 +13,7 @@ export function IconBrowser({ browser, ...rest }: { browser?: Browser; } & HTMLA
         case Browser.firefox: return <IconLogoFf {...rest} />;
         case Browser.dev: return <IconLogoDev {...rest} />;
         case Browser.edge: return <IconLogoMe {...rest} />;
+        case Browser.unknown: return <div {...rest as HTMLAttributes<HTMLDivElement>} />;
     }
     return null;
 }

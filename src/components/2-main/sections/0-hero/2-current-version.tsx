@@ -11,7 +11,7 @@ const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
 export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Browser; extInfoAtom: Atom<ExtnFromConfig | undefined>; loading: boolean; }) {
     const extnFromConfig = useAtomValue(extInfoAtom);
-    const broIcon: Browser = extnFromConfig?.broIcon || browser;
+    const broIcon: Browser = extnFromConfig?.broIcon || Browser.unknown;
     
     const hasInfo = extnFromConfig?.fname;
 
