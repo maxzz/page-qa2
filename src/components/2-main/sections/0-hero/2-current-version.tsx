@@ -19,7 +19,7 @@ export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Bro
     const txtStyles = useSpring({ opacity: vis ? 1 : 0, x: vis ? 0 : 200, config: { duration: 150 }, });
     
     return (
-        <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ ...boxShadow, transition: "all .2s" }}>
+        <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ boxShadow, transition: "all .2s" }}>
 
             {/* Icon, name, version, updated date */}
             <div className="content-center place-self-center">
