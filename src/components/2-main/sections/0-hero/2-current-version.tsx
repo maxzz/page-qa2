@@ -11,13 +11,22 @@ const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
 export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Browser; extInfoAtom: Atom<ExtnFromConfig | undefined>; loading: boolean; }) {
     const extnFromConfig = useAtomValue(extInfoAtom);
-    const vis = extnFromConfig?.fname;
     const broIcon: Browser = extnFromConfig?.broIcon || browser;
-    //console.log('CurrentVersion', { browser, extnFromConfig, loading, vis, broIcon });
-
-    const btnStyles = useSpring({ opacity: vis ? 1 : 0, scaleY: vis ? 1 : 0, config: { duration: 150 }, });
-    const txtStyles = useSpring({ opacity: vis ? 1 : 0, x: vis ? 0 : 200, config: { duration: 150 }, });
     
+    const hasInfo = extnFromConfig?.fname;
+
+    const btnStyles = useSpring({
+        opacity: hasInfo ? 1 : 0,
+        scaleY: hasInfo ? 1 : 0,
+        config: { duration: 150 },
+    });
+
+    const txtStyles = useSpring({
+        opacity: hasInfo ? 1 : 0,
+        x: hasInfo ? 0 : 200,
+        config: { duration: 150 },
+    });
+
     return (
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ boxShadow, transition: "all .2s" }}>
 
