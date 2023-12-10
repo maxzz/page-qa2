@@ -1,5 +1,5 @@
 export * from './section0-hero';
-export * from './section1_release-notes';
+export * from './section1-release-notes';
 export * from './section2-current-versions';
 export * from './section3-archive';
 export * from './section4-test-apps';

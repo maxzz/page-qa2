@@ -1,7 +1,7 @@
 import { FilenameMetaEx, BuildType } from '@/store/apis';
 import { UITooltip } from '@/components/ui/UITooltip';
-import { OrderedGroup } from './1-group-icons';
-import { ReleasedItem } from './2-grid-item';
+import { OrderedGroup } from './1-grid-released-item-icons';
+import { ReleasedItem } from './2-grid-released-item';
 import { PopupBody } from './5-popup-body';
 
 export function ReleasedItemParent({ items }: { items: FilenameMetaEx[]; }) {

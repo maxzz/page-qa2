@@ -21,7 +21,7 @@ const iconClasses = (groupItem: GroupItem) => classNames(
     !isDevTools(groupItem) && "extension-small-icon-outline",
 );
 
-export function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
+export function ReleasedIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
     return (
         <div className="w-10 flex">
             {Object.values(orderedGroup).map(
@@ -29,7 +29,7 @@ export function GroupIcons({ orderedGroup }: { orderedGroup: OrderedGroup; }) {
                     <Fragment key={idx}>
                         {(groupItem.main || groupItem.debug) && (
                             <IconBrowser
-                                browser={groupItem.main?.browser || groupItem.debug?.browser}
+                                browser={groupItem.main?.broIcon || groupItem.debug?.broIcon}
                                 className={iconClasses(groupItem)}
                                 key={idx}
                             />

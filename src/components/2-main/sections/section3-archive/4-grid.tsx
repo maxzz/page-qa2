@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { byYearsAtom } from '@/store/store';
 import { YearExts } from '@/store/apis';
-import { ReleasedItemParent } from './3-grid-released-item';
+import { ReleasedItemParent } from './3-grid-released-item-parent';
 
 export function GridAllYears() {
     const byYears: YearExts[] = [...useAtomValue(byYearsAtom)].reverse();

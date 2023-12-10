@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
 import { urlArchiveExtension, FilenameMetaEx, BuildType, convBrowser2Name } from '@/store/apis';
 import { IconBrowser } from '@/components/ui/icons';
-import { OrderedGroup } from './1-group-icons';
+import { OrderedGroup } from './1-grid-released-item-icons';
 
-function PopupBodyRow({ meta }: { meta?: FilenameMetaEx; }) {
+function PopupRow({ meta }: { meta?: FilenameMetaEx; }) {
     if (!meta) {
         return null;
     }
@@ -31,8 +31,8 @@ export function PopupBody({ orderedGroup, item }: { orderedGroup: OrderedGroup; 
                 {Object.entries(orderedGroup).map(
                     ([key, item], idx) => (
                         <Fragment key={idx}>
-                            <PopupBodyRow meta={item.main} />
-                            <PopupBodyRow meta={item.debug} />
+                            <PopupRow meta={item.main} />
+                            <PopupRow meta={item.debug} />
                         </Fragment>
                     )
                 )}
