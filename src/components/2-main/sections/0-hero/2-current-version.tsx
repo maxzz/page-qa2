@@ -11,9 +11,15 @@ const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
 export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Browser; extInfoAtom: Atom<ExtnFromConfig | undefined>; loading: boolean; }) {
     const extnFromConfig = useAtomValue(extInfoAtom);
-    const broIcon: Browser = extnFromConfig?.broIcon || Browser.unknown;
+    const broIcon: Browser = extnFromConfig?.broIcon || browser;
     
     const hasInfo = extnFromConfig?.fname;
+    const hasIcon = extnFromConfig?.broIcon;
+
+    const icoStyles = useSpring({
+        opacity: hasIcon ? 1 : 0,
+        config: { duration: 1500 },
+    });
 
     const btnStyles = useSpring({
         opacity: hasInfo ? 1 : 0,
@@ -31,9 +37,9 @@ export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Bro
         <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border rounded transition-all duration-200 grid grid-cols-[auto,1fr]" style={{ boxShadow }}>
 
             {/* Icon, name, version, updated date */}
-            <div className="content-center place-self-center">
+            <a.div style={icoStyles} className="content-center place-self-center">
                 <IconBrowser browser={broIcon} className={"w-9 h-8"} style={iconShadow} />
-            </div>
+            </a.div>
 
             <div className="ml-3 text-xs overflow-hidden">
                 <div className="text-base font-bold scale-y-125 whitespace-nowrap">{convBrowser2Name(browser)}
