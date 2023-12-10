@@ -4,9 +4,9 @@
             "extensionUrl": {
                 "dp": {
                     "url": "https://chrome.google.com/webstore/detail/digitalpersona-altus/piimgpjgnagkckjlhjcppbkbjjfjmnbh",
-                    "version": "3.4.700",
-                    "updated": "2022.12.04",
-                    "published": "2022.12.15"
+                    "version": "3.4.709",
+                    "updated": "2023.02.26",
+                    "published": "2023.03.15"
                 },
                 "hp": {
                     "url": "https://chrome.google.com/webstore/detail/hp-client-security-manage/pkdnjfgdoolnmiacpdamadcneoblphbj",
@@ -23,7 +23,7 @@
             },
             "qaUrl": {
                 "dp": {
-                    "url": "https://crossmatch.hid.gl/g02/current/dppm-3.4.710_on_2023.03.14-r-chrome.zip"
+                    "url": "https://crossmatch.hid.gl/g02/current/dppm-3.4.812_on_2023.12.08-r-chrome.zip"
                 }
             }
         },
