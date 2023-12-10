@@ -28,7 +28,7 @@ export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Bro
     });
 
     return (
-        <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border grid grid-cols-[auto,1fr]" style={{ boxShadow, transition: "all .2s" }}>
+        <div className="px-2 pt-2 pb-1 sm:px-4 sm:py-3 border rounded transition-all duration-200 grid grid-cols-[auto,1fr]" style={{ boxShadow }}>
 
             {/* Icon, name, version, updated date */}
             <div className="content-center place-self-center">
