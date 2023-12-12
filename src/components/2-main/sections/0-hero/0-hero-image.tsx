@@ -9,20 +9,18 @@ export const boxShadow = "\
 
 export function HeroImage() {
     const styles = useSpring({
-        from: { scale: 2, opacity: 0, y: -1000 },
+        from: { scale: 3, opacity: 0.2, y: -1000 },
         to: { scale: 1, opacity: 1, y: 0 },
-        config: { duration: 1600, easing: easings.easeInOutElastic }
+        config: { duration: 3000, easing: easings.easeInOutElastic }
     });
     return (
-        <div className="overflow-hidden">
-            <a.div style={styles} className="bg-slate-50 rounded overflow-hidden transition-all duration-200">
-                <img
-            
-                    className="h-full object-cover border border-slate-300 border-b-slate-400"
-                    src={HERO_IMAGE}
-                    alt="hero"
-                />
-            </a.div>
+        <div className="bg-slate-50 rounded overflow-hidden transition-all duration-200" style={{ boxShadow }}>
+            <a.img
+                style={styles}
+                className="h-full object-cover border border-slate-300 border-b-slate-400"
+                src={HERO_IMAGE}
+                alt="hero"
+            />
         </div>
     );
 }
