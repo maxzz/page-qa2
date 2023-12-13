@@ -36,6 +36,15 @@ export default (({ command }) => defineConfig({
             brotliSize: true,
         }),
     ],
+    build: {
+        rollupOptions: {
+            onwarn: (warning, rollupWarn) => {
+                if (warning.message.includes('"use client"')) return;
+                if (warning.code === 'CIRCULAR_DEPENDENCY') return;
+                rollupWarn(warning);
+            },
+        },
+    },
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src'),
