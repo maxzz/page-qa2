@@ -10,7 +10,7 @@ const legendBrowsers = [
     Browser.firefox,  // 4. Firefox extension
     Browser.firefox,  // 5. Firefox extension with debug information
     Browser.firefox,  // 6. Firefox extension (debug version only)
-    Browser.dev       // 7. Dev extension with binaries
+    Browser.dev       // 7. Dev extension with binaries (tow versions: txt and self extraction exe)
 ];
 
 const withDebugText = (idx: number) => idx === 1 || idx === 3 || idx === 5;
