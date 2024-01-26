@@ -61,6 +61,13 @@ export function Section5_FinalNotes() {
                 }
             </ul>
 
+            <h2 className="mt-2 text-base font-semibold">digitalpersona.hidglobal.com</h2>
+            <ul className="ml-4 list-disc">
+                <li>
+                    Support tools <a className="hoverurl" href={"https://digitalpersona.hidglobal.com/support-tools"} target="_blank">digitalpersona.hidglobal.com/support-tools</a>.
+                </li>
+            </ul>
+
             <h2 className="mt-2 text-base font-semibold">About</h2>
             <ul className="ml-4 list-disc">
                 <li>
