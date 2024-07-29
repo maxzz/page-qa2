@@ -1,8 +1,14 @@
 import { atom } from 'jotai';
 import { marked } from 'marked';
-import { archiveByYears, fetchCurrentConfig, fetchExistingOnServer, fetchReleaseNotes, regexMarkdownPublicVersions, correctArchiveVsConfigVersions, FilenameMeta } from '../apis';
 import { toastError } from '@/components/ui/UiToaster';
-import { loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNotesAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom, loadFailedAtom } from './3-data-atoms';
+import {
+    archiveByYears, fetchCurrentConfig, fetchExistingOnServer, fetchReleaseNotes,
+    regexMarkdownPublicVersions, correctArchiveVsConfigVersions, FilenameMeta
+} from '../../apis';
+import {
+    loadingStateConfigAtom, loadingStateArchiveAtom, loadingStateReleaseNotesAtom,
+    publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom, loadFailedAtom
+} from '../3-data-atoms';
 
 const runFetchConfigAtom = atom(
     null,
@@ -79,7 +85,7 @@ const correlateAtom = atom(
         if (stateNotes.loading || stateArchive.loading || stateConfig.loading) {
             return;
         }
-        
+
         const failed = !!stateNotes.error || !!stateArchive.error || !!stateConfig.error;
         set(loadFailedAtom, failed);
         if (failed) {
@@ -98,7 +104,7 @@ const correlateAtom = atom(
         set(byYearsAtom, byYears);
 
         // 2. Update stale config versions with the latest from FTP.
-        const res = correctArchiveVsConfigVersions(stateArchive.data, stateConfig.data, publicVersions);
+        const res = correctArchiveVsConfigVersions({ fromArchive: stateArchive.data, fromConfig: stateConfig.data, publicVersions });
         if (res) {
             set(latestChExtensionAtom, res.latestChExtension);
             set(latestFfExtensionAtom, res.latestFfExtension);
