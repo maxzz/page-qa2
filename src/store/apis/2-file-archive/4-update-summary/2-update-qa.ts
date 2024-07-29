@@ -2,7 +2,12 @@ import { CurrentExtensions, Browser } from "../../types";
 import { FilenameMetaVersion } from "../3-filename-meta-version";
 import { updateSummaryItems } from "./1-update-summary-items";
 
-export function updateQa(fromArchive: FilenameMetaVersion[], fromConfig: CurrentExtensions) {
+type updateQaProps = {
+    fromArchive: FilenameMetaVersion[];
+    fromConfig: CurrentExtensions;
+};
+
+export function updateQa({ fromArchive, fromConfig }: updateQaProps) {
     const latestQa = fromArchive?.[0]?.item;
 
     if (latestQa) {
@@ -11,6 +16,7 @@ export function updateQa(fromArchive: FilenameMetaVersion[], fromConfig: Current
             browser: Browser.chrome,
             qa: true,
         };
+        
         fromConfig.summary = updateSummaryItems(fromConfig.summary, latestQa, lookupFor);
     }
 
