@@ -24,10 +24,16 @@ function selectTheLatestFrom(extnConfig: ExtnFromConfig, extnArchive?: FilenameM
     );
 }
 
+type correctArchiveVsConfigVersionsProps = {
+    fromArchive: FilenameMeta[] | null;
+    fromConfig: CurrentExtensions | null;
+    publicVersions: string[] | undefined;
+};
+
 /**
  * Update possibly outdated configuration versions with the latest version from the FTP archive files.
  */
-export function correctArchiveVsConfigVersions(fromArchive: FilenameMeta[] | null, fromConfig: CurrentExtensions | null, publicVersions: string[] | undefined) {
+export function correctArchiveVsConfigVersions({ fromArchive, fromConfig, publicVersions }: correctArchiveVsConfigVersionsProps) {
     if (!fromConfig || !fromArchive) {
         return;
     }
@@ -43,7 +49,7 @@ export function correctArchiveVsConfigVersions(fromArchive: FilenameMeta[] | nul
     const latestFfExtension = selectTheLatestFrom(fromConfig.firefox, latestFfFromArchive);
    
     // 3. Apply 'Current Versions'
-    fromConfig.summary = updateSummary(sortedArchive, fromConfig, publicVersions);
+    fromConfig.summary = updateSummary({ fromArchive: sortedArchive, fromConfig, publicVersions });
     const summaryExtensions = fromConfig.summary;
 
     // const pureArchive = sortedArchive.map((item) => item.item);
