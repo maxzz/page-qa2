@@ -1,4 +1,4 @@
-import { FilenameMeta, FtpFiles, BuildType, Browser, filename2Meta } from "../types";
+import { FilenameMeta, FtpFiles, BuildType, Browser, filename2Meta } from "../9-types";
 import { urlFtpExtensions } from "../constants";
 
 const traytools: FilenameMeta = {

@@ -1,4 +1,4 @@
-import { ExtnFromConfig, FilenameMeta } from "../../types";
+import { ExtnFromConfig, FilenameMeta } from "../../9-types";
 import { isVersionAGreaterB } from "../3-filename-meta-version";
 
 type BrandBrowserQa = Pick<ExtnFromConfig, 'brand' | 'browser' | 'qa'>;

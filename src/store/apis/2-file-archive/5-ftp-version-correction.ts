@@ -1,4 +1,4 @@
-import { Browser, BuildType, CurrentExtensions, ExtnFromConfig, FilenameMeta } from "../types";
+import { Browser, BuildType, CurrentExtensions, ExtnFromConfig, FilenameMeta } from "../9-types";
 import { urlArchiveExtension } from "../constants";
 import { updateSummary } from "./4-update-summary";
 import { FilenameMetaVersion, compareFilenameMetaVersions, convToFilenameMetaVersion, isVersionAGreaterB } from "./3-filename-meta-version";

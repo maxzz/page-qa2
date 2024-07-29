@@ -1,4 +1,4 @@
-import { Browser } from "@/store/apis/types";
+import { Browser } from "@/store/apis/9-types";
 
 function getDpBrandFromLocation() {
     const brand = window.location.href.match(/page(dp|hp|de|qa)/i);

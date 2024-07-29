@@ -1,6 +1,6 @@
 import { Atom, useAtomValue } from 'jotai';
 import { a, useSpring } from '@react-spring/web';
-import { convBrowser2Name, Browser } from '@/store/apis/types';
+import { convBrowser2Name, Browser } from '@/store/apis/9-types';
 import { ExtnFromConfig } from '@/store/apis';
 import { beautifyDate } from '@/utils/helpers';
 import { IconBrowser } from '@/components/ui/icons';

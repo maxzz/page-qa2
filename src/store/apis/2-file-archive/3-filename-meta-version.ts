@@ -1,4 +1,4 @@
-import { FilenameMeta } from "../types";
+import { FilenameMeta } from "../9-types";
 
 export type VersionTuple = [number, number, number];
 

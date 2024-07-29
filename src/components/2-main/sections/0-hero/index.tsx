@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { loadingStateConfigAtom, latestChExtensionAtom, latestFfExtensionAtom } from '@/store/store';
-import { Browser } from '@/store/apis/types';
+import { Browser } from '@/store/apis/9-types';
 import { HeroImage } from './0-hero-image';
 import { CurrentVersion } from './2-current-version';
 

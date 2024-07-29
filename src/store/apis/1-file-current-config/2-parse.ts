@@ -1,4 +1,4 @@
-import { CurrentExtensions, ExtnFromConfig, FormatCurrentCfg, Brand, Browser, filename2Meta } from '../types';
+import { CurrentExtensions, ExtnFromConfig, FormatCurrentCfg, Brand, Browser, filename2Meta } from '../9-types';
 
 function findInfo(extensions: ExtnFromConfig[], brand: Brand, browser: Browser, qa: boolean): ExtnFromConfig | undefined {
     return extensions.find((item: ExtnFromConfig) => item.brand === brand && item.browser === browser && item.qa === qa);

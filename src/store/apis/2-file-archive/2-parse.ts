@@ -1,5 +1,5 @@
 import { stringToDate } from "@/utils/helpers";
-import { Browser, BuildType, FilenameMeta } from "../types";
+import { Browser, BuildType, FilenameMeta } from "../9-types";
 
 export type FilenameMetaEx = Prettify<
     & FilenameMeta

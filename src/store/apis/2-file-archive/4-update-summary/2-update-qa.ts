@@ -1,4 +1,4 @@
-import { CurrentExtensions, Browser } from "../../types";
+import { CurrentExtensions, Browser } from "../../9-types";
 import { FilenameMetaVersion } from "../3-filename-meta-version";
 import { updateSummaryItems } from "./1-update-summary-items";
 

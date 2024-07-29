@@ -1,4 +1,4 @@
-import { CurrentExtensions } from "../../types";
+import { CurrentExtensions } from "../../9-types";
 import { FilenameMetaVersion } from "../3-filename-meta-version";
 import { updateQa } from "./2-update-qa";
 import { updatePublic } from "./3-update-public";

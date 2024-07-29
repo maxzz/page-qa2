@@ -1,5 +1,5 @@
 import { urlCurrentConfig } from '../constants';
-import { CurrentExtensions } from '../types';
+import { CurrentExtensions } from '../9-types';
 import { parseCurrentConfig } from './2-parse';
 
 async function _fetchCurrentConfig(): Promise<Response> {

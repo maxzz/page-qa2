@@ -1,2 +1,2 @@
-export * from './1-data-files-loading-atoms';
-export * from './1-data-files-loading-atoms/0-atoms';
+export * from './1-fetch-files-atom';
+export * from './1-fetch-files-atom/0-atoms';
