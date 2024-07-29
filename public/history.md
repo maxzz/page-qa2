@@ -1,3 +1,9 @@
+#### version 4.0.064 &nbsp;v3 <span class="date">07.08.2024</span>
+* Fixed an issue [SFLINK-1354](https://tracksafe.hidglobal.com/browse/SFLINK-1354) where the username on a site was detected as a password.
+
+#### version 4.0.061 &nbsp;v3 <span class="date">12.08.2023</span>
+* The first extension created to support manifest version 3.
+
 #### version 4.0.023 <span class="date">08.13.2023</span> Public
 * The extension is built using a new build system and a new branch to provide future support for v2 and v3 manifests.
 * Bug [91453](http://dp-tfs.crossmatch.net:8080/tfs/DefaultCollection/Prime/_workitems?id=91453) 
