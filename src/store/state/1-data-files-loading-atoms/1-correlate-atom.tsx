@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { archiveByYears, correctArchiveVsConfigVersions } from "@/store/apis";
-import { loadingStateReleaseNotesAtom, loadingStateArchiveAtom, loadingStateConfigAtom, loadFailedAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom } from "./0-all";
+import { loadingStateReleaseNotesAtom, loadingStateArchiveAtom, loadingStateConfigAtom, loadFailedAtom, publicVersionsAtom, byYearsAtom, latestChExtensionAtom, latestFfExtensionAtom, summaryExtensionsAtom } from "./0-atoms";
 
 const runOnceAtom = atom(false);
 

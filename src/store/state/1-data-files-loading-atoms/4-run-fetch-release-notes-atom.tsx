@@ -2,8 +2,8 @@ import { atom } from "jotai";
 import { toastError } from "@/components/ui/UiToaster";
 import { fetchReleaseNotes, regexMarkdownPublicVersions } from "@/store/apis";
 import { marked } from "marked";
-import { loadingStateReleaseNotesAtom, publicVersionsAtom } from "./0-all";
-import { correlateAtom } from './1-run-once-atom';
+import { loadingStateReleaseNotesAtom, publicVersionsAtom } from "./0-atoms";
+import { correlateAtom } from './1-correlate-atom';
 
 export const runFetchReleaseNotesAtom = atom(
     null,
@@ -26,4 +26,5 @@ export const runFetchReleaseNotesAtom = atom(
         }
     }
 );
+
 runFetchReleaseNotesAtom.onMount = (runFetch) => runFetch();

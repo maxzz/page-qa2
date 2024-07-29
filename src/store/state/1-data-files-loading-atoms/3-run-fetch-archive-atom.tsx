@@ -1,8 +1,8 @@
 import { atom } from "jotai";
 import { toastError } from "@/components/ui/UiToaster";
 import { FilenameMeta, fetchExistingOnServer } from "@/store/apis";
-import { loadingStateArchiveAtom } from "./0-all";
-import { correlateAtom } from './1-run-once-atom';
+import { loadingStateArchiveAtom } from "./0-atoms";
+import { correlateAtom } from './1-correlate-atom';
 
 export const runFetchArchiveAtom = atom(
     null,
@@ -22,4 +22,5 @@ export const runFetchArchiveAtom = atom(
         }
     }
 );
+
 runFetchArchiveAtom.onMount = (runFetch) => runFetch();

@@ -1,8 +1,8 @@
 import { atom } from "jotai";
 import { toastError } from "@/components/ui/UiToaster";
 import { fetchCurrentConfig } from "@/store/apis";
-import { loadingStateConfigAtom } from "./0-all";
-import { correlateAtom } from './1-run-once-atom';
+import { loadingStateConfigAtom } from "./0-atoms";
+import { correlateAtom } from './1-correlate-atom';
 
 export const runFetchConfigAtom = atom(
     null,
@@ -22,4 +22,5 @@ export const runFetchConfigAtom = atom(
         }
     }
 );
+
 runFetchConfigAtom.onMount = (runFetch) => runFetch();
