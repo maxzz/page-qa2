@@ -20,3 +20,4 @@ export function Section3_Archive() {
 }
 
 //TODO: check properly state loading and error
+//TODO: change archive view to grid instead of columns to have order left to right vs top down and left.

@@ -24,10 +24,6 @@ export function App() {
         <PopperRoot />
         <UIToaster />
 
-        <div className="min-h-full overflow-hidden bg-slate-50">
-            <Frontpage />
-        </div>
+        <Frontpage />
     </>);
 }
-
-//TODO: change archive view to grid instead of columns to have order left to right vs top down and left.
