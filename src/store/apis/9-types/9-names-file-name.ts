@@ -3,14 +3,14 @@ import { Browser } from "./7-names-browser-short";
 import { convBrowserFname2Browser, BrowserFname } from "./8-names-browser-fname";
 import { BuildType } from "./6-names-build";
 
-export type FilenameMeta = { // Extension info from archive (or full url) filename
-    fname: string;          // short filename or url "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/current/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
-    version: string;        // "3.4.430"
-    updated: string;        // "2022.03.04"
-    browser: Browser;  // "c"
-    broIcon: Browser;  // browser icon
-    build: BuildType;
-    isV3: boolean;
+export type FilenameMeta = {    // Extension info from archive (or full url) filename
+    fname: string;              // short filename or url "https://crossmatch.hid.gl/g02/dppm-3.4.430_on_2022.03.04-r-chrome.zip"
+    version: string;            // "3.4.430"
+    updated: string;            // "2022.03.04"
+    browser: Browser;           // "c"
+    broIcon: Browser;           // browser icon
+    build: BuildType;           // "r" or "m"
+    isV3: boolean;              // is service-worker extension witm manifest v3
 };
 
 /**
@@ -25,10 +25,12 @@ export type FilenameMeta = { // Extension info from archive (or full url) filena
  *  ```
  */
 export function filename2Meta(fname: string): FilenameMeta {
+
     const match = fname.match(regexFnameVerDateRelBrowser);
     const browser = (match ? convBrowserFname2Browser(match[4] as BrowserFname) : undefined) || Browser.chrome;
     const isV3 = browser === Browser.chrome3;
-    const meta: FilenameMeta = {
+
+    const rv: FilenameMeta = {
         fname,
         version: match && match[1] || '',
         updated: match && match[2] || '',
@@ -37,5 +39,6 @@ export function filename2Meta(fname: string): FilenameMeta {
         broIcon: isV3 ? Browser.chrome3 : browser,
         isV3,
     };
-    return meta;
+
+    return rv;
 }

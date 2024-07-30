@@ -93,7 +93,8 @@ export function convToVersionsMap(items: FilenameMetaEx[]): VersionsMap {
         (version) => version.sort((a, b) => itemSortIndex(a) - itemSortIndex(b)) // sort items inside each version
     );
 
-    return preserveStringKeysOrder(rv);
+    const final = preserveStringKeysOrder(rv);
+    return final;
 }
 
 function itemSortIndex(item: FilenameMetaEx): number {
@@ -107,9 +108,10 @@ function itemSortIndex(item: FilenameMetaEx): number {
 }
 
 function preserveStringKeysOrder<T>(items: { [k: string]: T; }): { [k: string]: T; } {
+
     const entries = Object.entries(items); // preserve insertion order.
 
     entries.sort((a, b) => a[0].localeCompare(b[0]));
-    
+
     return Object.fromEntries(entries);
 }
