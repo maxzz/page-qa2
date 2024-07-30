@@ -82,16 +82,21 @@ export function convToVersionsMap(items: FilenameMetaEx[]): VersionsMap {
 
     const rv: VersionsMap = {};
 
-    items.forEach((item) => {
-        if (!rv[item.version]) {
-            rv[item.version] = [];
+    items.forEach(
+        (item) => {
+            if (!rv[item.version]) {
+                rv[item.version] = [];
+            }
+            rv[item.version].push(item);
         }
-        rv[item.version].push(item);
-    });
-
-    Object.values(rv).forEach(
-        (version) => version.sort((a, b) => itemSortIndex(a) - itemSortIndex(b)) // sort items inside each version
     );
+
+    Object.values(rv)
+        .forEach(
+            (version) => version.sort((a, b) => itemSortIndex(a) - itemSortIndex(b)) // sort items inside each version
+        );
+
+    // console.log('rv', rv);
 
     const final = preserveStringKeysOrder(rv);
     return final;
@@ -110,8 +115,29 @@ function itemSortIndex(item: FilenameMetaEx): number {
 function preserveStringKeysOrder<T>(items: { [k: string]: T; }): { [k: string]: T; } {
 
     const entries = Object.entries(items); // preserve insertion order.
+    console.log('entries 1', entries);
 
-    entries.sort((a, b) => a[0].localeCompare(b[0]));
+    // entries.sort((a, b) => a[0].localeCompare(b[0]));
+    entries.sort((a, b) => comapereVersion(a[0], b[0]));
+
+    console.log('entries 2', entries);
 
     return Object.fromEntries(entries);
+}
+function comapereVersion(a: string, b: string): number {
+    const aParts = a.split('.').map((x) => parseInt(x));
+    const bParts = b.split('.').map((x) => parseInt(x));
+
+    for (let i = 0; i < 3; i++) {
+        const aPart = aParts[i];
+        const bPart = bParts[i];
+
+        if (aPart < bPart) {
+            return -1;
+        } else if (aPart > bPart) {
+            return 1;
+        }
+    }
+
+    return 0;
 }
