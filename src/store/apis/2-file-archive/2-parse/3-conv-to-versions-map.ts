@@ -79,7 +79,6 @@ import { FilenameMetaEx, VersionsMap } from "./9-types";
     ```
  */
 export function convToVersionsMap(items: FilenameMetaEx[]): VersionsMap {
-
     const rv: VersionsMap = {};
 
     items.forEach(
@@ -93,17 +92,14 @@ export function convToVersionsMap(items: FilenameMetaEx[]): VersionsMap {
 
     Object.values(rv)
         .forEach(
-            (version) => version.sort((a, b) => itemSortIndex(a) - itemSortIndex(b)) // sort items inside each version
+            (version) => version.sort((a, b) => buildNmbToSortIndex(a) - buildNmbToSortIndex(b)) // sort items inside each version
         );
-
-    // console.log('rv', rv);
 
     const final = preserveStringKeysOrder(rv);
     return final;
 }
 
-function itemSortIndex(item: FilenameMetaEx): number {
-
+function buildNmbToSortIndex(item: FilenameMetaEx): number {
     const types = {
         [Browser.chrome]: item.build === BuildType.release ? 1 : 3,
         [Browser.firefox]: item.build === BuildType.release ? 2 : 4,
@@ -112,18 +108,6 @@ function itemSortIndex(item: FilenameMetaEx): number {
     return types[item.browser as keyof typeof types] || 5;
 }
 
-function preserveStringKeysOrder<T>(items: { [k: string]: T; }): { [k: string]: T; } {
-
-    const entries = Object.entries(items); // preserve insertion order.
-    console.log('entries 1', entries);
-
-    // entries.sort((a, b) => a[0].localeCompare(b[0]));
-    entries.sort((a, b) => comapereVersion(a[0], b[0]));
-
-    console.log('entries 2', entries);
-
-    return Object.fromEntries(entries);
-}
 function comapereVersion(a: string, b: string): number {
     const aParts = a.split('.').map((x) => parseInt(x));
     const bParts = b.split('.').map((x) => parseInt(x));
@@ -140,4 +124,12 @@ function comapereVersion(a: string, b: string): number {
     }
 
     return 0;
+}
+
+function preserveStringKeysOrder<T>(items: { [k: string]: T; }): { [k: string]: T; } {
+    const entries = Object.entries(items); // preserve insertion order.
+
+    entries.sort((a, b) => comapereVersion(a[0], b[0]));
+
+    return Object.fromEntries(entries);
 }
