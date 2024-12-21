@@ -9,7 +9,7 @@
         "@react-spring/web": "9.7.5",
         "@use-gesture/react": "10.3.1",
         "dom-confetti": "^0.2.2",
-        "jotai": "2.9.1",
+        "jotai": "2.10.4",
         "marked": "13.0.3",
         "react": "18.3.1",
         "react-dom": "18.3.1",
