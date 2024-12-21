@@ -17,7 +17,7 @@
         "react-popper": "2.3.0",
         "react-popper-tooltip": "4.4.2",
         "react-use": "17.5.1",
-        "valtio": "^1.13.2"
+        "valtio": "^2.1.2"
     },
     "devDependencies": {
         "@rollup/plugin-replace": "6.0.2",
