@@ -16,7 +16,7 @@
         "react-hot-toast": "2.4.1",
         "react-popper": "2.3.0",
         "react-popper-tooltip": "4.4.2",
-        "react-use": "17.5.1",
+        "react-use": "17.6.0",
         "valtio": "^2.1.2"
     },
     "devDependencies": {
