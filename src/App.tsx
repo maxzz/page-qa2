@@ -27,3 +27,5 @@ export function App() {
         <Frontpage />
     </>);
 }
+
+//TODO: add link to https://chromewebstore.google.com/detail/digitalpersona/piimgpjgnagkckjlhjcppbkbjjfjmnbh
