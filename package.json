@@ -10,7 +10,7 @@
         "@use-gesture/react": "10.3.1",
         "dom-confetti": "^0.2.2",
         "jotai": "2.10.4",
-        "marked": "15.0.4",
+        "marked": "15.0.6",
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "react-hot-toast": "2.4.1",
@@ -29,7 +29,7 @@
         "autoprefixer": "10.4.20",
         "postcss": "8.4.49",
         "rollup-plugin-visualizer": "5.14.0",
-        "sass": "1.83.0",
+        "sass": "1.83.1",
         "tailwindcss": "3.4.17",
         "typescript": "5.7.2",
         "vite": "~6.0.7"
