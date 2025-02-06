@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react';
+import { type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { classNames } from '@/utils/classnames';
 import { Config, usePopperTooltip } from 'react-popper-tooltip';
@@ -57,14 +57,16 @@ export function UITooltip({ trigger, children, arrow = false, runInPortal = true
     );
 
     const Popper = visible && (
-        runInPortal ? createPortal((poperBody), document.getElementById('portal')!) : { poperBody }
+        runInPortal
+            ? createPortal((poperBody), document.getElementById('portal')!)
+            : poperBody
     );
 
     return (<>
         <div ref={setTriggerRef}>
             {trigger}
         </div>
-        
+
         {Popper}
     </>);
 }
