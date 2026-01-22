@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { dataLoadAtom } from '../../store/store';
-import { Frontpage } from '../2-main';
+import { Frontpage } from './1-layout';
 import { UIToaster } from '../ui/UiToaster';
 import { UISymbolsDefs } from '../ui/icons';
 

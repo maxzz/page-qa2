@@ -1,6 +1,6 @@
 import { AppHeader } from '../1-header';
 import { Section } from '../ui/01-section';
-import { Section0_HeroSection, Section1_ReleaseNotes, Section2_CurrentVersions, Section3_Archive, Section4_TestApps, Section5_FinalNotes } from './sections';
+import { Section0_HeroSection, Section1_ReleaseNotes, Section2_CurrentVersions, Section3_Archive, Section4_TestApps, Section5_FinalNotes } from '../2-main/sections';
 import { Section6_Footer_Spacer } from '../3-footer';
 import { appSettings } from '@/store/state/0-app-settings';
 
