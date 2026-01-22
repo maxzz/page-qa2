@@ -1,5 +1,5 @@
 import React from 'react';
-import { toast as callToast, Toaster as ToasterComponent } from 'react-hot-toast';
+import { toast as callToast, Toaster as ToasterComponent, type Toast } from 'react-hot-toast';
 
 export function UIToaster() {
     return (
@@ -56,7 +56,7 @@ export function toastSucceeded(message: string) {
 }
 
 export function toastError(message: string) {
-    callToast.custom((t) =>
+    callToast.custom((t: Toast) =>
         // <div className="max-w-[540px] text-red-50 bg-red-600 border-red-700 border-2 rounded shadow-lg shadow-red-900/40">
         <div className="max-w-[540px] text-red-50 bg-red-600 border-red-700 border-2 rounded shadow-lg shadow-red-900/40">
             <div className="px-3 py-1 flex items-center justify-between">
