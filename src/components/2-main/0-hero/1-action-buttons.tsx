@@ -1,7 +1,7 @@
 import { useRef } from 'react';
-import { IconClipboard, IconDownload } from '../../../ui/icons';
+import { IconClipboard, IconDownload } from '../../ui/icons';
 import { classNames } from '@/utils/classnames';
-import { toastSucceeded } from '../../../ui/UiToaster';
+import { toastSucceeded } from '../../ui/UiToaster';
 import { confetti } from 'dom-confetti';
 
 const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
