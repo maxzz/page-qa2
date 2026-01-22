@@ -28,7 +28,7 @@ export function BrowserVersionsTable({ browser, table = [] }: { browser: Browser
             </div>
 
             {/* Table columns: Brand, QA, Public */}
-            <div className="py-1 bg-slate-50 border-slate-300 border rounded shadow overflow-hidden grid grid-cols-3 gap-y-0.5">
+            <div className="py-1 bg-slate-50 border-slate-300 border rounded shadow-sm overflow-hidden grid grid-cols-3 gap-y-0.5">
                 {/* Header */}
                 <div className={tableHeaderClasses}>
                     <div className="px-3">Brand</div>

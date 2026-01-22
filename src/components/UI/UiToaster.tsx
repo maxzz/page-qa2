@@ -58,7 +58,7 @@ export function toastSucceeded(message: string) {
 export function toastError(message: string) {
     callToast.custom((t: Toast) =>
         // <div className="max-w-[540px] text-red-50 bg-red-600 border-red-700 border-2 rounded shadow-lg shadow-red-900/40">
-        <div className="max-w-[540px] text-red-50 bg-red-600 border-red-700 border-2 rounded shadow-lg shadow-red-900/40">
+        <div className="max-w-135 text-red-50 bg-red-600 border-red-700 border-2 rounded shadow-lg shadow-red-900/40">
             <div className="px-3 py-1 flex items-center justify-between">
                 <div className="">{message}</div>
                 <div className="ml-4 w-12 h-12 flex items-center justify-center hover:bg-red-400 active:scale-[.97] cursor-pointer select-none"

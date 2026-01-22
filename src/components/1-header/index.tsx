@@ -5,7 +5,7 @@ export const elevation4Shadow = { boxShadow: '0 2px 4px -1px rgb(0 0 0 / 20%), 0
 
 export function AppHeader() {
     return (<>
-        <div className="px-6 py-5 flex items-center justify-between bg-[#003165] shadow-sm cursor-default"> {/* bg-[#003f82] */}
+        <div className="px-6 py-5 flex items-center justify-between bg-[#003165] shadow-xs cursor-default"> {/* bg-[#003f82] */}
             <div className="flex items-center space-x-2">
 
                 <div className="w-20 py-2 flex items-center justify-center bg-white rounded-md">

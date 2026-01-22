@@ -1,15 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
-@layer components {
-    .hoverurl {
-        @apply border-b hover:border-b-2 border-url hover:text-url;
-    }
+@theme {
+    --color-url: #0047cc;
+}
 
-    .extension-small-icon-outline {
-        @apply outline outline-1 sm:outline-2 outline-offset-1 outline-green-500 sm:outline-green-500/30;
-    }
+@utility hoverurl {
+    @apply border-b hover:border-b-2 border-url hover:text-url;
+}
+
+@utility extension-small-icon-outline {
+    @apply outline-1 sm:outline-2 outline-offset-1 outline-green-500 sm:outline-green-500/30;
 }
 
 /* https://codepen.io/thebabydino/pen/WNKxOxY */

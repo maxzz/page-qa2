@@ -43,7 +43,7 @@ export function JsonBeautifier() {
                     <div className="grid grid-cols-[1fr_auto] items-center gap-2">
                         <input
                             type="text"
-                            className="my-2 w-full form-input text-xs text-inherit bg-slate-200 border-none rounded shadow"
+                            className="my-2 w-full form-input text-xs text-inherit bg-slate-200 border-none rounded shadow-sm"
                             spellCheck="false"
                             value={text}
                             onChange={(e) => {
@@ -60,7 +60,7 @@ export function JsonBeautifier() {
 
                             <input
                                 type="text"
-                                className="my-2 max-w-[64px] form-input text-xs text-center text-inherit bg-slate-200 border-none rounded shadow"
+                                className="my-2 max-w-16 form-input text-xs text-center text-inherit bg-slate-200 border-none rounded shadow-sm"
                                 value={perLine}
                                 onChange={(e) => {
                                     const t = e.target.value;
@@ -79,17 +79,17 @@ export function JsonBeautifier() {
                     {!!text.length &&
                         <div className="relative py-0.5 min-h-[2.6rem] bg-slate-200 rounded">
 
-                            <div className="px-3 max-h-[460px] text-[.75rem] whitespace-pre overflow-auto">
+                            <div className="px-3 max-h-115 text-[.75rem] whitespace-pre overflow-auto">
                                 {formatted}
                             </div>
 
                             <div className="absolute top-0.5 right-4 p-1 bg-slate-200 flex space-x-0.5">
-                                <div className="px-2 py-1.5 text-xs border-slate-100 border rounded shadow">
+                                <div className="px-2 py-1.5 text-xs border-slate-100 border rounded shadow-sm">
                                     {nLines} line{nLines != 1 ? 's' : ''}
                                 </div>
 
                                 <button
-                                    className="px-2 py-1.5 text-xs border-slate-400 border rounded shadow"
+                                    className="px-2 py-1.5 text-xs border-slate-400 border rounded shadow-sm"
                                     onClick={() => {
                                         setText('');
                                     }}
@@ -98,7 +98,7 @@ export function JsonBeautifier() {
                                 </button>
 
                                 <button
-                                    className="px-2 py-1.5 text-xs border-slate-400 border rounded shadow"
+                                    className="px-2 py-1.5 text-xs border-slate-400 border rounded shadow-sm"
                                     onClick={async () => {
                                         await navigator.clipboard.writeText(formatted);
                                     }}
