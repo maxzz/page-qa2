@@ -16,7 +16,7 @@ function CurrentVersions() {
 
 export function Section0_HeroSection() {
     return (
-        <div className="mt-4 mb-3 h-60 grid grid-cols-[minmax(8rem,1fr),minmax(12rem,28rem)] gap-4">
+        <div className="mt-4 mb-3 h-60 grid grid-cols-[minmax(8rem,1fr)_minmax(12rem,28rem)] gap-4">
             <HeroImage />
             <CurrentVersions />
         </div>
