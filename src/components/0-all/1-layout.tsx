@@ -20,7 +20,7 @@ export function Frontpage() {
                     {/* <div className="ml-[calc(20vw/2)] mr-[calc(calc(20vw/2)-16px)] max-w-3xl flex flex-col space-y-4"> */}
                     {/* <div className="ml-[calc(20vw/2)] mr-auto max-w-3xl flex flex-col space-y-4"> */}
 
-                    <div className="mx-auto max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-4xl flex flex-col space-y-4">
+                    <div className="mx-auto max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-4xl flex flex-col gap-y-4">
                         <Section0_HeroSection />
 
                         <Section state={appSettings} name="open1" title={"Release Notes"}>
