@@ -4,23 +4,6 @@ import { classNames } from '@/utils/classnames';
 import { toastSucceeded } from '../../ui/UiToaster';
 import { confetti } from 'dom-confetti';
 
-const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
-    angle: 90,
-    spread: 147,
-    startVelocity: 60,
-    elementCount: 130,
-    dragFriction: 0.21,
-    duration: 2000,
-    stagger: 0,
-    width: "8px",
-    height: "4px",
-    perspective: "1000px",
-    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
-};
-
-const buttonClasses = "p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5 select-none";
-const buttonStateClasses = (valid: string | undefined) => classNames(buttonClasses, !valid && "invisible pointer-events-none");
-
 export function ActionButtons({ url }: { url?: string; }) {
     const confettiRef = useRef<HTMLButtonElement>(null);
     return (
@@ -56,3 +39,20 @@ export function ActionButtons({ url }: { url?: string; }) {
         </div>
     );
 }
+
+const confettiConfig = { //https://daniel-lundin.github.io/react-dom-confetti
+    angle: 90,
+    spread: 147,
+    startVelocity: 60,
+    elementCount: 130,
+    dragFriction: 0.21,
+    duration: 2000,
+    stagger: 0,
+    width: "8px",
+    height: "4px",
+    perspective: "1000px",
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
+};
+
+const buttonClasses = "p-2 flex items-center whitespace-nowrap rounded hover:bg-blue-100 active:scale-[.97] space-x-0.5 select-none";
+const buttonStateClasses = (valid: string | undefined) => classNames(buttonClasses, !valid && "invisible pointer-events-none");
