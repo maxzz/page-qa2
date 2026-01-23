@@ -4,10 +4,7 @@ import { convBrowser2Name, Browser } from '@/store/apis/9-types';
 import { ExtnFromConfig } from '@/store/apis';
 import { beautifyDate } from '@/utils/helpers';
 import { IconBrowser } from '@/components/ui/icons';
-import { boxShadow } from './0-hero-image';
 import { ActionButtons } from './1-action-buttons';
-
-const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
 
 export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Browser; extInfoAtom: Atom<ExtnFromConfig | undefined>; loading: boolean; }) {
     const extnFromConfig = useAtomValue(extInfoAtom);
@@ -63,3 +60,12 @@ export function CurrentVersion({ browser, extInfoAtom, loading }: { browser: Bro
         </div>
     );
 }
+
+const iconShadow = { filter: 'drop-shadow(1px 1px 1px #0002)', };
+
+export const boxShadow = "\
+0 2px 1px -1px rgba(0,0,0,.2), \
+0 1px 1px 0 rgba(0,0,0,.14), \
+0 1px 3px 0 rgba(0,0,0,.12)\
+";
+
