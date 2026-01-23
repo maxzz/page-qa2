@@ -12,7 +12,7 @@ export function Frontpage() {
 
                 <AppHeader />
 
-                <div className="flex-1 overflow-y-auto" style={{ overflow: 'overlay' }}>
+                <div className="flex-1 overflow-y-auto" style={{ scrollbarGutter: 'stable' }}>
                     {/* <div className="m-auto w-4/5 flex flex-col space-y-4"> */}
                     {/* <div className="m-auto max-w-[80vw] flex flex-col space-y-4"> */}
                     {/* <div className="m-auto max-w-[80%] flex flex-col space-y-4"> */}
