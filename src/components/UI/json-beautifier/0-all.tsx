@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { beautify } from "./beautify";
 
 export function JsonBeautifier() {
@@ -9,6 +9,25 @@ export function JsonBeautifier() {
     const [formatted, setFormatted] = useState('');
 
     // useEffect(() => { runTest(perLine, setText, setFormatted, setNLines); }, []); // for UI testing only
+
+    function handleTextChange(e: ChangeEvent<HTMLInputElement>) {
+        const t = e.target.value;
+        setText(t);
+        const res = format(t, perLine);
+        setFormatted(res.formated || (t ? '?' : ''));
+        res.lines !== undefined && setNLines(res.lines);
+    }
+
+    function handlePerLineChange(e: ChangeEvent<HTMLInputElement>) {
+        const t = e.target.value;
+        const n = Number(t);
+        if (!isNaN(n)) {
+            setPerLine(n);
+            const res = format(text, n);
+            setFormatted(res.formated || (t ? '?' : ''));
+            res.lines !== undefined && setNLines(res.lines);
+        }
+    }
 
     return (
         <div className="pr-1">
@@ -25,13 +44,7 @@ export function JsonBeautifier() {
                             className="my-2 px-2 w-full form-input text-xs text-inherit bg-slate-200 border-none rounded shadow-sm"
                             spellCheck="false"
                             value={text}
-                            onChange={(e) => {
-                                const t = e.target.value;
-                                setText(t);
-                                const res = format(t, perLine);
-                                setFormatted(res.formated || (t ? '?' : ''));
-                                res.lines !== undefined && setNLines(res.lines);
-                            }}
+                            onChange={handleTextChange}
                         />
 
                         <div className="flex items-center gap-1 cursor-default" title="maximum number of characters per line">
@@ -41,16 +54,7 @@ export function JsonBeautifier() {
                                 type="text"
                                 className="my-2 max-w-16 form-input text-xs text-center text-inherit bg-slate-200 border-none rounded shadow-sm"
                                 value={perLine}
-                                onChange={(e) => {
-                                    const t = e.target.value;
-                                    const n = Number(t);
-                                    if (!isNaN(n)) {
-                                        setPerLine(n);
-                                        const res = format(text, n);
-                                        setFormatted(res.formated || (t ? '?' : ''));
-                                        res.lines !== undefined && setNLines(res.lines);
-                                    }
-                                }}
+                                onChange={handlePerLineChange}
                             />
                         </div>
                     </div>
