@@ -40,6 +40,6 @@
         "serve": "vite preview",
         "build_types": "tsc && vite build",
         "preview": "vite preview",
-        "deploy": "pnpm build && gh-pages -d dist"
+        "to-npm": "pnpm build && gh-pages -d dist"
     }
 }
