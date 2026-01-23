@@ -1,22 +1,6 @@
 import { useEffect, useState } from "react";
 import { beautify } from "./beautify";
 
-function format(text: string, perLine: number): { formated: string; lines: number; error?: undefined; } | { error: string; formated?: undefined; lines?: undefined; } {
-    try {
-        const o = JSON.parse(text);
-        const formated = beautify(o, null, 4, perLine);
-        const lines = formated.split(/\r?\n/).length;
-        return {
-            formated,
-            lines,
-        };
-    } catch (error) {
-        return {
-            error: 'invalid input'
-        };
-    }
-}
-
 export function JsonBeautifier() {
     const [open, setOpen] = useState(false);
     const [text, setText] = useState('');
@@ -36,7 +20,10 @@ export function JsonBeautifier() {
 
     return (
         <div className="pr-1">
-            <button className="" onClick={() => setOpen((v) => !v)}>JSON beautifier...</button>
+            <button className="" onClick={() => setOpen((v) => !v)}>
+                Built-in JSON beautifier...
+            </button>
+
             {open &&
                 <div className="">
 
@@ -113,6 +100,22 @@ export function JsonBeautifier() {
             }
         </div >
     );
+}
+
+function format(text: string, perLine: number): { formated: string; lines: number; error?: undefined; } | { error: string; formated?: undefined; lines?: undefined; } {
+    try {
+        const o = JSON.parse(text);
+        const formated = beautify(o, null, 4, perLine);
+        const lines = formated.split(/\r?\n/).length;
+        return {
+            formated,
+            lines,
+        };
+    } catch (error) {
+        return {
+            error: 'invalid input'
+        };
+    }
 }
 
 //TODO: persist perLine
