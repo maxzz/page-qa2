@@ -45,8 +45,8 @@ importers:
         specifier: 17.6.0
         version: 17.6.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       valtio:
-        specifier: ^2.3.0
-        version: 2.3.0(@types/react@19.2.15)(react@19.2.6)
+        specifier: ^2.3.2
+        version: 2.3.2(@types/react@19.2.15)(react@19.2.6)
     devDependencies:
       '@rollup/plugin-replace':
         specifier: 6.0.3
@@ -1272,8 +1272,8 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
-  valtio@2.3.0:
-    resolution: {integrity: sha512-1MfKNcmOIdBSatiJsYgw420n6jnD+jeoI0V+RkOQbCB0ElLh6GKUfPr0hc9uq/KBGeghivDEarRsKFFdSQQnKw==}
+  valtio@2.3.2:
+    resolution: {integrity: sha512-YXhWQei9IN/ZDce9rhL3trCq9+vVq8M1gWmKVdP3YSZ2gxsmmNWVbxXwf9yG6ffu/dAvAD91nevg8xirGr4Dhg==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=18.0.0'
@@ -2364,7 +2364,7 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
-  valtio@2.3.0(@types/react@19.2.15)(react@19.2.6):
+  valtio@2.3.2(@types/react@19.2.15)(react@19.2.6):
     dependencies:
       proxy-compare: 3.0.1
     optionalDependencies:
