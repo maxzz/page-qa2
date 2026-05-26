@@ -64,9 +64,9 @@ export function Section4_TestApps() {
 
             {/*  */}
             <br />
-            <div className="">Piggyback tests</div>
+            <div className="">Tests</div>
             <ul className={ulClasses}>
-                <AppLink label="Trace Viewer 25" href="https://digitalpersona.hidglobal.com/g02/tests/piggyback" />
+                <AppLink label="Piggyback tests" href="https://digitalpersona.hidglobal.com/g02/tests/piggyback" />
             </ul>
 
             <br />
